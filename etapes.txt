@@ -1,0 +1,36 @@
+Étapes de création du blog
+
+1) Première étape : création de la base de données blogPHP et la table Article.
+
+Le script SQL de création de la table Article est :
+	
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO"; 
+DROP TABLE IF EXISTS Article; 
+CREATE TABLE Article ( 
+  Id int(11) NOT NULL AUTO_INCREMENT, 
+  Titre varchar(25) NOT NULL, 
+  Date datetime NOT NULL, 
+  Commentaire text NOT NULL, 
+  Photo varchar(25) NOT NULL, 
+  PRIMARY KEY (Id) 
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+2) Deuxième étape : création du formulaire formulaireAjout.php :
+
+formulaireAjout.php
+
+3) troisième étape : création d’une page PHP pour ajouter le contenu du formulaire formulaireAjout.php à la base de données et de copier l’image transmise dans el dossier photos:
+
+getDataForm.php
+
+4) quatrième étape : création d’une page PHP permettant d’afficher le contenu du blog (l’ensemble des articles du blog):
+
+Blog.php
+
+
+
+
+
+
+
+

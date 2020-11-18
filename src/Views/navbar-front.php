@@ -1,0 +1,33 @@
+<header>
+    <nav class="navbar shadow-1 primary">
+      <a href="#" target="_blank" class="navbar-brand">Blog Php Denis</a>
+      <div class="navbar-menu ml-auto">
+        <a class="navbar-link" href="index.php">Accueil</a>
+        <a class="navbar-link" href="src/Views/articles.php"><i class="fas fa-sticky-note"></i> Articles</a>
+        <a class="navbar-link" href="src/Views/users.php"><i class="fas fa-user"></i> Profil</a>
+        <a href="src/Admin/indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
+        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
+    <div class="sidenav-header">
+      <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
+      <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
+    </div>
+    <a href="index.php" class="sidenav-link active">Accueil</a>
+    <a href="src/Views/articles.php" class="sidenav-link"><i class="fas fa-sticky-note"></i> Articles</a>
+    <a href="src/Views/users.php" class="sidenav-link"><i class="fas fa-user"></i> Profil</a>
+    <a href="src/Admin/indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
+    <a href="#" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+    <div>
+  </div>
+    <a href="inserer.php">Insérer</a>
+    <a href="modifier.php">Modifier</a>
+    <a href="supprimer.php">Supprimer</a>
+    <div><hr><br></div>
+    <button class="btn shadow-1 btn-dark rounded-4">Mode dark</button>
+    <div><br></div>
+    <button class="btn shadow-1 rounded-4">Mode light </button>
+  </div>

@@ -1,0 +1,39 @@
+form {
+    width:70%;
+    margin:auto;
+    background: #ccc;
+    padding: 30px;
+}
+
+
+label, input[type=password] {
+    display: block;
+}
+
+.alerte {
+    background: red;
+    color:#fff;
+    padding: 20px;
+}
+
+
+table {
+    width: 50%;
+    margin: 50px auto;
+    border-collapse: collapse;
+}
+
+
+table td{
+}
+
+table tr:nth-child(2n + 1){
+    background: #ddd;
+}
+
+img {
+    max-width: 100%;
+    height:auto
+}
+
+
