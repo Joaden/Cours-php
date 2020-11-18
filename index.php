@@ -14,7 +14,7 @@ require_once('config/functions.php');
 $articles = getArticles();
 
 // TEST AUTOLOAD CLASS COMPTEUR
-$instance = new App\Compteur();
+$instance = new App\Models\Compteur();
 
 $today = Carbon::now();
 // var_dump($today->format('d/m/Y H:i'));
