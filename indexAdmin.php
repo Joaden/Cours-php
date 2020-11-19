@@ -1,12 +1,12 @@
 <?php
-
-require_once('../../vendor/autoload.php');
+// Route url : http://localhost:8000/src/Admin/indexAdmin.php : Accueil Administration
+require_once('vendor/autoload.php');
 
 //Appel de function avec la connexion à la bdd
-require_once('../../config/functions.php');
+require_once('config/functions.php');
 
 $users = getUsers();
-// $comments = getCommentsAdmin($id);
+$comments = getCommentsAdmin();
 // echo count($users);
 // var_dump($users);
 // die();
@@ -19,18 +19,17 @@ $num_rows=0;
     <head>
         <title>Administration</title> -->
         <?php 
-            include("../Views/base-back.php"); 
+            include("src/Views/base-back.php"); 
         ?>
     <!-- </head> -->
     <!-- <body class="layout with-sidenav"> -->
     <header>
     <div class="navbar-fixed">
 
-    
     <nav class="navbar shadow-1 primary">
       <a href="#" class="navbar-brand">Back-Office Blog</a>
       <div class="navbar-menu ml-auto">
-        <a class="navbar-link" href="../../index.php"><i class="fas fa-home"></i> Accueil</a>
+        <a class="navbar-link" hr="index.php"><i class="fas fa-home"></i> Accueil</a>
         <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
@@ -41,7 +40,13 @@ $num_rows=0;
       <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
       <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
     </div>
-    <a href="../../index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
+    <a hr="index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
+    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
+    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
+    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
+    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
+    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
+    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
     <a href="#" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
     <div>
   </div>
@@ -116,26 +121,30 @@ $num_rows=0;
                     <li>
                         <?= $user->id ?> : <?= $user->name ?> / <?= $user->email ?>
                             <?php if($user->is_verified == 0) { ?> : 
-                                <a href="indexAdmin.php?confirme=<?= $user->id ?>">
+                                <a href="indexAdmin.php?type=user&confirme=<?= $user->id ?>">
                                     Confirmer
                                 </a>
-                            <?php } ?> - <a  href="indexAdmin.php?supprime=<?= $user->id ?>"><span class="red dark-1">Supprimer</span></a>
+                            <?php } ?> - <a  href="indexAdmin.php?type=user&supprime=<?= $user->id ?>"><span class="red dark-1">Supprimer</span></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
 
             <br><hr><br>
     
+            <div>
+                <h2> Action sur liste des Commentaires :</h2>
+                <h4> Approuver ou Supprimer le commentaire</h4>
+            </div>
             <ul>
                 <?php foreach($comments as $comment): ?>
                     
                     <li>
                         <?= $comment->articleId ?> : créé le <?= $comment->date ?> : <?= $comment->author ?> / <?= $comment->comment ?>
                             <?php if($comment->approved == 0) { ?> : 
-                                <a href="indexAdmin.php?confirme=<?= $comment->id ?>">
+                                <a href="indexAdmin.php?type=commentaire&confirme=<?= $comment->id ?>">
                                     Confirmer
                                 </a>
-                            <?php } ?> - <a  href="indexAdmin.php?supprime=<?= $comment->id ?>"><span class="red dark-1">Supprimer</span></a>
+                            <?php } ?> - <a  href="indexAdmin.php?type=commentaire&supprime=<?= $comment->id ?>"><span class="red dark-1">Supprimer</span></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -147,5 +156,6 @@ $num_rows=0;
       Copyright © 2020 - Daos
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
   </body>
 </html>

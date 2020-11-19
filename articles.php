@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <?php 
-        include("header.html"); 
+        include("src/Views/import/header.html"); 
     ?>
     <body class="layout with-sidenav">
         <?php 
-          include("navbar-front.php"); 
+          include("src/Views/import/navbar-front.php"); 
         ?>
         <div class="container-fluid">
             <?php if(isset($alerte)): ?>
@@ -51,7 +51,7 @@
             <hr>
 
             <?php 
-                include("src/Views/footer.php"); 
+                include("src/Views/import/footer.php"); 
             ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>

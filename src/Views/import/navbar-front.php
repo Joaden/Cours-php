@@ -3,8 +3,9 @@
       <a href="#" target="_blank" class="navbar-brand">Blog Php Denis</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="index.php">Accueil</a>
-        <a class="navbar-link" href="src/Views/articles.php"><i class="fas fa-sticky-note"></i> Articles</a>
-        <a class="navbar-link" href="src/Views/users.php"><i class="fas fa-user"></i> Profil</a>
+        <a class="navbar-link" href="articles.php"><i class="fas fa-sticky-note"></i> Articles</a>
+        <a class="navbar-link" href="users.php"><i class="fas fa-user"></i> Profil</a>
+        <a class="navbar-link" href="contact.php"><i class="fas fa-user"></i> Contact</a>
         <a href="src/Admin/indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
         <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
@@ -17,9 +18,10 @@
       <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
     </div>
     <a href="index.php" class="sidenav-link active">Accueil</a>
-    <a href="src/Views/articles.php" class="sidenav-link"><i class="fas fa-sticky-note"></i> Articles</a>
-    <a href="src/Views/users.php" class="sidenav-link"><i class="fas fa-user"></i> Profil</a>
-    <a href="src/Admin/indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
+    <a href="articles.php" class="sidenav-link"><i class="fas fa-sticky-note"></i> Articles</a>
+    <a href="users.php" class="sidenav-link"><i class="fas fa-user"></i> Profil</a>
+    <a href="contact.php" class="sidenav-link"><i class="fas fa-user"></i> Contact</a>
+    <a href="indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
     <a href="#" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
     <div>
   </div>

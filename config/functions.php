@@ -50,30 +50,47 @@ function getComments($id)
 }
 function getUsers()
 {
-    
+    // à décommenter pour utiliser $_SESSION
     // session_start();
 
-    require('../../config/connect.php');
+    require('config/connect.php');
 
-    // Sécurité authentification obligatoire
+    // Sécurité authentification obligatoire à décommenter pour obliger la connexion d'un admin
     // if(!isset($_SESSION['id']) OR $_SESSION['id'] != 1) {
     //     echo "<div class=\"container\"><div class=\"jumbotron\"><h1>Vous devez vous authentifier .</h1></div></div>";
     //     exit();
     // }
+    // Si il y Get type and qu'il est égale à user
+        if(isset($_GET['type']) AND $_GET['type'] == 'user') {
+            //
+            if(isset($_GET['confirme']) AND !empty($_GET['confirme'])) {
+                $confirme = (int) $_GET['confirme'];
 
-    if(isset($_GET['confirme']) AND !empty($_GET['confirme'])) {
-        $confirme = (int) $_GET['confirme'];
+                $req = $bdd->prepare('UPDATE users SET is_verified = 1 WHERE id = ?');
+                $req->execute(array($confirme));
+            }
+            if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
+                $supprime = (int) $_GET['supprime'];
 
-        $req = $bdd->prepare('UPDATE users SET is_verified = 1 WHERE id = ?');
-        $req->execute(array($confirme));
-    }
-    if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
-        $supprime = (int) $_GET['supprime'];
+                $req = $bdd->prepare('DELETE FROM users WHERE id = ?');
+                $req->execute(array($supprime));
+            }
+        } elseif(isset($_GET['type']) AND $_GET['type'] == 'commentaire') {
+            if(isset($_GET['approved']) AND !empty($_GET['approved'])) {
+                $approved = (int) $_GET['approved'];
 
-        $req = $bdd->prepare('DELETE FROM users WHERE id = ?');
-        $req->execute(array($supprime));
-    }
-    
+                $req = $bdd->prepare('UPDATE users SET approved = 1 WHERE id = ?');
+                $req->execute(array($approved));
+            }
+            if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
+                $supprime = (int) $_GET['supprime'];
+
+                $req = $bdd->prepare('DELETE FROM comments WHERE id = ?');
+                $req->execute(array($supprime));
+            } 
+        }
+
+            
 
     $req = $bdd->prepare('SELECT * FROM users ORDER BY id DESC');
     // $req = $bdd->prepare('SELECT * FROM users WHERE is_verified = 0 ORDER BY id DESC');
@@ -88,11 +105,11 @@ function getUsers()
     $req->closeCursor();
 }
 // ADMIN fonction récupère le commentaire par ID
-function getCommentsAdmin($id)
+function getCommentsAdmin()
 {
-    require('../../config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM comments WHERE articleId = ?');
-    $req->execute(array($id));
+    require('config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
+    $req->execute(array());
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     return $data;
     $req->closeCursor();

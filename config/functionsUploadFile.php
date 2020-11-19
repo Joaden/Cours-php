@@ -1,4 +1,5 @@
 <?php
+// Fichier à intégrer 
 // convertit en octets
 /////////////////////////////////////////////////////////////
 function convertBytes( $value ) {
