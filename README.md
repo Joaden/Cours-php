@@ -7,5 +7,6 @@ installation
 
     composer require nesbot/carbon : pour la gestion des dates.
     composer dump-autoload : créé le vendor et composer.json
+    npm install jquery
 
 php -S localhost:8000
