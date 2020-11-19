@@ -27,11 +27,11 @@ $num_rows=0;
     <div class="navbar-fixed">
 
     <nav class="navbar shadow-1 primary">
-      <a href="#" class="navbar-brand">Back-Office Gestion articles</a>
+      <a href="#" class="navbar-brand">Back-Office Gestion Users</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
         <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-home"></i>Articles</a>
-        <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
         <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
         <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
         <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter</a>
@@ -69,13 +69,13 @@ $num_rows=0;
         <div class="container-fluid">
             
             <div class="container">
-               <h1>Administration Gestion articles</h1>
+               <h1>Administration  Gestion Users</h1>
                <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (3).jpg" alt="Image" />
             </div>
             <hr><br>
             <div class="grix xs2 md4 center mt-5">
-                <button id="tooltip1" data-ax="tooltip" data-tooltip-content="Affiche les users" class="btn airforce dark-3 rounded-1 shadow-1">Data Users</button>
-                <button id="tooltip4" data-ax="tooltip" data-tooltip-position="left" data-tooltip-content="Affiche les articles" class="btn airforce dark-3 rounded-1 shadow-1">Data Articles</button>
+                <button id="tooltip1" data-ax="tooltip" data-tooltip-content="Affiche les users" class="btn airforce dark-3 rounded-1 shadow-1">Show Users</button>
+                <button id="tooltip4" data-ax="tooltip" data-tooltip-position="left" data-tooltip-content="Affiche les articles" class="btn airforce dark-3 rounded-1 shadow-1">Show Articles</button>
                 <button id="tooltip2" data-ax="tooltip" data-tooltip-position="right" data-tooltip-content="Tooltip" class="btn airforce dark-3 rounded-1 shadow-1">Right</button>
                 <button id="tooltip3" data-ax="tooltip" data-tooltip-position="bottom" data-tooltip-content="Tooltip" class="btn airforce dark-3 rounded-1 shadow-1">Bottom</button>
             </div>
@@ -100,37 +100,39 @@ $num_rows=0;
                     $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
 
                     // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
+                    $req1 = $bdd->query('SELECT * FROM users');
+                    $req3 = $bdd->query('SELECT * FROM espèces');
+                    $req4 = $bdd->query('SELECT * FROM users INNER JOIN users_infos ON users.users_infos_id = users_infos.users_id LIMIT 0,30');
                     // Requete avec INNER JOIN pour récupérer des données ciblées dans 2 tables
                     // LEFT JOIN ajoute toutes les donnees de la table cité à gauche et RIGHT JOIN celle de droite
-                    $reqJoin = $bdd->query('SELECT articles.title,articles.date, comments.author, comments.comment, comments.approved FROM articles INNER JOIN comments ON articles.id = comments.articleId AND comments.approved = "1" LIMIT 0,25');
+                    $req5 = $bdd->query('SELECT articles.title,articles.date, comments.author, comments.comment, comments.approved FROM articles INNER JOIN comments ON articles.id = comments.articleId AND comments.approved = "1" LIMIT 0,25');
 
                     // '(B) ->prepare est utilisé quand on ne connait pas la valeur
-                    // $req2 = $bdd->prepare('SELECT * FROM users WHERE espece_id = ? ORDER BY id');
+                    $req2 = $bdd->prepare('SELECT * FROM users WHERE espece_id = ? ORDER BY id');
                     // $req2->execute(array($_POST['espece_id']));
                     // $req2->execute(array($_GET['value']));
                     ?>
-                    <h3>Tableau de recherche article</h3>
              <table border="1">
-                 <th scope="col">Title</th>
-                 <th scope="col">date</th>
-                 <th scope="col">Author</th>
-                 <th scope="col">Commentaire</th>
-                 <th scope="col">Approuvé</th>
-                 <th scope="col">***</th>
-                 <th scope="col">***</th>
+                 <th scope="col">User ID</th>
+                 <th scope="col">Nom</th>
+                 <th scope="col">Email</th>
+                 <th scope="col">Vérifié</th>
+                 <th scope="col">Phone</th>
+                 <th scope="col">Type</th>
+                 <th scope="col">Date inscription</th>
                  <?php
                     // while($resultat = $req1->fetch())
-                    while($resultat = $reqJoin->fetch())
+                    while($resultat = $req4->fetch())
                     {
                     ?>
                     <tr>
-                        <td><?php echo  $resultat['title'] ?></td>
-                        <td><?php echo  $resultat['date'] ?></td>
-                        <td><?php echo  $resultat['author'] ?></td>
-                        <td><?php echo  $resultat['comment'] ?></td>
-                        <td><?php echo  $resultat['approved'] ?></td>
-                        <td>***</td>
-                        <td>***</td>
+                        <td><?php echo  $resultat['id'] ?></td>
+                        <td><?php echo  $resultat['name'] ?></td>
+                        <td><?php echo  $resultat['email'] ?></td>
+                        <td><?php echo  $resultat['is_verified'] ?></td>
+                        <td><?php echo  $resultat['phone'] ?></td>
+                        <td><?php echo  $resultat['espece_id'] ?></td>
+                        <td><?php echo  $resultat['date_inscription'] ?></td>
                     </tr>
                       <!-- echo "Nom : "  . $resultat['name'] . ". / Email : "  . $resultat['email'] . " / espèce : " . $resultat['espece_id'] . " <br/> " ; -->
                     <?php
@@ -138,7 +140,64 @@ $num_rows=0;
               
                 ?>
              </table>
-          
+
+            <!-- END barre de recherche users par categories, type, etc.. -->
+            <br><hr><br>
+            <!-- Affichage des membres -->
+            
+            <div class="responsive-table-2">
+                <table class="table bordered hover">
+                    <thead>
+                        <caption>
+                        Tableau des utilisateurs
+                        </caption>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Vérifié</th>
+                            <th>Age</th>
+                            <th>Pseudo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($users as $user): ?>
+                            <tr>
+                                <td><?= $user->id ?></td>
+                                <td><?= $user->name ?></td>
+                                <td><?= $user->email ?></td>
+                            <?php if($user->is_verified == 0) { ?>
+                                <td class="red"><?= $user->is_verified ?></td>
+                            <?php } ?>
+                            <?php if($user->is_verified == 1) { ?>  
+                                <td class="success">User verified</td>
+                            <?php } ?>
+                                <td><?= $user->age ?></td>
+                                <td><?= $user->pseudo ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <br><hr><br>
+            <div>
+                <h2> Action sur liste Users :</h2>
+                <h4> Confirmation du status vérifié</h4>
+                <h5> Suppression d'utilisateurs</h5>
+            </div>
+            <ul>
+                <?php foreach($users as $user): ?>
+                    
+                    <li>
+                        <?= $user->id ?> : <?= $user->name ?> / <?= $user->email ?>
+                            <?php if($user->is_verified == 0) { ?> : 
+                                <a href="indexAdmin.php?type=user&confirme=<?= $user->id ?>">
+                                    Confirmer
+                                </a>
+                            <?php } ?> - <a  href="indexAdmin.php?type=user&supprime=<?= $user->id ?>"><span class="red dark-1">Supprimer</span></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
 
             <br><hr><br>
     

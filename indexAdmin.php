@@ -31,7 +31,7 @@ $num_rows=0;
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
         <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-home"></i>Articles</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-home"></i></a>
         <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
         <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
         <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter</a>
@@ -48,7 +48,7 @@ $num_rows=0;
     </div>
     <a href="index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
     <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
+    <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
     <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
     <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
     <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
