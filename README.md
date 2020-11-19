@@ -9,3 +9,5 @@ Entrainement en php natif
  - composer dump-autoload : créé le vendor et composer.json
  
  php -S localhost:8000 
+ 
+ MVC rebuild in progress
