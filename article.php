@@ -45,14 +45,22 @@ else
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <title><?= $article->title ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>Blog Article Page</title>
+        <?php 
+            include("src/Views/import/header.html"); 
+        ?>  
   </head>
-  <body>
+  <body class="layout with-sidenav">
+  <?php 
+          include("src/Views/import/navbar-front.php"); 
+        ?>
     <div class="container-fluid">
+      <div class="container">
       <a href="index.php">Retour aux articles</a>
       <h1><?= $article->title ?></h1>
       <br>
@@ -98,7 +106,7 @@ else
           </div>
         </div>
       
-
+            <hr>
       <h2>Commentaires :</h2>
 
       <?php foreach($comments as $com): ?>
@@ -107,6 +115,10 @@ else
           <p><?= $com->comment ?></p>
       <?php endforeach; ?>
 
+      </div>
     </div>
+    <?php 
+        include("src/Views/import/footer.php"); 
+    ?>
   </body>
 </html>

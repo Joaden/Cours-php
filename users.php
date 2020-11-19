@@ -3,6 +3,15 @@
 // require_once('vendor/autoload.php');
 
 // require_once('config/functions.php');
+//  $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
+
+//  $req = $bdd->query('SELECT * FROM users_infos');
+
+//  while($resultat = $req->fetch())
+//  {
+//   echo $resultat['users_id'] . ". date d'anniversaire le : " . $resultat['birth'] . " inscrit le : " . $resultat['date_inscription'] . " tel : " . $resultat['phone'] . "<br/>";
+//  }
+ 
 
 ?>
 <!DOCTYPE html>
@@ -83,6 +92,43 @@
         </div>
       </div>
     </div>
+    <br><hr><br>
+
+    <?php
+      // session_start();
+
+      $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
+
+      // '(B) ->prepare est utilisé quand on ne connait pas la valeur
+      // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
+      $req = $bdd->query('SELECT * FROM users_infos');
+
+      $req1 = $bdd->query('SELECT * FROM espèces');
+
+      $req2 = $bdd->query('SELECT * FROM users WHERE is_verified = 1 ');
+
+      // while($reqUserData = $req1->fetch())
+      // {
+      //   echo "Nom : "  . $reqUserData['name'] . ". Email : "  . $reqUserData['email'] . "<br/> Caractéristique : " ;
+
+      // }
+
+      while($reqUserData = $req2->fetch())
+      {
+        echo "Nom : "  . $reqUserData['name'] . ". Email : "  . $reqUserData['email'] . "Vérifié : oui <br/> " ;
+
+      }
+
+      while($resultat = $req->fetch())
+      {
+      echo $resultat['users_id'] . ". date d'anniversaire le : " . $resultat['birth'] . " inscrit le : " . $resultat['date_inscription'] . " tel : " . $resultat['phone'] . "<br/>";
+      }
+
+
+    ?>
+
+
+
     <?php 
       include("src/Views/import/footer.php"); 
     ?>
@@ -110,7 +156,7 @@
   <script>
     $(document).ready(function(){
       $("#myNotes").click(function(){
-        $(".notes").fadeToggle("slow");
+        $(".notes").fadeToggle("2000");
       });
     });
      
