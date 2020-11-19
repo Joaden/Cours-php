@@ -7,7 +7,7 @@
         <a class="navbar-link" href="users.php"><i class="fas fa-user"></i> Profil</a>
         <a class="navbar-link" href="contact.php"><i class="fas fa-user"></i> Contact</a>
         <a href="src/Admin/indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
-        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+        <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
   </header>
@@ -22,12 +22,10 @@
     <a href="users.php" class="sidenav-link"><i class="fas fa-user"></i> Profil</a>
     <a href="contact.php" class="sidenav-link"><i class="fas fa-user"></i> Contact</a>
     <a href="indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
-    <a href="#" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+    <a href="register.php" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
     <div>
   </div>
-    <a href="inserer.php">Insérer</a>
-    <a href="modifier.php">Modifier</a>
-    <a href="supprimer.php">Supprimer</a>
+    
     <div><hr><br></div>
     <button class="btn shadow-1 btn-dark rounded-4">Mode dark</button>
     <div><br></div>

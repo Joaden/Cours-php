@@ -29,8 +29,14 @@ $num_rows=0;
     <nav class="navbar shadow-1 primary">
       <a href="#" class="navbar-brand">Back-Office Blog</a>
       <div class="navbar-menu ml-auto">
-        <a class="navbar-link" hr="index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+        <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
+        <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
   </header>
@@ -40,15 +46,16 @@ $num_rows=0;
       <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
       <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
     </div>
-    <a hr="index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
-    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
-    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
-    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
-    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
-    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
-    <a hr="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
-    <a href="#" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+    <a href="index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
+    <a href="register.php" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
     <div>
+        <hr>
   </div>
     <a href="inserer.php">Insérer</a>
     <a href="modifier.php">Modifier</a>

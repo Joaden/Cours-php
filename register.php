@@ -1,9 +1,9 @@
 <?php 
 
-require_once('../vendor/autoload.php');
+require_once('vendor/autoload.php');
 
 //Appel de function avec la connexion à la bdd
-require('../config/functions.php');
+require('config/functions.php');
 
 if(isset($_POST['form']))
 {

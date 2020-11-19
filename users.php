@@ -63,8 +63,8 @@
       </main>
     </div>
     <hr><br>
-    <div id="notes" class="container shadow-1 rounded-2 bd-red bd-solid bd-3">
-      <button class="btn btn-success rounded-1 press">Mes Notes</button> Intégrer le crud de la class notes, button green hide/show notes. 
+    <div id="notes" class="container shadow-1 rounded-2 bd-solid bd-3">
+      <button id="myNotes"  class="btn btn-success rounded-1 press">Mes Notes</button> Intégrer le crud de la class notes, button green hide/show notes. 
       <div class="notes">
         <div id="notes-div" class="grix xs1 sm2 ">
           <div class="grix xs3 shadow-1 rounded-2 bd-blue bd-solid bd-3 ">
@@ -102,13 +102,15 @@
     // } else {
     //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (7).jpg\" alt=\"Image profil\" />";
     //   } 
-    
+    //<script src="jquery-3.5.1.min.js"></script>
   ?>
-  <script src="jquery-3.5.1.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
   <script>
     $(document).ready(function(){
-      $(".notes").click(function(){
-        $("#notes-div").fadeToggle("slow");
+      $("#myNotes").click(function(){
+        $(".notes").fadeToggle("slow");
       });
     });
      
