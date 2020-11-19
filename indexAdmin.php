@@ -102,19 +102,43 @@ $num_rows=0;
                     // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
                     $req1 = $bdd->query('SELECT * FROM users');
                     $req3 = $bdd->query('SELECT * FROM espèces');
+                    $req4 = $bdd->query('SELECT * FROM users INNER JOIN users_infos ON users.users_infos_id = users_infos.users_id LIMIT 0,30');
+                    // $resultat4 = $req4->fetch();
 
                     // '(B) ->prepare est utilisé quand on ne connait pas la valeur
                     $req2 = $bdd->prepare('SELECT * FROM users WHERE espece_id = ? ORDER BY id');
                     $req2->execute(array($_POST['espece_id']));
                     // $req2->execute(array($_GET['value']));
-             
-                    while($resultat = $req1->fetch())
+                    ?>
+             <table border="1">
+                 <th scope="col">User ID</th>
+                 <th scope="col">Nom</th>
+                 <th scope="col">Email</th>
+                 <th scope="col">Vérifié</th>
+                 <th scope="col">Phone</th>
+                 <th scope="col">Type</th>
+                 <th scope="col">Date inscription</th>
+                 <?php
+                    // while($resultat = $req1->fetch())
+                    while($resultat = $req4->fetch())
                     {
-                      echo "Nom : "  . $resultat['name'] . ". / Email : "  . $resultat['email'] . " / espèce : " . $resultat['espece_id'] . " <br/> " ;
-              
+                    ?>
+                    <tr>
+                        <td><?php echo  $resultat['id'] ?></td>
+                        <td><?php echo  $resultat['name'] ?></td>
+                        <td><?php echo  $resultat['email'] ?></td>
+                        <td><?php echo  $resultat['is_verified'] ?></td>
+                        <td><?php echo  $resultat['phone'] ?></td>
+                        <td><?php echo  $resultat['espece_id'] ?></td>
+                        <td><?php echo  $resultat['date_inscription'] ?></td>
+                    </tr>
+                      <!-- echo "Nom : "  . $resultat['name'] . ". / Email : "  . $resultat['email'] . " / espèce : " . $resultat['espece_id'] . " <br/> " ; -->
+                    <?php
                     }
               
                 ?>
+             </table>
+
             <!-- END barre de recherche users par categories, type, etc.. -->
             <br><hr><br>
             <!-- Affichage des membres -->
