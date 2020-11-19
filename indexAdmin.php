@@ -30,12 +30,12 @@ $num_rows=0;
       <a href="#" class="navbar-brand">Back-Office Blog</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
         <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
@@ -79,6 +79,43 @@ $num_rows=0;
                 <button id="tooltip2" data-ax="tooltip" data-tooltip-position="right" data-tooltip-content="Tooltip" class="btn airforce dark-3 rounded-1 shadow-1">Right</button>
                 <button id="tooltip3" data-ax="tooltip" data-tooltip-position="bottom" data-tooltip-content="Tooltip" class="btn airforce dark-3 rounded-1 shadow-1">Bottom</button>
             </div>
+            <br><hr><br>
+            <!-- START barre de recherche users par categories, type, etc.. -->
+                <form method="POST" action="">
+                <label for="especes">Espèces recherché : </label>
+                    <select name="especes" id="select-user-espece">
+                        <option value="humain">Humain</option>
+                        <option value="martien">Martien</option>
+                        <option value="alien">Alien</option>
+                        <option value="Null">Autres</option>
+                    </select>
+                    <label for="verified">Vérifié : </label>
+                    <select name="verified" id="select-user-verified">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                    </select>
+                    <input type="submit" value="OK">
+                </form>
+                <?php
+                    $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
+
+                    // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
+                    $req1 = $bdd->query('SELECT * FROM users');
+                    $req3 = $bdd->query('SELECT * FROM espèces');
+
+                    // '(B) ->prepare est utilisé quand on ne connait pas la valeur
+                    $req2 = $bdd->prepare('SELECT * FROM users WHERE espece_id = ? ORDER BY id');
+                    $req2->execute(array($_POST['espece_id']));
+                    // $req2->execute(array($_GET['value']));
+             
+                    while($resultat = $req1->fetch())
+                    {
+                      echo "Nom : "  . $resultat['name'] . ". / Email : "  . $resultat['email'] . " / espèce : " . $resultat['espece_id'] . " <br/> " ;
+              
+                    }
+              
+                ?>
+            <!-- END barre de recherche users par categories, type, etc.. -->
             <br><hr><br>
             <!-- Affichage des membres -->
             
