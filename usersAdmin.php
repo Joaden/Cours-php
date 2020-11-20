@@ -97,7 +97,7 @@ $num_rows=0;
                     <input type="submit" value="OK">
                 </form>
                 <?php
-                    $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
+                    $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
 
                     // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
                     $req1 = $bdd->query('SELECT * FROM users');

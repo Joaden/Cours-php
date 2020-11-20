@@ -1,17 +1,9 @@
 <?php 
 
-// require_once('vendor/autoload.php');
+require_once('vendor/autoload.php');
 
-// require_once('config/functions.php');
-//  $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
-
-//  $req = $bdd->query('SELECT * FROM users_infos');
-
-//  while($resultat = $req->fetch())
-//  {
-//   echo $resultat['users_id'] . ". date d'anniversaire le : " . $resultat['birth'] . " inscrit le : " . $resultat['date_inscription'] . " tel : " . $resultat['phone'] . "<br/>";
-//  }
- 
+require_once('config/connect.php'); 
+require_once('config/functions.php'); 
 
 ?>
 <!DOCTYPE html>
@@ -97,7 +89,7 @@
     <?php
       // session_start();
 
-      $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
+      // $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
 
       // '(B) ->prepare est utilisé quand on ne connait pas la valeur
       // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer

@@ -8,7 +8,7 @@ abstract class Model
     private static function setBdd()
     {
         //connection à la bdd
-        $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
         self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
     } 
