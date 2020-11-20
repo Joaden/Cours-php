@@ -1,5 +1,12 @@
 <?php
 
+/* Please create on the project folder : 
+     folder "personal_variables"    containing
+        db_credentials.php    containing
+            $db_login = "..." 
+            $db_password = "..."
+
+*/
 require("personal_variables/db_credentials.php");
 
 //connection à la bdd
