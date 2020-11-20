@@ -1,11 +1,20 @@
 <?php
 
+/* Please create on the project folder : 
+     folder "personal_variables"    containing
+        db_credentials.php    containing
+            $db_login = "..." 
+            $db_password = "..."
+
+*/
+require("personal_variables/db_credentials.php");
+
 //connection à la bdd
-$bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', 'root', '');
+// $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
+$bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
 
 //affiche le msg d'erreur
 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-
 
 ////PDO vs mysqli:
 
