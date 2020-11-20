@@ -43,7 +43,7 @@
                         <a href="#">*****</a>
                     
                     
-                    <form action="article.php?id=<?= $article->id ?>" method="post">
+                    <form action="" method="post">
                         <p>
                             <label for="author">Pseudo :</label><br>
                             <input type="text" name="author" id="author" value="<?php if(isset($author)) echo $author ?>" class="form-control">

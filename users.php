@@ -1,8 +1,8 @@
 <?php 
 
-// require_once('vendor/autoload.php');
+require_once('vendor/autoload.php');
 
-// require_once('config/functions.php');
+require_once('config/functions.php');
 //  $bdd = new PDO("mysql:host=localhost;dbname=cours_denis", "root", "");
 
 //  $req = $bdd->query('SELECT * FROM users_infos');
