@@ -17,15 +17,51 @@
 
             <div class="container">
                <h1>Page Articles</h1>
-               <img src="..." class="img-fluid" alt="Responsive image"> 
+               <img src="assets/upload/ps5.jpg" class="img-fluid" alt="Responsive image"> 
             </div>
             
            <hr>
-            <div>
-                <a href="src/register.php">Connexion / Inscription</a>
-            </div>
+           <div class="container">
+               <div class="row">
+                    <div class="col-6">
+                        <a href="src/register.php">Connexion / Inscription</a>
+                    </div>
+                    <div class="col-6">
+                        <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>         
+                    </div>
+                </div>
+           </div>
             <hr>
-
+            <br>
+            <div class="container">
+               <div class="row">
+                    <div class="col-6">
+                        <h2>Créer un article</h2>
+                        <a href="#">*****</a>
+                    
+                    
+                    <form action="article.php?id=<?= $article->id ?>" method="post">
+                        <p>
+                            <label for="author">Pseudo :</label><br>
+                            <input type="text" name="author" id="author" value="<?php if(isset($author)) echo $author ?>" class="form-control">
+                        </p>
+                        <p>
+                            <label for="title">Titre :</label><br>
+                            <text name="title" id="title" cols="30" rows="5" class="form-control"><?php if(isset($title)) echo $title ?></text>
+                        </p>
+                        <p>
+                            <label for="content">Contenu :</label><br>
+                            <textarea name="content" id="content" cols="30" rows="5" class="form-control"><?php if(isset($content)) echo $content ?></textarea>
+                        </p>
+                        <button class="btn btn-success" type="submit">Envoyer</button>
+                    </form>     
+                    </div>
+                </div>
+           </div>
+            <br><hr><br>
         
 
             <div class="container-xl">
