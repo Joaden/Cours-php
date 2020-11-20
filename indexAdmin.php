@@ -2,8 +2,10 @@
 // Route url : http://localhost:8000/src/Admin/indexAdmin.php : Accueil Administration
 require_once('vendor/autoload.php');
 
-//Appel de function avec la connexion à la bdd
-require_once('config/functions.php');
+// Appel de function avec la connexion à la bdd
+require('config/connect.php');
+// Appel du fichier de fonction
+require('config/functions.php');
 
 $users = getUsers();
 $comments = getCommentsAdmin();
@@ -30,12 +32,12 @@ $num_rows=0;
       <a href="#" class="navbar-brand">Back-Office Blog</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-home"></i>Articles</a>
-        <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-home"></i></a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i></a>
+        <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-sticky-note"></i>Articles</a>
+        <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-user"></i>Users</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-clipboard"></i>Notes</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i>Images</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-download"></i> Gestion Exporter</a>
+        <a href="#" class="sidenav-link "><i class="fas fa-home"></i>Mailing</a>
         <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
@@ -47,11 +49,11 @@ $num_rows=0;
       <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
     </div>
     <a href="index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
-    <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-home"></i> Gestion Articles</a>
-    <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-home"></i> Gestion Users</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Notes</a>
+    <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-sticky-note"></i> Gestion Articles</a>
+    <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-user"></i> Gestion Users</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-clipboard"></i> Gestion Notes</a>
     <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Exporter les data</a>
+    <a href="#" class="sidenav-link "><i class="fas fa-download"></i> Gestion Exporter les data</a>
     <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
     <a href="register.php" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
     <div>
