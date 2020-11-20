@@ -2,7 +2,9 @@
 // Route url : http://localhost:8000/src/Admin/indexAdmin.php : Accueil Administration
 require_once('vendor/autoload.php');
 
-//Appel de function avec la connexion à la bdd
+//Appel de la connexion à la bdd
+require_once('config/connect.php');
+//Appel de function 
 require_once('config/functions.php');
 
 $users = getUsers();
