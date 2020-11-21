@@ -63,7 +63,7 @@ function getUsers()
     // Si il y Get type and qu'il est égale à user
         if(isset($_GET['type']) AND $_GET['type'] == 'user') {
             //
-            if(isset($_GET['confirme']) AND !empty($_GET['confirme'])) {
+            if(isset($_GET['http://localhost/phpmyadmin/db_designer.php?db=cours_denis']) AND !empty($_GET['confirme'])) {
                 $confirme = (int) $_GET['confirme'];
 
                 $req = $bdd->prepare('UPDATE users SET is_verified = 1 WHERE id = ?');
