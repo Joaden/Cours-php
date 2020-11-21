@@ -71,7 +71,7 @@ function getUsers()
             }
             if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
                 $supprime = (int) $_GET['supprime'];
-
+                
                 $req = $bdd->prepare('DELETE FROM users WHERE id = ?');
                 $req->execute(array($supprime));
             }
