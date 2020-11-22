@@ -23,6 +23,7 @@ if(isset($_POST['formregister']))
             $captcha = htmlspecialchars($_POST['captcha']);
             
             // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
+            // j'utilise password_hash() MAIS, faudra faire une petite recherche pour être sûr que ce soit sécurisé
             // $br = '<br>';
                     // echo $name . $br;
                     // echo $email . $br;
@@ -42,18 +43,22 @@ if(isset($_POST['formregister']))
                     {
                         if($email == $email2)
                         {
+                            // function avec filtre qui permet de vérifier si c'est bien une adresse mail
                             if(filter_var($email, FILTER_VALIDATE_EMAIL))
                             {
                                 $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ?");
                                 $reqmail->execute(array($email));
                                 $mailexist = $reqmail->rowCount();
+                                // Si il n'y a pas cet email en base
                                 if($mailexist == 0)
                                 {
                                     if($password == $password2)
                                     {
+                                        // hash de mdp , a voir si il y a plus sûr comme function
                                         $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
         
                                         $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password) VALUE(?, ?, ?, ?)");
+                                        // On insère les $*** dans la requête
                                         $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp));
                                         $erreur = "Votre compte à bien été créé ! <a href=\"connexion.php\">Me Connecter</a>";
                                         // $_SESSION['comptecree'] = "Votre compte à bien été créé !";

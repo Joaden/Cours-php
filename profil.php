@@ -45,10 +45,17 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
   <?php 
     include("src/Views/import/navbar-front.php"); 
   ?>
+    <main>
+        <!-- Code here the main content -->
+        <button data-target="example-sidenav" class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
+        Open sidenav
+        </button>
+    </main>
+
   <div class="container-fluid">
     <div class="container">
       <h1>Profil de <?php echo $userInfo['name']; ?>****</h1>
-      <main>
+      
         <hr>
         <div>
             Pseudo = <?php echo $userInfo['pseudo']; ?>. <br>
@@ -58,15 +65,14 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
             if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])
             {
                echo "<a href=\"#\">Editer mon profil</a>";
-               echo "<a href=\"#\">Se déconnecter</a>";
+               echo "<a href=\"logout.php\">Se déconnecter</a>";
             }
         ?>
-        <!-- Code here the main content -->
-        <button data-target="example-sidenav"
+        <!-- <button data-target="example-sidenav"
           class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
             Open sidenav
-        </button>
-        <span>Choose your hero !</span>
+        </button> -->
+        <!-- <span>Choose your hero !</span>
           <img width="80px" class="sidenav-logo dropshadow-1" src="../../assets/photos/profils/super-heros (3).jpg" alt="Image profil" />
         <form>
         <select name="users" onchange="showUser(this.value)">
@@ -81,10 +87,11 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
         </select>
         </form>
         <br>
-        <div id="txtHint"><b>Person info will be listed here.</b></div>
-      </main>
+        <div id="txtHint"><b>Person info will be listed here.</b></div> -->
     </div>
+
     <hr><br>
+
     <div id="notes" class="container shadow-1 rounded-2 bd-solid bd-3">
       <button id="myNotes"  class="btn btn-success rounded-1 press">Mes Notes</button> Intégrer le crud de la class notes, button green hide/show notes. 
       <div class="notes">
