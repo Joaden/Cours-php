@@ -55,8 +55,9 @@ if(isset($_POST['formregister']))
         
                                         $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password) VALUE(?, ?, ?, ?)");
                                         $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp));
-                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        header('Location: index.php');
+                                        $erreur = "Votre compte à bien été créé ! <a href=\"connexion.php\">Me Connecter</a>";
+                                        // $_SESSION['comptecree'] = "Votre compte à bien été créé !";
+                                        // header('Location: index.php');
                                     }
                                     else
                                     {
@@ -134,9 +135,9 @@ if(isset($_POST['formregister']))
     </style>
     <body>
     <nav class="navbar shadow-1 primary">
-      <a href="#" class="navbar-brand">Inscription Blog</a>
+        <a href="index.php" class="navbar-brand">Homepage Blog</a>
       <div class="navbar-menu ml-auto">
-        <a class="navbar-link" href="../../index.php"><i class="fas fa-home"></i> Accueil</a>
+        <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
         <a class="navbar-link" href="connexion.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
@@ -146,7 +147,20 @@ if(isset($_POST['formregister']))
             <div class="container bordered">
                  <hr>
                  <hr>
-                <h2>Inscription</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Inscription</h2> 
+                    </div>
+                    <div class="col-md-6">
+                        <p>Vous avez déjà un compte ? 
+                            <button class="btn btn-primary">
+                                <a href="connexion.php">
+                                    Se connecter
+                                </a>
+                            </button>
+                        </p>
+                    </div>
+                </div>
                 <p style="color: red;" id="erreur">
                     <?php 
                         if(isset($erreur))

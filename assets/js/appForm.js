@@ -60,23 +60,23 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
 
     
 })
+// Function for test data form contact
+// function dataFake() {
 
-function dataFake() {
+//     alert('Données test');
 
-    alert('Données test');
+//     document.getElementById("name").setAttribute('value', "Doe");
 
-    document.getElementById("name").setAttribute('value', "Doe");
+//     document.getElementById("lastname").setAttribute('value', "Jhon");
 
-    document.getElementById("lastname").setAttribute('value', "Jhon");
+//     document.getElementById("email").setAttribute('value', "Jhon.doe@gmail.fr");
 
-    document.getElementById("email").setAttribute('value', "Jhon.doe@gmail.fr");
+//     document.getElementById("phone").setAttribute('value', "0600000000");
 
-    document.getElementById("phone").setAttribute('value', "0600000000");
+//     document.getElementById("sujet").setAttribute('value', "Test send mail");
 
-    document.getElementById("sujet").setAttribute('value', "Test send mail");
-
-    document.getElementById("message").innerHTML = "Hello World this is my message";
+//     document.getElementById("message").innerHTML = "Hello World this is my message";
 
     
-  }
+//   }
 

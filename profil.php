@@ -55,7 +55,11 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
             Email = <?php echo $userInfo['email']; ?>. <br>
         </div>
         <?php 
-
+            if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])
+            {
+               echo "<a href=\"#\">Editer mon profil</a>";
+               echo "<a href=\"#\">Se déconnecter</a>";
+            }
         ?>
         <!-- Code here the main content -->
         <button data-target="example-sidenav"

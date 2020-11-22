@@ -96,9 +96,9 @@ if(isset($_POST['formconnexion']))
     </style>
     <body>
         <nav class="navbar shadow-1 primary">
-        <a href="#" class="navbar-brand">Connexion Blog</a>
+        <a href="index.php" class="navbar-brand">Homepage Blog</a>
         <div class="navbar-menu ml-auto">
-            <a class="navbar-link" href="../../index.php"><i class="fas fa-home"></i> Accueil</a>
+            <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
             <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Inscription</a>
         </div>
         </nav>
@@ -108,7 +108,20 @@ if(isset($_POST['formconnexion']))
                 <div class="container bordered">
                     <hr>
                     <hr>
-                    <h2>Connexion</h2>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <h2>Connexion</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Vous n'avez pas encore de compte ? 
+                            <button class="btn btn-primary">
+                                <a href="register.php">
+                                    S'inscrire
+                                </a>
+                            </button>
+                        </p>
+                    </div>
+                </div>
                     <p style="color: red;" id="erreur">
                         <?php 
                             if(isset($erreur))
