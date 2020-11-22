@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 require_once('vendor/autoload.php');
 
@@ -8,8 +9,8 @@ require('config/functions.php');
 require_once('config/connect.php'); 
 
 
-// if(isset($_POST['forminscription']))
-// {
+if(isset($_POST['formregister']))
+{
     
     if(!empty($_POST['name']) AND !empty($_POST['email'])AND !empty($_POST['email2']) AND !empty($_POST['pseudo']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND empty($_POST['antibot']) AND !empty($_POST['captcha']))
     {
@@ -98,7 +99,7 @@ require_once('config/connect.php');
     // $erreurs champs incomplet
     $erreur = "Tous les champs doivent être complétés";
     }
-// }
+}
     
    
 // }
@@ -141,10 +142,7 @@ require_once('config/connect.php');
     </nav>
   </header>
         <div class="container-fluid">
-
-
             <h1>Inscription</h1>
-
             <div class="container bordered">
                  <hr>
                  <hr>
@@ -157,7 +155,6 @@ require_once('config/connect.php');
                         }
                     ?>
                 </p>
-                <!-- <form method="POST" action="post_contact_form.php"> -->
                 <form method="POST" action="">
                     <div class="form-group">
                         <label for="emailRegister">Name</label>
@@ -205,7 +202,7 @@ require_once('config/connect.php');
                             <div class="invalid-feedback">You  shall not pass!</div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Je m'inscris</button>
+                    <button type="submit" name="formregister" class="btn btn-primary">Je m'inscris</button>
                 </form>
                 <p style="color: red;" id="erreur">
                     <?php 
@@ -218,13 +215,11 @@ require_once('config/connect.php');
                 <br>
                 <br>
                 <hr>
-                
             </div>
-        
         </div>
         <footer class="footer primary">
-      Copyright © 2020 - Daos
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
+            Copyright © 2020 - Daos
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
     </body>
 </html>
