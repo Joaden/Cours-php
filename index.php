@@ -83,7 +83,7 @@ $resultat = $instance->additionner(31, 33);
            <div class="container">
                <div class="row">
                     <div class="col-6">
-                        <a href="src/register.php">Connexion / Inscription</a>
+                        <a href="register.php">Connexion / Inscription</a>
                     </div>
                     <div class="col-6">
                         <form class="form-inline my-2 my-lg-0">

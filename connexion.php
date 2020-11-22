@@ -8,8 +8,8 @@ require('config/functions.php');
 require_once('config/connect.php'); 
 
 
-// if(isset($_POST['forminscription']))
-// {
+if(isset($_POST['formconnexion']))
+{
    if(!empty($_POST['name']) AND !empty($_POST['email'])AND !empty($_POST['email2']) AND !empty($_POST['pseudo']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])){
         $name = htmlspecialchars($_POST['name']);
         $email = htmlspecialchars($_POST['email']);
@@ -84,7 +84,7 @@ require_once('config/connect.php');
     // $erreurs = 1;
     $erreur = "Tous les champs doivent être complétés";
     }
-// }
+}
 
 
 
@@ -116,17 +116,15 @@ require_once('config/connect.php');
     </style>
     <body>
     <nav class="navbar shadow-1 primary">
-      <a href="#" class="navbar-brand">Inscription Blog</a>
+      <a href="#" class="navbar-brand">Connexion Blog</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="../../index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Inscription</a>
       </div>
     </nav>
   </header>
         <div class="container-fluid">
-
-
-            <h1>Inscription</h1>
+            <h1>Connexion</h1>
 
             <div class="container bordered">
                  <hr>
@@ -201,7 +199,40 @@ require_once('config/connect.php');
                 <br>
                 <br>
                 <hr>
-                
+                <h2>Connexion</h2>
+                <!-- <div class="col-md-6"> -->
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="EmailSignin" aria-describedby="emailSignin">
+                            <small id="emailSignin" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="PasswordSignin">Password</label>
+                            <input type="password" class="form-control" id="PasswordSignin">
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                <label for="captcha"></label>
+                                <input type="text" class="form-control" id="captcha" name="captcha" placeholder="7 + 3 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
+                            </div>
+                        </div>
+                        <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label for="antibot"></label>
+                            <input type="text"  name="antibot" placeholder="" value="">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="CheckSignin">
+                            <label class="form-check-label" for="CheckSignin">Check me out</label>
+                        </div>
+                        <div>
+                        <div id="success"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Connexion</button>
+                    </form>
+                    <!-- <p style="color: red;" id="erreur"></p> -->
+                <!-- </div> -->
+                 <hr>
             </div>
         
         </div>
