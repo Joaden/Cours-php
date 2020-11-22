@@ -10,80 +10,97 @@ require_once('config/connect.php');
 
 // if(isset($_POST['forminscription']))
 // {
-   if(!empty($_POST['name']) AND !empty($_POST['email'])AND !empty($_POST['email2']) AND !empty($_POST['pseudo']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])){
-        $name = htmlspecialchars($_POST['name']);
-        $email = htmlspecialchars($_POST['email']);
-        $email2 = htmlspecialchars($_POST['email2']);
-        $pseudo = htmlspecialchars($_POST['pseudo']);
-        $password = htmlspecialchars($_POST['mdp']);
-        $password2 = htmlspecialchars($_POST['mdp2']);
-        // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
-        // $br = '<br>';
-                // echo $name . $br;
-                // echo $email . $br;
-                // echo $pseudo . $br;
-                // echo $hashedmdp . $br;
-                // echo " Send form register ok <br>";
-                // echo $hashedmdp2 . $br;
-
-        $pseudolength = strlen($pseudo);
-        if($pseudolength <= 30)
-        {
-            $reqpseudo = $bdd->prepare("SELECT * FROM users WHERE pseudo = ?");
-            $reqpseudo->execute(array($pseudo));
-            $pseudoexist = $reqpseudo->rowCount();
-            if($pseudoexist == 0)
+    
+    if(!empty($_POST['name']) AND !empty($_POST['email'])AND !empty($_POST['email2']) AND !empty($_POST['pseudo']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND empty($_POST['antibot']) AND !empty($_POST['captcha']))
+    {
+            $name = htmlspecialchars($_POST['name']);
+            $email = htmlspecialchars($_POST['email']);
+            $email2 = htmlspecialchars($_POST['email2']);
+            $pseudo = htmlspecialchars($_POST['pseudo']);
+            $password = htmlspecialchars($_POST['mdp']);
+            $password2 = htmlspecialchars($_POST['mdp2']);
+            $captcha = htmlspecialchars($_POST['captcha']);
+            
+            // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
+            // $br = '<br>';
+                    // echo $name . $br;
+                    // echo $email . $br;
+                    // echo $pseudo . $br;
+                    // echo $hashedmdp . $br;
+                    // echo " Send form register ok <br>";
+                    // echo $hashedmdp2 . $br;
+            if($_POST['captcha']=="20")
             {
-                if($email == $email2)
+                $pseudolength = strlen($pseudo);
+                if($pseudolength <= 30)
                 {
-                    if(filter_var($email, FILTER_VALIDATE_EMAIL))
+                    $reqpseudo = $bdd->prepare("SELECT * FROM users WHERE pseudo = ?");
+                    $reqpseudo->execute(array($pseudo));
+                    $pseudoexist = $reqpseudo->rowCount();
+                    if($pseudoexist == 0)
                     {
-                        $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ?");
-                        $reqmail->execute(array($email));
-                        $mailexist = $reqmail->rowCount();
-                        if($mailexist == 0)
+                        if($email == $email2)
                         {
-                            if($password == $password2)
+                            if(filter_var($email, FILTER_VALIDATE_EMAIL))
                             {
-                                $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
-
-                                $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password) VALUE(?, ?, ?, ?)");
-                                $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp));
-                                $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                header('Location: index.php');
+                                $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ?");
+                                $reqmail->execute(array($email));
+                                $mailexist = $reqmail->rowCount();
+                                if($mailexist == 0)
+                                {
+                                    if($password == $password2)
+                                    {
+                                        $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
+        
+                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password) VALUE(?, ?, ?, ?)");
+                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp));
+                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
+                                        header('Location: index.php');
+                                    }
+                                    else
+                                    {
+                                        $erreur = "Vos mots de passes ne correspondent pas.";
+                                    }
+                                }
+                                else
+                                {
+                                    $erreur = "Votre adresse mail est déjà utilisé.";
+                                }
                             }
                             else
                             {
-                                $erreur = "Vos mots de passes ne correspondent pas.";
+                                $erreur = "Votre adresses mail n'est pas valide.";
                             }
                         }
                         else
                         {
-                            $erreur = "Votre adresse mail est déjà utilisé.";
+                            // erreur email
+                            $erreur = "Vos adresses mails ne correspondent pas.";
                         }
                     }
                     else
                     {
-                        $erreur = "Votre adresses mail n'est pas valide.";
+                        // erreur pseudo deja pris
+                        $erreur = "Votre pseudo est déjà utlisé.";
                     }
                 }
-                else
-                {
-                    $erreur = "Vos adresses mails ne correspondent pas.";
+                else{
+                    // erreur pseudo trop long
+                    $erreur = "Votre pseudo ne doit pas dépasser 30 caractères.";
                 }
             }
-            else
-            {
-                $erreur = "Votre pseudo est déjà utlisé.";
-            }
+        else
+        {
+            // erreur captcha
+            $erreur = "Veuillez renseigner la bonne réponse";
         }
-        else{
-            $erreur = "Votre pseudo ne doit pas dépasser 30 caractères.";
-        }
-   }else{
-    // $erreurs = 1;
+    }else{
+    // $erreurs champs incomplet
     $erreur = "Tous les champs doivent être complétés";
     }
+// }
+    
+   
 // }
 
 
@@ -119,7 +136,7 @@ require_once('config/connect.php');
       <a href="#" class="navbar-brand">Inscription Blog</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="../../index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+        <a class="navbar-link" href="connexion.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </div>
     </nav>
   </header>

@@ -8,7 +8,8 @@
         <a class="navbar-link" href="contact.php"><i class="fas fa-user"></i> Contact</a>
         <a class="navbar-link" href="formulaireContact.php"><i class="fas fa-envelope"></i> Formulaire</a>
         <a class="navbar-link" href="src/Admin/indexAdmin.php" ><i class="fas fa-user"></i> Administration</a>
-        <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+        <a class="navbar-link" href="connexion.php"><i class="fas fa-sign-in-alt"></i> sign in</a>
+        <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> sign up</a>
       </div>
     </nav>
   </header>

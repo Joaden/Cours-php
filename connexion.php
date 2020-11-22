@@ -119,7 +119,7 @@ if(isset($_POST['formconnexion']))
       <a href="#" class="navbar-brand">Connexion Blog</a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="../../index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a class="navbar-link" href="#"><i class="fas fa-sign-in-alt"></i> Inscription</a>
+        <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Inscription</a>
       </div>
     </nav>
   </header>
