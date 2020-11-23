@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Route url : http://localhost:8000/src/Admin/indexAdmin.php : Accueil Administration
 require_once('vendor/autoload.php');
 

@@ -9,83 +9,110 @@ require('config/connect.php');
 // Appel du fichier de fonction
 require('config/functions.php');
 
-$users = getUsers();
-$comments = getCommentsAdmin();
-// echo count($users);
-// var_dump($users);
-// die();
-$num_rows=0;
+if(isset($_SESSION['id']))
+{
+    $num_rows=0;
+
+    //Si le user est connecté
+    $reqUser = $bdd->prepare("SELECT * FROM users WHERE id = ? ");
+    $reqUser->execute(array($_SESSION['id']));
+    $user = $reqUser->fetch();
+
+    if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
+    {
+        echo $_POST['newpseudo'];
+        echo $_POST['mdp'];
+        echo $_POST['mdp2'];
+        die();
+        $newPseudo = htmlspecialchars($_POST['newpseudo']);
+        $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
+        $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
+        header('Location: profil.php?id='.$_SESSION['id']);
+
+    }
+
+    if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
+    {
+        $newemail = htmlspecialchars($_POST['newemail']);
+        $insertemail = $bdd->prepare("UPDATE users SET email = ? WHERE id = ?");
+        $insertemail->execute(array($newemail, $_SESSION['id']));
+        header('Location: profil.php?id='.$_SESSION['id']);
+
+    }
 
 
 ?>
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Administration</title> -->
+        <title>Edit profil</title>
         <?php 
-            include("src/Views/base-back.php"); 
+            include("src/Views/import/head.html"); 
         ?>
-    <!-- </head> -->
-    <!-- <body class="layout with-sidenav"> -->
-    <header>
-    <div class="navbar-fixed">
-
-    <nav class="navbar shadow-1 primary">
-      <a href="#" class="navbar-brand">Back-Office Blog</a>
-      <div class="navbar-menu ml-auto">
-        <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
-        <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-sticky-note"></i>Articles</a>
-        <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-user"></i>Users</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-clipboard"></i>Notes</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i>Images</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-download"></i> Gestion Exporter</a>
-        <a href="#" class="sidenav-link "><i class="fas fa-home"></i>Mailing</a>
-        <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
-      </div>
-    </nav>
-  </header>
-
-  <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
-    <div class="sidenav-header">
-      <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
-      <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
-    </div>
-    <a href="index.php" class="sidenav-link active"><i class="fas fa-home"></i> Accueil</a>
-    <a href="articlesAdmin.php" class="sidenav-link "><i class="fas fa-sticky-note"></i> Gestion Articles</a>
-    <a href="usersAdmin.php" class="sidenav-link "><i class="fas fa-user"></i> Gestion Users</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-clipboard"></i> Gestion Notes</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Images</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-download"></i> Gestion Exporter les data</a>
-    <a href="#" class="sidenav-link "><i class="fas fa-home"></i> Gestion Mailing</a>
-    <a href="register.php" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
-    <div>
-        <hr>
-  </div>
-    <a href="inserer.php">Insérer</a>
-    <a href="modifier.php">Modifier</a>
-    <a href="supprimer.php">Supprimer</a>
-    <div><hr><br></div>
-    <button class="btn shadow-1 btn-dark rounded-4">Mode dark</button>
-    <div><br></div>
-    <button class="btn shadow-1 rounded-4">Mode light </button>
-  </div>
-  </div>
+    </head> 
+    <body class="layout with-sidenav">
+        <?php 
+          include("src/Views/import/navbar-front.php"); 
+        ?>
         <div class="container-fluid">
-            
             <div class="container">
-               <h1>Administration</h1>
+               <h1>Edition de mon profil</h1>
                <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (3).jpg" alt="Image" />
             </div>
             <hr><br>
             <div class="grix xs2 md4 center mt-5">
-                <button id="tooltip1" data-ax="tooltip" data-tooltip-content="Affiche les users" class="btn airforce dark-3 rounded-1 shadow-1">Show Users</button>
-                <button id="tooltip4" data-ax="tooltip" data-tooltip-position="left" data-tooltip-content="Affiche les articles" class="btn airforce dark-3 rounded-1 shadow-1">Show Articles</button>
+                <button id="tooltip1" data-ax="tooltip" data-tooltip-content="Editer mes infos personnelles" class="btn airforce dark-3 rounded-1 shadow-1">Show Users</button>
+                <button id="tooltip4" data-ax="tooltip" data-tooltip-position="left" data-tooltip-content="Editer mes articles" class="btn airforce dark-3 rounded-1 shadow-1">Show Articles</button>
                 <button id="tooltip2" data-ax="tooltip" data-tooltip-position="right" data-tooltip-content="Tooltip" class="btn airforce dark-3 rounded-1 shadow-1">Right</button>
                 <button id="tooltip3" data-ax="tooltip" data-tooltip-position="bottom" data-tooltip-content="Tooltip" class="btn airforce dark-3 rounded-1 shadow-1">Bottom</button>
             </div>
             <br><hr><br>
+
+            <div class="container">
+                <h3>Edition pseudo & email</h3>
+                <div class="row">
+                    <div></div>
+                    <div>
+                        <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="newpseudo">Nouveau Pseudo</label>
+                            <input name="newpseudo" type="text" class="form-control" id="newpseudo" aria-describedby="newpseudo" placeholder="Votre pseudo" value="<?php $user['pseudo']; ?>" required>
+                            <small id="newpseudo" class="form-text text-muted"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="newmail">Nouveau Mail</label>
+                            <input name="newmail" type="email" class="form-control" id="newmail" aria-describedby="newmail" placeholder="Votre email" value="<?php $user['email']; ?>" required>
+                            <small id="newmail" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="mdp">Password</label>
+                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Votre mot de passe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mdp2">Confirmation Password</label>
+                            <input name="mdp2" type="password" class="form-control" id="mdp2" placeholder="Votre mot de passe" required>
+                        </div>
+                        
+                        <button type="submit" name="formEditProfil" class="btn btn-primary">Enregistrer les modifications</button>
+                    </form>
+                    <p style="color: red;" id="erreur">
+                        <?php 
+                            if(isset($erreur))
+                            {
+                            echo $erreur;  
+                            }
+                        ?>
+                    </p>
+                    <br>
+                    <br>
+                    </div>
+                </div>
+            </div>
+
+
+            <br><hr><br>
             <!-- START barre de recherche users par categories, type, etc.. -->
-                <form method="POST" action="">
+                <!-- <form method="POST" action="">
                 <label for="especes">Espèces recherché : </label>
                     <select name="especes" id="select-user-espece">
                         <option value="humain">Humain</option>
@@ -99,40 +126,40 @@ $num_rows=0;
                         <option value="false">Non</option>
                     </select>
                     <input type="submit" value="OK">
-                </form>
+                </form> -->
                 <?php
-                    $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
+                    // $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
 
-                    // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
-                    $req1 = $bdd->query('SELECT * FROM users');
-                    $req3 = $bdd->query('SELECT * FROM espèces');
-                    $req4 = $bdd->query('SELECT * FROM users INNER JOIN users_infos ON users.users_infos_id = users_infos.users_id LIMIT 0,30');
-                    // Requete avec INNER JOIN pour récupérer des données ciblées dans 2 tables
-                    // LEFT JOIN ajoute toutes les donnees de la table cité à gauche et RIGHT JOIN celle de droite
-                    $req5 = $bdd->query('SELECT articles.title,articles.date, comments.author, comments.comment, comments.approved FROM articles INNER JOIN comments ON articles.id = comments.articleId AND comments.approved = "1" LIMIT 0,25');
+                    // // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
+                    // $req1 = $bdd->query('SELECT * FROM users');
+                    // $req3 = $bdd->query('SELECT * FROM espèces');
+                    // $req4 = $bdd->query('SELECT * FROM users INNER JOIN users_infos ON users.users_infos_id = users_infos.users_id LIMIT 0,30');
+                    // // Requete avec INNER JOIN pour récupérer des données ciblées dans 2 tables
+                    // // LEFT JOIN ajoute toutes les donnees de la table cité à gauche et RIGHT JOIN celle de droite
+                    // $req5 = $bdd->query('SELECT articles.title,articles.date, comments.author, comments.comment, comments.approved FROM articles INNER JOIN comments ON articles.id = comments.articleId AND comments.approved = "1" LIMIT 0,25');
 
-                    // '(B) ->prepare est utilisé quand on ne connait pas la valeur
-                    $req2 = $bdd->prepare('SELECT * FROM users WHERE espece_id = ? ORDER BY id');
-                    // $req2->execute(array($_POST['espece_id']));
-                    // $req2->execute(array($_GET['value']));
+                    // // '(B) ->prepare est utilisé quand on ne connait pas la valeur
+                    // $req2 = $bdd->prepare('SELECT * FROM users WHERE espece_id = ? ORDER BY id');
+                    // // $req2->execute(array($_POST['espece_id']));
+                    // // $req2->execute(array($_GET['value']));
                     ?>
              <table border="1">
-                 <th scope="col">User ID</th>
                  <th scope="col">Nom</th>
                  <th scope="col">Email</th>
+                 <th scope="col">Pseudo</th>
                  <th scope="col">Vérifié</th>
                  <th scope="col">Phone</th>
                  <th scope="col">Type</th>
                  <th scope="col">Date inscription</th>
                  <?php
                     // while($resultat = $req1->fetch())
-                    while($resultat = $req4->fetch())
-                    {
+                    // while($resultat = $req->fetch())
+                    // {
                     ?>
                     <tr>
-                        <td><?php echo  $resultat['id'] ?></td>
                         <td><?php echo  $resultat['name'] ?></td>
                         <td><?php echo  $resultat['email'] ?></td>
+                        <td><?php echo  $resultat['pseudo'] ?></td>
                         <td><?php echo  $resultat['is_verified'] ?></td>
                         <td><?php echo  $resultat['phone'] ?></td>
                         <td><?php echo  $resultat['espece_id'] ?></td>
@@ -140,7 +167,7 @@ $num_rows=0;
                     </tr>
                       <!-- echo "Nom : "  . $resultat['name'] . ". / Email : "  . $resultat['email'] . " / espèce : " . $resultat['espece_id'] . " <br/> " ; -->
                     <?php
-                    }
+                    // }
               
                 ?>
              </table>
@@ -233,3 +260,10 @@ $num_rows=0;
     <script src="jquery-3.5.1.min.js"></script>
   </body>
 </html>
+<?php
+}
+else
+{
+    header("Location: connexion.php");
+}
+?>

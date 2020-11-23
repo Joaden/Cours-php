@@ -58,7 +58,7 @@ $resultat = $instance->additionner(31, 33);
     <head>
         <title>Blog Home page</title>
         <?php 
-            include("src/Views/import/header.html"); 
+            include("src/Views/import/head.html"); 
         ?>  
     </head>
     

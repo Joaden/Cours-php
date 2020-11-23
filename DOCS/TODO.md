@@ -20,6 +20,9 @@
 
 - [22nov 2020 23h16] Denis => Must be optimized
     Improved the connexion form (register and connexion and $_SESSION)
+- [22nov 2020 23h16] Denis 
+    Add if else with $_SESSION  login || logout
+
 
 ## USEFUL
 - [21nov 13h24] Christophe
@@ -34,12 +37,13 @@
 
 ## WHEN WE HAVE TIME
 - ...
+
 - [22nov 2020 23h20] Denis
     bug size footer inside connexion.php
-
 - [22nov 2020 23h20] Denis
     Delete all comment(die();) in all files
-
+- [22nov 2020 23h40] Denis
+    Bug button (Open Sidenav) in profil.php table and smartphone version 
 
 ## how to use this file:
 - [date] [nom ou email du demandeur] 

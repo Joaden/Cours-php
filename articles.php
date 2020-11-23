@@ -1,10 +1,11 @@
 <?php 
+session_start();
 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
     <?php 
-        include("src/Views/import/header.html"); 
+        include("src/Views/import/head.html"); 
     ?>
     <body class="layout with-sidenav">
         <?php 

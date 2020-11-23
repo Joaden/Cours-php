@@ -19,6 +19,14 @@
       <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
       <img width="80px" class="sidenav-logo dropshadow-1" src="assets/photos/profils/super-heros (2).jpg" alt="Logo" />
     </div>
+    <a href="profil.php" class="sidenav-link">
+      <?php
+        if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])
+          {
+            echo $userInfo['pseudo'];
+          }
+      ?>
+     </a>
     <a href="index.php" class="sidenav-link active">Accueil</a>
     <a href="articles.php" class="sidenav-link"><i class="fas fa-sticky-note"></i> Articles</a>
     <a href="profil.php" class="sidenav-link"><i class="fas fa-user"></i> Profil</a>

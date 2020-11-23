@@ -30,10 +30,16 @@ if(isset($_POST['formconnexion']))
             if ($result && password_verify($_POST['mdp'], $result['password']))
             {
                 // Si les verif passent bien on pourra utiliser ces variables de session pour avoir les info du user connecté
-                $_SESSION['id'] = $userInfo['id'];
-                $_SESSION['pseudo'] = $userInfo['pseudo'];
-                $_SESSION['email'] = $userInfo['email'];
-                header("Location: profil.php?id".$_SESSION['id']);
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['pseudo'] = $result['pseudo'];
+                $_SESSION['email'] = $result['email'];
+                // echo "id = ".$result['id']."<br>";
+                // echo "name = ".$result['name']."<br>";
+                // echo "pseudo = ".$result['pseudo']."<br>";
+                // echo "email = ".$result['email']."<br>";
+                // echo "Valide = ".$result['is_verified']."<br>";
+                // die();
+                header("Location: profil.php?id=".$_SESSION['id']);
             }
 
             // $reqUser = $bdd->prepare("SELECT * FROM users WHERE email = ? AND password = ?");

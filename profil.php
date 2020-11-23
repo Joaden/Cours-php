@@ -21,7 +21,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
   <head>
     <title>Blog php profil</title>
     <?php 
-        include("src/Views/import/header.html"); 
+        include("src/Views/import/head.html"); 
     ?>
     <style>
       table {
@@ -45,12 +45,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
   <?php 
     include("src/Views/import/navbar-front.php"); 
   ?>
-    <main>
-        <!-- Code here the main content -->
-        <button data-target="example-sidenav" class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
-        Open sidenav
-        </button>
-    </main>
+    
 
   <div class="container-fluid">
     <div class="container">
@@ -60,14 +55,25 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
         <div>
             Pseudo = <?php echo $userInfo['pseudo']; ?>. <br>
             Email = <?php echo $userInfo['email']; ?>. <br>
+            Adresse mail confirmée = <?php echo $userInfo['is_verified']; ?>. <br>
+            Email = <?php echo $userInfo['email']; ?>. <br>
+            Email = <?php echo $userInfo['email']; ?>. <br>
         </div>
         <?php 
             if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])
             {
-               echo "<a href=\"#\">Editer mon profil</a>";
-               echo "<a href=\"logout.php\">Se déconnecter</a>";
+        ?>
+                <a href="editProfil.php?id=<?php $_SESSION['id']; ?>">Editer mon profil</a><br>
+                <a href="logout.php">Se déconnecter</a>
+        <?php
             }
         ?>
+        <main>
+        <!-- Code here the main content -->
+            <button data-target="example-sidenav" class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
+            Open sidenav
+            </button>
+        </main>
         <!-- <button data-target="example-sidenav"
           class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
             Open sidenav
