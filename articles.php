@@ -44,7 +44,7 @@ session_start();
                         <a href="#">*****</a>
                     
                     
-                    <form action="article.php?id=<?= $article->id ?>" method="post">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         <p>
                             <label for="author">Pseudo :</label><br>
                             <input type="text" name="author" id="author" value="<?php if(isset($author)) echo $author ?>" class="form-control">
@@ -56,8 +56,11 @@ session_start();
                         <p>
                             <label for="content">Contenu :</label><br>
                             <textarea name="content" id="content" cols="30" rows="5" class="form-control"><?php if(isset($content)) echo $content ?></textarea>
+                            <input type="hidden" name="MAX_FILE_SIZE" value="2097152"> 
+                            <p>Choisissez une photo avec une taille inférieure à 2 Mo.</p> 
+                            <input type="file" name="photo"> 
                         </p>
-                        <button class="btn btn-success" type="submit">Envoyer</button>
+                        <button name="submit" class="btn btn-success" type="submit">Envoyer</button>
                     </form>     
                     </div>
                 </div>
