@@ -21,7 +21,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
   <head>
     <title>Blog php profil</title>
     <?php 
-        include("src/Views/import/head.html"); 
+        include("src/Views/common/head.html"); 
     ?>
     <style>
       table {
@@ -43,7 +43,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
   </head>
   <body class="layout with-sidenav">
   <?php 
-    include("src/Views/import/navbar-front.php"); 
+    include("src/Views/common/navbar-front.php"); 
   ?>
     
 
@@ -155,7 +155,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
 
 
     <?php 
-      include("src/Views/import/footer.php"); 
+      include("src/Views/common/footer.php"); 
     ?>
   </div>
   <?php

@@ -10,11 +10,11 @@ $articles = getArticles();
 <!DOCTYPE html>
 <html lang="fr">
     <?php 
-        include("src/Views/import/head.html"); 
+        include("src/Views/common/head.html"); 
     ?>
     <body class="layout with-sidenav">
         <?php 
-          include("src/Views/import/navbar-front.php"); 
+          include("src/Views/common/navbar-front.php"); 
         ?>
         <div class="container-fluid">
             <?php if(isset($alerte)): ?>
@@ -96,7 +96,7 @@ $articles = getArticles();
             <hr>
 
             <?php 
-                include("src/Views/import/footer.php"); 
+                include("src/Views/common/footer.php"); 
             ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>

@@ -58,13 +58,13 @@ $resultat = $instance->additionner(31, 33);
     <head>
         <title>Blog Home page</title>
         <?php 
-            include("src/Views/import/head.html"); 
+            include("src/Views/common/head.html"); 
         ?>  
     </head>
     
     <body class="layout with-sidenav">
         <?php 
-          include("src/Views/import/navbar-front.php"); 
+          include("src/Views/common/navbar-front.php"); 
         ?>
         <div class="container-fluid">
             <?php if(isset($alerte)): ?>
@@ -240,7 +240,7 @@ $resultat = $instance->additionner(31, 33);
                 </div>
             </div>
             <?php 
-                include("src/Views/import/footer.php"); 
+                include("src/Views/common/footer.php"); 
             ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>

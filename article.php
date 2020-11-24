@@ -55,12 +55,12 @@ else
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>Blog Article Page</title>
         <?php 
-            include("src/Views/import/head.html"); 
+            include("src/Views/common/head.html"); 
         ?>  
   </head>
   <body class="layout with-sidenav">
   <?php 
-          include("src/Views/import/navbar-front.php"); 
+          include("src/Views/common/navbar-front.php"); 
         ?>
     <div class="container-fluid">
       <div class="container">
@@ -121,7 +121,7 @@ else
       </div>
     </div>
     <?php 
-        include("src/Views/import/footer.php"); 
+        include("src/Views/common/footer.php"); 
     ?>
   </body>
 </html>

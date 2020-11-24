@@ -47,7 +47,7 @@ if(isset($_SESSION['id']))
     <head>
         <title>Edit profil</title>
         <?php 
-            include("src/Views/import/head.html"); 
+            include("src/Views/common/head.html"); 
         ?>
         <style>
 
@@ -59,7 +59,7 @@ if(isset($_SESSION['id']))
     </head> 
     <body class="layout with-sidenav">
         <?php 
-          include("src/Views/import/navbar-front.php"); 
+          include("src/Views/common/navbar-front.php"); 
         ?>
         <div class="container-fluid">
             <div class="container">

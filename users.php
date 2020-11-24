@@ -13,7 +13,7 @@ require_once('config/functions.php');
   <head>
     <title>Blog php profil</title>
     <?php 
-        include("src/Views/import/header.html"); 
+        include("src/Views/common/header.html"); 
     ?>
     <style>
       table {
@@ -35,7 +35,7 @@ require_once('config/functions.php');
   </head>
   <body class="layout with-sidenav">
   <?php 
-    include("src/Views/import/navbar-front.php"); 
+    include("src/Views/common/navbar-front.php"); 
   ?>
   <div class="container-fluid">
     <div class="container">
@@ -124,7 +124,7 @@ require_once('config/functions.php');
 
 
     <?php 
-      include("src/Views/import/footer.php"); 
+      include("src/Views/common/footer.php"); 
     ?>
   </div>
   <?php
