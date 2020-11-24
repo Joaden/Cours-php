@@ -56,8 +56,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0)
             Pseudo = <?php echo $userInfo['pseudo']; ?>. <br>
             Email = <?php echo $userInfo['email']; ?>. <br>
             Adresse mail confirmée = <?php echo $userInfo['is_verified']; ?>. <br>
-            Email = <?php echo $userInfo['email']; ?>. <br>
-            Email = <?php echo $userInfo['email']; ?>. <br>
+            <!--  -->
         </div>
         <?php 
             if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])

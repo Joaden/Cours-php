@@ -20,10 +20,10 @@ if(isset($_SESSION['id']))
 
     if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
     {
-        echo $_POST['newpseudo'];
-        echo $_POST['mdp'];
-        echo $_POST['mdp2'];
-        die();
+        // echo $_POST['newpseudo'];
+        // echo $_POST['mdp'];
+        // echo $_POST['mdp2'];
+        // die();
         $newPseudo = htmlspecialchars($_POST['newpseudo']);
         $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
         $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
@@ -49,6 +49,13 @@ if(isset($_SESSION['id']))
         <?php 
             include("src/Views/import/head.html"); 
         ?>
+        <style>
+
+            #formEditProfil div{
+                padding: 10px;
+                margin: 10px;
+            }
+        </style>
     </head> 
     <body class="layout with-sidenav">
         <?php 
@@ -69,13 +76,13 @@ if(isset($_SESSION['id']))
             <br><hr><br>
 
             <div class="container">
-                <h3>Edition pseudo & email</h3>
+                <h3>Edition</h3>
                 <div class="row">
                     <div></div>
-                    <div>
+                    <!-- <div>
                         <form method="POST" action="">
                         <div class="form-group">
-                            <label for="newpseudo">Nouveau Pseudo</label>
+                            <label for="newpseudo">Avatar</label>
                             <input name="newpseudo" type="text" class="form-control" id="newpseudo" aria-describedby="newpseudo" placeholder="Votre pseudo" value="<?php $user['pseudo']; ?>" required>
                             <small id="newpseudo" class="form-text text-muted"></small>
                         </div>
@@ -93,22 +100,108 @@ if(isset($_SESSION['id']))
                             <input name="mdp2" type="password" class="form-control" id="mdp2" placeholder="Votre mot de passe" required>
                         </div>
                         
-                        <button type="submit" name="formEditProfil" class="btn btn-primary">Enregistrer les modifications</button>
-                    </form>
-                    <p style="color: red;" id="erreur">
-                        <?php 
-                            if(isset($erreur))
-                            {
-                            echo $erreur;  
-                            }
-                        ?>
-                    </p>
-                    <br>
-                    <br>
-                    </div>
+                            <button type="submit" name="formEditProfil" class="btn btn-primary">Enregistrer les modifications</button>
+                        </form>
+                        <p style="color: red;" id="erreur">
+                            <?php 
+                                if(isset($erreur))
+                                {
+                                echo $erreur;  
+                                }
+                            ?>
+                        </p>
+                        <br>
+                        <br>
+                    </div> -->
                 </div>
             </div>
+            <hr><br>
 
+<div id="formEditProfil" class="container shadow-1 rounded-2 bd-solid bd-3">
+  <button id="ButtonEditProfil"  class="btn btn-success rounded-1 press">Modifier mon profil</button> 
+  <small class="form-text text-muted">Si vous changez ......</small>
+  <div class="form-hide">
+    <div id="notes-div" class="grix xs1 sm2 ">
+      <div class="grix xs3 shadow-1 rounded-2 bd-blue bd-solid bd-3 ">
+        <div class="col-xs3 text-center">
+        <button class="btn btn-primary rounded-2 press">Mon pseudo</button>
+          <!-- <button class="btn btn-primary rounded-2 press">Add Notes</button> | <button class="btn btn-danger rounded-2 press">Supp Notes</button> -->
+        </div>
+        <hr class="border-bottom">
+        <div class="col-xs3">
+                        <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="newpseudo">Nouveau Pseudo</label>
+                            <input name="newpseudo" type="text" class="form-control" id="newpseudo" aria-describedby="newpseudo" placeholder="Votre pseudo" value="<?php $user['pseudo']; ?>" required>
+                            <small id="newpseudo" class="form-text text-muted"></small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mdp">Password</label>
+                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Votre mot de passe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mdp2">Confirmation Password</label>
+                            <input name="mdp2" type="password" class="form-control" id="mdp2" placeholder="Votre mot de passe" required>
+                        </div>
+                        
+                            <button type="submit" name="formEditPseudo" class="btn btn-primary">Enregistrer les modifications</button>
+                        </form>
+                        <p style="color: red;" id="erreur">
+                            <?php 
+                                if(isset($erreur))
+                                {
+                                echo $erreur;  
+                                }
+                            ?>
+                        </p>
+                        <br>
+                        <br>
+                    </div>
+        <!-- <div>box 2</div>
+        <div>box 3</div>
+        <div>box 4</div> -->
+      </div>
+      <div class="grix xs3 shadow-1 rounded-2 bd-blue bd-solid bd-3">
+      <div class="col-xs3 text-center">
+        <button class="btn btn-primary rounded-2 press">Mon email</button>
+          <!-- <button class="btn btn-primary rounded-2 press">Add Notes</button> | <button class="btn btn-danger rounded-2 press">Supp Notes</button> -->
+        </div>
+        <hr class="border-bottom">
+      <div class="col-xs3">
+                        <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="newmail">Nouveau Mail</label>
+                            <input name="newmail" type="email" class="form-control" id="newmail" aria-describedby="newmail" placeholder="Votre email" value="<?php $user['email']; ?>" required>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="mdp">Password</label>
+                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Votre mot de passe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mdp2">Confirmation Password</label>
+                            <input name="mdp2" type="password" class="form-control" id="mdp2" placeholder="Votre mot de passe" required>
+                        </div>
+                        
+                            <button type="submit" name="formEditEmail" class="btn btn-primary">Enregistrer les modifications</button>
+                        </form>
+                        <p style="color: red;" id="erreur">
+                            <?php 
+                                if(isset($erreur))
+                                {
+                                echo $erreur;  
+                                }
+                            ?>
+                        </p>
+                        <br>
+                        <br>
+                    </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><hr><br>
 
             <br><hr><br>
             <!-- START barre de recherche users par categories, type, etc.. -->
@@ -258,6 +351,14 @@ if(isset($_SESSION['id']))
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
     <script src="jquery-3.5.1.min.js"></script>
+    <script>
+          $(document).ready(function(){
+      $("#ButtonEditProfil").click(function(){
+        $(".form-hide").fadeToggle("2000");
+      });
+    });
+     
+    </script>
   </body>
 </html>
 <?php

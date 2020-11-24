@@ -16,6 +16,6 @@
       <input type="submit" name="ok" value="Envoyer"> 
    </form> 
    <br /> 
-   <a href="blog.php" >VISITEZ LE BLOG</a> 
+   <a href="blog.php">VISITEZ LE BLOG</a> 
 </body> 
 </html>
