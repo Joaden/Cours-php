@@ -10,3 +10,9 @@
 
 ### branch christophe (commit 21nov20 17h52)
   - corrected error line 66 in functions.php
+
+
+### branch master (commit 24nov20 16h00)
+  - add UPDATE profil(speudo & email)
+  - modif profil.php / editProfil.php 
+  - Test : Create a user, connexion, in profil(click on editer mon profil)
