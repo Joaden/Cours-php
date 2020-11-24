@@ -1,6 +1,11 @@
 <?php 
 session_start();
 
+
+//Appel de function avec la connexion à la bdd
+require_once('config/functions.php');
+$articles = getArticles();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
