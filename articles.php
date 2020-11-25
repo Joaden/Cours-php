@@ -1,6 +1,23 @@
 <?php 
 session_start();
 
+require_once('vendor/autoload.php');
+
+require_once('config/connect.php');
+
+require_once('config/functions.php');
+
+if(isset($_GET['id']) AND $_GET['id'] > 0)
+{
+    $getId = intval($_GET['id']);
+    $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+    $reqUser->execute(array($getId));
+    $userInfo = $reqUser->fetch();
+}
+
+
+$articles = getArticles();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -80,6 +97,8 @@ session_start();
                     <?php foreach($articles as $article): ?>
                         <div class="col-md-3">
                             <h3><?= $article->title ?></h3>
+                            <img src="assets/upload/penguins.jpg" alt="img-thumbnail" class="img-thumbnail">
+
                             <br>
                             Créé le :<time><?= $article->date ?></time>
                             <br>

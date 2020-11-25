@@ -1,15 +1,26 @@
 <?php
+session_start();
+
+require_once('vendor/autoload.php');
+
+require_once('config/connect.php');
+
+require_once('config/functions.php');
+
+if(isset($_GET['id']) AND $_GET['id'] > 0)
+{
+    $getId = intval($_GET['id']);
+    $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+    $reqUser->execute(array($getId));
+    $userInfo = $reqUser->fetch();
+}
+
 use Carbon\Carbon;
 // spl_autoload_register(function($className){
 
 //     // str_replace
 //     require_once $className;
 // })
-
-require_once('vendor/autoload.php');
-
-//Appel de function avec la connexion à la bdd
-require_once('config/functions.php');
 
 $articles = getArticles();
 
@@ -83,7 +94,11 @@ $resultat = $instance->additionner(31, 33);
            <div class="container">
                <div class="row">
                     <div class="col-6">
-                        <a href="register.php">Connexion / Inscription</a>
+                        <?php if(isset($_SESSION['id'])) echo "<a href=\"logout.php\">Déconnexion</a>";
+                            else                       
+                                echo "<a href=\"connexion.php\">Connexion</a>"; 
+                        ?>
+                            
                     </div>
                     <div class="col-6">
                         <form class="form-inline my-2 my-lg-0">
