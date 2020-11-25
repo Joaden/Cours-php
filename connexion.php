@@ -101,87 +101,90 @@ if(isset($_POST['formconnexion']))
         }
     </style>
     <body>
-        <nav class="navbar shadow-1 primary">
-        <a href="index.php" class="navbar-brand">Homepage Blog</a>
-        <div class="navbar-menu ml-auto">
-            <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
-            <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Inscription</a>
-        </div>
-        </nav>
-        </header>
-            <div class="container-fluid">
-                <h1>Connexion</h1>
-                <div class="container bordered">
-                    <hr>
-                    <hr>
-                    <div class="row">
-                    <div class="col-md-6">
-                        <h2>Connexion</h2>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Vous n'avez pas encore de compte ? 
-                            <button class="btn btn-primary">
-                                <a href="register.php">
-                                    S'inscrire
-                                </a>
-                            </button>
-                        </p>
-                    </div>
+        <header>
+            <nav class="navbar shadow-1 primary">
+                <a href="index.php" class="navbar-brand">Homepage Blog</a>
+                <div class="navbar-menu ml-auto">
+                    <a class="navbar-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
+                    <a class="navbar-link" href="register.php"><i class="fas fa-sign-in-alt"></i> Inscription</a>
                 </div>
-                    <p style="color: red;" id="erreur">
-                        <?php 
-                            if(isset($erreur))
-                            {
-                            echo $erreur;  
-                            }
-                        ?>
+            </nav>
+        </header>
+        <div class="container-fluid">
+            <h1>Connexion</h1>
+            <div class="container bordered">
+                <hr>
+                <hr>
+                <div class="row">
+                <div class="col-md-6">
+                    <h2>Connexion</h2>
+                </div>
+                <div class="col-md-6">
+                    <p>Vous n'avez pas encore de compte ? 
+                        <button class="btn btn-primary">
+                            <a href="register.php">
+                                S'inscrire
+                            </a>
+                        </button>
                     </p>
-                    
-                    <form method="POST" action="">
-                        <div class="form-group">
-                            <label for="emailRegister">Email</label>
-                            <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="Votre email" value="<?php if(isset($email)) { echo $email; } ?>" required>
-                            <small id="emailRegister" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="mdp">Password</label>
-                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Votre mot de passe" required>
-                        </div>
-                        <div class="control-group">
-                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label for="captcha"></label>
-                                <input type="text" class="form-control" id="captcha" name="captcha" placeholder="4 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
-                            </div>
-                        </div>
-                        <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
-                            <label for="antibot"></label>
-                            <input type="text"  name="antibot" placeholder="" value="">
-                        </div>
-                        <div class="form-group form-check">
-                            <div class="form-check pl-0">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck29" required>
-                                <label class="form-check-label" for="invalidCheck29">Agree to terms and conditions</label>
-                                <div class="invalid-feedback">You  shall not pass!</div>
-                            </div>
-                        </div>
-                        <button type="submit" name="formconnexion" class="btn btn-primary">Je m'inscris</button>
-                    </form>
-                    <p style="color: red;" id="erreur">
-                        <?php 
-                            if(isset($erreur))
-                            {
-                            echo $erreur;  
-                            }
-                        ?>
-                    </p>
-                    <br>
-                    <br>
-                    <hr>
                 </div>
             </div>
-            <footer class="footer primary">
-                Copyright © 2020 - Daos
-            </footer>
-        <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
+                <p style="color: red;" id="erreur">
+                    <?php 
+                        if(isset($erreur))
+                        {
+                        echo $erreur;  
+                        }
+                    ?>
+                </p>
+                
+                <form method="POST" action="">
+                    <div class="form-group">
+                        <label for="emailRegister">Email</label>
+                        <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="Votre email" value="<?php if(isset($email)) { echo $email; } ?>" required>
+                        <small id="emailRegister" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="mdp">Password</label>
+                        <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Votre mot de passe" required>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label for="captcha"></label>
+                            <input type="text" class="form-control" id="captcha" name="captcha" placeholder="4 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
+                        </div>
+                    </div>
+                    <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label for="antibot"></label>
+                        <input type="text"  name="antibot" placeholder="" value="">
+                    </div>
+                    <div class="form-group form-check">
+                        <div class="form-check pl-0">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck29" required>
+                            <label class="form-check-label" for="invalidCheck29">Agree to terms and conditions</label>
+                            <div class="invalid-feedback">You  shall not pass!</div>
+                        </div>
+                    </div>
+                    <button type="submit" name="formconnexion" class="btn btn-primary">Je m'inscris</button>
+                </form>
+                <p style="color: red;" id="erreur">
+                    <?php 
+                        if(isset($erreur))
+                        {
+                        echo $erreur;  
+                        }
+                    ?>
+                </p>
+                <br>
+                <br>
+                <hr>
+            </div>
+        </div>
+        <footer class="footer primary">
+            Copyright © 2020 - Daos
+        </footer>
+        <?php 
+            include("src/Views/common/scripts_loader.html");
+        ?>
     </body>
 </html>

@@ -75,7 +75,8 @@ $resultat = $instance->additionner(31, 33);
     
     <body class="layout with-sidenav">
         <?php 
-          include("src/Views/common/navbar-front.php"); 
+          include("src/Views/common/navbar_top.php"); 
+        //   include("src/Views/common/navbar-front.php");
         ?>
         <div class="container-fluid">
             <?php if(isset($alerte)): ?>
@@ -258,13 +259,9 @@ $resultat = $instance->additionner(31, 33);
                 include("src/Views/common/footer.php"); 
             ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
-        <script src="jquery-3.5.1.min.js"></script>
-        <script>
-            $('.carousel').carousel({
-                interval: 2000
-            })
-        </script>
 
+        <?php 
+            include("src/Views/common/scripts_loader.html");
+        ?>
     </body>
 </html>

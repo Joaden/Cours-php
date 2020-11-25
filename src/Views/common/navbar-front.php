@@ -46,11 +46,11 @@
     <a href="indexAdmin.php" class="sidenav-link"><i class="fas fa-user"></i> Administration</a>
     <a href="register.php" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Inscription</a>
     <a href="connexion.php" class="sidenav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
-    <div>
-    </div>
 
     <div>
-        <hr><br></div>
+        <hr><br>
+    </div>
+    
     <button class="btn shadow-1 btn-dark rounded-4">Mode dark</button>
     <div><br></div>
     <button class="btn shadow-1 rounded-4">Mode light </button>

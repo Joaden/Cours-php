@@ -1,27 +1,9 @@
 <?php 
 session_start();
 
-<<<<<<< HEAD
 
 //Appel de function avec la connexion à la bdd
 require_once('config/functions.php');
-=======
-require_once('vendor/autoload.php');
-
-require_once('config/connect.php');
-
-require_once('config/functions.php');
-
-if(isset($_GET['id']) AND $_GET['id'] > 0)
-{
-    $getId = intval($_GET['id']);
-    $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    $reqUser->execute(array($getId));
-    $userInfo = $reqUser->fetch();
-}
-
-
->>>>>>> 1b3c74f6bb2282bd47a0a9ff243c3f49379d929f
 $articles = getArticles();
 
 ?>
@@ -119,6 +101,8 @@ $articles = getArticles();
                 include("src/Views/common/footer.php"); 
             ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
+        <?php 
+            include("src/Views/common/scripts_loader.html");
+        ?>
     </body>
 </html>

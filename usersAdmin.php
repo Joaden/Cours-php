@@ -207,7 +207,8 @@ $num_rows=0;
     <footer class="footer primary">
       Copyright © 2020 - Daos
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
-    <script src="jquery-3.5.1.min.js"></script>
+    <?php 
+        include("src/Views/common/scripts_loader.html");
+    ?>
   </body>
 </html>
