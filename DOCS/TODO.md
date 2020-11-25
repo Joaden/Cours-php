@@ -48,3 +48,25 @@
 ## how to use this file:
 - [date] [nom ou email du demandeur] 
     [copier coller la demander, en vo ET une trad] ou noter notre phrase.
+
+
+## IDEES A RANGER :
+    3 roles : reader (fr: ?) , writer (fr: abonnés), administrator (fr: régulateur)
+
+    désactiver le framework css axentix
+
+    navbars:
+        - dupliquer le code avant de toucher
+        - sur une copie de chaque navbar: remettre les classes en version bootstrap.
+        - séparer chaque navbar dans un fichier séparé :
+  
+        - la navbar du haut affichera:  connexion/déconnexion ET SI CONNECTÉ : pseudo, déconnexion, photo, 
+
+    top-navbar : 
+        - centrer le titre du site
+        - boutons de connexion à droite
+        - nom du profil à droite
+        - role actuel du user à droite
+    
+    creer un fichier translate
+        - par exemple pour traduire les noms de roles
