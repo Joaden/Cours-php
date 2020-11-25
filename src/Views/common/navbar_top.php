@@ -5,7 +5,7 @@
         <span class="navbar-text text-white flex-grow-1 justify-content-md-start w-md-100">non-inscrit</span>
     <?php endif; ?>
 
-    <a class="navbar-brand mr-0 flex-grow-1 text-md-center w-md-100" href="#">Blog PHP</a>
+    <a class="navbar-brand mr-0 flex-grow-1 text-md-center w-md-100" href="index.php">Blog PHP</a>
 
     <button class="navbar-toggler border-primary" type="button" data-toggle="collapse" data-target="#navbar_top" aria-controls="navbar_top" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
