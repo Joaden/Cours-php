@@ -19,8 +19,8 @@
         </form>
          -->
         <form class="form my-2 my-md-0 d-flex flex-column flex-sm-row">
-            <a class="btn btn-outline-danger flex-grow-1 mb-2 mb-sm-0  mr-sm-2" href="connexion.php">Register</a>
-            <a class="btn btn-outline-primary flex-grow-1" href="register.php">Sign In</a>
+            <a class="btn btn-outline-danger flex-grow-1 mb-2 mb-sm-0  mr-sm-2" href="connexion.php">Inscription</a>
+            <a class="btn btn-outline-primary flex-grow-1" href="register.php">Connexion</a>
         </form>
     </div>
 </nav>

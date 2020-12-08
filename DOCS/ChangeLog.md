@@ -1,9 +1,9 @@
 # Changelogs
     (recents firsts)
 
-### branch christophe (commit ............. )
-
-
+### branch christophe (commit 8dec2020 15h19 )
+    - added file "nommage des fichiers.txt". Let's remove it when done.
+    - reactivated the old navbar for now.
 
 ### branch christophe (commit 25nov2020 20h13)
     - created a navbar_top.php

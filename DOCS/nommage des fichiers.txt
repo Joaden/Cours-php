@@ -1,0 +1,48 @@
+SYSTEME DE NOMMAGE PAR PREFIXES :
+
+    [prefixSujet]_[nomPage].php
+    [prefixSujet]_modal_[nomModal].php
+
+ACCUEIL
+    index.php                                               (publique)
+
+CONTACT
+    contact_writeMessage.php                                (abonné)
+    contact_messageSent.php                                 (abonné)
+
+PAGES DE SESSIONS
+    session_register.php                                    (publique)
+    session_connection.php                                  (publique)
+    session_logout.php                                      (abonné) ou (admin)
+
+GESTION DES ARTICLES
+    article_read.php                                        (publique)
+    article_all.php                                         (publique)
+    article_write.php                                       (abonné)
+    article_modify.php                                      (abonné)
+
+
+PAGES POUR USER
+    user_index.php                                          (abonné)
+        ou
+    user_board.php                                          (abonné)
+
+    user_modal_avatar.php                                   (abonné)
+    user_modal_createNote.php                               (abonné)
+
+PAGES POUR ADMIN
+    admin_index.php                                         (admin)
+        ou
+    admin_board.php                                         (admin)
+
+    admin_manageUsers.php                                   (admin)
+    admin_manageUsers_modal_deleteConfirmation.php          (admin)
+    admin_manageUsers_modal_verify.php                      (admin)
+    admin_manageUsers_modal_warning.php                     (admin)
+
+    admin_manageArticles.php                                (admin)
+    admin_manageArticles_delete.php                         (admin)
+    admin_manageArticles_warning.php                        (admin)
+        ou
+    admin_manageArticles_censure.php                        (admin)
+

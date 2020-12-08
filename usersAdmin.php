@@ -4,6 +4,8 @@ session_start();
 // Route url : http://localhost:8000/src/Admin/indexAdmin.php : Accueil Administration
 require_once('vendor/autoload.php');
 
+require_once('config/connect.php');
+
 //Appel de function avec la connexion à la bdd
 require_once('config/functions.php');
 

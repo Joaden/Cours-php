@@ -51,6 +51,9 @@
         - nom du profil à droite
         - role actuel du user à droite   [DONE] à gauche
 
+- [27nov 19h47] Christophe
+    - article.php doesn't use the common/head.php , but his head is written inline. 
+
 ## USEFUL
 - [21nov 13h24] Christophe
     rename project with a more explicit name
@@ -61,6 +64,22 @@
 
 - [22nov 2020 23h20] Denis
     Choose a design
+
+- [27nov 2020 19h54] Christophe
+    remove the checkbox "agree terms and ..." on connection page  (not coherent)
+
+- [27nov 2020 20h00] Christophe
+    the file connexion.php (in french) should be renamed connection.php (in english)
+
+- [28nov 2020 16h05] Christophe
+    create a file common/buttons_dark_light.php and move the code inside.
+    then replace the html by the include(....buttons_dark_light.php) . 
+
+- [28nov 2020 16h40] Christophe
+    file indexAdmin.php :  regroup the 3 tables of Users, they are duplicates.
+
+- [28nov 2020 16h40] Christophe
+    file indexAdmin.php :  the tables to manage Users should be in [usersAdmin.php], not in [indexAdmin.php].
 
 ## WHEN WE HAVE TIME
 - ...

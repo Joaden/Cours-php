@@ -76,7 +76,7 @@ $resultat = $instance->additionner(31, 33);
     <body class="layout with-sidenav">
         <?php 
           include("src/Views/common/navbar_top.php"); 
-        //   include("src/Views/common/navbar-front.php");
+          include("src/Views/common/navbar-front.php");
         ?>
         <div class="container-fluid">
             <?php if(isset($alerte)): ?>
