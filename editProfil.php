@@ -47,7 +47,7 @@ if(isset($_SESSION['id']))
     <head>
         <title>Edit profil</title>
         <?php 
-            include("src/Views/import/head.html"); 
+            include("src/Views/common/head.html"); 
         ?>
         <style>
 
@@ -59,7 +59,7 @@ if(isset($_SESSION['id']))
     </head> 
     <body class="layout with-sidenav">
         <?php 
-          include("src/Views/import/navbar-front.php"); 
+          include("src/Views/common/navbar-front.php"); 
         ?>
         <div class="container-fluid">
             <div class="container">
@@ -349,8 +349,10 @@ if(isset($_SESSION['id']))
     <footer class="footer primary">
       Copyright © 2020 - Denis & Christohpe
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
-    <script src="jquery-3.5.1.min.js"></script>
+    <?php 
+        include("src/Views/common/scripts_loader.html");
+    ?>
+
     <script>
           $(document).ready(function(){
       $("#ButtonEditProfil").click(function(){

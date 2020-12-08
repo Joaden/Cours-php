@@ -1,32 +1,20 @@
 <?php 
 session_start();
 
-require_once('vendor/autoload.php');
 
-require_once('config/connect.php');
-
+//Appel de function avec la connexion à la bdd
 require_once('config/functions.php');
-
-if(isset($_GET['id']) AND $_GET['id'] > 0)
-{
-    $getId = intval($_GET['id']);
-    $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    $reqUser->execute(array($getId));
-    $userInfo = $reqUser->fetch();
-}
-
-
 $articles = getArticles();
 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
     <?php 
-        include("src/Views/import/head.html"); 
+        include("src/Views/common/head.html"); 
     ?>
     <body class="layout with-sidenav">
         <?php 
-          include("src/Views/import/navbar-front.php"); 
+          include("src/Views/common/navbar-front.php"); 
         ?>
         <div class="container-fluid">
             <?php if(isset($alerte)): ?>
@@ -110,9 +98,11 @@ $articles = getArticles();
             <hr>
 
             <?php 
-                include("src/Views/import/footer.php"); 
+                include("src/Views/common/footer.php"); 
             ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
+        <?php 
+            include("src/Views/common/scripts_loader.html");
+        ?>
     </body>
 </html>

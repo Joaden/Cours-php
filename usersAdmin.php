@@ -4,6 +4,8 @@ session_start();
 // Route url : http://localhost:8000/src/Admin/indexAdmin.php : Accueil Administration
 require_once('vendor/autoload.php');
 
+require_once('config/connect.php');
+
 //Appel de function avec la connexion à la bdd
 require_once('config/functions.php');
 
@@ -207,7 +209,8 @@ $num_rows=0;
     <footer class="footer primary">
       Copyright © 2020 - Daos
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0-beta.3.1/dist/js/axentix.min.js"></script>
-    <script src="jquery-3.5.1.min.js"></script>
+    <?php 
+        include("src/Views/common/scripts_loader.html");
+    ?>
   </body>
 </html>
