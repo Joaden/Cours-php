@@ -65,6 +65,9 @@ else
     <div class="container-fluid">
       <div class="container">
       <a href="articles.php">Retour aux articles</a>
+      <div>
+        <img src="assets/upload/ps5.jpg" class="img-fluid" alt="Responsive image">
+      </div>
       <h1><?= $article->title ?></h1>
       <br>
       <p><?= $article->content ?></p>

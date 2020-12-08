@@ -11,7 +11,7 @@
       </a>
       <div class="navbar-menu ml-auto">
         <a class="navbar-link" href="index.php">Accueil</a>
-        <a class="navbar-link" href="articles.php"><i class="fas fa-sticky-note"></i> Articles</a>
+        <a class="navbar-link" href="articles.php?id=".$_SESSION['id']"><i class="fas fa-sticky-note"></i> Articles</a>
         <a class="navbar-link" href="profil.php"><i class="fas fa-user"></i> Profil</a>
         <a class="navbar-link" href="contact.php"><i class="fas fa-user"></i> Contact</a>
         <a class="navbar-link" href="formulaireContact.php"><i class="fas fa-envelope"></i> Formulaire</a>

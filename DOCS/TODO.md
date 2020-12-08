@@ -44,6 +44,9 @@
     Delete all comment(die();) in all files
 - [22nov 2020 23h40] Denis
     Bug button (Open Sidenav) in profil.php table and smartphone version 
+- [03dec 2020 15h40] Denis
+    Lecteur audio de la description de l'article, lors de la création du post, on créé un fichier audio , on l'intègre dans une balise src en control
+
 
 ## how to use this file:
 - [date] [nom ou email du demandeur] 
