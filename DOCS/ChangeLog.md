@@ -27,3 +27,20 @@
     - modifications on __.sql files
       - rename 2 files :  aaaammdd_database_installation.sql
       - move them in folder 'database_installation'
+
+### branch newdesign 
+    - moved every pages files into ./old_pages/
+    - renamed folders :
+      - in ./
+        src             -> become old_src
+        pages           -> become old_pages
+      - in ./assets/
+        css             -> become old_css
+        js              -> become old_js
+    - imported from  my 'prepa_frontend' project into this project :
+      - in ./assets/    -> added folders 'js' and 'scss'
+      - in ./           -> added index.php
+      - in ./           -> added /views/  folder  and his content.
+    - in ./views/       -> created /pages/
+    - in ./views/pages  -> created /pages/home.php
+    - in ./views/       -> changed the paths in every include(.....)

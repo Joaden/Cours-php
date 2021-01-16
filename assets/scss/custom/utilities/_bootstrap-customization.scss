@@ -1,0 +1,42 @@
+/*  ----------- bootstrap customization */ 
+
+:root {
+    --dominanteLighter2:    #FFC75C;
+    --dominanteLighter1:    #FFB830;
+    --dominante:            #ED9B00;
+    --dominanteDarker1:     #BD7C00;
+    --dominanteDarker2:     #936000;
+
+    --secondaireLighter2:    #3FAFA7;
+    --secondaireLighter1:    #1E9F96;
+    --secondaire:            #009287;
+    --secondaireDarker1:     #00746C;
+    --secondaireDarker2:     #005A53;
+}
+
+$theme-colors: (
+//   "primary":    blue,
+    // "secondary": rgb(255, 4, 201),
+//   "success":    green,
+//   "info":       yellow,
+//   "warning":    orange,
+//   "danger":     red,
+//   "light":      #ddd,
+//   "dark":       #222
+    "dominanteLighter2":    #FFC75C,
+    "dominanteLighter1":    #FFB830,
+    "dominante":            #ED9B00,
+    "dominanteDarker1":     #BD7C00,
+    "dominanteDarker2":     #936000,
+
+    "secondaireLighter2":    #3FAFA7,
+    "secondaireLighter1":    #1E9F96,
+    "secondaire":            #009287,
+    "secondaireDarker1":     #00746C,
+    "secondaireDarker2":     #005A53
+);
+
+
+
+// every time you use '.row' on any element,  the childs will have 15px for padding-left and padding-right; 
+// $grid-gutter-width:           0px;
