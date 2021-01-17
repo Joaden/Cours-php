@@ -1,3 +1,8 @@
+<?php 
+    $pathToRootInUrl = $_SERVER['SERVER_NAME'].'/Cours-php';
+    $pathToRootInFiles = $_SERVER['CONTEXT_DOCUMENT_ROOT'].'/Cours-php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -117,12 +122,7 @@
     <br>
     <br>
 
-
-
-    <?php 
-        // echo("ici je fais un var_dump");
-        echo(__DIR__);
-    ?>
+    <?php include($pathToRootInUrl.'/views/common/footer_dev_mode.php'); ?>
 
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->
