@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require ('../inc/_connexion.php');
 require ('../inc/_define.php');
 require ('../inc/functions.php');
