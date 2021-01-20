@@ -1,4 +1,7 @@
 <?php
+$pathToRootFolder = "../../../../../";
+
+
 
 function calculatePathToRootFolder($pathToParentFolderOfTheFile) {
     // __DIR__                    renvoi  C:\laragon\www\Cours-php\views\pages
@@ -26,7 +29,7 @@ function calculatePathToRootFolder($pathToParentFolderOfTheFile) {
             // var_dump($absolutePathToRoot_arr);
         // ok ils sont maintenant de la même taille!
     
-    $pathToRootFolder = "";
+    $pathToRootFolder = "../";
     for ($i=0 ; $i<count($absolutePathToFile_arr); $i++){
 
         if ( $absolutePathToRoot_arr[$i] != $absolutePathToFile_arr[$i]) {
@@ -42,9 +45,24 @@ function calculatePathToRootFolder($pathToParentFolderOfTheFile) {
 
 
 // essai avec return du $pathToRootFolder >> dans une variable de test :
-    $pathToRootFolder_essai = calculatePathToRootFolder(dirname(__DIR__));
-    var_dump($pathToRootFolder_essai); // ok renvoi bien "../../../../"
+    // $pathToRootFolder_essai = calculatePathToRootFolder(dirname(__DIR__));
+    // var_dump($pathToRootFolder_essai); // ok renvoi bien "../../../../"
+
 
 
 // essai avec return du $pathToRootFolder: >> dans la variable que l'on gardera :
-    // $pathToRootFolder = calculatePathToRootFolder(dirname(__DIR__));
+    $pathToRootFolder = calculatePathToRootFolder( dirname(__DIR__) );
+
+
+include($pathToRootFolder."views/common/navbar.php");
+
+
+
+__DIR__;  // chemin du parent  C:/  /   /  / / parent/ 
+__FILE__; // chemin du parent  C:/  /   /  / / parent/ fichier.php
+
+
+
+
+// FOOTER
+include($pathToRootFolder."views/common/footer_dev_mode.php");

@@ -1,30 +1,46 @@
 <?php 
     // $pathToRootInUrl = ''; // reset
     // $pathToRootInUrl = $_SERVER['SERVER_NAME'].'/Cours-php'; // 'localhost'
+    // $pathToRootFolder = "../../";
 ?>
 
-<footer>
+
+<!-- Yes, i Know, the 'style' html tag should not be placed here. But it's just for dev_mode anyway! -->
+<style>
+    .footer-dev-mode {
+        background:black; 
+        color:white;
+        padding:2rem 1rem;
+    }
+    .footer-dev-mode a:any-link{
+        color:white;
+        font-size: 1.2rem;
+    }
+</style>
+
+
+<footer class="footer-dev-mode">
     <ul>
-        <a href="<?=$pathToRootInUrl.'/debug_functions.php'?>">
+        <a href="<?=$pathToRootFolder.'debug_functions.php'?>">
             <li>debug_functions.php</li>
         </a>
-        <a href="<?=$pathToRootInUrl.'/index.php'?>">
+        <a href="<?=$pathToRootFolder.'index.php'?>">
             <li>index.php</li>
         </a>
-        <a href="<?=$pathToRootInUrl.'/variables_project.php'?>">
+        <a href="<?=$pathToRootFolder.'variables_project.php'?>">
             <li>variables_project.php</li>
         </a>
-        <a href="<?=$pathToRootInUrl.'/views/pages/debug.php'?>">
-            <li>debug.php</li>
+        <a href="<?=$pathToRootFolder.'views/pages/debug.php'?>">
+            <li>views/pages/debug.php</li>
         </a>
-        <a href="<?=$pathToRootInUrl.'/views/pages/home.php'?>">
-            <li>home.php</li>
+        <a href="<?=$pathToRootFolder.'views/pages/home.php'?>">
+            <li>views/pages/home.php</li>
         </a>
-        <a href="<?=$pathToRootInUrl.'/views/pages/phpinfos.php'?>">
-            <li>phpinfos.php</li>
+        <a href="<?=$pathToRootFolder.'views/pages/phpinfos.php'?>">
+            <li>views/pages/phpinfos.php</li>
         </a>
-        <a href="<?=$pathToRootInUrl.'/views/tests/test_buttons.html'?>">
-            <li>test_buttons.html</li>
+        <a href="<?=$pathToRootFolder.'views/pages/test/de/chemin/pagetest.php'?>">
+            <li>views/pages/test/de/chemin/pagetest.php</li>
         </a>
     </ul>
 </footer>

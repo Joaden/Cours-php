@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 
     <!-- SASS/CSS (this file imports Bootstrap Scss) -->
-    <link rel="stylesheet" href="../../assets/scss/mainStyle.css">
+    <link rel="stylesheet" href="<?=$pathToRootFolder.'assets/scss/mainStyle.css'?>">
 
     <?php 
         // THIS IS A COOKIE TEST :

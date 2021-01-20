@@ -1,13 +1,12 @@
 <?php 
-    $pathToRootInUrl = $_SERVER['SERVER_NAME'].'/Cours-php';
-    $pathToRootInFiles = $_SERVER['CONTEXT_DOCUMENT_ROOT'].'/Cours-php';
+    $pathToRootFolder = "../../";
+    $PAGE_TITLE = "BlogPHP - home";
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 
-    <?php $PAGE_TITLE = "BLOG"; ?>
-    <?php include("../../views/common/head.php");?>
+    <?php include($pathToRootFolder."views/common/head.php");?>
 
 <body>
     <!-- =================================================== -->
@@ -16,7 +15,7 @@
     <h1 class="brand-logo-big">BLOG</h1>
 
     <!-- ======== NAVBAR ========= -->
-    <?php include("../../views/common/navbar.php"); ?>
+    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
     
 
     <!-- ======== CARROUSEL ========= -->
@@ -121,13 +120,13 @@
     <br>
     <br>
 
-    <?php include($pathToRootInFiles.'/views/common/footer_dev_mode.php'); ?>
-
+    <!-- FOOTER -->
+    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->
 
-    <?php include("../../views/common/load_js_scripts.php");?>
-
+    <?php include($pathToRootFolder."views/common/load_js_scripts.php");?>
 </body>
 
 </html>

@@ -62,3 +62,9 @@
 	- in ./views/pages	-> created uri_not_found.php
 	- in ./views/pages  -> created : views/pages/test/de/chemin/pagetest.php
     	- contain a function calculatePathToRootFolder();
+
+### branch newdesign (commit 20janv2021 12h15 )
+  - for all pages, added $pathToRootFolder
+  - in footer_dev_mode.php  -> solved all link 
+  - in footer_dev_mode.php  -> created a <link> tag to make it look better
+  - integrated 'footer_dev_mode.php'  in all web pages of the project.
