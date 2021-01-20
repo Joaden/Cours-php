@@ -23,7 +23,7 @@ function showInHtml($variableTo_vardump, $wanted_title="noTitle (but you can put
     echo "<br>";
     var_dump($variableTo_vardump);
 }
-
+// showInHtml($maVar, "variable pour blabla...");
 
 // ###################################################
 function showInConsole($variableTo_vardump) {

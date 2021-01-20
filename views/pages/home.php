@@ -9,7 +9,6 @@
     <?php $PAGE_TITLE = "BLOG"; ?>
     <?php include("../../views/common/head.php");?>
 
-
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
@@ -122,12 +121,13 @@
     <br>
     <br>
 
-    <?php include($pathToRootInUrl.'/views/common/footer_dev_mode.php'); ?>
+    <?php include($pathToRootInFiles.'/views/common/footer_dev_mode.php'); ?>
 
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->
 
     <?php include("../../views/common/load_js_scripts.php");?>
+
 </body>
 
 </html>

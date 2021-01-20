@@ -16,13 +16,14 @@
 
 $theme-colors: (
 //   "primary":    blue,
-    // "secondary": rgb(255, 4, 201),
+//   "secondary": rgb(255, 4, 201),
 //   "success":    green,
 //   "info":       yellow,
 //   "warning":    orange,
 //   "danger":     red,
 //   "light":      #ddd,
 //   "dark":       #222
+
     "dominanteLighter2":    #FFC75C,
     "dominanteLighter1":    #FFB830,
     "dominante":            #ED9B00,
@@ -33,7 +34,16 @@ $theme-colors: (
     "secondaireLighter1":    #1E9F96,
     "secondaire":            #009287,
     "secondaireDarker1":     #00746C,
-    "secondaireDarker2":     #005A53
+    "secondaireDarker2":     #005A53,
+
+    "primary-admin":    blue,
+    "secondary-admin": rgb(255, 4, 201),
+    "success-admin":    green,
+    "info-admin":       yellow,
+    "warning-admin":    orange,
+    "danger-admin":     red,
+    "light-admin":      #ddd,
+    "dark-admin":       #222
 );
 
 
