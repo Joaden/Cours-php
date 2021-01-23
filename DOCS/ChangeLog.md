@@ -68,3 +68,6 @@
   - in footer_dev_mode.php  -> solved all link 
   - in footer_dev_mode.php  -> created a <link> tag to make it look better
   - integrated 'footer_dev_mode.php'  in all web pages of the project.
+
+### branch newdesign (commit 24janv2021 00h13 )
+	- in ./views/pages  -> created : views/pages/article_all.php
