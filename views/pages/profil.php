@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-require_once('vendor/autoload.php');
+$pathToRootFolder = "../../";
+$PAGE_TITLE = "Tableau de bord";
 
-require_once('config/connect.php');
+require_once($pathToRootFolder.'vendor/autoload.php');
 
-require_once('config/functions.php');
+require_once($pathToRootFolder.'config/connect.php');
+
+require_once($pathToRootFolder.'config/functions.php');
 
 if (isset($_GET['id']) and $_GET['id'] > 0) {
     $getId = intval($_GET['id']);
@@ -18,11 +21,10 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <title>Blog php profil</title>
     <?php
-        include("src/Views/common/head.html");
+        include($pathToRootFolder."views/common/head.php");
     ?>
+
     <style>
         table {
             width: 100%;
@@ -45,19 +47,78 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
             margin: 5px;
         }
     </style>
-</head>
 
-<body class="layout with-sidenav">
-    <?php
-    include("src/Views/common/navbar-front.php");
-    ?>
+<body>
+    <!-- =================================================== -->
+    <!-- ================ DEBUT HTML  ================ -->
+
+    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
+
+    <!-- ======== NAVBAR ========= -->
+    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+
 
 
     <div class="container-fluid">
         <div class="container">
-            <h1>Profil de <?php echo $userInfo['name']; ?>****</h1>
+            <div class="row">
+                <hr>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h1><?php echo $PAGE_TITLE ?></h1>
+                    <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
+                    <h3>
+                        <?php echo $_SESSION["varsessiontest"]; ?>
+                    </h3>
+                    <?php if(isset($_SESSION['id'])) echo "<a href=\"session-logout.php\">Déconnexion</a>";
+                            else                       
+                                echo "<a href=\"session-login.php\">Connexion</a>"; 
+                        ?>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">nombre d'articles rédigés 12</div>
+                <div class="col-md-4"></div>
+                
+                <div class="col-md-4"></div>
+                <div class="col-md-4">nombre de likes reçus 120</div>
+                <div class="col-md-4"></div>
+
+                <div class="col-md-4"></div>
+                <div class="col-md-4">nombre de warning Admin 1</div>
+                <div class="col-md-4"></div>
+            </div>
+
+            <hr><br><hr>
+
+            <div class="row">
+                <hr>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h1>Mes articles</h1>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
 
             <hr>
+
+            <div class="row">
+                <hr>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h1>Mes notes</h1>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+
+            <h1>Profil de <?php echo $userInfo['name']; ?>****</h1>
+
+            <hr><br><hr>
             <div>
                 Pseudo = <?php echo $userInfo['pseudo']; ?>. <br>
                 Email = <?php echo $userInfo['email']; ?>. <br>
@@ -78,26 +139,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
                     Open sidenav
                 </button>
             </main>
-            <!-- <button data-target="example-sidenav"
-          class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
-            Open sidenav
-        </button> -->
-            <!-- <span>Choose your hero !</span>
-          <img width="80px" class="sidenav-logo dropshadow-1" src="../../assets/photos/profils/super-heros (3).jpg" alt="Image profil" />
-        <form>
-        <select name="users" onchange="showUser(this.value)">
-        <option value="">Select a person:</option>
-        <option value="1">Hero</option>
-        <option value="2">Hero</option>
-        <option value="3">Hero</option>
-        <option value="4">Hero</option>
-        <option value="5">Hero</option>
-        <option value="6">Hero</option>
-        <option value="7">Hero</option>
-        </select>
-        </form>
-        <br>
-        <div id="txtHint"><b>Person info will be listed here.</b></div> -->
+            
         </div>
 
         <hr><br>
@@ -126,17 +168,16 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
         <hr><br>
 
         <?php
-        // session_start();
 
         // $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
 
         // '(B) ->prepare est utilisé quand on ne connait pas la valeur
         // '(A) ->query est utilisé quand on sait ce que l'on veut récupérer
-        $req = $bdd->query('SELECT * FROM users_infos');
+        // $req = $bdd->query('SELECT * FROM users_infos');
 
-        $req1 = $bdd->query('SELECT * FROM espèces');
+        // $req1 = $bdd->query('SELECT * FROM espèces');
 
-        $req2 = $bdd->query('SELECT * FROM users WHERE is_verified = 1 ');
+        // $req2 = $bdd->query('SELECT * FROM users WHERE is_verified = 1 ');
 
         // while($reqUserData = $req1->fetch())
         // {
@@ -144,45 +185,35 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
 
         // }
 
-        while ($reqUserData = $req2->fetch()) {
-            echo "Nom : "  . $reqUserData['name'] . ". Email : "  . $reqUserData['email'] . "Vérifié : oui <br/> ";
-        }
+        // while ($reqUserData = $req2->fetch()) {
+        //     echo "Nom : "  . $reqUserData['name'] . ". Email : "  . $reqUserData['email'] . "Vérifié : oui <br/> ";
+        // }
 
-        while ($resultat = $req->fetch()) {
-            echo $resultat['users_id'] . ". date d'anniversaire le : " . $resultat['birth'] . " inscrit le : " . $resultat['date_inscription'] . " tel : " . $resultat['phone'] . "<br/>";
-        }
+        // while ($resultat = $req->fetch()) {
+        //     echo $resultat['users_id'] . ". date d'anniversaire le : " . $resultat['birth'] . " inscrit le : " . $resultat['date_inscription'] . " tel : " . $resultat['phone'] . "<br/>";
+        // }
 
 
         ?>
 
-
-
-        <?php
-        include("src/Views/common/footer.php");
-        ?>
     </div>
-    <?php
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    // if($value == 1) {
-    //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (2).jpg\" alt=\"Image profil\" />";
-    // } elseif ($value == 2) {
-    //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (3).jpg\" alt=\"Image profil\" />";
-    // } elseif ($value == 3) {
-    //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (4).jpg\" alt=\"Image profil\" />";
-    // } elseif ($value == 4) {
-    //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (5).jpg\" alt=\"Image profil\" />";
-    // } elseif ($value == 5) {
-    //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (6).jpg\" alt=\"\Image profil\" />";
-    // } else {
-    //   echo "<img width=\"80px\" class=\"sidenav-logo dropshadow-1\" src=\"../../assets/photos/profils/super-heros (7).jpg\" alt=\"Image profil\" />";
-    //   } 
-    //<script src="jquery-3.5.1.min.js"></script>
-    ?>
+    <!-- FOOTER -->
+    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    
+    <!-- ================ FIN HTML  ================ -->
+    <!-- =================================================== -->
 
-    <?php 
-        include("src/Views/common/scripts_loader.html");
-    ?>
-
+    <?php include($pathToRootFolder."views/common/load_js_scripts.php");?>
     <script>
         $(document).ready(function() {
             $("#myNotes").click(function() {

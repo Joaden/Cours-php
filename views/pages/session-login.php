@@ -6,12 +6,12 @@ $PAGE_TITLE = "Connexion";
 
 require_once($pathToRootFolder.'vendor/autoload.php');
 
-//Appel de function avec la connexion à la bdd
+// Call functions with the connections
 require($pathToRootFolder.'config/functions.php');
 
 require_once($pathToRootFolder.'config/connect.php'); 
 
-// Si e submit est fait
+// back processing of the form if the form is submitted
 if(isset($_POST['formconnexion']))
 {
     $emailConnect = htmlspecialchars($_POST['email']);
@@ -26,18 +26,18 @@ if(isset($_POST['formconnexion']))
         
         if($_POST['captcha']=="10")
         {
-            // Requete pour vérifier si les identifiants correspondent et existent
+            // request for verify id and check this
             $reqUser = $bdd->prepare("SELECT * FROM users WHERE email = :email ");
             $reqUser->execute(array('email' => $_POST['email']));
             $result = $reqUser->fetch();
             if ($result && password_verify($_POST['mdp'], $result['password']))
             {
-                // Si les verif passent bien on pourra utiliser ces variables de session pour avoir les infos du user connecté
+                // If the checks are successful we can use these session variables to get the information of the connected user.
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['pseudo'] = $result['pseudo'];
                 $_SESSION['email'] = $result['email'];
-
-                header("Location: profil.php?id=".$_SESSION['id']);
+                $_SESSION['autoriser']="oui";
+                header("Location: session.php?id=".$_SESSION['id']);
             }
             else
             {
@@ -123,7 +123,11 @@ if(isset($_POST['formconnexion']))
                             <div class="form-group">
                                 <label for="mdp"></label>
                                 <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Mot de passe" required>
-                                <small id="emailRegister" class="form-text text-muted">Mot de passe oublié ?</small>
+                                <small id="emailRegister" class="form-text text-muted">
+                                    <a href="recover-password.php">
+                                        Mot de passe oublié ?
+                                    </a>
+                                </small>
                             </div>
                         </div>
                         <div class="col-md-3"></div>
