@@ -1,6 +1,15 @@
 <?php 
+    session_start();
+
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "BlogPHP - All Articles";
+
+    //Appel de function avec la connexion à la bdd
+    // require_once($pathToRootFolder.'config/functions.php');
+    // $articles = getArticles();
+
+    
+    
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +21,7 @@
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big">BLOG</h1>
+    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
 
     <!-- ======== NAVBAR ========= -->
     <?php include($pathToRootFolder."views/common/navbar.php"); ?>
@@ -20,18 +29,22 @@
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
                 <section class="section">
+                    <?php if(isset($alerte)): ?>
+                        <p class="alerte"><?php echo $alerte; ?></p>
+                    <?php endif; ?>
                     <div class="section-head mt-5">
                         <h2 class="section-head-title">Articles populaires</h2>
                     </div>
 
                     <div class="container section-content">
                         <div class="row">
+                            <?php # foreach($articles as $article): ?>
                             <?php for($i=0; $i<6;$i++):?>
                                 <!-- <div class="col-6 show-red"> -->
                                 <!-- </div> -->
 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                                    <a class="blogArticle-imglink" href="#">
+                                    <a class="blogArticle-imglink" href="article.php?id=<?= $article->id ?>">
                                         <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
                                         <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
                                         <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->

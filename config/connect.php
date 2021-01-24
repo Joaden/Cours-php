@@ -1,5 +1,5 @@
 <?php
-
+$pathToRootFolder = "../../";
 /* Please create on the project folder : 
      folder "personal_variables"    containing
         db_credentials.php    containing
@@ -7,7 +7,7 @@
             $db_password = "..."
 
 */
-require("personal_variables/db_credentials.php");
+require($pathToRootFolder."personal_variables/db_credentials.php");
 
 //connection à la bdd
 // $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);

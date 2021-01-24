@@ -1,5 +1,23 @@
 <?php 
+    session_start();
+
+    $_SESSION["varsessiontest"]= "Session de test OK";
     $pathToRootFolder = "../../";
+    //require_once('vendor/autoload.php');
+
+    require_once($pathToRootFolder.'config/connect.php');
+
+    require_once($pathToRootFolder.'config/functions.php');
+
+    // retrieves the user's ID if he is logged in
+    if(isset($_GET['id']) AND $_GET['id'] > 0)
+    {
+        $getId = intval($_GET['id']);
+        $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+        $reqUser->execute(array($getId));
+        $userInfo = $reqUser->fetch();
+    }
+    
     $PAGE_TITLE = "BlogPHP - home";
 ?>
 
@@ -12,7 +30,7 @@
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big">BLOG</h1>
+    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
 
     <!-- ======== NAVBAR ========= -->
     <?php include($pathToRootFolder."views/common/navbar.php"); ?>
@@ -69,9 +87,10 @@
             <?php for($i=1; $i<=3; $i++): ?>
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
-                        <a class="blogArticle-imglink col-lg-5" href="#">
+                        <a class="blogArticle-imglink col-lg-5" href="article.php?id=<?= $article->id ?>">
                             <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
-                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
+                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article.php?id=<?= $article->id ?>"></a>
+
                             <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
             
                         </a>

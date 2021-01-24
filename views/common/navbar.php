@@ -6,19 +6,19 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <!--
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                -->
+            
+            <!--<li class="nav-item active">
+                <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
+            </li>-->
+                
             <li class="nav-item active">
-                <a class="nav-link text-center" href="#">Articles</a>
+                <a class="nav-link text-center" href="article_all.php"><i class="fas fa-sticky-note"></i>Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="#">L'équipe</a>
+                <a class="nav-link text-center" href="#"><i class="fas fa-user"></i>L'équipe</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="#">Contact</a>
+                <a class="nav-link text-center" href="#"><i class="fas fa-envelope"></i>Contact</a>
             </li>
         </ul>
 
@@ -30,8 +30,8 @@
             -->
 
         <div class="container-fluid d-flex flex-column justify-content-center flex-md-row justify-content-md-end">
-            <button class="btn bg-white mb-1 mb-md-0 mr-md-3 text-dominante">Inscription</button>
-            <button class="btn btn-outline-light">Connexion</button>
+            <button class="btn bg-white mb-1 mb-md-0 mr-md-3 text-dominante"><a class="nav-link text-center" href="session-register.php">Inscription</a></button>
+            <button class="btn btn-outline-light"><a class="nav-link text-center" href="session-login.php">Connexion</a></button>
         </div>
     </div>
 </nav>

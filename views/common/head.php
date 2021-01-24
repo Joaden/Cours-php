@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 
+     <!-- ICONS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    
     <!-- SASS/CSS (this file imports Bootstrap Scss) -->
     <link rel="stylesheet" href="<?=$pathToRootFolder.'assets/scss/mainStyle.css'?>">
 
