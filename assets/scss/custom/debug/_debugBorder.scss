@@ -1,0 +1,18 @@
+/*  ----------- "debugBorder" */
+
+$mapBorderColor: (
+    "black": #000,
+    "gray": gray,
+    "red": red,
+    "orange": orange,
+    "blue": blue,
+    "green": green,
+    "yellow": yellow,
+    "pink": pink
+);
+
+@each $colorKeyname, $colorValue in $mapBorderColor {
+    .show-#{$colorKeyname} {
+        border: 2px solid #{$colorValue};
+    }
+}

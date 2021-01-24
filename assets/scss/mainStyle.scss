@@ -1,0 +1,126 @@
+// ###################################
+// our SCSS to customize Bootstrap :
+// ###################################
+
+    @import "custom/utilities/bootstrap-customization";
+
+// ###################################
+// Bootstrap files : "Partials"
+// ###################################
+    // infos for implementation : https://getbootstrap.com/docs/4.5/getting-started/theming/
+
+    // OPTION A : IF WE WANT ALL BOOTSTRAP : Turn those lines on !
+        @import "bootstrap/scss/bootstrap-reboot";
+        @import "bootstrap/scss/bootstrap-grid";
+        @import "bootstrap/scss/bootstrap";
+
+
+
+    // OPTION B : IF WE WANT PARTS OF BOOTSTRAP : Turn the chosen lines on !
+    // (and turn off the lines above of course)
+
+        // @import "bootstrap/scss/functions";
+        // @import "bootstrap/scss/variables";
+        // @import "bootstrap/scss/mixins";
+        // @import "bootstrap/scss/root";
+        // @import "bootstrap/scss/reboot";
+        // @import "bootstrap/scss/type";
+        // @import "bootstrap/scss/images";
+        // @import "bootstrap/scss/code";
+        // @import "bootstrap/scss/grid";
+        // @import "bootstrap/scss/tables";
+        // @import "bootstrap/scss/forms";
+        // @import "bootstrap/scss/buttons";
+        // @import "bootstrap/scss/transitions";
+        // @import "bootstrap/scss/dropdown";
+        // @import "bootstrap/scss/button-group";
+        // @import "bootstrap/scss/input-group";
+        // @import "bootstrap/scss/custom-forms";
+        // @import "bootstrap/scss/nav";
+        // @import "bootstrap/scss/navbar";
+        // @import "bootstrap/scss/card";
+        // @import "bootstrap/scss/breadcrumb";
+        // @import "bootstrap/scss/pagination";
+        // @import "bootstrap/scss/badge";
+        // @import "bootstrap/scss/jumbotron";
+        // @import "bootstrap/scss/alert";
+        // @import "bootstrap/scss/progress";
+        // @import "bootstrap/scss/media";
+        // @import "bootstrap/scss/list-group";
+        // @import "bootstrap/scss/close";
+        // @import "bootstrap/scss/toasts";
+        // @import "bootstrap/scss/modal";
+        // @import "bootstrap/scss/tooltip";
+        // @import "bootstrap/scss/popover";
+        // @import "bootstrap/scss/carousel";
+        // @import "bootstrap/scss/spinners";
+        // @import "bootstrap/scss/utilities";
+        // @import "bootstrap/scss/print";
+
+
+
+// ###################################
+// our SCSS  :
+// ###################################
+
+// ===================================
+// UTILITIES
+    //    _reset.scss    ou  _normalize.scss
+    //    _mixins.scss  pour les propriétés CSS à déclarer pour chaque navigateur.
+    @import "custom/utilities/colors";
+    //    _variables.scss   soit dans 'variables'  soit dans 'base'
+    @import "custom/debug/debugBorder";
+
+// ===================================
+// BASE        (ne doit jamais contenir de classes ou d'id !)
+    @import "custom/base/typo";
+    // _tables.scss
+    // _flex.scss       (sous forme de mixin ? )
+
+// ===================================
+// LAYOUTS     (position, marges, etc..)
+    // les classes doivent être nommées: 
+        // .l-header {}
+        // .l-main {}
+        // .l-aside {}
+        // .l-footer {}
+
+    // pour les zones:   
+        // _header.scss
+        // _main.scss
+        // _aside.scss
+        // _footer.scss
+
+    //  pour les pages:     (normalement  pas utile)
+        // _index.scss
+        // _concerts.scss
+        // _photos.scss
+        // _bio.scss
+        // _contact.scss
+
+// ===================================
+// MODULES      (on sélectionne presque uniquement avec des classes)
+    // .module { règles communes du parent}
+        // .module-element {}
+    // .module-variante { règles spécifique du parent pour cette version}
+    
+    // _navbar.scss
+    // _buttons.scss
+    // _animations.scss
+    @import "custom/modules/brand";
+    @import "custom/modules/carousel";
+    @import "custom/modules/section";
+    @import "custom/modules/blogArticle";
+    @import "custom/modules/articleFilter";
+    @import "custom/modules/specialTypo";
+
+// ===================================
+// STATES   (état des boutons, au autre)
+    // _states.scss
+        // .module-element--etat {}
+
+// ===================================
+// THEMES         ( sélecteurs  .dark   .light   .yellow )... 
+    // _dark.scss
+    // _light.scss
+    // _yellow.scss
