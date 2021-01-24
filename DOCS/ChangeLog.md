@@ -71,3 +71,5 @@
 
 ### branch newdesign (commit 24janv2021 00h13 )
 	- in ./views/pages  -> created : views/pages/article_all.php
+### branch newdesign (commit 24janv2021 02h14 )
+  - in article_all.php -> created aside bar and articles (bootstrap adjustment not finished yet)
