@@ -4,8 +4,44 @@ session_start();
 $pathToRootFolder = "../../";
 $PAGE_TITLE = "Article";
 
-
-
+if (!isset($_GET['id']) or !is_numeric($_GET['id']))
+    header('location: home.php');
+    else {
+        extract($_GET);
+    
+        $id = strip_tags($id);
+    
+        require_once($pathToRootFolder.'config/functions.php');
+    
+        if (!empty($_POST)) {
+            extract($_POST);
+            $errors = array();
+    
+            $author = strip_tags($author);
+            $comment = strip_tags($comment);
+    
+            if (empty($author))
+                array_push($errors, 'Entrez un pseudo !');
+    
+            if (empty($comment))
+                array_push($errors, 'Entrez un commentaire !');
+    
+            if (count($errors) == 0) {
+                // comment utilise la function addComment
+                $comment = addComment($id, $author, $comment);
+    
+                // message retourné pas d'erreur
+                $success = '<div class="alert alert-success">Votre commentaire a bien été envoyé</div>';
+    
+                // Vider le champs du form !
+                unset($author);
+                unset($comment);
+            }
+        }
+    
+        $article = getArticle($id);
+        $comments = getComments($id);
+    }
 
 ?>
 

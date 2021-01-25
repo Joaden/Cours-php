@@ -38,8 +38,15 @@
             -->
 
         <div class="container-fluid d-flex flex-column justify-content-center flex-md-row justify-content-md-end">
-            <button class="btn bg-white mb-1 mb-md-0 mr-md-3 text-dominante"><a class="nav-link text-center" href="session_register.php">Inscription</a></button>
-            <button class="btn btn-outline-light"><a class="nav-link text-center" href="session_login.php">Connexion</a></button>
+        <?php if(isset($_SESSION['id'])) echo $_SESSION["pseudo"];
+            ?>
+            <div>  </div>
+        <?php 
+            if(isset($_SESSION['id'])) echo "<button class=\"btn bg-white mb-1 mb-md-0 mr-md-3 text-dominante\"><a class=\"nav-link text-center\" href=\"session_logout.php\">Déconnection</a></button>";
+            else
+                echo "<button class=\"btn bg-white mb-1 mb-md-0 mr-md-3 text-dominante\"><a class=\"nav-link text-center\" href=\"session_register.php\">Inscription</a></button><button class=\"btn btn-outline-light\"><a class=\"nav-link text-center\" href=\"session_login.php\">Connexion</a></button>";
+
+        ?>
         </div>
     </div>
 </nav>
