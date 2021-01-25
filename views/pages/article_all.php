@@ -44,7 +44,7 @@
                                 <!-- </div> -->
 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                                    <a class="blogArticle-imglink" href="article.php?id=<?= $article->id ?>">
+                                    <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">
                                         <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
                                         <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
                                         <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
@@ -127,7 +127,7 @@
             
     </div>
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

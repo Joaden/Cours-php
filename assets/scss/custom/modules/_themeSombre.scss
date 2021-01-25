@@ -1,0 +1,27 @@
+body {
+    background-color : #1c1c1e ;
+    color : #fefefe ;
+}
+
+a {
+    color : #5fa9ee ;
+}
+
+img {
+    filter: grayscale(20%);
+}
+// invert colors
+@media (prefers-color-scheme: dark) {
+    // html {
+    // filter: invert(100%);
+    // }
+    :root {
+        --background-color: #111;
+        --page-background: #212121;
+        --text-color: #ededed;
+        --color-alpha: #50a8d8;
+    }
+    }
+
+
+

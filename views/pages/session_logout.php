@@ -2,7 +2,7 @@
 session_start();
 // $_SESSION = array();
 session_destroy();
-header("Location: msg-logout.php");
+header("Location: msg_logout.php");
 
 
 

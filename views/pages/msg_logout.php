@@ -1,7 +1,7 @@
 <?php 
     session_start();
 
-    $_SESSION["varsessiontest"]= "Recover password";
+    $_SESSION["varsessiontest"]= "Session destroy";
     $pathToRootFolder = "../../";
     //require_once('vendor/autoload.php');
 
@@ -25,23 +25,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h3>
-                    <?php echo $_SESSION["varsessiontest"]; ?>
-                </h3>
-                <h2>Suivez les indications pour redéfinir un nouveau mot de passe.</h2>
+                <h2>Vous êtes maintenant déconnecté !</h2>
+                <small>Vous allez être redirigé à la page d'acceuil.</small>
             </div>
         </div>
-        <form action=""></form>
     </div>
 
-    
+    <?php header("refresh:3;url=home.php");?> 
     <br>
     <br>
     <br>
     <br>
 
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

@@ -3,6 +3,16 @@
 
     $_SESSION["varsessiontest"]= "Session de test OK";
     $pathToRootFolder = "../../";
+
+    //Cookie de test pour le theme
+    @$theme=$_GET["theme"];
+    if($theme=="clair" || $theme=="sombre"){
+        setcookie("theme",$theme,time()+3600);
+        header("location: home.php");
+    }
+    print_r($_COOKIE);
+    $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
+
     //require_once('vendor/autoload.php');
 
     require_once($pathToRootFolder.'config/connect.php');
@@ -140,7 +150,8 @@
     <br>
 
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php include($pathToRootFolder."views/common/footer.php");?>
+    <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

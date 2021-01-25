@@ -70,7 +70,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
                     <h3>
                         <?php echo $_SESSION["varsessiontest"]; ?>
                     </h3>
-                    <?php if(isset($_SESSION['id'])) echo "<a href=\"session-logout.php\">Déconnexion</a>";
+                    <?php if(isset($_SESSION['id'])) echo "<div class=\"text-danger\"><a href=\"session-logout.php\">Déconnexion</a></div>";
                             else                       
                                 echo "<a href=\"session-login.php\">Connexion</a>"; 
                         ?>
@@ -116,15 +116,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
             </div>
 
 
-            <h1>Profil de <?php echo $userInfo['name']; ?>****</h1>
-
-            <hr><br><hr>
-            <div>
-                Pseudo = <?php echo $userInfo['pseudo']; ?>. <br>
-                Email = <?php echo $userInfo['email']; ?>. <br>
-                Adresse mail confirmée = <?php echo $userInfo['is_verified']; ?>. <br>
-                <!--  -->
-            </div>
+            
             <?php
             if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
             ?>
@@ -133,36 +125,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
             <?php
             }
             ?>
-            <main>
-                <!-- Code here the main content -->
-                <button data-target="example-sidenav" class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
-                    Open sidenav
-                </button>
-            </main>
-            
-        </div>
-
-        <hr><br>
-
-        <div id="notes" class="container shadow-1 rounded-2 bd-solid bd-3">
-            <button id="myNotes" class="btn btn-success rounded-1 press">Mes Notes</button> Intégrer le crud de la class notes, button green hide/show notes.
-            <div class="notes">
-                <div id="notes-div" class="grix xs1 sm2 ">
-                    <div class="grix xs3 shadow-1 rounded-2 bd-blue bd-solid bd-3 ">
-                        <div class="col-xs3 ">
-                            <button class="btn btn-primary rounded-2 press">Add Notes</button> | <button class="btn btn-danger rounded-2 press">Supp Notes</button>
-                        </div>
-                        <div>box 2</div>
-                        <div>box 3</div>
-                        <div>box 4</div>
-                    </div>
-                    <div class="grix xs3 shadow-1 rounded-2 bd-blue bd-solid bd-3">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis at, dolore itaque quisquam dolorem rem distinctio eaque! Excepturi, quasi placeat, assumenda deserunt maiores odio id recusandae, aut modi odit enim.</div>
-                        <div>box 2</div>
-                        <div>box 3</div>
-                    </div>
-                </div>
-            </div>
+       
         </div>
         <br>
         <hr><br>
@@ -208,7 +171,8 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
     <br>
 
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php include($pathToRootFolder."views/common/footer.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

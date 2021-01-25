@@ -61,7 +61,7 @@ if(isset($_POST['formconnexion']))
 <html lang="fr">
 
     <?php include($pathToRootFolder."views/common/head.php");?>
-
+    <!-- style antibot should stay here -->
     <style>
         #antibot{
         display: none;
@@ -124,7 +124,7 @@ if(isset($_POST['formconnexion']))
                                 <label for="mdp"></label>
                                 <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Mot de passe" required>
                                 <small id="emailRegister" class="form-text text-muted">
-                                    <a href="recover-password.php">
+                                    <a href="recover_password.php">
                                         Mot de passe oublié ?
                                     </a>
                                 </small>
@@ -174,7 +174,7 @@ if(isset($_POST['formconnexion']))
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
                         <button class="btn btn-danger">
-                            <a href="session-register.php">
+                            <a href="session_register.php">
                                 S'inscrire
                             </a>
                         </button>
@@ -196,7 +196,10 @@ if(isset($_POST['formconnexion']))
             </div>
         </div>
           <!-- FOOTER -->
-        <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+        <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");
+            #include($pathToRootFolder."views/common/footer.php");
+        
+        ?>
         
         <!-- ================ FIN HTML  ================ -->
         <!-- =================================================== -->

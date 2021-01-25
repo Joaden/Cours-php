@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(@$_SESSION["autoriser"]!="oui"){
-    header("location:session-login.php");
+    header("location:session_login.php");
     exit();
 }
 else{
@@ -35,7 +35,7 @@ else{
     <br>
 
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+   
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

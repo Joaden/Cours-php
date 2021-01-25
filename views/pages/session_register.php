@@ -327,12 +327,11 @@ if(isset($_POST['formregister']))
                 <hr>
             </div>
         </div>
-        <footer class="footer primary">
-            Copyright © 2020 - Daos
-        </footer>
+        
         <?php 
+            #include($pathToRootFolder."views/common/footer.php");
             #include($pathToRootFolder."views/pages/common/scripts_loader.html");
-            include("views/common/load_js_scripts.php");
+            include($pathToRootFolder."views/common/load_js_scripts.php");
         ?>
     </body>
 </html>
