@@ -61,6 +61,10 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
     <!-- ======== NAVBAR ========= -->
     <?php include($pathToRootFolder."views/common/navbar.php"); ?>
     <div class="container-fluid">
+        <?php 
+            // define a $alertMessage="..message.." if necessary
+            include($pathToRootFolder."views/common/alertMessageIfExist.php");
+        ?>
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
                 <section class="section">

@@ -94,7 +94,7 @@ problem when `home.php` load `footer_dev_mode.php` :
   - -> formatted to a more conventional MarkDown format + 
   - -> added backtilts arround paths and filename for better readability.
 
-## CHRISTOPHE - branch newdesign (commit ???????? )
+## CHRISTOPHE - branch newdesign (commit 26janv2021 17h59 )
 
 - in `home.php` remove the `@` before `$theme`
 - in `config/functions.php` 
@@ -107,4 +107,10 @@ problem when `home.php` load `footer_dev_mode.php` :
 - NOTICE BUG : articles in array `$articles` are loaded in reverse-id :
   - `1`:id_4 `2`:id_3 `3`:id_4 `4`:id_1
   - FIXED : in `config/functions.php` > `getArticles` > changed `DESC` by `ASC` .
-  - 
+
+## CHRISTOPHE - branch newdesign (commit 26janv2021 18h38 )
+
+- fixed Denis's idea of using a $alert :
+  - created the file `views/common/alertMessageIfExist.php` containing a html/bootstrap alert.
+  - in every pages, added an include of the pre-cited file.
+- in `session_login.php` , the bootstrap class `container-fluid` had a `container` directly inside, which i deleted.

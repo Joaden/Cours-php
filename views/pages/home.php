@@ -85,6 +85,10 @@
 
     <!-- ======== PARAGRAPHE BIENVENUE ========= -->
     <main class="container border-yellow">
+        <?php 
+            // define a $alertMessage="..message.." if necessary
+            include($pathToRootFolder."views/common/alertMessageIfExist.php");
+        ?>
         <section class="section">
             <div class="section-head">
                 <h2 class="section-head-title">Bienvenue</h2>
@@ -160,7 +164,7 @@
 
     <!-- FOOTER -->
     <?php include($pathToRootFolder."views/common/footer.php");?>
-    <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

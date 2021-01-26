@@ -79,121 +79,124 @@ if(isset($_POST['formconnexion']))
         <!-- ======== NAVBAR ========= -->
         <?php include($pathToRootFolder."views/common/navbar.php"); ?>
 
-        <div class="container-fluid">
-            <div class="container">
-                <div class="row">    
-                    <div class="col-md-4">
+        <div class="container">
+            <?php 
+                // define a $alertMessage="..message.." if necessary
+                include($pathToRootFolder."views/common/alertMessageIfExist.php");
+            ?>
 
-                    </div>
-                    <div class="col-md-4">
-                        <h1><?php echo $PAGE_TITLE ?></h1>
-                        <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
-                        <h3>
-                            <?php echo $_SESSION["varsessiontest"]; ?>
-                        </h3>
-                    </div>
-                    <div class="col-md-4">
+            <div class="row">    
+                <div class="col-md-4">
 
-                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h1><?php echo $PAGE_TITLE ?></h1>
+                    <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
+                    <h3>
+                        <?php echo $_SESSION["varsessiontest"]; ?>
+                    </h3>
+                </div>
+                <div class="col-md-4">
 
-                </div>   
-                <p style="color: red;" id="erreur">
-                    <?php 
-                        if(isset($erreur))
-                        {
-                        echo $erreur;  
-                        }
-                    ?>
-                </p>
-                
-                <form method="POST" action="">
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="emailRegister"></label>
-                                <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="E-mail" value="<?php if(isset($email)) { echo $email; } ?>" required>
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-3"></div>
-
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="mdp"></label>
-                                <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Mot de passe" required>
-                                <small id="emailRegister" class="form-text text-muted">
-                                    <a href="recover_password.php">
-                                        Mot de passe oublié ?
-                                    </a>
-                                </small>
-                            </div>
-                        </div>
-                        <div class="col-md-3"></div>
-
-
-
-                        <div class="col-md-5"></div>
-                        <div class="col-md-2">
-                            <div class="control-group">
-                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                    <label for="captcha"></label>
-                                    <input type="text" class="form-control" id="captcha" name="captcha" placeholder="4 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5"></div>
-
-                        <div class="col-md-5"></div>
-                        <div class="col-md-2">
-                            <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label for="antibot"></label>
-                                <input type="text"  name="antibot" placeholder="" value="">
-                            </div>
-                    
-                            <button type="submit" name="formconnexion" class="btn btn-primary">Se connecter</button>
-                        </div>
-                        <div class="col-md-5"></div>
-
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 ">
-                            <hr>
-                        </div>
-                        <div class="col-md-4"></div>
-
-                    </div>
-                </form>
-
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <p>Vous n'avez pas encore de compte ?</p>
-                    </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-5"></div>
-                    <div class="col-md-2">
-                        <button class="btn btn-danger">
-                            <a href="session_register.php">
-                                S'inscrire
-                            </a>
-                        </button>
-                    </div>
-                    <div class="col-md-5"></div>
                 </div>
 
-                <p style="color: red;" id="erreur">
-                    <?php 
-                        if(isset($erreur))
-                        {
-                        echo $erreur;  
-                        }
-                    ?>
-                </p>
-                <br>
-                <br>
-                <hr>
+            </div>   
+            <p style="color: red;" id="erreur">
+                <?php 
+                    if(isset($erreur))
+                    {
+                    echo $erreur;  
+                    }
+                ?>
+            </p>
+            
+            <form method="POST" action="">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="emailRegister"></label>
+                            <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="E-mail" value="<?php if(isset($email)) { echo $email; } ?>" required>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mdp"></label>
+                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Mot de passe" required>
+                            <small id="emailRegister" class="form-text text-muted">
+                                <a href="recover_password.php">
+                                    Mot de passe oublié ?
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+
+
+
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                <label for="captcha"></label>
+                                <input type="text" class="form-control" id="captcha" name="captcha" placeholder="4 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5"></div>
+
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label for="antibot"></label>
+                            <input type="text"  name="antibot" placeholder="" value="">
+                        </div>
+                
+                        <button type="submit" name="formconnexion" class="btn btn-primary">Se connecter</button>
+                    </div>
+                    <div class="col-md-5"></div>
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 ">
+                        <hr>
+                    </div>
+                    <div class="col-md-4"></div>
+
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <p>Vous n'avez pas encore de compte ?</p>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button class="btn btn-danger">
+                        <a href="session_register.php">
+                            S'inscrire
+                        </a>
+                    </button>
+                </div>
+                <div class="col-md-5"></div>
             </div>
+
+            <p style="color: red;" id="erreur">
+                <?php 
+                    if(isset($erreur))
+                    {
+                    echo $erreur;  
+                    }
+                ?>
+            </p>
+            <br>
+            <br>
+            <hr>
         </div>
           <!-- FOOTER -->
         <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");
