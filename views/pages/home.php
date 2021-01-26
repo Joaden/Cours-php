@@ -1,8 +1,12 @@
 <?php 
+    $pathToRootFolder = "../../";
+    $PAGE_TITLE = "BlogPHP - home";
+    
+    include($pathToRootFolder."debug_functions.php");
+
     session_start();
 
     $_SESSION["varsessiontest"]= "Session de test OK";
-    $pathToRootFolder = "../../";
 
     //Cookie de test pour le theme
     @$theme=$_GET["theme"];
@@ -10,7 +14,9 @@
         setcookie("theme",$theme,time()+3600);
         header("location: home.php");
     }
-    print_r($_COOKIE);
+    // print_r($_COOKIE);
+    showInConsole($_COOKIE);
+
     $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 
     //require_once('vendor/autoload.php');
@@ -28,7 +34,10 @@
         $userInfo = $reqUser->fetch();
     }
     
-    $PAGE_TITLE = "BlogPHP - home";
+
+    $articles = getArticles();
+                                        showInConsole($articles); // debug
+
 ?>
 
 <!DOCTYPE html>
@@ -94,18 +103,18 @@
             </div>
 
             <!-- =================== ARTICLES ================== -->
-            <?php for($i=1; $i<=3; $i++): ?>
+            <?php foreach($articles as $article): ?>
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
-                        <a class="blogArticle-imglink col-lg-5" href="article.php?id=<?= '$article->id' ?>">
-                            <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
-                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article.php?id=<?= '$article->id' ?>"></a>
-
-                            <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
-            
+                        <a class="blogArticle-imglink col-lg-5" href="article.php?id=<?= $article->id ?>">
+                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article.php?id=<?= $article->id; ?>"></a>
                         </a>
                         <div class="blogArticle-content offset-lg-1 col-lg-6">
-                            <h2 class="blogArticle-title">Lorem ipsum dolor sit amet</h2>
+                            <h2 class="blogArticle-title">
+                                <a href="article.php?id=<?= $article->id ?>" class="">
+                                    <?= $article->title; ?>
+                                </a>
+                            </h2>
                             <p class="blogArticle-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rem eum fuga voluptatibus velit excepturi aliquid quia minima dolor cum? Dolorem repellat, dicta rerum doloremque non omnis? Deleniti eaque blanditiis corporis recusandae placeat, delectus veritatis omnis at dolor neque, expedita quo nemo incidunt similique dolorum dolorem, exercitationem ratione odio quia sit est! Deserunt quisquam vitae blanditiis amet nam, accusantium cumque animi suscipit, perspiciatis quam exercitationem qui obcaecati, quos molestias beatae?</p>
                             <div class="blogArticle-footer">
                                 <!-- v1 -->
@@ -132,7 +141,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endfor; ?>
+            <?php endforeach; ?>
         </section>
 
     </main>

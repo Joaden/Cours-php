@@ -1,5 +1,6 @@
 <?php
 $pathToRootFolder = "../../";
+
 /* Please create on the project folder : 
      folder "personal_variables"    containing
         db_credentials.php    containing

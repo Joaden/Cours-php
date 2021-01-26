@@ -12,6 +12,8 @@ if($conn->connect_error) {
     die('Problème de connection'.$conn->connect_error);
 }
 
+$pathToRootFolder = "../";
+
 // Create database
 $sql = "CREATE DATABASE ".$database;
 if ($conn->query($sql) === TRUE) {
