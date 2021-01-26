@@ -123,20 +123,17 @@
                 </div>
               </div>
 
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label for="phone">Téléphone</label>
-                  <input name="phone" class="form-control" maxlength="15" id="phone" type="tel" placeholder=" number"  data-validation-required-message="Please enter your phone number." value="<?php echo isset( $_SESSION['inputs']['phone']) ? $_SESSION['inputs']['phone'] : ''; ?>">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+              <div class="form-group">
                   <label for="sujet">Objet</label>
-                  <input name="sujet" class="form-control" id="sujet" rows="5" placeholder=" objet" required="required" data-validation-required-message="Please enter a sujet." value="<?php echo isset( $_SESSION['inputs']['sujet']) ? $_SESSION['inputs']['sujet'] : ''; ?>">
+                  <select name="sujet" class="form-control" id="sujet" placeholder=" objet" required="required" data-validation-required-message="Please enter a sujet." value="<?php echo isset( $_SESSION['option']['sujet']) ? $_SESSION['option']['sujet'] : ''; ?>">
+                    <option></option>
+                    <option>Subscribtion</option>
+                    <option>Unsubscribe</option>
+                    <option>Payments</option>
+                    <option>Data</option>
+                    <option>Other</option>
+                  </select>
                   <p class="help-block text-danger"></p>
-                </div>
               </div>
 
               <div class="control-group">
