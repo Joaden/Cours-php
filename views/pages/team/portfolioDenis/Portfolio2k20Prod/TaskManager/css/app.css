@@ -1,0 +1,149 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica';
+}
+
+.header {
+    margin-top: 42px;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.header h1 {
+    text-align: center;
+    font-size: 37px;
+    margin-top: 43px;
+}
+
+.header ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 0;
+
+    margin-top: 45px;
+    margin-bottom: 18px;
+}
+
+.header li {
+    /* text-transform: lowercase; */    
+    font-weight: bold;
+}
+
+.header li button {
+    /* text-transform: lowercase; */    
+    font-weight: bold;
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
+    text-transform: lowercase;
+    padding: 0;
+    color: #8ccfe0;
+}
+
+.header li button.active {
+    color: #006680;
+}
+
+.header li::before {
+    content: "|";
+    padding: 0 0.35em;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header li:first-child::before {
+    content: "Afficher les tâches :";
+    padding: 0 0.5em;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.header .form-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.header .form-group input[type="text"] {
+    height: 37px;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.header .form-group input[type="submit"] {
+    width: 143px;
+    background-color: #fd984c;
+    border: none;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.tasklist {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.tasklist p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.tasklist p input[type=checkbox] {
+    display: none;
+}
+
+.tasklist p input[type=checkbox]:checked + label::before{
+    content: "X";
+}
+
+.tasklist p {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+}
+
+.tasklist p label {
+    padding-left: 63px;
+}
+
+.tasklist p label::before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 37px;
+    height: 37px;
+    background-color:  #fd984c;
+    top: 0;
+    left: 0px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/*
+body::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("../img/overlay.png");
+    background-position: top center;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 20000px;
+    opacity: 0.25;
+    pointer-events: none; 
+    z-index: 999;
+    }
+*/

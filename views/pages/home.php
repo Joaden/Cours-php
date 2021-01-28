@@ -10,10 +10,10 @@
         setcookie("theme",$theme,time()+3600);
         header("location: home.php");
     }
-    print_r($_COOKIE);
+   // print_r($_COOKIE);
     $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 
-    //require_once('vendor/autoload.php');
+    require_once('vendor/autoload.php');
 
     require_once($pathToRootFolder.'config/connect.php');
 
@@ -97,9 +97,9 @@
             <?php for($i=1; $i<=3; $i++): ?>
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
-                        <a class="blogArticle-imglink col-lg-5" href="article.php?id=<?= $article->id ?>">
+                        <a class="blogArticle-imglink col-lg-5" href="#">
                             <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
-                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article.php?id=<?= $article->id ?>"></a>
+                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="#"></a>
 
                             <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
             

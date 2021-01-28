@@ -6,8 +6,8 @@
 - [22nov 2020 23h10] Denis => Completed tasks                                             [DONE]
     integration : files register.php, connexion.php, profil.php, appForm.js and logout.php
 
-- [22nov 2020 23h20] Denis
-    Integration : SCSS / VARIABLE ROOT / all include(connect.php)
+- [22nov 2020 23h20] Denis [DONE]
+    Integration : SCSS / VARIABLE ROOT / all include(connect.php) 
 
 - [25nov 2020 19h07] Christophe
     the file contact.php should be in Views/common/ , as it's not a page.   
@@ -28,11 +28,11 @@
 - [21nov 13h24] Christophe
     hide unfinished [features, sections, buttons, ...] (better to program one thing at a time and make it fully-fonctional)
 
-- [22nov 2020 23h16] Denis => Must be optimized
-    Improved the connexion form (register and connexion and $_SESSION)
+- [22nov 2020 23h16] Denis => Must be optimized [DONE]
+    Improved the connexion form (register and connexion and $_SESSION) 
 
 - [22nov 2020 23h16] Denis 
-    Add if else with $_SESSION  login || logout
+    Add if else with $_SESSION  login || logout [DONE]
 
 - [25nov 11h30] Christophe
     désactiver le framework css axentix                     [DONE]
@@ -54,6 +54,12 @@
 - [27nov 19h47] Christophe
     - article.php doesn't use the common/head.php , but his head is written inline. 
 
+- [26nov 2021 23h50] Denis 
+    - All fields newdesign branch
+    - integrate $session in branch session
+    - 
+
+
 ## USEFUL
 - [21nov 13h24] Christophe
     rename project with a more explicit name
@@ -63,10 +69,10 @@
     delete file 'etapes.txt' and write its content in /DOCS/ TODO.md or INSTALL.md
 
 - [22nov 2020 23h20] Denis
-    Choose a design
+    Choose a design [DONE]
 
-- [27nov 2020 19h54] Christophe
-    remove the checkbox "agree terms and ..." on connection page  (not coherent)
+- [27nov 2020 19h54] Christophe  [DONE]
+    remove the checkbox "agree terms and ..." on connection page  (not coherent) 
 
 - [27nov 2020 20h00] Christophe
     the file connexion.php (in french) should be renamed connection.php (in english)
@@ -85,9 +91,9 @@
 - ...
 
 - [22nov 2020 23h20] Denis
-    bug size footer inside connexion.php
+    bug size footer inside connexion.php [DONE]
 - [22nov 2020 23h20] Denis
-    Delete all comment(die();) in all files
+    Delete all comment(die();) in all files [DONE]
 - [22nov 2020 23h40] Denis
     Bug button (Open Sidenav) in profil.php table and smartphone version 
 - [03dec 2020 15h40] Denis

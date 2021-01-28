@@ -1,7 +1,7 @@
 <?php 
 
 $infosServer = [];
-//$infosServer = [$serverName, $serverName, $serverREFERER, $serverHOST, $serverUSER_AGENT, $serverPORT, $serverUSER, $serverINFO, $serverADMIN];
+//$infosServer = [$serverName, $serverName, $serverREFERER, $serverHOST, $serverUSER_AGENT, $serverPORT];
 
 // Nom du serveur
 $serverName = $_SERVER['SERVER_NAME'];

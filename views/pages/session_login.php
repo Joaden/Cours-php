@@ -89,7 +89,6 @@ if(isset($_POST['formconnexion']))
                         <h1><?php echo $PAGE_TITLE ?></h1>
                         <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
                         <h3>
-                            <?php echo $_SESSION["varsessiontest"]; ?>
                         </h3>
                     </div>
                     <div class="col-md-4">
