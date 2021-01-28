@@ -89,7 +89,7 @@
   - modified -> newdesign termofservice.php
   - modified -> newdesign privacy.php 
   - modified -> newdesign article_read.php (page article) 
-  - modified -> newdesign folder team for hide portfolio (page team.php) 
+  - modified -> newdesign folder team introduction and for hide portfolio (page team.php) 
 
 ### branch newdesign Denis(commit 26janv2021 10h30 )
-- in article_all.php -> created aside 
+  - in article_all.php -> created aside 

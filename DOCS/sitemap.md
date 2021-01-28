@@ -21,8 +21,8 @@ logout.php
 ===================================================================== 
 # contact 
 
-contact.php
-
+contact_writeMessage.php
+    - permet d'envoyer un mail (réservé aux abonnés?)
 redirect-mailto.php
 
 ===================================================================== 
@@ -32,6 +32,8 @@ article.php :
     - afficher un article
     - formulaire pour entrer un commentaire 
     - liste de commentaires
+    
+article_all.php
   
 ===================================================================== 
 # pages for 'Writers'
