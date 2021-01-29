@@ -1,3 +1,14 @@
+---
+title: "ChangeLog for project Cours-php"
+authors: "Denis CHANET & Christophe GOURMAND"
+output:
+  html_document:
+    css: ./style_for_md_files.css
+    self_contained: no
+---
+
+<link rel="stylesheet" href="./style_for_md_files.css">
+
 # Changelogs
 
     (recents firsts)
@@ -31,8 +42,8 @@
 - filled these files with informations
 - added informations and re-organised the `README.md` file written by Denis.
 - modifications on `__.sql` files
-	- rename 2 files :  `aaaammdd_database_installation.sql`
-	- move them in folder `./database_installation`
+  - rename 2 files :  `aaaammdd_database_installation.sql`
+  - move them in folder `./database_installation`
 
 ## CHRISTOPHE - branch newdesign (commit 16janv2021 21h53)
 
@@ -87,6 +98,28 @@ problem when `home.php` load `footer_dev_mode.php` :
 
 - in `article_all.php` -> created `aside` bar and articles (bootstrap adjustment not finished yet)
 
+## DENIS - branch newdesign (commit 25janv2021 23h14 )
+
+- created -> newdesign `session_login`
+- created -> newdesign `session_logout`
+- created -> newdesign `session_register`
+- created -> newdesign `session.php` (page msg success auth)
+- created -> newdesign `recover_password.php` (page récupération de mot de passe)
+- created -> newdesign `redirect_mailto.php` (page tunnel)
+- created -> newdesign `profil.php` (page designed)
+- created -> newdesign `contact.php` (form contact)
+- created -> newdesign `contact_post.php` (traitement du form contact)
+- created -> newdesign `article_all.php` (page de tout les articles)
+- modified -> newdesign `article_read.php` (page article)
+- modified -> newdesign `termofservice.php`
+- modified -> newdesign `privacy.php`
+- modified -> newdesign `article_read.php` (page article)
+- modified -> newdesign folder `team` > page `team.php` : (GOAL : introduction + to hide portfolio)
+
+## DENIS - branch newdesign (commit 26janv2021 10h30 )
+
+- in article_all.php -> created aside
+
 ## CHRISTOPHE - branch newdesign (commit 26janv2021 15h42 )
 
 - in `./database/installation`  -> created `sql_connect_and_create_database.md` containing instructions to connect and re-create the database.
@@ -115,9 +148,18 @@ problem when `home.php` load `footer_dev_mode.php` :
   - in every pages, added an include of the pre-cited file.
 - in `session_login.php` , the bootstrap class `container-fluid` had a `container` directly inside, which i deleted.
 
-## CHRISTOPHE - branch newdesign (commit ??????? )
+## CHRISTOPHE - branch newdesign (commit 29janv2021 14h47 )
 
 - for `footer_dev_mode.php` moved css rules in a file `_footerDevMode.scss` (imported in `mainStyle.css`)
 - reactivated `footer_dev_mode.php` in all pages (temporarly)
 - in `mainStyle.scss` : turned off the import of `themeClair` and `themeSombre`
 - in `footer_dev_mode.php` : currently trying to get the file list in `/pages/`  (NOT FINISHED)
+
+## CHRISTOPHE - branch newdesign (commit 29janv 23h30 )
+
+- `changelogdenis.md` : file renamed + integrated in `ChangeLog.md`.
+- created `DOCS/style_for_md_files.css`.
+- in `ChangeLog.md` -> added link to stylesheet.
+- in `home.php` -> fixed the link loading `autoload.php`
+- in `navbar.php` -> reorganized the `echo` containing `buttons` (to improve readability and edit easier)
+- in `session_register.php` -> changed bootstrap layout for elements of the form.

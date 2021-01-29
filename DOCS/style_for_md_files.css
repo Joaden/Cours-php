@@ -1,0 +1,18 @@
+h1 {
+    font-weight: bold;
+    color: red;
+}
+
+h2 {
+    color: blue;
+}
+
+h3 {
+    color: purple;
+}
+
+code {
+    font-family: Consolas, monospace;
+    background: #ebebeb;
+    color: #0087a6;
+}

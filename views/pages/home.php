@@ -19,7 +19,7 @@
 
     $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 
-    require_once('vendor/autoload.php');
+    require_once($pathToRootFolder.'vendor/autoload.php');
 
     require_once($pathToRootFolder.'config/connect.php');
 

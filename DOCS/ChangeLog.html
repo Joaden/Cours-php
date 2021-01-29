@@ -23,16 +23,24 @@
         <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
         
     </head>
-    <body class="vscode-body vscode-light">
-        <h1 id="changelogs">Changelogs</h1>
+    <body class="vscode-body">
+        <hr>
+<h2 id="title-changelog-for-project-cours-phpauthors-denis-chanet--christophe-gourmandoutputhtml_documentcss-style_for_md_filescssself_contained-no">title: &quot;ChangeLog for project Cours-php&quot;<br>
+authors: &quot;Denis CHANET &amp; Christophe GOURMAND&quot;<br>
+output:<br>
+html_document:<br>
+css: ./style_for_md_files.css<br>
+self_contained: no</h2>
+<link rel="stylesheet" href="./style_for_md_files.css">
+<h1 id="changelogs">Changelogs</h1>
 <pre><code>(recents firsts)
 </code></pre>
-<h3 id="christophe---branch-christophe-commit-8dec2020-15h19-">CHRISTOPHE - branch christophe (commit 8dec2020 15h19 )</h3>
+<h2 id="christophe---branch-christophe-commit-8dec2020-15h19-">CHRISTOPHE - branch christophe (commit 8dec2020 15h19 )</h2>
 <ul>
 <li>added file <code>nommage des fichiers.txt</code> . Let's remove it when done.</li>
 <li>reactivated the old navbar for now.</li>
 </ul>
-<h3 id="christophe---branch-christophe-commit-25nov2020-20h13">CHRISTOPHE - branch christophe (commit 25nov2020 20h13)</h3>
+<h2 id="christophe---branch-christophe-commit-25nov2020-20h13">CHRISTOPHE - branch christophe (commit 25nov2020 20h13)</h2>
 <ul>
 <li>created a <code>navbar_top.php</code></li>
 <li>de-activated Axentix (css in <code>head.php</code> and js in <code>footer.php</code>)</li>
@@ -40,17 +48,17 @@
 <li>created  <code>src/Views/common/scripts_loader.html</code> AND included in all pages files.</li>
 <li>created a <code>navbar_side.php</code> (not filled)</li>
 </ul>
-<h3 id="denis---branch-master-commit-24nov20-16h00">DENIS - branch master (commit 24nov20 16h00)</h3>
+<h2 id="denis---branch-master-commit-24nov20-16h00">DENIS - branch master (commit 24nov20 16h00)</h2>
 <ul>
 <li>add UPDATE profil(speudo &amp; email)</li>
 <li>modif <code>profil.php</code> / <code>editProfil.php</code></li>
 <li>Test : Create a user, connexion, in profil(click on editer mon profil)</li>
 </ul>
-<h3 id="christophe---branch-christophe-commit-21nov20-17h52">CHRISTOPHE - branch christophe (commit 21nov20 17h52)</h3>
+<h2 id="christophe---branch-christophe-commit-21nov20-17h52">CHRISTOPHE - branch christophe (commit 21nov20 17h52)</h2>
 <ul>
 <li>corrected error line 66 in <code>functions.php</code></li>
 </ul>
-<h3 id="christophe---branch-christophe--commit-21nov20-14h08">CHRISTOPHE - branch christophe  (commit 21nov20 14h08)</h3>
+<h2 id="christophe---branch-christophe--commit-21nov20-14h08">CHRISTOPHE - branch christophe  (commit 21nov20 14h08)</h2>
 <ul>
 <li>added folder <code>DOCS</code> + files <code>AUTHORS.md</code> , <code>BUGS.md</code> , <code>Changelog.md</code> , <code>INSTALL.md</code> , <code>NEWS.md</code> , <code>README.md</code> , <code>TODO.md</code></li>
 <li>filled these files with informations</li>
@@ -62,7 +70,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-16janv2021-21h53">CHRISTOPHE - branch newdesign (commit 16janv2021 21h53)</h3>
+<h2 id="christophe---branch-newdesign-commit-16janv2021-21h53">CHRISTOPHE - branch newdesign (commit 16janv2021 21h53)</h2>
 <ul>
 <li>moved every pages files into <code>./old_pages/</code></li>
 <li>renamed folders :
@@ -92,7 +100,7 @@
 <li>in <code>./views/pages</code>  -&gt; created <code>/pages/home.php</code></li>
 <li>in <code>./views/</code>       -&gt; changed the paths in every <code>include(.....)</code></li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-17janv2021-13h00">CHRISTOPHE - branch newdesign (commit 17janv2021 13h00)</h3>
+<h2 id="christophe---branch-newdesign-commit-17janv2021-13h00">CHRISTOPHE - branch newdesign (commit 17janv2021 13h00)</h2>
 <ul>
 <li>in <code>./views/pages</code>  -&gt; created <code>phpinfos.php</code>  (no link from navbar, you must access by URL)</li>
 <li>in <code>./views/pages</code>  -&gt; created <code>debug.php</code>  (no link from navbar, you must access by URL)
@@ -100,13 +108,13 @@
 <li>please use this page to visualise some variables of your choice using <code>var_dump();</code></li>
 </ul>
 </li>
-<li>in <code>./ </code>            -&gt; created <code>variables_project.php</code></li>
+<li>in <code>./</code>             -&gt; created <code>variables_project.php</code></li>
 <li>in <code>./</code>             -&gt; created <code>debug_functions.php</code></li>
 <li>in <code>debug_functions.php</code> -&gt; created function <code>showme(&quot;chooseATitle&quot;, $variableToVarDump);</code></li>
 <li>in <code>./views/common/</code> -&gt; created <code>footer_dev_mode.php</code><br>
 (  actually working on variables <code>$pathToRootInUrl</code> and <code>$pathToRootInFiles</code>  )</li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-20janv2021-09h49">CHRISTOPHE - branch newdesign (commit 20janv2021 09h49)</h3>
+<h2 id="christophe---branch-newdesign-commit-20janv2021-09h49">CHRISTOPHE - branch newdesign (commit 20janv2021 09h49)</h2>
 <p>problem when <code>home.php</code> load <code>footer_dev_mode.php</code> :<br>
 each <code>&lt;a&gt;</code> links  load 2 times the <code>/localhost/........localhost/........</code></p>
 <ul>
@@ -117,22 +125,44 @@ each <code>&lt;a&gt;</code> links  load 2 times the <code>/localhost/........loc
 </ul>
 </li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-20janv2021-12h15-">CHRISTOPHE - branch newdesign (commit 20janv2021 12h15 )</h3>
+<h2 id="christophe---branch-newdesign-commit-20janv2021-12h15-">CHRISTOPHE - branch newdesign (commit 20janv2021 12h15 )</h2>
 <ul>
 <li>for all pages, added <code>$pathToRootFolder</code></li>
 <li>in <code>footer_dev_mode.php</code>  -&gt; solved all link</li>
 <li>in <code>footer_dev_mode.php</code>  -&gt; created a <code>&lt;link&gt;</code> tag to make it look better</li>
 <li>integrated <code>footer_dev_mode.php</code>  in all web pages of the project.</li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-24janv2021-00h13-">CHRISTOPHE - branch newdesign (commit 24janv2021 00h13 )</h3>
+<h2 id="christophe---branch-newdesign-commit-24janv2021-00h13-">CHRISTOPHE - branch newdesign (commit 24janv2021 00h13 )</h2>
 <ul>
 <li>in <code>./views/pages/</code>  -&gt; created : <code>article_all.php</code></li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-24janv2021-02h14-">CHRISTOPHE - branch newdesign (commit 24janv2021 02h14 )</h3>
+<h2 id="christophe---branch-newdesign-commit-24janv2021-02h14-">CHRISTOPHE - branch newdesign (commit 24janv2021 02h14 )</h2>
 <ul>
 <li>in <code>article_all.php</code> -&gt; created <code>aside</code> bar and articles (bootstrap adjustment not finished yet)</li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit-26janv2021-15h42-">CHRISTOPHE - branch newdesign (commit 26janv2021 15h42 )</h3>
+<h2 id="denis---branch-newdesign-commit-25janv2021-23h14-">DENIS - branch newdesign (commit 25janv2021 23h14 )</h2>
+<ul>
+<li>created -&gt; newdesign <code>session_login</code></li>
+<li>created -&gt; newdesign <code>session_logout</code></li>
+<li>created -&gt; newdesign <code>session_register</code></li>
+<li>created -&gt; newdesign <code>session.php</code> (page msg success auth)</li>
+<li>created -&gt; newdesign <code>recover_password.php</code> (page récupération de mot de passe)</li>
+<li>created -&gt; newdesign <code>redirect_mailto.php</code> (page tunnel)</li>
+<li>created -&gt; newdesign <code>profil.php</code> (page designed)</li>
+<li>created -&gt; newdesign <code>contact.php</code> (form contact)</li>
+<li>created -&gt; newdesign <code>contact_post.php</code> (traitement du form contact)</li>
+<li>created -&gt; newdesign <code>article_all.php</code> (page de tout les articles)</li>
+<li>modified -&gt; newdesign <code>article_read.php</code> (page article)</li>
+<li>modified -&gt; newdesign <code>termofservice.php</code></li>
+<li>modified -&gt; newdesign <code>privacy.php</code></li>
+<li>modified -&gt; newdesign <code>article_read.php</code> (page article)</li>
+<li>modified -&gt; newdesign folder <code>team</code> &gt; page <code>team.php</code> : (GOAL : introduction + to hide portfolio)</li>
+</ul>
+<h2 id="denis---branch-newdesign-commit-26janv2021-10h30-">DENIS - branch newdesign (commit 26janv2021 10h30 )</h2>
+<ul>
+<li>in article_all.php -&gt; created aside</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-26janv2021-15h42-">CHRISTOPHE - branch newdesign (commit 26janv2021 15h42 )</h2>
 <ul>
 <li>in <code>./database/installation</code>  -&gt; created <code>sql_connect_and_create_database.md</code> containing instructions to connect and re-create the database.</li>
 <li>in <code>DOCS/ChangeLog.md</code> (this actual file)
@@ -142,9 +172,51 @@ each <code>&lt;a&gt;</code> links  load 2 times the <code>/localhost/........loc
 </ul>
 </li>
 </ul>
-<h3 id="christophe---branch-newdesign-commit--">CHRISTOPHE - branch newdesign (commit ???????? )</h3>
+<h2 id="christophe---branch-newdesign-commit-26janv2021-17h59-">CHRISTOPHE - branch newdesign (commit 26janv2021 17h59 )</h2>
 <ul>
 <li>in <code>home.php</code> remove the <code>@</code> before <code>$theme</code></li>
+<li>in <code>config/functions.php</code>
+<ul>
+<li>-&gt; added <code>$pathToRootFolder</code> at file beginning.</li>
+<li>-&gt; for every <code>require</code>, I used <code>$pathToRootFolder</code>.</li>
+</ul>
+</li>
+<li>in <code>config/connect.php</code> -&gt; corrected $pathToRootFolder : should be <code>../</code> and not <code>../../</code></li>
+<li>added <code>$pathToRootFolder</code> in every files in <code>/config/</code></li>
+<li>in <code>home.php</code> : loaded <code>$articles</code> using its function.</li>
+<li>in <code>home.php</code> : changed the loop <code>for</code> into a <code>foreach</code> to load <code>$article</code> each iteration.</li>
+<li>NOTICE BUG : articles in array <code>$articles</code> are loaded in reverse-id :
+<ul>
+<li><code>1</code>:id_4 <code>2</code>:id_3 <code>3</code>:id_4 <code>4</code>:id_1</li>
+<li>FIXED : in <code>config/functions.php</code> &gt; <code>getArticles</code> &gt; changed <code>DESC</code> by <code>ASC</code> .</li>
+</ul>
+</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-26janv2021-18h38-">CHRISTOPHE - branch newdesign (commit 26janv2021 18h38 )</h2>
+<ul>
+<li>fixed Denis's idea of using a $alert :
+<ul>
+<li>created the file <code>views/common/alertMessageIfExist.php</code> containing a html/bootstrap alert.</li>
+<li>in every pages, added an include of the pre-cited file.</li>
+</ul>
+</li>
+<li>in <code>session_login.php</code> , the bootstrap class <code>container-fluid</code> had a <code>container</code> directly inside, which i deleted.</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-29janv2021-14h47-">CHRISTOPHE - branch newdesign (commit 29janv2021 14h47 )</h2>
+<ul>
+<li>for <code>footer_dev_mode.php</code> moved css rules in a file <code>_footerDevMode.scss</code> (imported in <code>mainStyle.css</code>)</li>
+<li>reactivated <code>footer_dev_mode.php</code> in all pages (temporarly)</li>
+<li>in <code>mainStyle.scss</code> : turned off the import of <code>themeClair</code> and <code>themeSombre</code></li>
+<li>in <code>footer_dev_mode.php</code> : currently trying to get the file list in <code>/pages/</code>  (NOT FINISHED)</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-29janv-23h30-">CHRISTOPHE - branch newdesign (commit 29janv 23h30 )</h2>
+<ul>
+<li><code>changelogdenis.md</code> : file renamed + integrated in <code>ChangeLog.md</code>.</li>
+<li>created <code>DOCS/style_for_md_files.css</code>.</li>
+<li>in <code>ChangeLog.md</code> -&gt; added link to stylesheet.</li>
+<li>in <code>home.php</code> -&gt; fixed the link loading <code>autoload.php</code></li>
+<li>in <code>navbar.php</code> -&gt; reorganized the <code>echo</code> containing <code>buttons</code> (to improve readability and edit easier)</li>
+<li>in <code>session_register.php</code> -&gt; changed bootstrap layout for elements of the form.</li>
 </ul>
 
     </body>
