@@ -199,8 +199,9 @@ if(isset($_POST['formconnexion']))
             <hr>
         </div>
           <!-- FOOTER -->
-        <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");
+        <?php 
             #include($pathToRootFolder."views/common/footer.php");
+            include($pathToRootFolder."views/common/footer_dev_mode.php");
         
         ?>
         

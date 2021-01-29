@@ -16,17 +16,19 @@
 
 ------------------------------------------------------------------------ */ 
 
-
 // ###################################################
-function showInHtml($variableTo_vardump, $wanted_title="noTitle (but you can put one as second parameter)") {
+function showInHtml($variableTo_vardump , $wanted_title = "noTitle: but you can put one as second parameter") {
     echo "<h1 style='font-size:2rem; background: orange;'>{$wanted_title}</h1>";
     echo "<br>";
     var_dump($variableTo_vardump);
 }
 
 // ###################################################
-function showInConsole($variableTo_vardump) {
+function showInConsole($variableTo_vardump, $wanted_title = "'noTitle'") {
+    $jsonToVardump = json_encode($variableTo_vardump);
+    
     echo "<script>";
-    echo(  "console.log(".json_encode($variableTo_vardump).");"  );
+    echo(  "console.log($wanted_title);"  );
+    echo(  "console.log($jsonToVardump);"  );
     echo "</script>";
 }

@@ -6,7 +6,7 @@
 
     session_start();
 
-    $_SESSION["varsessiontest"]= "Session de test OK";
+    $_SESSION["varsessiontest"] = "Session de test OK";
 
     //Cookie de test pour le theme
     @$theme=$_GET["theme"];
@@ -15,7 +15,7 @@
         header("location: home.php");
     }
     // print_r($_COOKIE);
-    showInConsole($_COOKIE);
+    // showInConsole($_COOKIE);
 
     $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 

@@ -114,3 +114,10 @@ problem when `home.php` load `footer_dev_mode.php` :
   - created the file `views/common/alertMessageIfExist.php` containing a html/bootstrap alert.
   - in every pages, added an include of the pre-cited file.
 - in `session_login.php` , the bootstrap class `container-fluid` had a `container` directly inside, which i deleted.
+
+## CHRISTOPHE - branch newdesign (commit ??????? )
+
+- for `footer_dev_mode.php` moved css rules in a file `_footerDevMode.scss` (imported in `mainStyle.css`)
+- reactivated `footer_dev_mode.php` in all pages (temporarly)
+- in `mainStyle.scss` : turned off the import of `themeClair` and `themeSombre`
+- in `footer_dev_mode.php` : currently trying to get the file list in `/pages/`  (NOT FINISHED)
