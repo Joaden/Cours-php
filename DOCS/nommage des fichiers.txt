@@ -9,11 +9,14 @@ ACCUEIL
 CONTACT
     contact_writeMessage.php                                (abonné)
     contact_messageSent.php                                 (abonné)
+    contact_post.php     (traitement php)                            (abonné)
 
 PAGES DE SESSIONS
     session_register.php                                    (publique)
     session_connection.php                                  (publique)
     session_logout.php                                      (abonné) ou (admin)
+    session.php                                      (abonné) ou (admin)
+    msg_logout.php                                      (abonné) ou (admin)
 
 GESTION DES ARTICLES
     article_read.php                                        (publique)
@@ -28,7 +31,9 @@ PAGES POUR USER
     user_board.php                                          (abonné)
 
     user_modal_avatar.php                                   (abonné)
-    user_modal_createNote.php                               (abonné)
+    user_modal_createNote.php  
+    
+    recover_password.php                             (abonné)
 
 PAGES POUR ADMIN
     admin_index.php                                         (admin)

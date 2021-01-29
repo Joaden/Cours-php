@@ -15,7 +15,7 @@
                 <a class="nav-link text-center" href="article_all.php"><i class="fas fa-sticky-note"></i>Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="team.php"><i class="fas fa-user"></i>L'équipe</a>
+                <a class="nav-link text-center" href="team/portfolioDenis/Portfolio2k20Prod/index.php" target="_blank" data-type="external" rel="nofollow"><i class="fas fa-user"></i>L'équipe</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-center" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>

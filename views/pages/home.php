@@ -19,7 +19,7 @@
 
     $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 
-    //require_once('vendor/autoload.php');
+    require_once('vendor/autoload.php');
 
     require_once($pathToRootFolder.'config/connect.php');
 
@@ -110,8 +110,12 @@
             <?php foreach($articles as $article): ?>
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
-                        <a class="blogArticle-imglink col-lg-5" href="article.php?id=<?= $article->id ?>">
-                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article.php?id=<?= $article->id; ?>"></a>
+                        <a class="blogArticle-imglink col-lg-5" href="#">
+                            <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
+                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="#"></a>
+
+                            <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+            
                         </a>
                         <div class="blogArticle-content offset-lg-1 col-lg-6">
                             <h2 class="blogArticle-title">

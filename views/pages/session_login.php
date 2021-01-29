@@ -85,10 +85,7 @@ if(isset($_POST['formconnexion']))
                 include($pathToRootFolder."views/common/alertMessageIfExist.php");
             ?>
 
-            <div class="row">    
-                <div class="col-md-4">
-
-                </div>
+                    
                 <div class="col-md-4">
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
