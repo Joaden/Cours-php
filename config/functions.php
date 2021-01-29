@@ -1,10 +1,12 @@
 <?php
+
 // function qui récupère tous les articles
 function getArticles()
 {
-    require('config/connect.php');
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT id, title, date FROM articles ORDER BY id DESC');
+    $req = $bdd->prepare('SELECT id, title, date FROM articles ORDER BY id ASC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -12,12 +14,13 @@ function getArticles()
     return $data;
     /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
     $req->closeCursor();
-
+    
 }
 // Fonction qui récupère un article
 function getArticle($id)
 {
-    require('config/connect.php');
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('SELECT * FROM articles WHERE id = ?');
     $req->execute(array($id));
     if($req->rowCount() == 1)
@@ -27,13 +30,15 @@ function getArticle($id)
         // $req->closeCursor();
     }
     else
-        header('Location: index.php');
+    header('Location: index.php');
     $req->closeCursor();
 }
 // fonction ajouter un commentaire à un article
 function addComment($articleId, $author, $comment)
 {
-    require('config/connect.php');
+    $pathToRootFolder = "../../";
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
     $req->execute(array($articleId, $author, $comment));
     $req->closeCursor();
@@ -41,7 +46,8 @@ function addComment($articleId, $author, $comment)
 // fonction récupère le commentaire par ID
 function getComments($id)
 {
-    require('config/connect.php');
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('SELECT * FROM comments WHERE articleId = ?');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -50,10 +56,12 @@ function getComments($id)
 }
 function getUsers()
 {
+    $pathToRootFolder = "../../";
+    
     // à décommenter pour utiliser $_SESSION
     // session_start();
 
-    require('config/connect.php');
+    require($pathToRootFolder.'config/connect.php');
 
     // Sécurité authentification obligatoire à décommenter pour obliger la connexion d'un admin
     // if(!isset($_SESSION['id']) OR $_SESSION['id'] != 1) {
@@ -107,7 +115,8 @@ function getUsers()
 // ADMIN fonction récupère le commentaire par ID
 function getCommentsAdmin()
 {
-    require('config/connect.php');
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
     $req->execute(array());
     $data = $req->fetchAll(PDO::FETCH_OBJ);

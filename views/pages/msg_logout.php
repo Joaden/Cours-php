@@ -23,6 +23,10 @@
     <?php include($pathToRootFolder."views/common/navbar.php"); ?>
     
     <div class="container">
+        <?php 
+            // define a $alertMessage="..message.." if necessary
+            include($pathToRootFolder."views/common/alertMessageIfExist.php");
+        ?>
         <div class="row">
             <div class="col-md-4">
                 <h2>Vous êtes maintenant déconnecté !</h2>

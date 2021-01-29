@@ -63,6 +63,10 @@ echo $_SESSION["pseudo"];
 
     <div class="container-fluid">
         <div class="container">
+            <?php 
+                // define a $alertMessage="..message.." if necessary
+                include($pathToRootFolder."views/common/alertMessageIfExist.php");
+            ?>
             <div class="row">
                 <hr>
                 <div class="col-md-4"></div>

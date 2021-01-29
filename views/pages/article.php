@@ -61,6 +61,10 @@ else {
     include("src/Views/common/navbar-front.php");
     ?>
     <div class="container-fluid">
+        <?php 
+            // define a $alertMessage="..message.." if necessary
+            include($pathToRootFolder."views/common/alertMessageIfExist.php");
+        ?>
         <div class="container">
             <a href="articles.php">Retour aux articles</a>
             <h1><?= $article->title ?></h1>

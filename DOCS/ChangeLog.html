@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Changelogs</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="changelogs">Changelogs</h1>
+<pre><code>(recents firsts)
+</code></pre>
+<h3 id="christophe---branch-christophe-commit-8dec2020-15h19-">CHRISTOPHE - branch christophe (commit 8dec2020 15h19 )</h3>
+<ul>
+<li>added file <code>nommage des fichiers.txt</code> . Let's remove it when done.</li>
+<li>reactivated the old navbar for now.</li>
+</ul>
+<h3 id="christophe---branch-christophe-commit-25nov2020-20h13">CHRISTOPHE - branch christophe (commit 25nov2020 20h13)</h3>
+<ul>
+<li>created a <code>navbar_top.php</code></li>
+<li>de-activated Axentix (css in <code>head.php</code> and js in <code>footer.php</code>)</li>
+<li>correction de la balise <code>&lt;/header&gt;</code> non ouverte dans <code>connexion.php</code></li>
+<li>created  <code>src/Views/common/scripts_loader.html</code> AND included in all pages files.</li>
+<li>created a <code>navbar_side.php</code> (not filled)</li>
+</ul>
+<h3 id="denis---branch-master-commit-24nov20-16h00">DENIS - branch master (commit 24nov20 16h00)</h3>
+<ul>
+<li>add UPDATE profil(speudo &amp; email)</li>
+<li>modif <code>profil.php</code> / <code>editProfil.php</code></li>
+<li>Test : Create a user, connexion, in profil(click on editer mon profil)</li>
+</ul>
+<h3 id="christophe---branch-christophe-commit-21nov20-17h52">CHRISTOPHE - branch christophe (commit 21nov20 17h52)</h3>
+<ul>
+<li>corrected error line 66 in <code>functions.php</code></li>
+</ul>
+<h3 id="christophe---branch-christophe--commit-21nov20-14h08">CHRISTOPHE - branch christophe  (commit 21nov20 14h08)</h3>
+<ul>
+<li>added folder <code>DOCS</code> + files <code>AUTHORS.md</code> , <code>BUGS.md</code> , <code>Changelog.md</code> , <code>INSTALL.md</code> , <code>NEWS.md</code> , <code>README.md</code> , <code>TODO.md</code></li>
+<li>filled these files with informations</li>
+<li>added informations and re-organised the <code>README.md</code> file written by Denis.</li>
+<li>modifications on <code>__.sql</code> files
+<ul>
+<li>rename 2 files :  <code>aaaammdd_database_installation.sql</code></li>
+<li>move them in folder <code>./database_installation</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-16janv2021-21h53">CHRISTOPHE - branch newdesign (commit 16janv2021 21h53)</h3>
+<ul>
+<li>moved every pages files into <code>./old_pages/</code></li>
+<li>renamed folders :
+<ul>
+<li>in <code>./</code>
+<ul>
+<li><code>/src/</code>      -&gt; become <code>/old_src/</code><br>
+<code>/pages/</code>      -&gt; become <code>/old_pages/</code></li>
+</ul>
+</li>
+<li>in <code>./assets/</code>
+<ul>
+<li><code>/css/</code>             -&gt; become <code>/old_css/</code></li>
+<li><code>/js/</code>              -&gt; become <code>/old_js/</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>imported from  my <code>prepa_frontend</code> project into this project :
+<ul>
+<li>in <code>./assets/</code>    -&gt; added folders <code>js</code> and <code>scss</code></li>
+<li>in <code>./</code>           -&gt; added <code>index.php</code></li>
+<li>in <code>./</code>           -&gt; added <code>/views/</code>  folder  and his content.</li>
+</ul>
+</li>
+<li>in <code>./views/</code>       -&gt; created <code>/pages/</code></li>
+<li>in <code>./views/pages</code>  -&gt; created <code>/pages/home.php</code></li>
+<li>in <code>./views/</code>       -&gt; changed the paths in every <code>include(.....)</code></li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-17janv2021-13h00">CHRISTOPHE - branch newdesign (commit 17janv2021 13h00)</h3>
+<ul>
+<li>in <code>./views/pages</code>  -&gt; created <code>phpinfos.php</code>  (no link from navbar, you must access by URL)</li>
+<li>in <code>./views/pages</code>  -&gt; created <code>debug.php</code>  (no link from navbar, you must access by URL)
+<ul>
+<li>please use this page to visualise some variables of your choice using <code>var_dump();</code></li>
+</ul>
+</li>
+<li>in <code>./ </code>            -&gt; created <code>variables_project.php</code></li>
+<li>in <code>./</code>             -&gt; created <code>debug_functions.php</code></li>
+<li>in <code>debug_functions.php</code> -&gt; created function <code>showme(&quot;chooseATitle&quot;, $variableToVarDump);</code></li>
+<li>in <code>./views/common/</code> -&gt; created <code>footer_dev_mode.php</code><br>
+(  actually working on variables <code>$pathToRootInUrl</code> and <code>$pathToRootInFiles</code>  )</li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-20janv2021-09h49">CHRISTOPHE - branch newdesign (commit 20janv2021 09h49)</h3>
+<p>problem when <code>home.php</code> load <code>footer_dev_mode.php</code> :<br>
+each <code>&lt;a&gt;</code> links  load 2 times the <code>/localhost/........localhost/........</code></p>
+<ul>
+<li>in <code>./views/pages</code>    -&gt; created <code>uri_not_found.php</code></li>
+<li>in <code>./views/pages</code>    -&gt; created : <code>/test/de/chemin/pagetest.php</code>
+<ul>
+<li>contain a function <code>calculatePathToRootFolder();</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-20janv2021-12h15-">CHRISTOPHE - branch newdesign (commit 20janv2021 12h15 )</h3>
+<ul>
+<li>for all pages, added <code>$pathToRootFolder</code></li>
+<li>in <code>footer_dev_mode.php</code>  -&gt; solved all link</li>
+<li>in <code>footer_dev_mode.php</code>  -&gt; created a <code>&lt;link&gt;</code> tag to make it look better</li>
+<li>integrated <code>footer_dev_mode.php</code>  in all web pages of the project.</li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-24janv2021-00h13-">CHRISTOPHE - branch newdesign (commit 24janv2021 00h13 )</h3>
+<ul>
+<li>in <code>./views/pages/</code>  -&gt; created : <code>article_all.php</code></li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-24janv2021-02h14-">CHRISTOPHE - branch newdesign (commit 24janv2021 02h14 )</h3>
+<ul>
+<li>in <code>article_all.php</code> -&gt; created <code>aside</code> bar and articles (bootstrap adjustment not finished yet)</li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit-26janv2021-15h42-">CHRISTOPHE - branch newdesign (commit 26janv2021 15h42 )</h3>
+<ul>
+<li>in <code>./database/installation</code>  -&gt; created <code>sql_connect_and_create_database.md</code> containing instructions to connect and re-create the database.</li>
+<li>in <code>DOCS/ChangeLog.md</code> (this actual file)
+<ul>
+<li>-&gt; formatted to a more conventional MarkDown format +</li>
+<li>-&gt; added backtilts arround paths and filename for better readability.</li>
+</ul>
+</li>
+</ul>
+<h3 id="christophe---branch-newdesign-commit--">CHRISTOPHE - branch newdesign (commit ???????? )</h3>
+<ul>
+<li>in <code>home.php</code> remove the <code>@</code> before <code>$theme</code></li>
+</ul>
+
+    </body>
+    </html>

@@ -1,4 +1,6 @@
 <?php
+$pathToRootFolder = "../";
+
 // montre toutes les erreurs
 error_reporting(0); // 0 en paramètre cache les erreurs
 

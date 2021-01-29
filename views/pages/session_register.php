@@ -14,7 +14,7 @@ require_once($pathToRootFolder.'config/connect.php');
 
 if(isset($_POST['formregister']))
 {
-    
+
     if(!empty($_POST['name']) AND !empty($_POST['email'])AND !empty($_POST['email2']) AND !empty($_POST['pseudo']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND empty($_POST['antibot']) AND !empty($_POST['captcha']))
     {
             $name = htmlspecialchars($_POST['name']);
@@ -109,10 +109,6 @@ if(isset($_POST['formregister']))
     $erreur = "Tous les champs doivent être complétés";
     }
 }
-    
-   
-// }
-
 
 
 ?>
@@ -157,6 +153,11 @@ if(isset($_POST['formregister']))
 
         </div>   
             <div class="container bordered">
+            <?php 
+                // define a $alertMessage="..message.." if necessary
+                include($pathToRootFolder."views/common/alertMessageIfExist.php");
+            ?>
+
                  <br>
                  <br>
                 <div class="row">
@@ -168,7 +169,7 @@ if(isset($_POST['formregister']))
                     <?php 
                         if(isset($erreur))
                         {
-                        echo $erreur;  
+                            echo $erreur;
                         }
                     ?>
                 </p>

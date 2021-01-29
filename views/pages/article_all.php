@@ -26,12 +26,15 @@
     <!-- ======== NAVBAR ========= -->
     <?php include($pathToRootFolder."views/common/navbar.php"); ?>
     <div class="container-fluid">
+        <?php 
+            // define a $alertMessage="..message.." if necessary
+            include($pathToRootFolder."views/common/alertMessageIfExist.php");
+        ?>
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
                 <section class="section">
-                    <?php if(isset($alerte)): ?>
-                        <p class="alerte"><?php echo $alerte; ?></p>
-                    <?php endif; ?>
+
+
                     <div class="section-head mt-5">
                         <h2 class="section-head-title">Articles populaires</h2>
                     </div>

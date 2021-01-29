@@ -1,4 +1,6 @@
 <?php
+$pathToRootFolder = "../";
+
 // Fichier à intégrer 
 // convertit en octets
 /////////////////////////////////////////////////////////////
