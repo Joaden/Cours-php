@@ -1,0 +1,14 @@
+.avatar-img {
+    height: 100%;
+    width: 100%;
+    max-width: 100px;
+
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius:100%;
+}
+
+.avatar-img--small {
+    @extend .avatar-img !optional;
+    max-width: 65px; 
+}

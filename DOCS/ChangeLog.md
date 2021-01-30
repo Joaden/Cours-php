@@ -163,3 +163,20 @@ problem when `home.php` load `footer_dev_mode.php` :
 - in `home.php` -> fixed the link loading `autoload.php`
 - in `navbar.php` -> reorganized the `echo` containing `buttons` (to improve readability and edit easier)
 - in `session_register.php` -> changed bootstrap layout for elements of the form.
+
+## CHRISTOPHE - branch newdesign (commit 29to30 janv 03h16 )
+- create a folder `/pages2/` to restart all pages, in front-end only.
+- in `/pages2/`  ->  recreated pages `home.php`
+- in `/pages2/`  ->  recreated pages `session_register.php`
+- in `/pages2/`  ->  recreated pages `session_login.php`
+- in `/pages2/`  ->  recreated pages `session_logout.php`
+- in `/pages2/`  ->  recreated pages `article_all.php`
+- in `/pages2/`  ->  recreated pages `article_read.php`
+- in `scss/modules/`  -> created `_avatar.scss`
+- in `scss/modules/`  -> created `_comment.scss`
+- in `/pages2/`  -> created `user_board.php`
+- in `views/pages/common/`  -> created `sidebar_user.php`  (used in `user_board.php`)
+- created `views/common/navbar_part_notConnected.php`
+  - AND placed 'inscription' and 'connection' buttons inside.
+  - AND in `navbar.php` ->  replaced the `echo`  by an include( ... ) for the buttons if not connected.
+- created `views/common/navbar_part_profil.php`

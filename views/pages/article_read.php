@@ -90,7 +90,7 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
                                 <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                     <p class="col-lg-6 align-self-baseline mb-0">
                                         <span class="abrev">par</span>
-                                        <span class="pseudo-valid">Pseudo</span>
+                                        <span class="pseudo">Pseudo</span>
                                     </p>
                                     <p class="col-lg-6 align-self-baseline text-lg-right">
                                         <span class="abrev">date</span>

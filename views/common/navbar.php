@@ -47,10 +47,11 @@
             -->
 
         <div class="container-fluid d-flex flex-column justify-content-center flex-md-row justify-content-md-end">
-        <?php if(isset($_SESSION['id'])) echo $_SESSION["pseudo"]; ?>
+        <?php # if(isset($_SESSION['id'])) echo $_SESSION["pseudo"]; ?>
             <!-- <div>  </div> -->
 
         <?php
+            /*
             if(isset($_SESSION['id'])) 
                 echo (
                     '<button class="btn bg-white mb-1 mb-md-0 mr-md-3 p-0 text-dominante">
@@ -59,7 +60,7 @@
                     </button>'
                     );
             else
-                echo (
+                 echo (
                     '<button class="btn bg-white mb-1 mb-md-0 mr-md-3 p-0 text-dominante">
                         <a class="nav-link text-center" href="session_register.php">Inscription</a>
                     </button>
@@ -67,6 +68,14 @@
                         <a class="nav-link text-center" href="session_login.php">Connexion</a>
                     </button>'
                 );
+            */
+
+            // FOR NOW ACTIVATE THE PART YOU WANT TO SEE :
+                // if not connected :
+                    # include($pathToRootFolder."views/common/navbar_part_notConnected.php");
+                // if connected :
+                    include($pathToRootFolder."views/common/navbar_part_profil.php");
+                
         ?>
         </div>
     </div>

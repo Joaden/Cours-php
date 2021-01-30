@@ -218,6 +218,27 @@ each <code>&lt;a&gt;</code> links  load 2 times the <code>/localhost/........loc
 <li>in <code>navbar.php</code> -&gt; reorganized the <code>echo</code> containing <code>buttons</code> (to improve readability and edit easier)</li>
 <li>in <code>session_register.php</code> -&gt; changed bootstrap layout for elements of the form.</li>
 </ul>
+<h2 id="christophe---branch-newdesign-commit-29to30-janv-03h16-">CHRISTOPHE - branch newdesign (commit 29to30 janv 03h16 )</h2>
+<ul>
+<li>create a folder <code>/pages2/</code> to restart all pages, in front-end only.</li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>home.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>session_register.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>session_login.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>session_logout.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>article_all.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>article_read.php</code></li>
+<li>in <code>scss/modules/</code>  -&gt; created <code>_avatar.scss</code></li>
+<li>in <code>scss/modules/</code>  -&gt; created <code>_comment.scss</code></li>
+<li>in <code>/pages2/</code>  -&gt; created <code>user_board.php</code></li>
+<li>in <code>views/pages/common/</code>  -&gt; created <code>sidebar_user.php</code>  (used in <code>user_board.php</code>)</li>
+<li>created <code>views/common/navbar_part_notConnected.php</code>
+<ul>
+<li>AND placed 'inscription' and 'connection' buttons inside.</li>
+<li>AND in <code>navbar.php</code> -&gt;  replaced the <code>echo</code>  by an include( ... ) for the buttons if not connected.</li>
+</ul>
+</li>
+<li>created <code>views/common/navbar_part_profil.php</code></li>
+</ul>
 
     </body>
     </html>

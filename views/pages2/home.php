@@ -3,42 +3,8 @@
     $PAGE_TITLE = "BlogPHP - home";
     
     include($pathToRootFolder."debug_functions.php");
-
-    session_start();
-
-    $_SESSION["varsessiontest"] = "Session de test OK";
-
-    //Cookie de test pour le theme
-    @$theme=$_GET["theme"];
-    if($theme=="clair" || $theme=="sombre"){
-        setcookie("theme",$theme,time()+3600);
-        header("location: home.php");
-    }
-    // print_r($_COOKIE);
-    // showInConsole($_COOKIE);
-
-    $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
-
-    require_once($pathToRootFolder.'vendor/autoload.php');
-
-    require_once($pathToRootFolder.'config/connect.php');
-
-    require_once($pathToRootFolder.'config/functions.php');
-
-    // retrieves the user's ID if he is logged in
-    if(isset($_GET['id']) AND $_GET['id'] > 0)
-    {
-        $getId = intval($_GET['id']);
-        $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-        $reqUser->execute(array($getId));
-        $userInfo = $reqUser->fetch();
-    }
-    
-
-    $articles = getArticles();
-                                        showInConsole($articles); // debug
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -107,7 +73,8 @@
             </div>
 
             <!-- =================== ARTICLES ================== -->
-            <?php foreach($articles as $article): ?>
+
+            <?php for($i=0; $i<9; $i++): ?>
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
                         <a class="blogArticle-imglink col-lg-5" href="#">
@@ -149,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php endfor; ?>
         </section>
 
     </main>
@@ -167,7 +134,6 @@
     <br>
 
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer.php");?>
     <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
