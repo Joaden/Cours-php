@@ -1,8 +1,12 @@
+<?php
+    $PAGE_TITLE = "TEST BOOTSTRAP";
+    $pathToRootFolder = "../../";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
-    <?php $PAGE_TITLE = "TEST BOOTSTRAP"; ?>
-    <?php include("./views/common/head.php");?>
+<?php include($pathToRootFolder."views/common/head.php"); ?>
 
 <body>
     <!-- =================================================== -->
@@ -60,7 +64,7 @@
 
     </div>
 
-    <?php include("./views/common/load_js_scripts.php");?>
+    <?php include($pathToRootFolder."views/common/load_js_scripts.php");?>
 </body>
 
 </html>

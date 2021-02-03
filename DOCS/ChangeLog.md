@@ -165,6 +165,7 @@ problem when `home.php` load `footer_dev_mode.php` :
 - in `session_register.php` -> changed bootstrap layout for elements of the form.
 
 ## CHRISTOPHE - branch newdesign (commit 29to30 janv 03h16 )
+
 - create a folder `/pages2/` to restart all pages, in front-end only.
 - in `/pages2/`  ->  recreated pages `home.php`
 - in `/pages2/`  ->  recreated pages `session_register.php`
@@ -182,6 +183,7 @@ problem when `home.php` load `footer_dev_mode.php` :
 - created `views/common/navbar_part_profil.php`
 
 ## CHRISTOPHE - branch newdesign (commit 03 fev 23h59 )
+
 integration of my new 'realgrid' system:  
 classes `grid-{nbcol}`  (nbcol can be 1 to 6)
 classes `grid-{breakpoint}-{nbcol}`  (nbcol can be 1 to 6) and (breakpoint can be sm,md,lg,xl)
@@ -190,3 +192,8 @@ classes `vlines-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 colu
 
 - in `/scss/custom/utilities/`  -> created `_realgrid.scss`
 - in `views/tests/`     -> created files `test-grid-1` `-2` `-3` `-1.2` `.php` (will be removed soon)
+
+## CHRISTOPHE - branch newdesign (commit 04 fev 00h24 )
+
+- corrections in `views/tests/`  : `test-grid-1` `-2` `-3` `-1.2` `.php`
+
