@@ -180,3 +180,13 @@ problem when `home.php` load `footer_dev_mode.php` :
   - AND placed 'inscription' and 'connection' buttons inside.
   - AND in `navbar.php` ->  replaced the `echo`  by an include( ... ) for the buttons if not connected.
 - created `views/common/navbar_part_profil.php`
+
+## CHRISTOPHE - branch newdesign (commit 03 fev 23h59 )
+integration of my new 'realgrid' system:  
+classes `grid-{nbcol}`  (nbcol can be 1 to 6)
+classes `grid-{breakpoint}-{nbcol}`  (nbcol can be 1 to 6) and (breakpoint can be sm,md,lg,xl)
+classes `vlines{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
+classes `vlines-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
+
+- in `/scss/custom/utilities/`  -> created `_realgrid.scss`
+- in `views/tests/`     -> created files `test-grid-1` `-2` `-3` `-1.2` `.php` (will be removed soon)

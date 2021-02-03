@@ -1,0 +1,93 @@
+$numberOfColInTheGrid_map:(1, 2, 3, 4, 5, 6);
+
+// ##########################################################
+// v1 : will create grid-{breakpoint}-{nbCol} from 'xs' to 'lg' and columns from 2 to 6.
+
+
+// @each $grid-breakpoints_name, $grid-breakpoints_val in $grid-breakpoints {
+
+//     @each $numberOfColInTheGrid in $numberOfColInTheGrid_map {
+        
+//         @include media-breakpoint-up(#{$grid-breakpoints_name}) {
+//             .grid-#{$grid-breakpoints_name}-#{$numberOfColInTheGrid} {
+//                 display: grid;
+//                 grid-auto-flow: row;
+            
+//                 grid-template-columns: repeat($numberOfColInTheGrid, 1fr);
+//             }
+//         }
+//     }
+// }
+
+
+
+
+// ##########################################################
+
+$bootstrap-breakpoints_map:("sm","md","lg","xl"); // recreated to have a version without "xs" for the creation of classes grid-{breakpoint}-{nbCol}
+
+// v2 - part2: will create grid-{nbCol} for 'no-media-querie' and columns from 2 to 6. (will be use for under 'sm' breakpoint.
+
+@each $numberOfColInTheGrid in $numberOfColInTheGrid_map {
+    // @include media-breakpoint-down(sm) {
+        .grid-#{$numberOfColInTheGrid} {
+            display: grid;
+            grid-auto-flow: row;
+            grid-template-columns: repeat($numberOfColInTheGrid, 1fr);
+        }
+    // }
+}
+
+
+// v2 - part1: will create grid-{breakpoint}-{nbCol} from 'sm' to 'lg' and columns from 2 to 6.
+
+@each $bootstrap-breakpoints_name in $bootstrap-breakpoints_map {
+    @each $numberOfColInTheGrid in $numberOfColInTheGrid_map {
+        @include media-breakpoint-up(#{$bootstrap-breakpoints_name}) {
+            .grid-#{$bootstrap-breakpoints_name}-#{$numberOfColInTheGrid} {
+                display: grid;
+                grid-auto-flow: row;
+                grid-template-columns: repeat($numberOfColInTheGrid, 1fr);
+            }
+        }
+    }
+}
+
+
+$lineNumbersInTheGrid_map:(1, 2, 3, 4, 5, 6, 7);
+
+
+// classes 'vline-#to#' without breakpoints (so without media queries)
+@for $lineStartNum from 1 through 7 {
+    @for $lineEndNum from 1 through 7{
+        @if $lineStartNum < $lineEndNum {
+            .vline#{$lineStartNum}to#{$lineEndNum} {
+                grid-column: #{$lineStartNum} / #{$lineEndNum};
+            }
+        }
+    }
+}
+
+// classes 'vline-#to#' without breakpoints (so without media queries)
+@each $bootstrap-breakpoints_name in $bootstrap-breakpoints_map {
+    @for $lineStartNum from 1 through 7 {
+        @for $lineEndNum from 1 through 7{
+            @if $lineStartNum < $lineEndNum {
+                .vline-#{$bootstrap-breakpoints_name}-#{$lineStartNum}to#{$lineEndNum} {
+                    grid-column: #{$lineStartNum} / #{$lineEndNum};
+                }
+            }
+        }
+    }
+}
+
+
+.grid-rowHeightForImg {
+    grid-template-rows: 250px;
+
+    & img {
+        height: 250px;
+        object-fit:cover;
+        width: 100%;
+    }
+}

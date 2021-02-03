@@ -86,8 +86,8 @@
                         </a>
                         <div class="blogArticle-content offset-lg-1 col-lg-6">
                             <h2 class="blogArticle-title">
-                                <a href="article.php?id=<?= $article->id ?>" class="">
-                                    <?= $article->title; ?>
+                                <a href="article.php?id=<?= '$article->id' ?>" class="">
+                                    <?= '$article->title;' ?>
                                 </a>
                             </h2>
                             <p class="blogArticle-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rem eum fuga voluptatibus velit excepturi aliquid quia minima dolor cum? Dolorem repellat, dicta rerum doloremque non omnis? Deleniti eaque blanditiis corporis recusandae placeat, delectus veritatis omnis at dolor neque, expedita quo nemo incidunt similique dolorum dolorem, exercitationem ratione odio quia sit est! Deserunt quisquam vitae blanditiis amet nam, accusantium cumque animi suscipit, perspiciatis quam exercitationem qui obcaecati, quos molestias beatae?</p>
