@@ -187,8 +187,8 @@ problem when `home.php` load `footer_dev_mode.php` :
 integration of my new 'realgrid' system:  
 classes `grid-{nbcol}`  (nbcol can be 1 to 6)
 classes `grid-{breakpoint}-{nbcol}`  (nbcol can be 1 to 6) and (breakpoint can be sm,md,lg,xl)
-classes `vlines{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
-classes `vlines-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
+classes `vline{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
+classes `vline-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
 
 - in `/scss/custom/utilities/`  -> created `_realgrid.scss`
 - in `views/tests/`     -> created files `test-grid-1` `-2` `-3` `-1.2` `.php` (will be removed soon)
@@ -197,3 +197,11 @@ classes `vlines-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 colu
 
 - corrections in `views/tests/`  : `test-grid-1` `-2` `-3` `-1.2` `.php`
 
+## CHRISTOPHE - branch newdesign (commit 04 fev 00h48 )
+
+- classe `vline{X}to{Y}`  -> renamed `vline-{X}to{Y}`  with a '-' after 'vlines'
+- renamed files in `views/tests/` :
+    - `test-grid-divs.php`
+    - `test-grid-form-better.php`
+    - `test-grid-form.php`
+    - `test-grid-images.php`

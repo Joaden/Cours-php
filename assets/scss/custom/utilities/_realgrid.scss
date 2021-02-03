@@ -61,7 +61,7 @@ $lineNumbersInTheGrid_map:(1, 2, 3, 4, 5, 6, 7);
 @for $lineStartNum from 1 through 7 {
     @for $lineEndNum from 1 through 7{
         @if $lineStartNum < $lineEndNum {
-            .vline#{$lineStartNum}to#{$lineEndNum} {
+            .vline-#{$lineStartNum}to#{$lineEndNum} {
                 grid-column: #{$lineStartNum} / #{$lineEndNum};
             }
         }

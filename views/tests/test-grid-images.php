@@ -17,7 +17,7 @@
 
     <div class="grid-1 grid-sm-2 grid-md-3 grid-lg-4 grid-xl-6 grid-rowHeightForImg">
         <div>
-            <img class="" src="https://source.unsplash.com/featured/?nature" alt="">
+            <img class="vline-1to3" src="https://source.unsplash.com/featured/?nature" alt="">
         </div>
         <div>
             <img class="" src="https://source.unsplash.com/featured/?sun" alt="">
