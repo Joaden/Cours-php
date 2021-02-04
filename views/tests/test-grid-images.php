@@ -16,50 +16,54 @@
     <h1>TEST BOOTSTRAP</h1>
 
     <div class="grid-1 grid-sm-2 grid-md-3 grid-lg-4 grid-xl-6 grid-rowHeightForImg">
-        <div>
-            <img class="vline-1to3" src="https://source.unsplash.com/featured/?nature" alt="">
+        
+        <div class="grid-sm-2col grid-md-1col grid-lg-4col">
+            <img src="https://source.unsplash.com/featured/?nature" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?sun" alt="">
+        <div class="grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?sun" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?water" alt="">
+        <div class="grid-md-1col grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?water" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?work" alt="">
+        <div class="grid-sm-2col grid-md-3col grid-lg-4col">
+            <img src="https://source.unsplash.com/featured/?work" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?ocean" alt="">
+        <div class="grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?ocean" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?girl" alt="">
+        <div class="grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?girl" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?meeting" alt="">
+        <div class="grid-sm-2col grid-md-1col grid-lg-4col">
+            <img src="https://source.unsplash.com/featured/?meeting" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?music" alt="">
+        <div class="grid-md-3col grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?music" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?animal" alt="">
+        <div class="grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?animal" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?plant" alt="">
+        <div class="grid-lg-4col">
+            <img src="https://source.unsplash.com/featured/?plant" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?desert" alt="">
+        <div class="grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?desert" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?forest" alt="">
+        <div class="grid-lg-2col">
+            <img src="https://source.unsplash.com/featured/?forest" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?sky" alt="">
+        <div class="grid-lg-4col">
+            <p class="h4">Le systeme Grid est plus puissant que vous ne pensez</p>
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?dirty" alt="">
+        <div class="vline-1to2 vline-sm-1to3">
+            <img src="https://source.unsplash.com/featured/?sky" alt="">
         </div>
-        <div>
-            <img class="" src="https://source.unsplash.com/featured/?camera" alt="">
+        <div class="">
+            <img src="https://source.unsplash.com/featured/?dirty" alt="">
+        </div>
+        <div class="">
+            <img src="https://source.unsplash.com/featured/?camera" alt="">
         </div>
 
     </div>

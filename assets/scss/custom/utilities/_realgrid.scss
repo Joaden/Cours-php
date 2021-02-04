@@ -53,9 +53,7 @@ $bootstrap-breakpoints_map:("sm","md","lg","xl"); // recreated to have a version
     }
 }
 
-
 $lineNumbersInTheGrid_map:(1, 2, 3, 4, 5, 6, 7);
-
 
 // classes 'vline-#to#' without breakpoints (so without media queries)
 @for $lineStartNum from 1 through 7 {
@@ -68,18 +66,35 @@ $lineNumbersInTheGrid_map:(1, 2, 3, 4, 5, 6, 7);
     }
 }
 
-// classes 'vline-#to#' without breakpoints (so without media queries)
+// classes 'vline-#to#' with breakpoints (so with media queries)
 @each $bootstrap-breakpoints_name in $bootstrap-breakpoints_map {
     @for $lineStartNum from 1 through 7 {
         @for $lineEndNum from 1 through 7{
             @if $lineStartNum < $lineEndNum {
-                .vline-#{$bootstrap-breakpoints_name}-#{$lineStartNum}to#{$lineEndNum} {
-                    grid-column: #{$lineStartNum} / #{$lineEndNum};
+                @include media-breakpoint-up(#{$bootstrap-breakpoints_name}) {
+                    .vline-#{$bootstrap-breakpoints_name}-#{$lineStartNum}to#{$lineEndNum} {
+                        grid-column: #{$lineStartNum} / #{$lineEndNum};
+                    }
                 }
             }
         }
     }
 }
+
+@each $bootstrap-breakpoints_name in $bootstrap-breakpoints_map {
+    @for $nbOfCols from 1 through 6 {
+        @include media-breakpoint-up(#{$bootstrap-breakpoints_name}) {
+            .grid-#{$bootstrap-breakpoints_name}-#{$nbOfCols}col{
+                grid-column: span #{$nbOfCols};
+            }
+        }
+    }
+}
+
+
+
+
+
 
 
 .grid-rowHeightForImg {
