@@ -73,7 +73,7 @@ $lineNumbersInTheGrid_map:(1, 2, 3, 4, 5, 6, 7);
             @if $lineStartNum < $lineEndNum {
                 @include media-breakpoint-up(#{$bootstrap-breakpoints_name}) {
                     .vline-#{$bootstrap-breakpoints_name}-#{$lineStartNum}to#{$lineEndNum} {
-                        grid-column: #{$lineStartNum} / #{$lineEndNum};
+                        grid-column: #{$lineStartNum} / #{$lineEndNum} !important;
                     }
                 }
             }

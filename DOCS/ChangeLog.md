@@ -210,3 +210,7 @@ classes `vline-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 colum
 
 - added media querie for class `vline-{breakpoint}-{X}to{Y}` (forgotten before :p )
 - in `/custom/utilities/_realgrid.scss` -> created classes `grid-{breakpoint}-Xcol` where X can be 1 to 6.
+
+## CHRISTOPHE - branch newdesign (commit 04 fev 01h49 )
+
+- improve my example in `views/test/test-grid-images.php` . please try to resize the browser, then check how i did.
