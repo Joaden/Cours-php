@@ -121,11 +121,9 @@ if(isset($_POST['formconnexion']))
                 </div>
                 <div class="col-md-6">
                     <p>Vous n'avez pas encore de compte ? 
-                        <button class="btn btn-primary">
-                            <a href="register.php">
-                                S'inscrire
-                            </a>
-                        </button>
+                    <a class="btn btn-danger" href="session_register.php">
+                        S'inscrire
+                    </a>
                     </p>
                 </div>
             </div>

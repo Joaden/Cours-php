@@ -45,32 +45,58 @@
 <!-- </style> -->
 
 
-<footer class="footer-dev-mode">
+<footer class="footer-dev-mode grid-md-2">
     <ul>
-        <a href="<?=$pathToRootFolder.'index.php'?>">
-            <li>index.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'views/pages/home.php'?>">
-            <li>views/pages/home.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'views/pages/article_all.php'?>">
-            <li>views/pages/article_all.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'views/pages/debug.php'?>">
-            <li>views/pages/debug.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'views/pages/phpinfos.php'?>">
-            <li>views/pages/phpinfos.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'views/pages/test/de/chemin/pagetest.php'?>">
-            <li>views/pages/test/de/chemin/pagetest.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'debug_functions.php'?>">
-            <li>debug_functions.php</li>
-        </a>
-        <a href="<?=$pathToRootFolder.'variables_project.php'?>">
-            <li>variables_project.php</li>
-        </a>
+        <h4 class="text-danger">in /pages/ </h4>
+        <li>
+            <a href="<?=$pathToRootFolder.'index.php'?>">index.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages/home.php'?>">views/pages/home.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages/article_all.php'?>">views/pages/article_all.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages/debug.php'?>">views/pages/debug.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages/phpinfos.php'?>">views/pages/phpinfos.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages/test/de/chemin/pagetest.php'?>">views/pages/test/de/chemin/pagetest.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'debug_functions.php'?>">debug_functions.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'variables_project.php'?>">variables_project.php</a>
+        </li>
+    </ul>
+
+    <ul>
+        <h4 class="text-danger">in /pages2/ </h4>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/home.php'?>">views/pages2/home.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/article_all.php'?>">views/pages2/article_all.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/article_read.php'?>">views/pages2/article_read.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/session_login.php'?>">views/pages2/session_login.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/session_logout.php'?>">views/pages2/session_logout.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/session_register.php'?>">views/pages2/session_register.php</a>
+        </li>
+        <li>
+            <a href="<?=$pathToRootFolder.'views/pages2/user_board.php'?>">views/pages2/user_board.php</a>
+        </li>
     </ul>
 
     <?php 

@@ -16,10 +16,9 @@
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
 
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+    
     <div class="container-fluid">
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
@@ -85,8 +84,15 @@
                     <!-- COMMENTAIRES -->
                     <form action="" class="mb-5">
                         <div class="form-group">
-                            <label for="writeComment_id">Poster un commentaire</label>
+                            <label for="writeComment_id">
+                                Poster un commentaire 
+                            </label>
                             <textarea id="writeComment_id" name="writeComment" class="form-control" rows="5"></textarea>
+                            <p>
+                                <em class="text-secondary"> (pas de compte ? inscrivez vous ici:</em>
+                                <a href="session_register.php">inscription</a>
+                                <em class="text-secondary">)</em>
+                            </p>
                         </div>
                     </form>
 

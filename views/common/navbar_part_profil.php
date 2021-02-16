@@ -6,13 +6,13 @@
                 <small>[statut: Writer]</small>
             </div>
         </a>
-        <div class="dropdown-menu bg-dominante text-white" aria-labelledby="navbar_profil_Dropdown">
+        <div class="dropdown-menu dropdownProfil" aria-labelledby="navbar_profil_Dropdown">
             <a class="dropdown-item" href="#">Profil</a>
             <a class="dropdown-item" href="#">Mes articles</a>
             <a class="dropdown-item" href="#">Paramètres</a>
             <a class="dropdown-item" href="#">Tableau de bords</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" href="#">Déconnexion</a>
+            <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="#">Déconnexion <i class="fas fa-sign-out-alt"></i></a>
         </div>
     </li>
 </ul>

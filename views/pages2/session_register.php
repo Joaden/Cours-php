@@ -8,13 +8,10 @@
     <?php include($pathToRootFolder."views/common/head.php");?>
 
     <body>
-    <!-- ================ DEBUT HTML  ================ -->
+        <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-        
+        <?php include($pathToRootFolder."views/common/header.php"); ?>
+            
         <div class="container"> <!-- 1er container -->
             <h1 class="text-dark text-center mt-3"><?php echo $PAGE_TITLE ?></h1>
             <h3></h3><!-- H3 affiche une var de session pour tester si la session fonctionne bien -->

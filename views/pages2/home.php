@@ -9,17 +9,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-    <?php include($pathToRootFolder."views/common/head.php");?>
+    <?php include($pathToRootFolder."views/common/head.php"); ?>
 
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-    
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
 
     <!-- ======== CARROUSEL ========= -->
     <div id="carouselOnHomepage" class="carousel slide" data-ride="carousel">

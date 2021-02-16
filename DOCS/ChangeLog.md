@@ -201,10 +201,10 @@ classes `vline-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 colum
 
 - classe `vline{X}to{Y}`  -> renamed `vline-{X}to{Y}`  with a '-' after 'vlines'
 - renamed files in `views/tests/` :
-    - `test-grid-divs.php`
-    - `test-grid-form-better.php`
-    - `test-grid-form.php`
-    - `test-grid-images.php`
+  - `test-grid-divs.php`
+  - `test-grid-form-better.php`
+  - `test-grid-form.php`
+  - `test-grid-images.php`
   
 ## CHRISTOPHE - branch newdesign (commit 04 fev 01h29 )
 
@@ -214,3 +214,35 @@ classes `vline-{breakpoint}-{X}to{Y}` where X and Y can be 1 to 7 (cause 6 colum
 ## CHRISTOPHE - branch newdesign (commit 04 fev 01h49 )
 
 - improve my example in `views/test/test-grid-images.php` . please try to resize the browser, then check how i did.
+
+## CHRISTOPHE - branch newdesign (commit 15>16 fev 01h04 )
+
+about the links colors:
+
+- CSS : changed the way `<a>` tags are colored (removed inherit for every link, and added specific color for each link in each classes of the website.
+- changed the button "S'inscrire" in all pages (a button contained a link, not it's directly a link).
+- created `assets/scss/custom/modules/_dropdownProfil.scss` 
+  - recreated classes for the `navbar_profil_Dropdown` because Bootstrap colors for background and links on hover are not adapted to our theme.
+
+about the header:
+
+- created `views/common/header.php` and placed site name and navbar inside.
+- included the `header.php` in:
+  - `views/common/home.php`
+  - `views/common/article_all.php`
+  - `views/common/article_read.php`
+  - `views/common/article_read.php`
+  - `views/common/session_login.php`
+  - `views/common/session_logout.php`
+  - `views/common/session_register.php`
+  - `views/common/user_board.php`
+
+other:
+
+- in `views/common/footer_dev_mode.php` -> corrected `li` and `a` (were nested reversely)
+- created `assets/scss/custom/utilities/_variables.scss`
+
+about widgets : in `views/pages2/user_board.php`:
+
+- created `assets/scss/custom/modules/_widgetTextDigit.scss`
+- in `user_board.php` -> in section "tableau de bord" : added 3 widgets "nombre de ..."

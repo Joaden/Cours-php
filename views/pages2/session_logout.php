@@ -13,10 +13,7 @@
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
     
     <div class="container">
         <h2 class="text-center text-secondaireDarker1 mt-4">Vous êtes maintenant déconnecté !</h2>

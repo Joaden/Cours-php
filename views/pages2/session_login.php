@@ -11,10 +11,7 @@
          <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
 
-        <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-        <!-- ======== NAVBAR ========= -->
-        <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+        <?php include($pathToRootFolder."views/common/header.php"); ?>
 
         <div class="container">
             <h1 class="text-dark text-center mt-3"><?php echo $PAGE_TITLE ?></h1>
@@ -66,11 +63,9 @@
             <p class="text-center">Vous n'avez pas encore de compte ?</p>
             <div class="row">
                 <div class="col text-center">
-                    <button class="btn btn-danger">
-                        <a href="session_register.php">
-                            S'inscrire
-                        </a>
-                    </button>
+                    <a class="btn btn-danger" href="session_register.php">
+                        S'inscrire
+                    </a>
                 </div>
             </div>
         

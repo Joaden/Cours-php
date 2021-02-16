@@ -274,6 +274,43 @@ classes <code>vline-{breakpoint}-{X}to{Y}</code> where X and Y can be 1 to 7 (ca
 <ul>
 <li>improve my example in <code>views/test/test-grid-images.php</code> . please try to resize the browser, then check how i did.</li>
 </ul>
+<h2 id="christophe---branch-newdesign-commit-1516-fev-01h04-">CHRISTOPHE - branch newdesign (commit 15&gt;16 fev 01h04 )</h2>
+<p>about the links colors:</p>
+<ul>
+<li>CSS : changed the way <code>&lt;a&gt;</code> tags are colored (removed inherit for every link, and added specific color for each link in each classes of the website.</li>
+<li>changed the button &quot;S'inscrire&quot; in all pages (a button contained a link, not it's directly a link).</li>
+<li>created <code>assets/scss/custom/modules/_dropdownProfil.scss</code>
+<ul>
+<li>recreated classes for the <code>navbar_profil_Dropdown</code> because Bootstrap colors for background and links on hover are not adapted to our theme.</li>
+</ul>
+</li>
+</ul>
+<p>about the header:</p>
+<ul>
+<li>created <code>views/common/header.php</code> and placed site name and navbar inside.</li>
+<li>included the <code>header.php</code> in:
+<ul>
+<li><code>views/common/home.php</code></li>
+<li><code>views/common/article_all.php</code></li>
+<li><code>views/common/article_read.php</code></li>
+<li><code>views/common/article_read.php</code></li>
+<li><code>views/common/session_login.php</code></li>
+<li><code>views/common/session_logout.php</code></li>
+<li><code>views/common/session_register.php</code></li>
+<li><code>views/common/user_board.php</code></li>
+</ul>
+</li>
+</ul>
+<p>other:</p>
+<ul>
+<li>in <code>views/common/footer_dev_mode.php</code> -&gt; corrected <code>li</code> and <code>a</code> (were nested reversely)</li>
+<li>created <code>assets/scss/custom/utilities/_variables.scss</code></li>
+</ul>
+<p>about widgets : in <code>views/pages2/user_board.php</code>:</p>
+<ul>
+<li>created <code>assets/scss/custom/modules/_widgetTextDigit.scss</code></li>
+<li>in <code>user_board.php</code> -&gt; in section &quot;tableau de bord&quot; : added 3 widgets &quot;nombre de ...&quot;</li>
+</ul>
 
     </body>
     </html>

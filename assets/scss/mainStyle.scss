@@ -69,7 +69,8 @@
     //    _mixins.scss  pour les propriétés CSS à déclarer pour chaque navigateur.
     @import "custom/utilities/colors";
     @import "custom/utilities/realgrid";
-    //    _variables.scss   soit dans 'variables'  soit dans 'base'
+    @import "custom/utilities/variables";
+    
     @import "custom/debug/debugBorder";
 
 // ===================================
@@ -116,6 +117,9 @@
     @import "custom/modules/blogArticle";
     @import "custom/modules/articleFilter";
     @import "custom/modules/comment";
+    @import "custom/modules/dropdownProfil";
+    @import "custom/modules/widgetTextDigit";
+
     @import "custom/modules/footerDevMode";
     // @import "custom/modules/themeClair";
     // @import "custom/modules/themeSombre";
