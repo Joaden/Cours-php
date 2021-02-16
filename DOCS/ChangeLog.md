@@ -246,3 +246,8 @@ about widgets : in `views/pages2/user_board.php`:
 
 - created `assets/scss/custom/modules/_widgetTextDigit.scss`
 - in `user_board.php` -> in section "tableau de bord" : added 3 widgets "nombre de ..."
+
+## CHRISTOPHE - branch newdesign (commit 15>16 fev 01h33 )
+
+- created `assets/scss/custom/modules/_sidebar.scss`
+- modified `views/common/sidebar_user.php` to match classes of `_sidebar.scss`

@@ -1,0 +1,38 @@
+.sidebar {
+    height: 100%;
+    margin: 1px 0 0 0;
+    padding: 0;
+
+    background-color: var(--dominante);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    .sidebar-item {
+        margin: 0;
+        padding: .5rem 0 .5rem 2rem;
+        list-style-type: none;
+
+        .sidebar-link {
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        &:hover {
+            background-color: hsla(0, 0, 0%, .2);
+        }
+    }
+
+    .sidebar-item--status {
+        @extend .sidebar-item--status;
+        background-color: #00b6c3;
+
+        &:hover {
+            background-color: #00b6c3;
+        }
+    }
+
+}
