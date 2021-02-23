@@ -1,0 +1,24 @@
+.dropdownProfil {
+    padding: 0;
+    background-color: var(--dominante);
+
+    // box-shadow: 0.6rem 0.6rem 20.4px color.adjust(var(--dominanteDarker2), $alpha:-0.5);
+
+    & > .dropdown-item {
+        padding: 0.3rem 1.3rem;
+        margin: 0;
+        color: white;
+    }
+
+    & > .dropdown-item:hover {
+        background-color: white;
+        color: var(--dominante);
+    }
+
+    & > .dropdown-item:last-child {
+        border-top: 1px solid white;
+        color: white;
+        background-color: #ec0101;
+    }
+
+}

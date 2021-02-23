@@ -1,0 +1,128 @@
+/* ----------- article */
+
+// rules to apply for version "large" or "medium" or "small" of this module :
+.blogArticle {
+    margin-right: 0;
+    margin-left: 0;
+
+    .blogArticle-imglink{
+
+        // border: 1px solid var(--dominanteDarker2);
+        background-color: $gray-100;
+        border: 1px dotted $gray-600;
+
+        .blogArticle-imglink-img{
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+    }
+
+    .blogArticle-content {
+
+        .blogArticle-title {
+            color: var(--dominante);
+            & > a:any-link {
+                color: inherit;
+            }
+        }
+
+        .blogArticle-text {
+            text-align: justify;
+        }
+
+        .blogArticle-footer {
+            border-top: 1px solid var(--secondaireLighter2);
+
+            .blogArticle-footer-infos{
+                
+            }
+        }
+    }
+}
+
+// rules specifics to version "large" of the module :
+
+.blogArticle--large {
+    @extend .blogArticle !optional;
+
+    margin-bottom: 3rem;
+
+    .blogArticle-imglink{
+        @extend .blogArticle-imglink !optional;
+
+
+        .blogArticle-imglink-img{
+            @extend .blogArticle-imglink-img !optional;
+            
+        }
+    }
+
+    .blogArticle-content {
+        @extend .blogArticle-content !optional;
+
+        .blogArticle-title {
+            @extend .blogArticle-title !optional;
+        }
+
+        .blogArticle-text {
+            @extend .blogArticle-text !optional;
+        }
+    }
+}
+
+// rules specifics to version "medium" of the module :
+
+.blogArticle--medium {
+    @extend .blogArticle !optional;
+
+    .blogArticle-imglink{
+        @extend .blogArticle-imglink !optional;
+
+
+        .blogArticle-imglink-img{
+            @extend .blogArticle-imglink-img !optional;
+            
+        }
+    }
+
+    .blogArticle-content {
+        @extend .blogArticle-content !optional;
+
+        .blogArticle-title {
+            @extend .blogArticle-title !optional;
+        }
+
+        .blogArticle-text {
+            @extend .blogArticle-text !optional;
+        }
+    }
+}
+
+// rules specifics to version "small" of the module :
+
+.blogArticle--small {
+    @extend .blogArticle !optional;
+
+    .blogArticle-imglink{
+        @extend .blogArticle-imglink !optional;
+
+
+        .blogArticle-imglink-img{
+            @extend .blogArticle-imglink-img !optional;
+            
+        }
+    }
+
+    .blogArticle-content {
+        @extend .blogArticle-content !optional;
+
+        .blogArticle-title {
+            @extend .blogArticle-title !optional;
+        }
+
+        .blogArticle-text {
+            @extend .blogArticle-text !optional;
+        }
+    }
+}

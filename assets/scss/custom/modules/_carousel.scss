@@ -1,0 +1,9 @@
+/*  ----------- carousel on Homepage - customisation */
+    #carouselOnHomepage .carousel-inner {
+        height: 400px;
+    }
+
+    #carouselOnHomepage .carousel-inner .carousel-item > img {
+        position: relative;
+        bottom: 120px;
+    }

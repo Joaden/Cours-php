@@ -1,0 +1,35 @@
+.abrev {
+    font-style: normal;
+    margin-right: 0.5rem;
+
+    color: #a3a3a3;
+}
+
+.pseudo {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-style: italic;
+    color: var(--secondaireLighter1);
+}
+
+.date {
+    margin-right: 1rem;
+}
+
+.keyword::before {
+    content: "#"
+}
+
+.keyword {
+    margin-right: .5rem;
+    margin-bottom: .3rem;
+    padding: 0 .4rem;
+    
+    border-radius: 0.4rem;
+    border: 1px solid hsl(0,0%,60%);
+    
+    text-align: center;
+    font-style: italic;
+    font-weight: 600;
+    color:  hsl(0,0%,60%);
+}

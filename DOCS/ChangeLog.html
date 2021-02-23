@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Changelogs</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body">
+        <hr>
+<h2 id="title-changelog-for-project-cours-phpauthors-denis-chanet--christophe-gourmandoutputhtml_documentcss-style_for_md_filescssself_contained-no">title: &quot;ChangeLog for project Cours-php&quot;<br>
+authors: &quot;Denis CHANET &amp; Christophe GOURMAND&quot;<br>
+output:<br>
+html_document:<br>
+css: ./style_for_md_files.css<br>
+self_contained: no</h2>
+<link rel="stylesheet" href="./style_for_md_files.css">
+<h1 id="changelogs">Changelogs</h1>
+<pre><code>(recents firsts)
+</code></pre>
+<h2 id="christophe---branch-christophe-commit-8dec2020-15h19-">CHRISTOPHE - branch christophe (commit 8dec2020 15h19 )</h2>
+<ul>
+<li>added file <code>nommage des fichiers.txt</code> . Let's remove it when done.</li>
+<li>reactivated the old navbar for now.</li>
+</ul>
+<h2 id="christophe---branch-christophe-commit-25nov2020-20h13">CHRISTOPHE - branch christophe (commit 25nov2020 20h13)</h2>
+<ul>
+<li>created a <code>navbar_top.php</code></li>
+<li>de-activated Axentix (css in <code>head.php</code> and js in <code>footer.php</code>)</li>
+<li>correction de la balise <code>&lt;/header&gt;</code> non ouverte dans <code>connexion.php</code></li>
+<li>created  <code>src/Views/common/scripts_loader.html</code> AND included in all pages files.</li>
+<li>created a <code>navbar_side.php</code> (not filled)</li>
+</ul>
+<h2 id="denis---branch-master-commit-24nov20-16h00">DENIS - branch master (commit 24nov20 16h00)</h2>
+<ul>
+<li>add UPDATE profil(speudo &amp; email)</li>
+<li>modif <code>profil.php</code> / <code>editProfil.php</code></li>
+<li>Test : Create a user, connexion, in profil(click on editer mon profil)</li>
+</ul>
+<h2 id="christophe---branch-christophe-commit-21nov20-17h52">CHRISTOPHE - branch christophe (commit 21nov20 17h52)</h2>
+<ul>
+<li>corrected error line 66 in <code>functions.php</code></li>
+</ul>
+<h2 id="christophe---branch-christophe--commit-21nov20-14h08">CHRISTOPHE - branch christophe  (commit 21nov20 14h08)</h2>
+<ul>
+<li>added folder <code>DOCS</code> + files <code>AUTHORS.md</code> , <code>BUGS.md</code> , <code>Changelog.md</code> , <code>INSTALL.md</code> , <code>NEWS.md</code> , <code>README.md</code> , <code>TODO.md</code></li>
+<li>filled these files with informations</li>
+<li>added informations and re-organised the <code>README.md</code> file written by Denis.</li>
+<li>modifications on <code>__.sql</code> files
+<ul>
+<li>rename 2 files :  <code>aaaammdd_database_installation.sql</code></li>
+<li>move them in folder <code>./database_installation</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-16janv2021-21h53">CHRISTOPHE - branch newdesign (commit 16janv2021 21h53)</h2>
+<ul>
+<li>moved every pages files into <code>./old_pages/</code></li>
+<li>renamed folders :
+<ul>
+<li>in <code>./</code>
+<ul>
+<li><code>/src/</code>      -&gt; become <code>/old_src/</code><br>
+<code>/pages/</code>      -&gt; become <code>/old_pages/</code></li>
+</ul>
+</li>
+<li>in <code>./assets/</code>
+<ul>
+<li><code>/css/</code>             -&gt; become <code>/old_css/</code></li>
+<li><code>/js/</code>              -&gt; become <code>/old_js/</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>imported from  my <code>prepa_frontend</code> project into this project :
+<ul>
+<li>in <code>./assets/</code>    -&gt; added folders <code>js</code> and <code>scss</code></li>
+<li>in <code>./</code>           -&gt; added <code>index.php</code></li>
+<li>in <code>./</code>           -&gt; added <code>/views/</code>  folder  and his content.</li>
+</ul>
+</li>
+<li>in <code>./views/</code>       -&gt; created <code>/pages/</code></li>
+<li>in <code>./views/pages</code>  -&gt; created <code>/pages/home.php</code></li>
+<li>in <code>./views/</code>       -&gt; changed the paths in every <code>include(.....)</code></li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-17janv2021-13h00">CHRISTOPHE - branch newdesign (commit 17janv2021 13h00)</h2>
+<ul>
+<li>in <code>./views/pages</code>  -&gt; created <code>phpinfos.php</code>  (no link from navbar, you must access by URL)</li>
+<li>in <code>./views/pages</code>  -&gt; created <code>debug.php</code>  (no link from navbar, you must access by URL)
+<ul>
+<li>please use this page to visualise some variables of your choice using <code>var_dump();</code></li>
+</ul>
+</li>
+<li>in <code>./</code>             -&gt; created <code>variables_project.php</code></li>
+<li>in <code>./</code>             -&gt; created <code>debug_functions.php</code></li>
+<li>in <code>debug_functions.php</code> -&gt; created function <code>showme(&quot;chooseATitle&quot;, $variableToVarDump);</code></li>
+<li>in <code>./views/common/</code> -&gt; created <code>footer_dev_mode.php</code><br>
+(  actually working on variables <code>$pathToRootInUrl</code> and <code>$pathToRootInFiles</code>  )</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-20janv2021-09h49">CHRISTOPHE - branch newdesign (commit 20janv2021 09h49)</h2>
+<p>problem when <code>home.php</code> load <code>footer_dev_mode.php</code> :<br>
+each <code>&lt;a&gt;</code> links  load 2 times the <code>/localhost/........localhost/........</code></p>
+<ul>
+<li>in <code>./views/pages</code>    -&gt; created <code>uri_not_found.php</code></li>
+<li>in <code>./views/pages</code>    -&gt; created : <code>/test/de/chemin/pagetest.php</code>
+<ul>
+<li>contain a function <code>calculatePathToRootFolder();</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-20janv2021-12h15-">CHRISTOPHE - branch newdesign (commit 20janv2021 12h15 )</h2>
+<ul>
+<li>for all pages, added <code>$pathToRootFolder</code></li>
+<li>in <code>footer_dev_mode.php</code>  -&gt; solved all link</li>
+<li>in <code>footer_dev_mode.php</code>  -&gt; created a <code>&lt;link&gt;</code> tag to make it look better</li>
+<li>integrated <code>footer_dev_mode.php</code>  in all web pages of the project.</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-24janv2021-00h13-">CHRISTOPHE - branch newdesign (commit 24janv2021 00h13 )</h2>
+<ul>
+<li>in <code>./views/pages/</code>  -&gt; created : <code>article_all.php</code></li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-24janv2021-02h14-">CHRISTOPHE - branch newdesign (commit 24janv2021 02h14 )</h2>
+<ul>
+<li>in <code>article_all.php</code> -&gt; created <code>aside</code> bar and articles (bootstrap adjustment not finished yet)</li>
+</ul>
+<h2 id="denis---branch-newdesign-commit-25janv2021-23h14-">DENIS - branch newdesign (commit 25janv2021 23h14 )</h2>
+<ul>
+<li>created -&gt; newdesign <code>session_login</code></li>
+<li>created -&gt; newdesign <code>session_logout</code></li>
+<li>created -&gt; newdesign <code>session_register</code></li>
+<li>created -&gt; newdesign <code>session.php</code> (page msg success auth)</li>
+<li>created -&gt; newdesign <code>recover_password.php</code> (page récupération de mot de passe)</li>
+<li>created -&gt; newdesign <code>redirect_mailto.php</code> (page tunnel)</li>
+<li>created -&gt; newdesign <code>profil.php</code> (page designed)</li>
+<li>created -&gt; newdesign <code>contact.php</code> (form contact)</li>
+<li>created -&gt; newdesign <code>contact_post.php</code> (traitement du form contact)</li>
+<li>created -&gt; newdesign <code>article_all.php</code> (page de tout les articles)</li>
+<li>modified -&gt; newdesign <code>article_read.php</code> (page article)</li>
+<li>modified -&gt; newdesign <code>termofservice.php</code></li>
+<li>modified -&gt; newdesign <code>privacy.php</code></li>
+<li>modified -&gt; newdesign <code>article_read.php</code> (page article)</li>
+<li>modified -&gt; newdesign folder <code>team</code> &gt; page <code>team.php</code> : (GOAL : introduction + to hide portfolio)</li>
+</ul>
+<h2 id="denis---branch-newdesign-commit-26janv2021-10h30-">DENIS - branch newdesign (commit 26janv2021 10h30 )</h2>
+<ul>
+<li>in article_all.php -&gt; created aside</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-26janv2021-15h42-">CHRISTOPHE - branch newdesign (commit 26janv2021 15h42 )</h2>
+<ul>
+<li>in <code>./database/installation</code>  -&gt; created <code>sql_connect_and_create_database.md</code> containing instructions to connect and re-create the database.</li>
+<li>in <code>DOCS/ChangeLog.md</code> (this actual file)
+<ul>
+<li>-&gt; formatted to a more conventional MarkDown format +</li>
+<li>-&gt; added backtilts arround paths and filename for better readability.</li>
+</ul>
+</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-26janv2021-17h59-">CHRISTOPHE - branch newdesign (commit 26janv2021 17h59 )</h2>
+<ul>
+<li>in <code>home.php</code> remove the <code>@</code> before <code>$theme</code></li>
+<li>in <code>config/functions.php</code>
+<ul>
+<li>-&gt; added <code>$pathToRootFolder</code> at file beginning.</li>
+<li>-&gt; for every <code>require</code>, I used <code>$pathToRootFolder</code>.</li>
+</ul>
+</li>
+<li>in <code>config/connect.php</code> -&gt; corrected $pathToRootFolder : should be <code>../</code> and not <code>../../</code></li>
+<li>added <code>$pathToRootFolder</code> in every files in <code>/config/</code></li>
+<li>in <code>home.php</code> : loaded <code>$articles</code> using its function.</li>
+<li>in <code>home.php</code> : changed the loop <code>for</code> into a <code>foreach</code> to load <code>$article</code> each iteration.</li>
+<li>NOTICE BUG : articles in array <code>$articles</code> are loaded in reverse-id :
+<ul>
+<li><code>1</code>:id_4 <code>2</code>:id_3 <code>3</code>:id_4 <code>4</code>:id_1</li>
+<li>FIXED : in <code>config/functions.php</code> &gt; <code>getArticles</code> &gt; changed <code>DESC</code> by <code>ASC</code> .</li>
+</ul>
+</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-26janv2021-18h38-">CHRISTOPHE - branch newdesign (commit 26janv2021 18h38 )</h2>
+<ul>
+<li>fixed Denis's idea of using a $alert :
+<ul>
+<li>created the file <code>views/common/alertMessageIfExist.php</code> containing a html/bootstrap alert.</li>
+<li>in every pages, added an include of the pre-cited file.</li>
+</ul>
+</li>
+<li>in <code>session_login.php</code> , the bootstrap class <code>container-fluid</code> had a <code>container</code> directly inside, which i deleted.</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-29janv2021-14h47-">CHRISTOPHE - branch newdesign (commit 29janv2021 14h47 )</h2>
+<ul>
+<li>for <code>footer_dev_mode.php</code> moved css rules in a file <code>_footerDevMode.scss</code> (imported in <code>mainStyle.css</code>)</li>
+<li>reactivated <code>footer_dev_mode.php</code> in all pages (temporarly)</li>
+<li>in <code>mainStyle.scss</code> : turned off the import of <code>themeClair</code> and <code>themeSombre</code></li>
+<li>in <code>footer_dev_mode.php</code> : currently trying to get the file list in <code>/pages/</code>  (NOT FINISHED)</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-29janv-23h30-">CHRISTOPHE - branch newdesign (commit 29janv 23h30 )</h2>
+<ul>
+<li><code>changelogdenis.md</code> : file renamed + integrated in <code>ChangeLog.md</code>.</li>
+<li>created <code>DOCS/style_for_md_files.css</code>.</li>
+<li>in <code>ChangeLog.md</code> -&gt; added link to stylesheet.</li>
+<li>in <code>home.php</code> -&gt; fixed the link loading <code>autoload.php</code></li>
+<li>in <code>navbar.php</code> -&gt; reorganized the <code>echo</code> containing <code>buttons</code> (to improve readability and edit easier)</li>
+<li>in <code>session_register.php</code> -&gt; changed bootstrap layout for elements of the form.</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-29to30-janv-03h16-">CHRISTOPHE - branch newdesign (commit 29to30 janv 03h16 )</h2>
+<ul>
+<li>create a folder <code>/pages2/</code> to restart all pages, in front-end only.</li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>home.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>session_register.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>session_login.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>session_logout.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>article_all.php</code></li>
+<li>in <code>/pages2/</code>  -&gt;  recreated pages <code>article_read.php</code></li>
+<li>in <code>scss/modules/</code>  -&gt; created <code>_avatar.scss</code></li>
+<li>in <code>scss/modules/</code>  -&gt; created <code>_comment.scss</code></li>
+<li>in <code>/pages2/</code>  -&gt; created <code>user_board.php</code></li>
+<li>in <code>views/pages/common/</code>  -&gt; created <code>sidebar_user.php</code>  (used in <code>user_board.php</code>)</li>
+<li>created <code>views/common/navbar_part_notConnected.php</code>
+<ul>
+<li>AND placed 'inscription' and 'connection' buttons inside.</li>
+<li>AND in <code>navbar.php</code> -&gt;  replaced the <code>echo</code>  by an include( ... ) for the buttons if not connected.</li>
+</ul>
+</li>
+<li>created <code>views/common/navbar_part_profil.php</code></li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-03-fev-23h59-">CHRISTOPHE - branch newdesign (commit 03 fev 23h59 )</h2>
+<p>integration of my new 'realgrid' system:<br>
+classes <code>grid-{nbcol}</code>  (nbcol can be 1 to 6)<br>
+classes <code>grid-{breakpoint}-{nbcol}</code>  (nbcol can be 1 to 6) and (breakpoint can be sm,md,lg,xl)<br>
+classes <code>vline{X}to{Y}</code> where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)<br>
+classes <code>vline-{breakpoint}-{X}to{Y}</code> where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)</p>
+<ul>
+<li>in <code>/scss/custom/utilities/</code>  -&gt; created <code>_realgrid.scss</code></li>
+<li>in <code>views/tests/</code>     -&gt; created files <code>test-grid-1</code> <code>-2</code> <code>-3</code> <code>-1.2</code> <code>.php</code> (will be removed soon)</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-04-fev-00h24-">CHRISTOPHE - branch newdesign (commit 04 fev 00h24 )</h2>
+<ul>
+<li>corrections in <code>views/tests/</code>  : <code>test-grid-1</code> <code>-2</code> <code>-3</code> <code>-1.2</code> <code>.php</code></li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-04-fev-00h48-">CHRISTOPHE - branch newdesign (commit 04 fev 00h48 )</h2>
+<ul>
+<li>classe <code>vline{X}to{Y}</code>  -&gt; renamed <code>vline-{X}to{Y}</code>  with a '-' after 'vlines'</li>
+<li>renamed files in <code>views/tests/</code> :
+<ul>
+<li><code>test-grid-divs.php</code></li>
+<li><code>test-grid-form-better.php</code></li>
+<li><code>test-grid-form.php</code></li>
+<li><code>test-grid-images.php</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-04-fev-01h29-">CHRISTOPHE - branch newdesign (commit 04 fev 01h29 )</h2>
+<ul>
+<li>added media querie for class <code>vline-{breakpoint}-{X}to{Y}</code> (forgotten before :p )</li>
+<li>in <code>/custom/utilities/_realgrid.scss</code> -&gt; created classes <code>grid-{breakpoint}-Xcol</code> where X can be 1 to 6.</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-04-fev-01h49-">CHRISTOPHE - branch newdesign (commit 04 fev 01h49 )</h2>
+<ul>
+<li>improve my example in <code>views/test/test-grid-images.php</code> . please try to resize the browser, then check how i did.</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-1516-fev-01h04-">CHRISTOPHE - branch newdesign (commit 15&gt;16 fev 01h04 )</h2>
+<p>about the links colors:</p>
+<ul>
+<li>CSS : changed the way <code>&lt;a&gt;</code> tags are colored (removed inherit for every link, and added specific color for each link in each classes of the website.</li>
+<li>changed the button &quot;S'inscrire&quot; in all pages (a button contained a link, not it's directly a link).</li>
+<li>created <code>assets/scss/custom/modules/_dropdownProfil.scss</code>
+<ul>
+<li>recreated classes for the <code>navbar_profil_Dropdown</code> because Bootstrap colors for background and links on hover are not adapted to our theme.</li>
+</ul>
+</li>
+</ul>
+<p>about the header:</p>
+<ul>
+<li>created <code>views/common/header.php</code> and placed site name and navbar inside.</li>
+<li>included the <code>header.php</code> in:
+<ul>
+<li><code>views/common/home.php</code></li>
+<li><code>views/common/article_all.php</code></li>
+<li><code>views/common/article_read.php</code></li>
+<li><code>views/common/article_read.php</code></li>
+<li><code>views/common/session_login.php</code></li>
+<li><code>views/common/session_logout.php</code></li>
+<li><code>views/common/session_register.php</code></li>
+<li><code>views/common/user_board.php</code></li>
+</ul>
+</li>
+</ul>
+<p>other:</p>
+<ul>
+<li>in <code>views/common/footer_dev_mode.php</code> -&gt; corrected <code>li</code> and <code>a</code> (were nested reversely)</li>
+<li>created <code>assets/scss/custom/utilities/_variables.scss</code></li>
+</ul>
+<p>about widgets : in <code>views/pages2/user_board.php</code>:</p>
+<ul>
+<li>created <code>assets/scss/custom/modules/_widgetTextDigit.scss</code></li>
+<li>in <code>user_board.php</code> -&gt; in section &quot;tableau de bord&quot; : added 3 widgets &quot;nombre de ...&quot;</li>
+</ul>
+<h2 id="christophe---branch-newdesign-commit-1516-fev-01h33-">CHRISTOPHE - branch newdesign (commit 15&gt;16 fev 01h33 )</h2>
+<ul>
+<li>created <code>assets/scss/custom/modules/_sidebar.scss</code></li>
+<li>modified <code>views/common/sidebar_user.php</code> to match classes of <code>_sidebar.scss</code></li>
+</ul>
+
+    </body>
+    </html>
