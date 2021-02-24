@@ -184,7 +184,7 @@ problem when `home.php` load `footer_dev_mode.php` :
 
 ## CHRISTOPHE - branch newdesign (commit 03 fev 23h59 )
 
-integration of my new 'realgrid' system:  
+integration of my new 'realgrid' system:
 classes `grid-{nbcol}`  (nbcol can be 1 to 6)
 classes `grid-{breakpoint}-{nbcol}`  (nbcol can be 1 to 6) and (breakpoint can be sm,md,lg,xl)
 classes `vline{X}to{Y}` where X and Y can be 1 to 7 (cause 6 columns, so 7 vertical lines)
@@ -251,3 +251,9 @@ about widgets : in `views/pages2/user_board.php`:
 
 - created `assets/scss/custom/modules/_sidebar.scss`
 - modified `views/common/sidebar_user.php` to match classes of `_sidebar.scss`
+
+## CHRISTOPHE - branch newdesign (commit ??????????? )
+
+- in `user_board.php` and `_widhetTextDigit.scss` -> the widget is now displayed better under/above 'md' breakpoint.
+- created `assets/scss/custom/modules/_widgetTable.scss`
+- in `views/pages2/user_board.php` -> created 2 tables for articles board.

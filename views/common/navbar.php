@@ -72,7 +72,7 @@
 
             // FOR NOW ACTIVATE THE PART YOU WANT TO SEE :
                 // if not connected :
-                    # include($pathToRootFolder."views/common/navbar_part_notConnected.php");
+                    // include($pathToRootFolder."views/common/navbar_part_notConnected.php");
                 // if connected :
                     include($pathToRootFolder."views/common/navbar_part_profil.php");
                 
