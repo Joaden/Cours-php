@@ -1,0 +1,64 @@
+.widgetTable_container
+{
+    overflow-x: scroll;
+
+    .widgetTable
+    {
+        min-width: 700px;
+        border: 1px solid var(--secondaire);
+
+        .widgetTable-head
+        {
+            background-color: var(--secondaire);
+            color: white;
+    
+            .widgetTable-head-row
+            {
+                .widgetTable-head-cell
+                {
+                    // border-left: 1px solid white;
+                    padding: .5rem 1rem;
+                    
+                    // every header cell except first one:
+                    &~.widgetTable-head-cell
+                    {
+                        border-left: 1px solid white;
+                    }
+                }
+
+            }
+            
+        }
+        .widgetTable-body
+        {
+            .widgetTable-body-row
+            {
+                .widgetTable-body-cell
+                {
+                    padding: .5rem 1rem;
+                    text-align: center;
+                    
+                    &.cell_article
+                    {
+                        text-align: left;
+                        font-size:1.2rem;
+                        color: var(--dominante);
+                    }
+                    &.cell_edit
+                    {
+                        font-size:1.2rem;
+                        color: var(--dominante);
+                    }
+                    &.cell_status-validated
+                    {
+                        color: $green;
+                    }
+                    &.cell_status-pending
+                    {
+                        color: var(--dominante);
+                    }
+                }
+            }
+        }
+    }
+}

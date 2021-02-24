@@ -3,7 +3,7 @@
     margin: 1px 0 0 0;
     padding: 0;
 
-    background-color: var(--dominante);
+    background-color: var(--secondaire);
 
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
     }
 
     .sidebar-item--status {
-        @extend .sidebar-item--status;
+        @extend .sidebar-item;
         background-color: #00b6c3;
 
         &:hover {
