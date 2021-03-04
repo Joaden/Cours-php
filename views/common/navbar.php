@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a class="nav-link text-center" href="contact.php">
+                <a class="nav-link text-center" href="contact_writeMessage.php">
                     <!-- <i class="fas fa-envelope"></i> -->
                     Contact
                 </a>
@@ -47,7 +47,10 @@
             -->
 
         <div class="container-fluid d-flex flex-column justify-content-center flex-md-row justify-content-md-end">
-        <?php # if(isset($_SESSION['id'])) echo $_SESSION["pseudo"]; ?>
+        <?php  if(isset($_SESSION['id'])) 
+            // echo $_SESSION["pseudo"]; 
+            // echo $varsessionid;
+        ?>
             <!-- <div>  </div> -->
 
         <?php
@@ -71,12 +74,25 @@
             */
 
             // FOR NOW ACTIVATE THE PART YOU WANT TO SEE :
+                // if  connected :
+                    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+                        $varsessionid = $_SESSION['id'];
+                        echo $varsessionid." ";
+                        echo $userInfo['pseudo']." ";
+                        echo "User connecté"." ";
+                        include($pathToRootFolder."views/common/navbar_part_profil.php");
+
+                    }
+                        // include($pathToRootFolder."views/common/navbar_part_notConnected.php");
                 // if not connected :
-                    // include($pathToRootFolder."views/common/navbar_part_notConnected.php");
-                // if connected :
-                    include($pathToRootFolder."views/common/navbar_part_profil.php");
+                    else {
+                        echo "User non connecté";
+                        include($pathToRootFolder."views/common/navbar_part_notConnected.php");
+
+                    }
+                    
+                ?>
                 
-        ?>
         </div>
     </div>
 </nav>

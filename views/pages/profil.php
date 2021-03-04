@@ -1,24 +1,21 @@
 <?php
 session_start();
 
+$_SESSION["varsessionprofiltest"]= "Session profil test OK";
 $pathToRootFolder = "../../";
 $PAGE_TITLE = "Tableau de bord";
 
-require_once($pathToRootFolder.'vendor/autoload.php');
+//require_once($pathToRootFolder.'vendor/autoload.php');
 
+// Connection
 require_once($pathToRootFolder.'config/connect.php');
 
 require_once($pathToRootFolder.'config/functions.php');
 
-if (isset($_GET['id']) and $_GET['id'] > 0) {
-    $getId = intval($_GET['id']);
-    $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    $reqUser->execute(array($getId));
-    $userInfo = $reqUser->fetch();
-    
-}
+// check if user is connected
+require($pathToRootFolder."views/common/checkSessionUser.php");
 
-echo $_SESSION["pseudo"];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,11 +51,8 @@ echo $_SESSION["pseudo"];
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
+    
 
 
     <div class="container-fluid">
@@ -74,7 +68,7 @@ echo $_SESSION["pseudo"];
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
                     <h3>
-                        <?php echo $_SESSION["varsessiontest"]; ?>
+                        <?php echo $_SESSION["varsessionprofiltest"]; ?>
                         
                     </h3>
                     <?php if(isset($_SESSION['id'])) echo "<div class=\"text-danger\"><a href=\"session-logout.php\">Déconnexion</a></div>";

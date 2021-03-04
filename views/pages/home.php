@@ -9,18 +9,21 @@ session_start();
     
 
     $_SESSION["varsessiontest"] = "Session home active OK";
+    if (isset($_SESSION['id'])){
+        $varsessionid = $_SESSION['id'];
+    };
 
     
     //Cookie de test pour le theme
-    @$theme=$_GET["theme"];
-    if($theme=="clair" || $theme=="sombre"){
-        setcookie("theme",$theme,time()+3600);
-        header("location: home.php");
-    }
+    // @$theme=$_GET["theme"];
+    // if($theme=="clair" || $theme=="sombre"){
+    //     setcookie("theme",$theme,time()+3600);
+    //     header("location: home.php");
+    // }
     // print_r($_COOKIE);
     // showInConsole($_COOKIE);
 
-    $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
+    //$styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 
     require_once($pathToRootFolder.'vendor/autoload.php');
 
@@ -29,17 +32,19 @@ session_start();
     require_once($pathToRootFolder.'config/functions.php');
 
     // retrieves the user's ID if he is logged in
-    if(isset($_GET['id']) AND $_GET['id'] > 0)
-    {
-        $getId = intval($_GET['id']);
-        $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-        $reqUser->execute(array($getId));
-        $userInfo = $reqUser->fetch();
-    }
+    // if(isset($_GET['id']) AND $_GET['id'] > 0)
+    require($pathToRootFolder."views/common/checkSessionUser.php");
+    // if(isset($_SESSION['id']))
+    // {
+    //     $getId = intval($_SESSION['id']);
+    //     $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+    //     $reqUser->execute(array($getId));
+    //     $userInfo = $reqUser->fetch();
+    // }
     
 
     $articles = getArticles();
-                                        showInConsole($articles); // debug
+    showInConsole($articles); // debug
 
 ?>
 

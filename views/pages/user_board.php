@@ -6,6 +6,17 @@ session_start();
 
     $_SESSION["varsessionuserboard"] = "Session user_board OK";
 
+    include($pathToRootFolder."debug_functions.php");
+
+    // Connection
+      //require_once('vendor/autoload.php');
+
+      require_once($pathToRootFolder.'config/connect.php');
+
+      require_once($pathToRootFolder.'config/functions.php');
+      
+    // check if user is connected
+    require($pathToRootFolder."views/common/checkSessionUser.php");
 ?>
 
 <!DOCTYPE html>

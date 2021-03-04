@@ -7,12 +7,12 @@
             </div>
         </a>
         <div class="dropdown-menu dropdownProfil" aria-labelledby="navbar_profil_Dropdown">
-            <a class="dropdown-item" href="#">Profil</a>
+            <a class="dropdown-item" href="profil.php">Profil</a>
             <a class="dropdown-item" href="#">Mes articles</a>
             <a class="dropdown-item" href="#">Paramètres</a>
-            <a class="dropdown-item" href="#">Tableau de bords</a>
+            <a class="dropdown-item" href="user_board.php">Tableau de bords</a>
             <!-- <div class="dropdown-divider"></div> -->
-            <a class="dropdown-item" href="#">Déconnexion <i class="fas fa-sign-out-alt"></i></a>
+            <a class="dropdown-item" href="session_logout.php">Déconnexion <i class="fas fa-sign-out-alt"></i></a>
         </div>
     </li>
 </ul>

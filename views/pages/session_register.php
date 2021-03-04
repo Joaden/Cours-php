@@ -23,6 +23,7 @@ if(isset($_POST['formregister']))
             $pseudo = htmlspecialchars($_POST['pseudo']);
             $password = htmlspecialchars($_POST['mdp']);
             $password2 = htmlspecialchars($_POST['mdp2']);
+            $phrase = htmlspecialchars($_POST['phrase']);
             $captcha = htmlspecialchars($_POST['captcha']);
             
             // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
@@ -60,12 +61,12 @@ if(isset($_POST['formregister']))
                                         // hash de mdp , a voir si il y a plus sûr comme function
                                         $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
         
-                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password) VALUE(?, ?, ?, ?)");
+                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
                                         // On insère les $*** dans la requête
-                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp));
-                                        $erreur = "Votre compte à bien été créé ! <a href=\"session-login.php\">Me Connecter</a>";
-                                        // $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        // header('Location: index.php');
+                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
+                                        $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
+                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
+                                        header('Location: session_login.php.php');
                                     }
                                     else
                                     {

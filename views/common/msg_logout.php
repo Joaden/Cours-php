@@ -1,7 +1,7 @@
 <?php 
     session_start();
 
-    $_SESSION["varsessiontest"]= "Session destroy";
+    $_SESSION["varsessiondestroytest"]= "Session Destroy";
     $pathToRootFolder = "../../";
     //require_once('vendor/autoload.php');
 
@@ -16,12 +16,9 @@
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
-
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
     
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
+
     <div class="container">
         <?php 
             // define a $alertMessage="..message.." if necessary
