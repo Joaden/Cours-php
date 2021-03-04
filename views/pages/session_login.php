@@ -39,7 +39,8 @@ if(isset($_POST['formconnexion']))
                 $_SESSION['pseudo'] = $result['pseudo'];
                 $_SESSION['email'] = $result['email'];
                 $_SESSION['autoriser']="oui";
-                header("Location: session.php?id=".$_SESSION['id']);
+                // header("Location: session.php?id=".$_SESSION['id']);
+                header("Location: session.php");
             }
             else
             {

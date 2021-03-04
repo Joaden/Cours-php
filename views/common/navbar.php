@@ -47,7 +47,7 @@
             -->
 
         <div class="container-fluid d-flex flex-column justify-content-center flex-md-row justify-content-md-end">
-        <?php  if(isset($_SESSION['id'])) 
+        <?php  #if(isset($_SESSION['id'])) 
             // echo $_SESSION["pseudo"]; 
             // echo $varsessionid;
         ?>

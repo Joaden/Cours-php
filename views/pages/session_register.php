@@ -66,7 +66,7 @@ if(isset($_POST['formregister']))
                                         $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
                                         $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
                                         $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        header('Location: session_login.php.php');
+                                        header('Location: session_login.php');
                                     }
                                     else
                                     {
