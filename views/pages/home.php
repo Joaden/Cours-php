@@ -1,13 +1,16 @@
 <?php 
+session_start();
+
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "BlogPHP - home";
     
     include($pathToRootFolder."debug_functions.php");
 
-    session_start();
+    
 
-    $_SESSION["varsessiontest"] = "Session de test OK";
+    $_SESSION["varsessiontest"] = "Session home active OK";
 
+    
     //Cookie de test pour le theme
     @$theme=$_GET["theme"];
     if($theme=="clair" || $theme=="sombre"){
@@ -49,11 +52,7 @@
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-    
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
 
     <!-- ======== CARROUSEL ========= -->
     <div id="carouselOnHomepage" class="carousel slide" data-ride="carousel">
@@ -92,6 +91,8 @@
         <section class="section">
             <div class="section-head">
                 <h2 class="section-head-title">Bienvenue</h2>
+                <h4><?php echo $_SESSION["varsessiontest"]; ?></h4>
+
             </div>
 
             <p class="section-text">Vous voilà arrivés sur notre Blog ! Profitez, écrivez, partagez, et réagissez, c'est pour ça que ce site existe.</p>

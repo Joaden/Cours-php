@@ -29,14 +29,14 @@
                     Contact
                 </a>
             </li>
-
+<!--
             <li class="nav-item d-flex align-items-center">
                 <a class="nav-link text-center" href="?theme=clair">Clair</a>
             </li>
             <li class="nav-item d-flex align-items-center">
                 <a class="nav-link text-center" href="?theme=sombre">Sombre</a>
             </li>
-
+-->
         </ul>
 
         <!--

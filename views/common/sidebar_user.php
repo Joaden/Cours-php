@@ -14,4 +14,9 @@
             Écrire un article
         </a>
     </li>
+    <li class="sidebar-item">
+        <a class="sidebar-link" href="contact.php">
+            <?php echo $_SESSION["varsessionuserboard"]; ?>
+        </a>
+    </li>
 </ul>
