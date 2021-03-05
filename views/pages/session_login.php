@@ -76,8 +76,14 @@ if(isset($_POST['formconnexion']))
     <body>
          <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
+        <h1 class="brand-logo--big">
+        <a class="brand-logo_link" href="home.php">BLOG</a>
+        </h1>
 
-        <?php include($pathToRootFolder."views/common/header.php"); ?>
+        <!-- ======== NAVBAR ========= -->
+        <?php include($pathToRootFolder."views/common/navbar_false.php"); ?>
+        <!-- navbar temporaire pour eviter un bug qui s'aafiche dans les logs lors de la connection ;) idem pour logout -->
+        <?php //include($pathToRootFolder."views/common/header.php"); ?>
      
 
         <div class="container">

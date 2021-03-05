@@ -22,7 +22,14 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
     <body>
         <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
-        <?php include($pathToRootFolder."views/common/header.php"); ?>
+        <h1 class="brand-logo--big">
+            <a class="brand-logo_link" href="home.php">BLOG</a>
+        </h1>
+
+        <!-- ======== NAVBAR ========= -->
+        <?php include($pathToRootFolder."views/common/navbar_false.php"); ?>
+
+
         <div class="container">
             <?php 
                 // define a $alertMessage="..message.." if necessary
@@ -33,9 +40,10 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
     
             <h1>Page confidentielle de Connexion</h1>
             <h2>Félicitations, vous êtes bien connecté !</h2>
+            <h3>Vous allez être rediriger vers la page d'accueil.</h3>
             <h4><a href="session_logout.php">Se déconnecter</a></h4>
             
-            <?php header("refresh:3;url=profil.php");?> 
+            <?php header("refresh:4;url=home.php");?> 
             <br>
             <br>
         </div>

@@ -4,11 +4,22 @@ session_start();
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "BlogPHP - All Articles";
 
-    //Appel de function avec la connexion à la bdd
-    // require_once($pathToRootFolder.'config/functions.php');
-    // $articles = getArticles();
+    $_SESSION["varsessionAllArticlestest"] = "Session AllArticles active OK";
 
-    
+    //Appel de function avec la connexion à la bdd    
+
+    //require_once($pathToRootFolder.'vendor/autoload.php');
+
+    require_once($pathToRootFolder.'config/connect.php');
+
+    require_once($pathToRootFolder.'config/functions.php');
+    // Get all articles
+    $articles = getArticles();
+    //showInConsole($articles); // debug
+
+    // retrieves the user's ID if he is logged in
+    // if(isset($_GET['id']) AND $_GET['id'] > 0)
+    require($pathToRootFolder."views/common/checkSessionUser.php");
     
 ?>
 
@@ -21,10 +32,9 @@ session_start();
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
+   <?php include($pathToRootFolder."views/common/header.php"); ?>
 
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+    <!-- ================ DEBUT LOOP ARTICLES  ================ -->
     <div class="container-fluid">
         <?php 
             // define a $alertMessage="..message.." if necessary
@@ -37,6 +47,9 @@ session_start();
 
                     <div class="section-head mt-5">
                         <h2 class="section-head-title">Articles populaires</h2>
+                        <h3>
+                        <?php echo $_SESSION["varsessionAllArticlestest"]; ?>
+                    </h3>
                     </div>
 
                     <div class="container section-content">

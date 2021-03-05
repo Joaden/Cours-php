@@ -2,7 +2,14 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbar_profil_Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="d-flex flex-column text-white">
-                <p class="h4 mb-0">Pseudo</p>
+                <p class="h4 mb-0">
+                    <?php 
+                        if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+                        $varsessionid = $_SESSION['id'];
+                        echo $userInfo['pseudo'];
+                        }  
+                    ?>
+                </p>
                 <small>[statut: Writer]</small>
             </div>
         </a>
