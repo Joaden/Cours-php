@@ -11,8 +11,10 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
     
         $id = strip_tags($id);
     
+        require_once($pathToRootFolder.'config/connect.php');
         require_once($pathToRootFolder.'config/functions.php');
-    
+        require($pathToRootFolder."views/common/checkSessionUser.php");
+
         if (!empty($_POST)) {
             extract($_POST);
             $errors = array();
@@ -56,11 +58,8 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
 
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-    <div class="container-fluid">
         <?php 
             // define a $alertMessage="..message.." if necessary
             include($pathToRootFolder."views/common/alertMessageIfExist.php");
@@ -72,7 +71,7 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
                         <p class="alerte"><?php echo $alerte; ?></p>
                     <?php endif; ?>
                     <div class="section-head mt-5">
-                        <h2 class="section-head-title">Article</h2>
+                        <h2 class="section-head-title"><?= $article->title; ?></h2>
                     </div>
                     <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
                         <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">
@@ -82,8 +81,8 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
             
                         </a>
                         <div class="blogArticle-content">
-                            <h2 class="blogArticle-title">Lorem ipsum dolor sit amet</h2>
-                            <p class="blogArticle-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rem eum fuga voluptatibus velit excepturi aliquid quia minima dolor cum? Dolorem repellat, dicta rerum doloremque non omnis?</p>
+                            <h2 class="blogArticle-title"><?= $article->title; ?></h2>
+                            <p class="blogArticle-text"><?= $article->content; ?></p>
                             <div class="blogArticle-footer">
                                 <!-- v1 -->
                                 
@@ -94,7 +93,7 @@ if (!isset($_GET['id']) or !is_numeric($_GET['id']))
                                     </p>
                                     <p class="col-lg-6 align-self-baseline text-lg-right">
                                         <span class="abrev">date</span>
-                                        <span class="date">xx/xx/xxxx</span>
+                                        <span class="date"><?= $article->date; ?></span>
                                         <span class="hour">..h..</span>
                                     </p>
                                 </div>

@@ -6,7 +6,7 @@ function getArticles()
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT id, title, date FROM articles ORDER BY id ASC');
+    $req = $bdd->prepare('SELECT id, title, content, date FROM articles ORDER BY id ASC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
