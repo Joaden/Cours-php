@@ -32,7 +32,12 @@
         <p class="text-center">Vous allez être redirigé vers la page d'acceuil.</p>
     </div>
 
-    <?php header("refresh:4;url=home.php");?>
+    <?php header("refresh:5;url=home.php");
+        echo 'Sinon cliquez içi <a href="home.php">Here</a>.';
+    ?>
+    <?php //sleep(5);?>
+
+    <?php //header("Location: home.php");?>
     <br>
     <br>
     <br>

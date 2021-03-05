@@ -20,6 +20,7 @@
     // destruction de tab session
     unset($_SESSION);
 
-    header("Location: home.php");
+    header("Location: msg_logout.php");
+    //header("Location: home.php");
 
 ?>
