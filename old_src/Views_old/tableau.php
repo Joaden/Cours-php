@@ -39,7 +39,7 @@ $produits= [$basket,$basket2,$sneaker];
 
         }
         .green{
-            background: #green;
+            /* background: #green; */
         }
     </style>
 </head>

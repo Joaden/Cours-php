@@ -23,6 +23,8 @@ if(isset($_POST['formregister']))
             $pseudo = htmlspecialchars($_POST['pseudo']);
             $password = htmlspecialchars($_POST['mdp']);
             $password2 = htmlspecialchars($_POST['mdp2']);
+            $phrase = htmlspecialchars($_POST['phrase']);
+            $avatar = htmlspecialchars($_POST['avatar']);
             $captcha = htmlspecialchars($_POST['captcha']);
             
             // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
@@ -60,12 +62,12 @@ if(isset($_POST['formregister']))
                                         // hash de mdp , a voir si il y a plus sûr comme function
                                         $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
         
-                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password) VALUE(?, ?, ?, ?)");
+                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
                                         // On insère les $*** dans la requête
-                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp));
-                                        $erreur = "Votre compte à bien été créé ! <a href=\"session-login.php\">Me Connecter</a>";
-                                        // $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        // header('Location: index.php');
+                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
+                                        $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
+                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
+                                        header('Location: session_login.php');
                                     }
                                     else
                                     {
@@ -126,34 +128,18 @@ if(isset($_POST['formregister']))
         }
     </style>
 
-    <body>
-    <!-- ================ DEBUT HTML  ================ -->
+<body>
+        <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-        
+        <?php include($pathToRootFolder."views/common/header.php"); ?>
+            
         <div class="container"> <!-- 1er container -->
             <h1 class="text-dark text-center mt-3"><?php echo $PAGE_TITLE ?></h1>
             <h3></h3><!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
 
-            <?php 
-                // define a $alertMessage="..message.." if necessary
-                include($pathToRootFolder."views/common/alertMessageIfExist.php");
-            ?>
-
             <br>
             <br>
 
-            <p style="color: red;" id="erreur">
-                <?php 
-                    if(isset($erreur))
-                    {
-                        echo $erreur;
-                    }
-                ?>
-            </p>
             <form method="POST" action="">
 
                 <h2 class="text-secondary">Visible par vous uniquement</h2>
@@ -241,10 +227,7 @@ if(isset($_POST['formregister']))
                         <input type="text" class="form-control" id="captcha" name="captcha" placeholder="14 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
                     </div>
                 </div>
-                <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
-                    <label for="antibot"></label>
-                    <input type="text"  name="antibot" placeholder="" value="">
-                </div>
+
                 <div class="row">
                     <div class="col text-center">
                         <button type="submit" name="formregister" class="btn btn-primary">Je m'inscris</button>
@@ -261,7 +244,6 @@ if(isset($_POST['formregister']))
                     </a>
                 </div>
             </div>
-
             <p style="color: red;" id="erreur">
                 <?php 
                     if(isset($erreur))
@@ -276,7 +258,8 @@ if(isset($_POST['formregister']))
         </div> <!-- 1er container -->
         
         <?php 
-            #include($pathToRootFolder."views/common/footer.php");
+            include($pathToRootFolder."views/common/footer_dev_mode.php");
+
             #include($pathToRootFolder."views/pages/common/scripts_loader.html");
             include($pathToRootFolder."views/common/load_js_scripts.php");
         ?>

@@ -1,24 +1,21 @@
 <?php
 session_start();
 
+$_SESSION["varsessionprofiltest"]= "Session profil test OK";
 $pathToRootFolder = "../../";
-$PAGE_TITLE = "Tableau de bord";
+$PAGE_TITLE = "Mon profil";
 
-require_once($pathToRootFolder.'vendor/autoload.php');
+//require_once($pathToRootFolder.'vendor/autoload.php');
 
+// Connection
 require_once($pathToRootFolder.'config/connect.php');
 
 require_once($pathToRootFolder.'config/functions.php');
 
-if (isset($_GET['id']) and $_GET['id'] > 0) {
-    $getId = intval($_GET['id']);
-    $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    $reqUser->execute(array($getId));
-    $userInfo = $reqUser->fetch();
-    
-}
+// check if user is connected
+require($pathToRootFolder."views/common/checkSessionUser.php");
 
-echo $_SESSION["pseudo"];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,11 +51,8 @@ echo $_SESSION["pseudo"];
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
+    
 
 
     <div class="container-fluid">
@@ -73,21 +67,18 @@ echo $_SESSION["pseudo"];
                 <div class="col-md-4">
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
-                    <h3>
-                        <?php echo $_SESSION["varsessiontest"]; ?>
+                    <h5>
+                        <?php echo $_SESSION["varsessionprofiltest"]; ?>
                         
-                    </h3>
-                    <?php if(isset($_SESSION['id'])) echo "<div class=\"text-danger\"><a href=\"session-logout.php\">Déconnexion</a></div>";
-                            else                       
-                                echo "<a href=\"session-login.php\">Connexion</a>"; 
-                    ?>
+                    </h5>
+                    
                     <?php
                         if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])
                         {
-                            echo $userInfo['pseudo'];
+                            //echo $userInfo['pseudo'];
                         }
                         else{
-                            echo "User non connecté";
+                            echo "";
                         }
                      ?>
                 </div>
@@ -95,44 +86,114 @@ echo $_SESSION["pseudo"];
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">nombre d'articles rédigés 12</div>
-                <div class="col-md-4"></div>
-                
-                <div class="col-md-4"></div>
-                <div class="col-md-4">nombre de likes reçus 120</div>
-                <div class="col-md-4"></div>
+            <!-- Formulaire pour modifier son profil -->
+            <form method="POST" action="">
 
-                <div class="col-md-4"></div>
-                <div class="col-md-4">nombre de warning Admin 1</div>
-                <div class="col-md-4"></div>
-            </div>
+                <h2 class="text-secondary">Visible par vous uniquement</h2>
 
-            <hr><br><hr>
+                <div class="ml-5">
+                    <div class="form-group">
+                        <label for="emailRegister"><?php if(isset($userInfo)) { echo $userInfo['name']; } ?></label>
+                        <input name="name" type="text" class="form-control" id="nameRegister" aria-describedby="nameRegister" placeholder="Modifier mon nom" value="<?php if(isset($name)) { echo $name; } ?>" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailRegister"><?php if(isset($userInfo)) { echo $userInfo['email']; } ?></label>
+                                <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="Modifier mon email" value="<?php if(isset($email)) { echo $email; } ?>" required>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="verified">
+                                    <?php if(isset($userInfo)) { echo 'Profil vérifié'; } 
+                                        if( $userInfo['is_verified'] == 0)
+                                        {
+                                           echo "<div>Votre profil n\'est pas confirmé</div>";
+                                        } 
+                                        else{
+                                            echo "<div>Profil Vérifié</div>";
+                                        }
+                                        
+                                    ?>
+                                </label>
+                                
+                            </div>
+                        </div>
 
-            <div class="row">
-                <hr>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <h1>Mes articles</h1>
+                        
+                    </div>
                 </div>
-                <div class="col-md-4"></div>
-            </div>
+                
+
+                <h2 class="mt-5 text-secondary">Visible par tout le monde</h2>
+
+                <div class="ml-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="pseudoRegister"><?php if(isset($userInfo)) { echo $userInfo['pseudo']; } ?></label>
+                                <input name="pseudo" type="text" class="form-control" id="pseudoRegister" aria-describedby="pseudoRegister" placeholder="Modifier mon pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="avatarRegister">Avatar / Photo</label>
+                                <input name="avatar" type="file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phraseRegister"><?php if(isset($userInfo)) { echo $userInfo['phrase']; } ?></label>
+                        <input name="phrase" type="text" class="form-control" id="phraseRegister" aria-describedby="phraseRegister" placeholder="Modifier la phrase" value="<?php if(isset($phrase)) { echo $phrase; } ?>" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="offset-md-3 col-md-6">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="form-group form-check">
+                    <div class="form-check pl-0 text-center">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck29" required>
+                        <label class="form-check-label" for="invalidCheck29">
+                            Accepter les conditions générales d'utilisations
+                            <!--Agree to terms and conditions-->
+                        </label>
+                        <div class="invalid-feedback">You  shall not pass!</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2 offset-sm-4 col-sm-4">
+                        <label for="captcha"></label>
+                        <input type="text" class="form-control" id="captcha" name="captcha" placeholder="14 + 1 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" name="formupdateprofil" class="btn btn-primary">Mettre à jour</button>
+                    </div>
+                </div>
+            </form>
 
             <hr>
-
-            <div class="row">
-                <hr>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <h1>Mes notes</h1>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-
-
             
+            <p style="color: red;" id="erreur">
+                <?php 
+                    if(isset($erreur))
+                    {
+                    echo $erreur;  
+                    }
+                ?>
+            </p>
+            <br>
+            <br>
+            <hr>
             <?php
             #if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
             ?>

@@ -10,8 +10,13 @@
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link" href="contact.php">
+        <a class="sidebar-link" href="article_write.php">
             Écrire un article
+        </a>
+    </li>
+    <li class="sidebar-item">
+        <a class="sidebar-link" href="#">
+            <?php echo $_SESSION["varsessionuserboard"]; ?>
         </a>
     </li>
 </ul>

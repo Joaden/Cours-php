@@ -1,23 +1,29 @@
 <?php 
+session_start();
+
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "BlogPHP - home";
     
     include($pathToRootFolder."debug_functions.php");
 
-    session_start();
+    
 
-    $_SESSION["varsessiontest"] = "Session de test OK";
+    $_SESSION["varsessiontest"] = "Session home active OK";
+    if (isset($_SESSION['id'])){
+        $varsessionid = $_SESSION['id'];
+    };
 
+    
     //Cookie de test pour le theme
-    @$theme=$_GET["theme"];
-    if($theme=="clair" || $theme=="sombre"){
-        setcookie("theme",$theme,time()+3600);
-        header("location: home.php");
-    }
+    // @$theme=$_GET["theme"];
+    // if($theme=="clair" || $theme=="sombre"){
+    //     setcookie("theme",$theme,time()+3600);
+    //     header("location: home.php");
+    // }
     // print_r($_COOKIE);
     // showInConsole($_COOKIE);
 
-    $styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
+    //$styleTheme=(empty(@$_COOKIE["theme"]))?("clair"):(@$_COOKIE["theme"]);
 
     require_once($pathToRootFolder.'vendor/autoload.php');
 
@@ -26,17 +32,19 @@
     require_once($pathToRootFolder.'config/functions.php');
 
     // retrieves the user's ID if he is logged in
-    if(isset($_GET['id']) AND $_GET['id'] > 0)
-    {
-        $getId = intval($_GET['id']);
-        $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-        $reqUser->execute(array($getId));
-        $userInfo = $reqUser->fetch();
-    }
+    // if(isset($_GET['id']) AND $_GET['id'] > 0)
+    require($pathToRootFolder."views/common/checkSessionUser.php");
+    // if(isset($_SESSION['id']))
+    // {
+    //     $getId = intval($_SESSION['id']);
+    //     $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+    //     $reqUser->execute(array($getId));
+    //     $userInfo = $reqUser->fetch();
+    // }
     
 
     $articles = getArticles();
-                                        showInConsole($articles); // debug
+    showInConsole($articles); // debug
 
 ?>
 
@@ -49,11 +57,7 @@
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-    
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
 
     <!-- ======== CARROUSEL ========= -->
     <div id="carouselOnHomepage" class="carousel slide" data-ride="carousel">
@@ -92,6 +96,8 @@
         <section class="section">
             <div class="section-head">
                 <h2 class="section-head-title">Bienvenue</h2>
+                <h4><?php echo $_SESSION["varsessiontest"]; ?></h4>
+
             </div>
 
             <p class="section-text">Vous voilà arrivés sur notre Blog ! Profitez, écrivez, partagez, et réagissez, c'est pour ça que ce site existe.</p>
@@ -119,23 +125,23 @@
                         </a>
                         <div class="blogArticle-content offset-lg-1 col-lg-6">
                             <h2 class="blogArticle-title">
-                                <a href="article.php?id=<?= $article->id ?>" class="">
+                                <a href="article_read.php?id=<?= $article->id ?>" class="">
                                     <?= $article->title; ?>
                                 </a>
                             </h2>
-                            <p class="blogArticle-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rem eum fuga voluptatibus velit excepturi aliquid quia minima dolor cum? Dolorem repellat, dicta rerum doloremque non omnis? Deleniti eaque blanditiis corporis recusandae placeat, delectus veritatis omnis at dolor neque, expedita quo nemo incidunt similique dolorum dolorem, exercitationem ratione odio quia sit est! Deserunt quisquam vitae blanditiis amet nam, accusantium cumque animi suscipit, perspiciatis quam exercitationem qui obcaecati, quos molestias beatae?</p>
+                            <p class="blogArticle-text"><?= $article->content; ?></p>
                             <div class="blogArticle-footer">
                                 <!-- v1 -->
                                 
                                 <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                     <p class="col-lg-6 align-self-baseline mb-0">
                                         <span class="abrev">par</span>
-                                        <span class="pseudo">Pseudo</span>
+                                        <span class="pseudo"><?php if(isset($article->author)){echo $article->author;}else{echo "Pseudo";} ?></span>
                                     </p>
                                     <p class="col-lg-6 align-self-baseline text-lg-right">
                                         <span class="abrev">date</span>
-                                        <span class="date">xx/xx/xxxx</span>
-                                        <span class="hour">..h..</span>
+                                        <span class="date"><?= $article->date; ?></span>
+                                        <!--<span class="hour">..h..</span>-->
                                     </p>
                                 </div>
 

@@ -13,7 +13,7 @@ CONTACT
 
 PAGES DE SESSIONS
     session_register.php                                    (publique)
-    session_connection.php                                  (publique)
+    session_login.php                                  (publique)
     session_logout.php                                      (abonné) ou (admin)
     session.php                                      (abonné) ou (admin)
     msg_logout.php                                      (abonné) ou (admin)
@@ -26,8 +26,6 @@ GESTION DES ARTICLES
 
 
 PAGES POUR USER
-    user_index.php                                          (abonné)
-        ou
     user_board.php                                          (abonné)
 
     user_modal_avatar.php                                   (abonné)
@@ -36,8 +34,6 @@ PAGES POUR USER
     recover_password.php                             (abonné)
 
 PAGES POUR ADMIN
-    admin_index.php                                         (admin)
-        ou
     admin_board.php                                         (admin)
 
     admin_manageUsers.php                                   (admin)

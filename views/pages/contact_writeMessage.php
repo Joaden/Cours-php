@@ -5,12 +5,17 @@
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "Contact ";
 
+    include($pathToRootFolder."debug_functions.php");
+
+    // Connection
     //require_once('vendor/autoload.php');
 
     require_once($pathToRootFolder.'config/connect.php');
 
     require_once($pathToRootFolder.'config/functions.php');
-    
+
+    // check if user is connected
+    require($pathToRootFolder."views/common/checkSessionUser.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +33,8 @@
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
+    <?php include($pathToRootFolder."views/common/header.php"); ?>
 
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
-    
     <div class="container-fluid">
         <?php 
             // define a $alertMessage="..message.." if necessary

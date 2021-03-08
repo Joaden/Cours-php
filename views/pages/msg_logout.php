@@ -1,11 +1,9 @@
 <?php 
-    session_start();
 
-    $_SESSION["varsessiontest"]= "Session destroy";
+    //$_SESSION["varsessiondestroytest"]= "Session Destroy";
     $pathToRootFolder = "../../";
-    //require_once('vendor/autoload.php');
 
-    // $PAGE_TITLE = "BlogPHP - home";
+    $PAGE_TITLE = "BlogPHP - Message Logout";
 ?>
 
 <!DOCTYPE html>
@@ -16,35 +14,42 @@
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
-
-    <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
-
-    <!-- ======== NAVBAR ========= -->
-    <?php include($pathToRootFolder."views/common/navbar.php"); ?>
     
+    <h1 class="brand-logo--big">
+            <a class="brand-logo_link" href="home.php">BLOG</a>
+        </h1>
+
+        <!-- ======== NAVBAR ========= -->
+        <?php include($pathToRootFolder."views/common/navbar_false.php"); ?>
+
     <div class="container">
         <?php 
             // define a $alertMessage="..message.." if necessary
-            include($pathToRootFolder."views/common/alertMessageIfExist.php");
+           // include($pathToRootFolder."views/common/alertMessageIfExist.php");
         ?>
 
         <h2 class="text-center text-secondaireDarker1 mt-4">Vous êtes maintenant déconnecté !</h2>
         <p class="text-center">Vous allez être redirigé vers la page d'acceuil.</p>
     </div>
 
-    <?php header("refresh:3;url=home.php");?>
+    <?php header("refresh:5;url=home.php");
+        echo 'Sinon cliquez içi <a href="home.php">Here</a>.';
+    ?>
+    <?php //sleep(5);?>
+
+    <?php //header("Location: home.php");?>
     <br>
     <br>
     <br>
     <br>
 
     <!-- FOOTER -->
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php //include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->
 
-    <?php include($pathToRootFolder."views/common/load_js_scripts.php");?>
+    <?php //include($pathToRootFolder."views/common/load_js_scripts.php");?>
 </body>
 
 </html>

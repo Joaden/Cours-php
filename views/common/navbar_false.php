@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a class="nav-link text-center" href="#" target="_blank" data-type="external" rel="nofollow">
+                <a class="nav-link text-center" href="team/portfolioDenis/Portfolio2k20Prod/index.php" target="_blank" data-type="external" rel="nofollow">
                     <!-- <i class="fas fa-user"></i> -->
                     L'équipe
                 </a>
@@ -47,51 +47,8 @@
             -->
 
         <div class="container-fluid d-flex flex-column justify-content-center flex-md-row justify-content-md-end">
-        <?php  #if(isset($_SESSION['id'])) 
-            // echo $_SESSION["pseudo"]; 
-            // echo $varsessionid;
-        ?>
-            <!-- <div>  </div> -->
+       
 
-        <?php
-            /*
-            if(isset($_SESSION['id'])) 
-                echo (
-                    '<button class="btn bg-white mb-1 mb-md-0 mr-md-3 p-0 text-dominante">
-                        <div class=""></div>
-                        <a class="nav-link text-center" href="session_logout.php">Déconnection</a>
-                    </button>'
-                    );
-            else
-                 echo (
-                    '<button class="btn bg-white mb-1 mb-md-0 mr-md-3 p-0 text-dominante">
-                        <a class="nav-link text-center" href="session_register.php">Inscription</a>
-                    </button>
-                    <button class="btn btn-outline-light p-0">
-                        <a class="nav-link text-center" href="session_login.php">Connexion</a>
-                    </button>'
-                );
-            */
-
-            // FOR NOW ACTIVATE THE PART YOU WANT TO SEE :
-                // if  connected :
-                    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-                        $varsessionid = $_SESSION['id'];
-                        // echo $varsessionid." ";
-                        // echo $userInfo['pseudo']." ";
-                        // echo "User connecté"." ";
-                        include($pathToRootFolder."views/common/navbar_part_profil.php");
-
-                    }
-                        // include($pathToRootFolder."views/common/navbar_part_notConnected.php");
-                // if not connected :
-                    else {
-                        //echo "User non connecté";
-                        include($pathToRootFolder."views/common/navbar_part_notConnected.php");
-
-                    }
-                    
-                ?>
                 
         </div>
     </div>

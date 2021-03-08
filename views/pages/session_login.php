@@ -4,6 +4,8 @@ session_start();
 $pathToRootFolder = "../../";
 $PAGE_TITLE = "Connexion";
 
+$_SESSION["varsessionlogintest"] = "Session login active OK";
+
 require_once($pathToRootFolder.'vendor/autoload.php');
 
 // Call functions with the connections
@@ -37,7 +39,8 @@ if(isset($_POST['formconnexion']))
                 $_SESSION['pseudo'] = $result['pseudo'];
                 $_SESSION['email'] = $result['email'];
                 $_SESSION['autoriser']="oui";
-                header("Location: session.php?id=".$_SESSION['id']);
+                // header("Location: session.php?id=".$_SESSION['id']);
+                header("Location: session.php");
             }
             else
             {
@@ -73,11 +76,15 @@ if(isset($_POST['formconnexion']))
     <body>
          <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
-
-        <h1 class="brand-logo-big"><a href="home.php">BLOG</a></h1>
+        <h1 class="brand-logo--big">
+        <a class="brand-logo_link" href="home.php">BLOG</a>
+        </h1>
 
         <!-- ======== NAVBAR ========= -->
-        <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+        <?php include($pathToRootFolder."views/common/navbar_false.php"); ?>
+        <!-- navbar temporaire pour eviter un bug qui s'aafiche dans les logs lors de la connection ;) idem pour logout -->
+        <?php //include($pathToRootFolder."views/common/header.php"); ?>
+     
 
         <div class="container">
             <?php 
@@ -90,7 +97,7 @@ if(isset($_POST['formconnexion']))
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
                     <h3>
-                        <?php echo $_SESSION["varsessiontest"]; ?>
+                        <?php echo $_SESSION["varsessionlogintest"]; ?>
                     </h3>
                 </div>
                 <div class="col-md-4">

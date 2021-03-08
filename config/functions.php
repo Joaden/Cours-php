@@ -1,12 +1,35 @@
 <?php
 
+//Create article for article_write.php
+function createArticle($title, $content, $author, $name)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    // preparation de al requete
+    $req = $bdd->prepare('INSERT INTO articles (title, content, date) VALUES (?, ?, NOW())');
+    $req->execute(array($title, $content, $author));
+    $req = $bdd->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
+    $postId = $req->execute($articleId);
+    if($req->rowCount() == 1)
+    {
+        $data = $req->fetch(PDO::FETCH_OBJ);
+        return $data;
+        // $req->closeCursor();
+    }
+
+    $req = $bdd->prepare('INSERT INTO images_articles (articleId, name) VALUES (?, ?)');
+    $req->execute(array($postId, $name));
+
+    $req->closeCursor(); 
+}
+
 // function qui récupère tous les articles
 function getArticles()
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT id, title, date FROM articles ORDER BY id ASC');
+    $req = $bdd->prepare('SELECT id, title, content, date, author FROM articles ORDER BY id ASC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
