@@ -136,7 +136,7 @@ session_start();
                                 <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                     <p class="col-lg-6 align-self-baseline mb-0">
                                         <span class="abrev">par</span>
-                                        <span class="pseudo">Pseudo</span>
+                                        <span class="pseudo"><?php if(isset($article->author)){echo $article->author;}else{echo "Pseudo";} ?></span>
                                     </p>
                                     <p class="col-lg-6 align-self-baseline text-lg-right">
                                         <span class="abrev">date</span>

@@ -6,6 +6,7 @@ session_start();
 
     $_SESSION["varsessionadmin_board"] = "Session admin_board OK";
 
+    require_once($pathToRootFolder.'config/connect.php');
     include($pathToRootFolder."debug_functions.php");
 
     // Connection

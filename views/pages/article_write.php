@@ -1,8 +1,25 @@
 <?php
-
+session_start();
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "Article Write";
 
+    $_SESSION["varsessionarticleWritetest"] = "Session article write active OK";
+    
+    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        $varsessionid = $_SESSION['id'];
+        $author = $userInfo['pseudo'] ;
+
+    require_once($pathToRootFolder.'config/connect.php');
+
+    require_once($pathToRootFolder.'config/functions.php');
+
+    // retrieves the user's ID if he is logged in
+    // if(isset($_GET['id']) AND $_GET['id'] > 0)
+    require($pathToRootFolder."views/common/checkSessionUser.php");
+    }
+    else {
+        header("Location: home.php");
+    }
 ?>
 
 
@@ -22,9 +39,73 @@
     <div class="container-fluid">
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
-               
-            </main>
+                <section class="section m-md-5 border-bottom border-dark pb-5">
+                    <div class="blogArticle--large">
+                        <div class="blogArticle-content">
+                            <div class="row no-gutters align-items-center">
+                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?></h2>
+                                <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+                            </div>
 
+                            <a class="blogArticle-imglink" href="#">
+                                <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                </section>
+                
+                <section class="section m-md-5">
+                <!-- ############ START FORM CREATE ARTICLE ############## -->
+                    <form action="" class="mb-5">
+                        <div class="form-group">
+                            <label for="writeArticle_id">
+                                <h4>Poster un article</h4> 
+                            </label>
+                            <div class="container">
+                                <h2>Create Article</h2>
+                                <form action="/action_page.php" method="POST">
+                                    <input type="text" name="author" id="author" value="$author" class="form-control" disabled>
+                                    <div class="form-group">
+                                        <label for="title">Title:</label>
+                                        <input type="title" class="form-control" id="title" placeholder="Title de l'article" name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">Contenu:</label>
+                                        <input type="content" class="form-control" id="content" placeholder="Contenu de l'article" name="content">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="remember"> Remember me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" name="submit_article">Poster</button>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </main>
+            <!-- ############ END FORM CREATE ARTICLE ############## -->
+
+            <?php
+                                if (isset($success))
+
+                                    echo $success;
+
+                                if (!empty($errors)) : ?>
+
+                                    <?php foreach ($errors as $error) : ?>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class=" alert alert-danger">
+                                                    <?= $error ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p></p>
+                                    <?php endforeach; ?>
+
+                            <?php endif; ?>
 
             <!-- ############ ASIDE ############## -->
             <aside class="order-0 order-md-1 col-md-3 col-xl-2 bg-secondaireLighter2 articleFilter px-0">

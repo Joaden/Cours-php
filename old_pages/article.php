@@ -62,7 +62,7 @@ else {
     ?>
     <div class="container-fluid">
         <div class="container">
-            <a href="articles.php">Retour aux articles</a>
+            <a href="article_all.php">Retour aux articles</a>
             <h1><?= $article->title ?></h1>
             <br>
             <p><?= $article->content ?></p>

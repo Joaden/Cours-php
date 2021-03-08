@@ -24,6 +24,7 @@ if(isset($_POST['formregister']))
             $password = htmlspecialchars($_POST['mdp']);
             $password2 = htmlspecialchars($_POST['mdp2']);
             $phrase = htmlspecialchars($_POST['phrase']);
+            $avatar = htmlspecialchars($_POST['avatar']);
             $captcha = htmlspecialchars($_POST['captcha']);
             
             // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
