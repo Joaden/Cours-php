@@ -5,17 +5,19 @@ session_start();
 
     $_SESSION["varsessionarticleWritetest"] = "Session article write active OK";
     
-    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+    if (isset($_SESSION['id'])){
+
+    // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         $varsessionid = $_SESSION['id'];
-        $author = $userInfo['pseudo'] ;
+        //$author = $userInfo['pseudo'] ;
 
-    require_once($pathToRootFolder.'config/connect.php');
+        require_once($pathToRootFolder.'config/connect.php');
 
-    require_once($pathToRootFolder.'config/functions.php');
+        require_once($pathToRootFolder.'config/functions.php');
 
-    // retrieves the user's ID if he is logged in
-    // if(isset($_GET['id']) AND $_GET['id'] > 0)
-    require($pathToRootFolder."views/common/checkSessionUser.php");
+        // retrieves the user's ID if he is logged in
+        // if(isset($_GET['id']) AND $_GET['id'] > 0)
+        require($pathToRootFolder."views/common/checkSessionUser.php");
     }
     else {
         header("Location: home.php");
@@ -39,11 +41,11 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
-                <section class="section m-md-5 border-bottom border-dark pb-5">
+                <!-- <section class="section m-md-5 border-bottom border-dark pb-5">
                     <div class="blogArticle--large">
                         <div class="blogArticle-content">
                             <div class="row no-gutters align-items-center">
-                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?></h2>
+                                <h2 class="blogArticle-title col-md-10 mb-4"></h2>
                                 <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
                             </div>
 
@@ -54,7 +56,8 @@ session_start();
                         </div>
                     </div>
                     
-                </section>
+                </section> -->
+                <h4><?php echo $_SESSION["varsessionarticleWritetest"]; ?></h4>
                 
                 <section class="section m-md-5">
                 <!-- ############ START FORM CREATE ARTICLE ############## -->
@@ -74,6 +77,12 @@ session_start();
                                     <div class="form-group">
                                         <label for="content">Contenu:</label>
                                         <input type="content" class="form-control" id="content" placeholder="Contenu de l'article" name="content">
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <div class="form-group"> -->
+                                            <label for="image">Photo de votre article</label>
+                                            <input name="image" type="file" class="form-control">
+                                        <!-- </div> -->
                                     </div>
                                     <div class="checkbox">
                                         <label><input type="checkbox" name="remember"> Remember me</label>
