@@ -1,12 +1,12 @@
 <?php
 
 //Create article for article_write.php
-function createArticle($title, $content, $author, $name)
+function createArticle($title, $content, $author, $image)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     // preparation de al requete
-    $req = $bdd->prepare('INSERT INTO articles (title, content, date) VALUES (?, ?, NOW())');
+    $req = $bdd->prepare('INSERT INTO articles (title, content, author, date) VALUES (?, ?, ?, NOW())');
     $req->execute(array($title, $content, $author));
     $req = $bdd->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
     $postId = $req->execute($articleId);
@@ -145,4 +145,21 @@ function getCommentsAdmin()
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     return $data;
     $req->closeCursor();
+}
+
+// function qui récupère toutes les catégories
+function getCategories()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    ///* prepare() = Création d'un objet PDOStatement */
+    $req = $bdd->prepare('SELECT id, parent_id, name, slug, is_valid FROM categories ORDER BY id ASC');
+    ///* execute() = Exécute la première requête */
+    $req->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $req->closeCursor();
+    
 }

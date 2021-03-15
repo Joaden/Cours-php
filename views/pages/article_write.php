@@ -5,7 +5,24 @@ session_start();
 
     $_SESSION["varsessionarticleWritetest"] = "Session article write active OK";
     
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+    // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+    //     $varsessionid = $_SESSION['id'];
+    //     $author = $userInfo['pseudo'] ;
+    //     //var_dump($author);
+    //     echo $author."ligne 15";
+
+    //     die();
+    //     }
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
+
     if (isset($_SESSION['id'])){
+
+        require($pathToRootFolder."views/common/checkSessionUser.php");
 
     // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         $varsessionid = $_SESSION['id'];
@@ -17,13 +34,26 @@ session_start();
 
         // retrieves the user's ID if he is logged in
         // if(isset($_GET['id']) AND $_GET['id'] > 0)
-        require($pathToRootFolder."views/common/checkSessionUser.php");
+
+        $categories = getCategories();
+        // showInConsole($categories); // debug
+
 
         if(isset($_POST['title'], $_POST['content'], $_POST['image'])) {
             if(!empty($_POST['title']) AND !empty($_POST['content'])) {
+                
+                $title = htmlspecialchars($_POST['title']);
+                $content = htmlspecialchars($_POST['content']);
+
+                if()
+
+                $ins = createArticle($title, $content, $author, $image);
+
+                $message = 'Votre article a bien été posté';
+                // $ins = $bdd->prepare('INSERT INTO articles (title, content, date)')
 
             } else {
-                $erreur = 'Veuillez remplir tous les champs';
+                $message = 'Veuillez remplir tous les champs';
             }
         }
     }
@@ -41,6 +71,13 @@ session_start();
 
     <?php include($pathToRootFolder."views/common/head.php");?>
 
+    <style>
+        #antibot{
+        display: none;
+        visibility: hidden;
+
+        }
+    </style>
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
@@ -79,23 +116,47 @@ session_start();
                             <div class="container">
                                 <h2>Create Article</h2>
                                 <form action="/action_page.php" method="POST" >
-                                    <input type="text" name="author" id="author" value="$author" class="form-control" disabled>
+                                    <input type="text" name="author" id="author" value="" class="form-control" disabled>
                                     <div class="form-group">
                                         <label for="title">Title:</label>
                                         <input type="title" class="form-control" id="title" placeholder="Title de l'article" name="title">
                                     </div>
                                     <div class="form-group">
                                         <label for="content">Contenu:</label>
-                                        <input type="content" class="form-control" id="content" placeholder="Contenu de l'article" name="content">
+                                        <textarea type="text" class="form-control" id="content" placeholder="Contenu de l'article" name="content"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <!-- <div class="form-group"> -->
                                             <label for="image">Photo de votre article</label>
+                                            <?php if($mode_edition == 1) { ?>
                                             <input name="image" type="file" class="form-control">
+                                            <?php } ?>
                                         <!-- </div> -->
                                     </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="remember"> Remember me</label>
+                                    <div class="form-group">
+                                        <label for="inputCat">Catégories</label>
+                                        <select id="inputCat" class="form-control">
+                                            <option selected>Choisir une catégorie</option>
+                                            <option></option>
+                                            <?php foreach ($categories as $cat) : ?>
+                                            <option><?php echo $cat->name ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <!-- <div class="form-group col-md-4">
+                                        <label for="inputTag">Tag</label>
+                                        <select id="inputTag" class="form-control">
+                                            <option selected>Choisir vos tag</option>
+                                            <option></option>
+                                            <?php //foreach ($tags as $tag) : ?>
+                                            <option><?php //echo $tag->name ?></option>
+                                            <?php //endforeach; ?>
+                                            
+                                        </select>
+                                    </div> -->
+                                    <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
+                                        <label for="antibot"></label>
+                                        <input type="text"  name="antibot" placeholder="" value="">
                                     </div>
                                     <button type="submit" class="btn btn-success" name="submit_article">Poster</button>
                                 </form>

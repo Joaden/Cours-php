@@ -227,6 +227,10 @@ if(isset($_POST['formregister']))
                         <input type="text" class="form-control" id="captcha" name="captcha" placeholder="14 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
                     </div>
                 </div>
+                <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label for="antibot"></label>
+                        <input type="text"  name="antibot" placeholder="" value="">
+                    </div>
 
                 <div class="row">
                     <div class="col text-center">
