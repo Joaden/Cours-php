@@ -18,10 +18,20 @@ session_start();
         // retrieves the user's ID if he is logged in
         // if(isset($_GET['id']) AND $_GET['id'] > 0)
         require($pathToRootFolder."views/common/checkSessionUser.php");
+
+        if(isset($_POST['title'], $_POST['content'], $_POST['image'])) {
+            if(!empty($_POST['title']) AND !empty($_POST['content'])) {
+
+            } else {
+                $erreur = 'Veuillez remplir tous les champs';
+            }
+        }
     }
     else {
         header("Location: home.php");
     }
+
+    
 ?>
 
 
@@ -68,7 +78,7 @@ session_start();
                             </label>
                             <div class="container">
                                 <h2>Create Article</h2>
-                                <form action="/action_page.php" method="POST">
+                                <form action="/action_page.php" method="POST" >
                                     <input type="text" name="author" id="author" value="$author" class="form-control" disabled>
                                     <div class="form-group">
                                         <label for="title">Title:</label>
@@ -89,6 +99,9 @@ session_start();
                                     </div>
                                     <button type="submit" class="btn btn-success" name="submit_article">Poster</button>
                                 </form>
+                                <br>
+                                <?php if(isset($erreur)) { echo $erreur; } ?>
+                                <br>
                             </div>
                         </div>
                     </form>
