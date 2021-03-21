@@ -133,11 +133,7 @@ session_start();
                                 ?>
                             </p>
 
-                            <p class="blogArticle-text">
-                                <?= 
-                                    $article->content; 
-                                ?>
-                            </p>
+                          
 
                             
                             <p class="blogArticle-text"></p>

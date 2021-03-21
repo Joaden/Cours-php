@@ -129,7 +129,7 @@ session_start();
                                     <?= $article->title; ?>
                                 </a>
                             </h2>
-                            <p class="blogArticle-text"><?= $article->content; ?></p>
+                            <p class="blogArticle-text"><?= substr($article->content, 0, 250)."..."; ?></p>
                             <div class="blogArticle-footer">
                                 <!-- v1 -->
                                 

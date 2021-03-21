@@ -5,7 +5,7 @@ session_start();
 
     $_SESSION["varsessionarticleWritetest"] = "Session article write active OK";
     
-
+    $mode_edition = 0;
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
     // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
@@ -22,7 +22,7 @@ session_start();
 
     if (isset($_SESSION['id'])){
 
-        require($pathToRootFolder."views/common/checkSessionUser.php");
+        
 
     // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         $varsessionid = $_SESSION['id'];
@@ -32,6 +32,7 @@ session_start();
 
         require_once($pathToRootFolder.'config/functions.php');
 
+        require($pathToRootFolder."views/common/checkSessionUser.php");
         // retrieves the user's ID if he is logged in
         // if(isset($_GET['id']) AND $_GET['id'] > 0)
 
@@ -45,7 +46,7 @@ session_start();
                 $title = htmlspecialchars($_POST['title']);
                 $content = htmlspecialchars($_POST['content']);
 
-                if()
+                // if()
 
                 $ins = createArticle($title, $content, $author, $image);
 
