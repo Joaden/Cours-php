@@ -8,7 +8,7 @@ session_start();
 
         $id = htmlspecialchars($_GET['id']);
 
-        var_dump($id);
+        //var_dump($id);
         //die();
         $id = strip_tags($id);
     
@@ -165,7 +165,7 @@ session_start();
                 
                 <section class="section m-md-5">
                     <!-- COMMENTAIRES -->
-                    <form action="" class="mb-5">
+                    <form method="POST" action="" class="mb-5">
                         <div class="form-group">
                             <label for="writeComment_id">
                                 <h4>Poster un commentaire</h4> 

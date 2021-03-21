@@ -97,17 +97,20 @@ if(isset($_POST['formregister']))
                                                 $erreur = "Votre photo ne doit pas dépasser 2Mo.";
                                             }
                                         } 
-                                        // hash de mdp , a voir si il y a plus sûr comme function
-                                        $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
-                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase, avatar) VALUE(?, ?, ?, ?, ?, ?)");
-                                        // On insère les $*** dans la requête
-                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase, $avatar));
-                                        //vérification & upload image 
-                                        //$updateAvatar = addAvatar();
+                                        else {
+                                            $erreur = "Veuillez ajouter une photo.";
+                                        }
+                                        // // hash de mdp , a voir si il y a plus sûr comme function
+                                        // $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
+                                        // $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase, avatar) VALUE(?, ?, ?, ?, ?, ?)");
+                                        // // On insère les $*** dans la requête
+                                        // $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase, $avatar));
+                                        // //vérification & upload image 
+                                        // //$updateAvatar = addAvatar();
 
-                                        $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
-                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        header('Location: session_login.php');
+                                        // $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
+                                        // $_SESSION['comptecree'] = "Votre compte à bien été créé !";
+                                        // header('Location: session_login.php');
 
                                     }
                                     else
