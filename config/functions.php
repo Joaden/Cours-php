@@ -1,13 +1,29 @@
 <?php
 /////////////////////////// CREATE FUNCTION
 //Create article for article_write.php
-function createArticle($title, $content, $author, $image)
+function createArticle($categorie_id, $title, $content, $author, $image)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
+    // if(isset($_SESSION['id']))
+    // {
+    //     $getId = intval($_SESSION['id']);
+    //     $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+    //     $reqUser->execute(array($getId));
+    //     $userInfo = $reqUser->fetch();
+        
+    // } 
+
+    $userId = $userInfo['id'];
+    $name = $userInfo['pseudo'];
+    //$articleId = $article['id'];
+
+    echo $categorie_id . "  before INSERT INTO<br>";
+    die();
+
     // preparation de al requete
-    $req = $bdd->prepare('INSERT INTO articles (title, content, author, date) VALUES (?, ?, ?, NOW())');
-    $req->execute(array($title, $content, $author));
+    $req = $bdd->prepare('INSERT INTO articles (userId, categorieId, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
+    $req->execute(array($userId, $categorie_id, $title, $content, $author));
     $req = $bdd->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
     $postId = $req->execute($articleId);
     if($req->rowCount() == 1)
@@ -16,9 +32,24 @@ function createArticle($title, $content, $author, $image)
         return $data;
         // $req->closeCursor();
     }
+    
 
-    $req = $bdd->prepare('INSERT INTO images_articles (articleId, name) VALUES (?, ?)');
-    $req->execute(array($postId, $name));
+    //vérification & upload image 
+    $addImageArticle = addImageArticle($articleId, $name, $userId);
+
+    $req = $bdd->prepare('INSERT INTO images (articleId, name, userId) VALUES (?, ?, ?)');
+    $req->execute(array($postId, $name, $userId));
+
+    $req->closeCursor(); 
+}
+// create article with multi img
+function createArticleMulti($articleId, $author, $userId)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    // preparation de la requete
+    $req = $bdd->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
+    $req->execute(array($postId, $name, $userId));
 
     $req->closeCursor(); 
 }
@@ -225,7 +256,6 @@ function getArticle($id)
 function addComment($articleId, $author, $comment)
 {
     $pathToRootFolder = "../../";
-    $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
     $req->execute(array($articleId, $author, $comment));
@@ -242,13 +272,25 @@ function getComments($id)
     return $data;
     $req->closeCursor();
 }
+function getAvatar()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+
+    $req = $bdd->prepare('SELECT avatar FROM users WHERE id == ');
+    
+    ///* execute() = Exécute la première requête */
+    $req->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $req->closeCursor();
+
+}
 function getUsers()
 {
     $pathToRootFolder = "../../";
-    
-    // à décommenter pour utiliser $_SESSION
-    // session_start();
-
     require($pathToRootFolder.'config/connect.php');
 
     // Sécurité authentification obligatoire à décommenter pour obliger la connexion d'un admin
@@ -355,6 +397,41 @@ function addavatar()
                 
                 return;
                 
+            } else {
+                $erreur = "Erreur lors de l'importation de photo de profil.";
+            }
+        } else {
+            $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
+        }
+    } else {
+        $erreur = "Votre photo ne doit pas dépasser 2Mo.";
+    }
+}
+}
+// add picture
+function addImageArticle($articleId, $name, $userId)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    //vérification & upload image
+    if(isset($_FILES['image']) AND !empty($_FILES['image']['name']))
+{
+    $taillemax = 2097152;
+    $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
+    if($_FILES['image']['size'] <= $taillemax)
+    {
+        //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+        $extensionUpload = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
+        if(in_array($extensionUpload, $extensionsValides))
+        {
+            $chemin = "$pathToRootFolder/assets/upload ".$_SESSION['id'].".".$extensionUpload;
+            $resultat = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
+            if($resultat)
+            {
+                $addImageArticle = $bdd->prepare('INSERT INTO images (articleId, name, userId) VALUES (?, ?, ?)');
+                $addImageArticle->execute();
+                
+                header('Location: profil.php');
             } else {
                 $erreur = "Erreur lors de l'importation de photo de profil.";
             }

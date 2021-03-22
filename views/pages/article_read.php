@@ -23,17 +23,14 @@ session_start();
                     $varsessionid = $_SESSION['id'];
                     $author = $userInfo['pseudo'] ;
                     //var_dump($author);
-                    echo $author."ligne 26";
+                    // echo $author."ligne 26";
 
-                    die();
+                    // die();
                     }
 
             //extract($_POST);
-            $author = $userInfo['pseudo'] ;  
-
-            //var_dump($author);
-            echo $author."ligne 32";
-            die();
+            $author = htmlspecialchars($userInfo['pseudo']);  
+            $comment = htmlspecialchars($_POST['comment']);
 
             $errors = array();
     
@@ -47,6 +44,10 @@ session_start();
                 array_push($errors, 'Entrez un commentaire !');
     
             if (count($errors) == 0) {
+                // get id article read
+                //$getId = getArticle($id);
+                $articleId = $id;
+
                 // comment utilise la function addComment
                 $comment = addComment($articleId, $author, $comment);
     
@@ -105,7 +106,7 @@ session_start();
                     <div class="blogArticle--large">
                         <div class="blogArticle-content">
                             <div class="row no-gutters align-items-center">
-                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?></h2>
+                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?> <?= $article->id; ?></h2>
                                 <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
                             </div>
 
@@ -258,7 +259,7 @@ session_start();
 
             <!-- ############ ASIDE ############## -->
             <aside class="order-0 order-md-1 col-md-3 col-xl-2 bg-secondaireLighter2 articleFilter px-0">
-                <form method="get" action="">
+                <form method="post" action="">
                     <div class="form-group">
                         <label for="filter_categorie_id" class="h3 d-block bg-secondaireDarker2 text-white mt-5 pl-2">Categorie</label>
                         <select name="filter_categorie" id="filter_categorie_id" class="form-control">
@@ -292,6 +293,10 @@ session_start();
             </aside>
         </div>
     </div>
+    <?php
+    require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions' . DIRECTORY_SEPARATOR . 'compteur';
+    ajouter_vue();
+    ?>
 
     <!-- FOOTER -->
     <?php # include($pathToRootFolder."views/common/footer.php");?>

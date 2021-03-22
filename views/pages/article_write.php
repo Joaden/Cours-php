@@ -22,9 +22,9 @@ session_start();
 
     if (isset($_SESSION['id'])){
 
-        
+        $mode_edition = 1;
 
-    // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         $varsessionid = $_SESSION['id'];
         //$author = $userInfo['pseudo'] ;
 
@@ -39,24 +39,35 @@ session_start();
         $categories = getCategories();
         // showInConsole($categories); // debug
 
+        if(isset($_POST['submit_article']))
+        {
+            if(isset($_POST['title'], $_POST['content'], $_POST['image'], $_POST['categorie'])) {
+                if(!empty($_POST['title']) AND !empty($_POST['content']) AND !empty($_POST['image']) AND !empty($_POST['categorie'])) {
+                    
+                    $title = htmlspecialchars($_POST['title']);
+                    $content = htmlspecialchars($_POST['content']);
+                    $categorie_id = htmlspecialchars($_POST['categorie']);
+                    
+                    echo $title . "<br>";
+                    echo $content . "<br>";
+                    echo $categorie_id . "<br>";
+                    die();
+                    // if()
+                    
 
-        if(isset($_POST['title'], $_POST['content'], $_POST['image'])) {
-            if(!empty($_POST['title']) AND !empty($_POST['content'])) {
-                
-                $title = htmlspecialchars($_POST['title']);
-                $content = htmlspecialchars($_POST['content']);
+                    $ins = createArticle($categorie_id, $title, $content, $author, $image);
 
-                // if()
+                    $message = 'Votre article a bien été posté';
+                    header('Location: user_board.php');
 
-                $ins = createArticle($title, $content, $author, $image);
+                    // $ins = $bdd->prepare('INSERT INTO articles (title, content, date)')
 
-                $message = 'Votre article a bien été posté';
-                // $ins = $bdd->prepare('INSERT INTO articles (title, content, date)')
-
-            } else {
-                $message = 'Veuillez remplir tous les champs';
+                } else {
+                    $message = 'Veuillez remplir tous les champs';
+                }
             }
         }
+        
     }
     else {
         header("Location: home.php");
@@ -105,19 +116,23 @@ session_start();
                     </div>
                     
                 </section> -->
-                <h4><?php echo $_SESSION["varsessionarticleWritetest"]; ?></h4>
+                <h4><?php 
+                        echo $_SESSION["varsessionarticleWritetest"];   
+                         echo "<br> ID user N° : ".$userInfo['id'],$userInfo['pseudo'];
+                        
+                    ?></h4>
+   
                 
                 <section class="section m-md-5">
                 <!-- ############ START FORM CREATE ARTICLE ############## -->
-                    <form action="" class="mb-5">
                         <div class="form-group">
                             <label for="writeArticle_id">
                                 <h4>Poster un article</h4> 
                             </label>
                             <div class="container">
                                 <h2>Create Article</h2>
-                                <form action="/action_page.php" method="POST" >
-                                    <input type="text" name="author" id="author" value="" class="form-control" disabled>
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <input type="text" name="author" id="author" value="<?php if(isset($userInfo)) { echo $userInfo['name']; } ?>" class="form-control" disabled>
                                     <div class="form-group">
                                         <label for="title">Title:</label>
                                         <input type="title" class="form-control" id="title" placeholder="Title de l'article" name="title">
@@ -130,17 +145,17 @@ session_start();
                                         <!-- <div class="form-group"> -->
                                             <label for="image">Photo de votre article</label>
                                             <?php if($mode_edition == 1) { ?>
-                                            <input name="image" type="file" class="form-control">
+                                            <input name="image" type="file" class="form-control" multiple>
                                             <?php } ?>
                                         <!-- </div> -->
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="inputCat">Catégories</label>
                                         <select id="inputCat" class="form-control">
                                             <option selected>Choisir une catégorie</option>
-                                            <option></option>
                                             <?php foreach ($categories as $cat) : ?>
-                                            <option><?php echo $cat->name ?></option>
+                                            <option name="<?php echo $cat->name ?>"><?php echo $cat->name ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -166,65 +181,32 @@ session_start();
                                 <br>
                             </div>
                         </div>
-                    </form>
+                   
                 </section>
             </main>
             <!-- ############ END FORM CREATE ARTICLE ############## -->
 
             <?php
-                                if (isset($success))
+                if (isset($success))
 
-                                    echo $success;
+                    echo $success;
 
-                                if (!empty($errors)) : ?>
+                if (!empty($errors)) : ?>
 
-                                    <?php foreach ($errors as $error) : ?>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class=" alert alert-danger">
-                                                    <?= $error ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p></p>
-                                    <?php endforeach; ?>
-
-                            <?php endif; ?>
-
-            <!-- ############ ASIDE ############## -->
-            <aside class="order-0 order-md-1 col-md-3 col-xl-2 bg-secondaireLighter2 articleFilter px-0">
-                <form method="get" action="">
-                    <div class="form-group">
-                        <label for="filter_categorie_id" class="h3 d-block bg-secondaireDarker2 text-white mt-5 pl-2">Categorie</label>
-                        <select name="filter_categorie" id="filter_categorie_id" class="form-control">
-                            <!-- <optgroup label=""> -->
-
-                                <!-- array temporaire: -->
-                                <?php $fakeCategories = ['aaaa','bbbb','cccc'];?>
-
-                                <?php for($i=0; $i<count($fakeCategories); $i++): ?>
-                                    <option value="<?=$fakeCategories[$i]?>"><?=$fakeCategories[$i]?></option>
-                                <?php endfor; ?>
-                            <!-- </optgroup> -->
-                        </select>
-
-                        <label for="filter_author_id" class="h3 d-block bg-secondaireDarker2 text-white mt-3 mb-1 pl-2">Auteur</label>
-                        <input type="text" id="filter_author_id" name="filter_author" class="form-control rounded-pill">
-
-
-                        <label for="filter_topic_id" class="h3 d-block bg-secondaireDarker2 text-white mt-3 mb-1 pl-2">Sujet ou Hashtag</label>
-                        <input type="text" id="filter_topic_id" name="filter_topic" class="form-control rounded-pill">
-
-
-
-
-                        <!-- <input type="submit" value="Filter" name="" id=""> -->
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-light mt-4 mb-4">Filter</button>
+                    <?php foreach ($errors as $error) : ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class=" alert alert-danger">
+                                    <?= $error ?>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </aside>
+                        <p></p>
+                    <?php endforeach; ?>
+
+            <?php endif; ?>
+
+            
         </div>
     </div>
 
