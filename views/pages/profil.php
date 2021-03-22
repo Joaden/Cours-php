@@ -128,12 +128,17 @@ if(isset($_POST['formupdateprofil']))
                                            echo "<div>Votre profil n\'est pas confirmé</div>";
                                         } 
                                         else{
-                                            echo "<div>Profil Vérifié</div>";
+                                            echo "<div>Veuillez confirmer votre email.</div>";
                                         }
                                         
                                     ?>
                                 </label>
                                 
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone"><?php if(isset($userInfo)) { echo 'Statut'; } else { echo "Permission statut :"; }?></label>
                             </div>
                         </div>
 
