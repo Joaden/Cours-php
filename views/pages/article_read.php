@@ -71,33 +71,8 @@ session_start();
         $image = getImage($id);
         $comments = getComments($id);
         $categorie = getCategorie($id);
-        //$categories = getCategories($id);
-        // var_dump($article);
-        // echo "<br>";
-        // echo "<br>";
-        // var_dump($categorie);
-        // $catStringify = stringify($categorie['name']); 
-        // echo "<br>";
-        // echo "<br>";
-        // echo $catStringify;
-        // // var_dump($categorie);
-        // die();
-    }
-    // else {
-    //     $errors = array();
-    //     if (empty($author))
-    //     array_push($errors, 'Entrez un pseudo !');
-
-    //     if (empty($comment))
-    //         array_push($errors, 'Entrez un commentaire !');
-    //     //echo $errors;
-    //     var_dump($author).' vardump author';
-    //     var_dump($errors).'vardump error';
-    //     var_dump($_POST).'vardump post';
-    //     var_dump($_GET).'vardump get';
-    //     die();
-    //     //header('location: home.php');
-    // }
+        
+     }
 
 ?>
 
@@ -159,7 +134,7 @@ session_start();
 
 
                             <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="../../assets/photos/<?php echo $image["name"]; ?>" alt="image de l'article">
+                                <img class="blogArticle-imglink-img" src="../../assets/photos/<?php echo $image->name; ?>" alt="image de l'article here">
                                 <!--<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">-->
                             </a>
 

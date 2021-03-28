@@ -50,11 +50,11 @@ session_start();
                             $extensionUpload = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
                             if(in_array($extensionUpload, $extensionsValides))
                             {
-                                $chemin = "$pathToRootFolder/assets/photos/avatars".$_SESSION['id'].".".$extensionUpload;
+                                $chemin = "$pathToRootFolder/assets/photos/".$_SESSION['id'].".".$extensionUpload;
                                 $resultat = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
                                 if($resultat)
                                 {
-                                    $image = $_SESSION['id'].".".$extensionUpload;
+                                    $image = $_SESSION['id']."article.".$extensionUpload;
 
                                     $author = $userInfo['pseudo'];
 

@@ -64,10 +64,12 @@ function getImage($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT name FROM images WHERE id = ? ');
+    $req = $bdd->prepare('SELECT * FROM images WHERE article_id = ? ');
     $req->execute(array($id));
-    $data = $req->fetchAll(PDO::FETCH_OBJ);
-    
+    $data = $req->fetch(PDO::FETCH_OBJ);
+    // echo $data;
+    // var_dump($data);
+    // die();
     $req->closeCursor();
     return $data;
 }
