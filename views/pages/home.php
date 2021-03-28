@@ -44,6 +44,10 @@ session_start();
     
 
     $articles = getArticles();
+    $categories = getCategories();
+    $image = getImages();
+
+
     showInConsole($articles); // debug
 
 ?>
@@ -113,7 +117,10 @@ session_start();
             </div>
 
             <!-- =================== ARTICLES ================== -->
+            <php $nbr = 1; ?>
+            
             <?php foreach($articles as $article): ?>
+                 
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
                         <a class="blogArticle-imglink col-lg-5" href="#">
@@ -145,12 +152,37 @@ session_start();
                                     </p>
                                 </div>
 
-                                <div class="blogArticle-footer-keywords row no-gutters">
-                                    <a href="#" class="keyword">moto</a>
-                                    <a href="#" class="keyword">vitesse</a>
-                                    <a href="#" class="keyword">design</a>
-                                    <a href="#" class="keyword">carrenage</a>
-                                </div>
+                                <?php #if (isset($categorie)){ ?>
+                                    <div class="blogArticle-footer-keywords row no-gutters">
+                                        <?php if (isset($article->categories_id)){ ?>
+                                            <?php $cat = $article->id; ?>
+                                            <?php $id = $article->id; ?>
+
+                                            <?php $categorie = getCategorie($id); ?>
+                                            
+
+                                            <?php #if (isset($categorie)){ ?>
+
+                                            <?php# foreach ($categorie as $cat) : ?>
+
+                                            <a href="#" class="keyword"><?= $article->categories_id; ?></a>
+                                        
+                                        <?php# endforeach; ?>
+
+                                    </div>
+
+                                        <?php }else{?>
+
+                                    <div class="blogArticle-footer-keywords row no-gutters">
+                                        <a href="#" class="keyword">moto</a>
+                                        <a href="#" class="keyword">vitesse</a>
+                                        <a href="#" class="keyword">design</a>
+                                        <a href="#" class="keyword">carrenage</a>
+                                    </div>
+                                        <?php    }  ?>
+                                        <?php   # }  ?>
+
+                                
                             </div>
                         </div>
                     </div>

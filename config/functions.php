@@ -1,7 +1,7 @@
 <?php
 /////////////////////////// CREATE FUNCTION
 //Create article for article_write.php
-function createArticle($categorie_id, $title, $content, $author, $image)
+function createArticle($user_id, $categorie_id, $title, $content, $author, $image)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
@@ -14,35 +14,77 @@ function createArticle($categorie_id, $title, $content, $author, $image)
         
     // } 
 
-    $userId = $userInfo['id'];
-    $name = $userInfo['pseudo'];
+    //$userId = $userInfo['id'];
+    //$name = $userInfo['pseudo'];
     //$articleId = $article['id'];
 
-    echo $categorie_id . "  before INSERT INTO<br>";
-    die();
-
-    // preparation de al requete
-    $req = $bdd->prepare('INSERT INTO articles (userId, categorieId, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
-    $req->execute(array($userId, $categorie_id, $title, $content, $author));
-    $req = $bdd->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
-    $postId = $req->execute($articleId);
-    if($req->rowCount() == 1)
-    {
-        $data = $req->fetch(PDO::FETCH_OBJ);
-        return $data;
-        // $req->closeCursor();
-    }
+    /////////////////// START DEBUG
+    // echo $image . "<br>";
+    // echo $user_id . "<br>";
+    // echo $title . "<br>";
+    // echo $content . "<br>";
+    // echo $author . "<br>ok ";
+    // //var_dump($categorie_id)  . "<br>";
+    // echo $categorie_id . "  before INSERT INTO<br>";
+    //die();
+    /////////////////// END DEBUG
     
 
-    //vérification & upload image 
-    $addImageArticle = addImageArticle($articleId, $name, $userId);
+    // preparation de al requete
+    $req = $bdd->prepare('INSERT INTO articles (user_id, categories_id, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
+    $req->execute(array($user_id, $categorie_id, $title, $content, $author));
+    $req1 = $bdd->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
+    $postId = $req1->execute();
+    
+    if($req1->rowCount() > 0)
+    {
+        $data = $req1->fetch(PDO::FETCH_OBJ);
+        //echo "id : article créé : ";
+        //var_dump($data);
+        //return $data;
+        // $req->closeCursor();
+    
+        
+        // $article_id = $data["id"];
+        $article_id = $data->id;
+        //echo $article_id;
+        //vérification & upload image 
+        //$addImageArticle = addImageArticle($article_id, $name, $user_id);
+        // var_dump($data);
+        //die();
+        $req1 = $bdd->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
+        $req1->execute(array($article_id, $image, $user_id));
 
-    $req = $bdd->prepare('INSERT INTO images (articleId, name, userId) VALUES (?, ?, ?)');
-    $req->execute(array($postId, $name, $userId));
-
-    $req->closeCursor(); 
+        $req1->closeCursor(); 
+    }
 }
-// create article with multi img
+
+////////////////////////////// GET IMAGE ARTICLE
+function getImage($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT name FROM images WHERE id = ? ');
+    $req->execute(array($id));
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    
+    $req->closeCursor();
+    return $data;
+}
+function getImages()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM images ORDER BY id ASC');
+    ///* execute() = Exécute la première requête */
+    $req->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    
+    $req->closeCursor();
+    return $data;
+}
+////////////////////////////// create article with multi img
 function createArticleMulti($articleId, $author, $userId)
 {
     $pathToRootFolder = "../../";
@@ -53,7 +95,8 @@ function createArticleMulti($articleId, $author, $userId)
 
     $req->closeCursor(); 
 }
-// Create User for page session_register.php
+
+////////////////////////////// Create User for page session_register.php
 function createUser()
 {
     $pathToRootFolder = "../../";
@@ -224,7 +267,7 @@ function getArticles()
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT id, title, content, date, author FROM articles ORDER BY id ASC');
+    $req = $bdd->prepare('SELECT * FROM articles ORDER BY id ASC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -260,17 +303,21 @@ function addComment($articleId, $author, $comment)
     $req = $bdd->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
     $req->execute(array($articleId, $author, $comment));
     $req->closeCursor();
+    // // Vider le champs du form !
+    unset($_POST['comment']);
+    unset($comment);
 }
 // fonction récupère le commentaire par ID
 function getComments($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM comments WHERE articleId = ?');
+    $req = $bdd->prepare('SELECT * FROM comments WHERE articleId = ? ORDER BY id DESC');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
-    return $data;
+    
     $req->closeCursor();
+    return $data;
 }
 function getAvatar()
 {
@@ -369,6 +416,17 @@ function getCategories()
     /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
     $req->closeCursor();
     
+}
+function getCategorie($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM categories INNER JOIN articles ON categories.id = articles.categories_id WHERE articles.id = ?');
+    // SELECT name FROM `cours_denis`.`categories` WHERE `id` = ? ');
+    $req->execute(array($id));
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    $req->closeCursor();
 }
 // add avatar for page session_register.php
 function addavatar()

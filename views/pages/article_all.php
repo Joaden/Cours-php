@@ -54,8 +54,8 @@ session_start();
 
                     <div class="container section-content">
                         <div class="row">
-                            <?php # foreach($articles as $article): ?>
-                            <?php for($i=0; $i<6;$i++):?>
+                            <?php foreach($articles as $article): ?>
+                            <?php #for($i=0; $i<6;$i++):?>
                                 <!-- <div class="col-6 show-red"> -->
                                 <!-- </div> -->
 
@@ -67,20 +67,24 @@ session_start();
                         
                                     </a>
                                     <div class="blogArticle-content">
-                                        <h2 class="blogArticle-title">Lorem ipsum dolor sit amet</h2>
-                                        <p class="blogArticle-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rem eum fuga voluptatibus velit excepturi aliquid quia minima dolor cum? Dolorem repellat, dicta rerum doloremque non omnis?</p>
+                                        <h2 class="blogArticle-title">
+                                            <a href="article_read.php?id=<?= $article->id ?>">
+                                                <?= $article->title; ?>
+                                            </a>
+                                        </h2>
+                                        <p class="blogArticle-text"><?= $article->content; ?></p>
                                         <div class="blogArticle-footer">
                                             <!-- v1 -->
                                             
                                             <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                                 <p class="col-lg-6 align-self-baseline mb-0">
                                                     <span class="abrev">par</span>
-                                                    <span class="pseudo">Pseudo</span>
+                                                    <span class="pseudo"><?php if(isset($article->author)){echo $article->author;}else{echo "Pseudo";} ?></span>
                                                 </p>
                                                 <p class="col-lg-6 align-self-baseline text-lg-right">
                                                     <span class="abrev">date</span>
-                                                    <span class="date">xx/xx/xxxx</span>
-                                                    <span class="hour">..h..</span>
+                                                    <span class="date"><?= $article->date; ?></span>
+                                                    <span class="hour"></span>
                                                 </p>
                                             </div>
 
@@ -93,7 +97,7 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
-                            <?php endfor; ?>
+                            <?php endforeach; ?>
 
                         </div>
                     </div>

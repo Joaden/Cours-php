@@ -6,22 +6,6 @@ session_start();
     $_SESSION["varsessionarticleWritetest"] = "Session article write active OK";
     
     $mode_edition = 0;
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-    // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-    //     $varsessionid = $_SESSION['id'];
-    //     $author = $userInfo['pseudo'] ;
-    //     //var_dump($author);
-    //     echo $author."ligne 15";
-
-    //     die();
-    //     }
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-
-
-
-        
 
         // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         $varsessionid = $_SESSION['id'];
@@ -44,34 +28,51 @@ session_start();
             if(isset($_POST['submit_article']))
             {
                 $title = htmlspecialchars($_POST['title']);
-                        $content = htmlspecialchars($_POST['content']);
-                        $categorie_id[] = htmlspecialchars($_POST['categorie']);
-                        
-                        echo $title . "<br>";
-                        echo $content . "<br>";
-                        var_dump($categorie_id)  . "<br>";
-                        die();
+                $content = htmlspecialchars($_POST['content']);
+                $categorie_id = htmlspecialchars($_POST['categorie']);
+                $user_id = $userInfo['id'];      
+                    
                 if(isset($_POST['title'], $_POST['content'], $_FILES['image'], $_POST['categorie'])) {
-                    if(!empty($_POST['title']) AND !empty($_POST['content']) AND !empty($_FILES['image']) AND !empty($_POST['categorie'])) {
+                    if(!empty($_POST['title']) AND !empty($_POST['content']) AND !empty($_FILES['image']['name']) AND !empty($_POST['categorie'])) {
                         
                         $title = htmlspecialchars($_POST['title']);
                         $content = htmlspecialchars($_POST['content']);
                         $categorie_id = htmlspecialchars($_POST['categorie']);
                         
-                        echo $title . "<br>";
-                        echo $content . "<br>";
-                        echo $categorie_id . "<br>";
-                        die();
-                        // if()
-                        
 
-                        $ins = createArticle($categorie_id, $title, $content, $author, $image);
 
-                        $message = 'Votre article a bien été posté';
-                        header('Location: user_board.php');
+                        // traitement image de l'article
+                        $taillemax = 2097152;
+                        $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
+                        if($_FILES['image']['size'] <= $taillemax)
+                        {
+                            //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                            $extensionUpload = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
+                            if(in_array($extensionUpload, $extensionsValides))
+                            {
+                                $chemin = "$pathToRootFolder/assets/photos/avatars".$_SESSION['id'].".".$extensionUpload;
+                                $resultat = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
+                                if($resultat)
+                                {
+                                    $image = $_SESSION['id'].".".$extensionUpload;
 
-                        // $ins = $bdd->prepare('INSERT INTO articles (title, content, date)')
+                                    $author = $userInfo['pseudo'];
 
+                                    $ins = createArticle($user_id, $categorie_id, $title, $content, $author, $image);
+
+                                    $message = 'Votre article a bien été posté';
+                                    header('Location: user_board.php');
+
+                                    // $ins = $bdd->prepare('INSERT INTO articles (title, content, date)')
+                                } else {
+                                    $erreur = "Erreur lors de l'importation de photo de profil.";
+                                }
+                            } else {
+                                $message = 'Le types de fichiers sont jpg, jpeg, png, gif';
+                            }
+                        } else {
+                            $message = 'La taille de l\'image est trop grande';
+                        }                        
                     } else {
                         $message = 'Tous les champs sont obligatoires';
                     }
@@ -161,7 +162,8 @@ session_start();
                             <div class="container">
                                 <h2>Create Article</h2>
                                 <form action="" method="POST" enctype="multipart/form-data">
-                                    <!--<input type="text" name="author" id="author" value="<?php #if(isset($userInfo)) { echo $userInfo['name']; } ?>" class="form-control" disabled>-->
+                                    <input type="text" name="author" id="author" value="<?php if(isset($userInfo)) { echo $userInfo['pseudo']; } ?>" class="form-control" disabled>
+                                
                                     <div class="form-group">
                                         <label for="title">Title:</label>
                                         <input type="title" class="form-control" id="title" placeholder="Title de l'article" name="title" require>
@@ -181,10 +183,10 @@ session_start();
                                     
                                     <div class="form-group">
                                         <label for="inputCat">Catégories</label>
-                                        <select id="inputCat" class="form-control">
+                                        <select id="inputCat" class="form-control" name="categorie">
                                             <option selected>Choisir une catégorie</option>
                                             <?php foreach ($categories as $cat) : ?>
-                                            <option name="<?php echo $cat->name ?>"><?php echo $cat->name ?></option>
+                                            <option value="<?php echo $cat->id ?>"><?php echo $cat->name ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
