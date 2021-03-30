@@ -161,13 +161,13 @@ session_start();
                                             <?php $categorie = getCategorie($id); ?>
                                             
 
-                                            <?php #if (isset($categorie)){ ?>
+                                            <?php if (isset($categorie)){ ?>
 
-                                            <?php# foreach ($categorie as $cat) : ?>
+                                            <?php foreach ($categorie as $cat) : ?>
 
                                             <a href="#" class="keyword"><?= $article->categories_id; ?></a>
                                         
-                                        <?php# endforeach; ?>
+                                        <?php endforeach; ?>
 
                                     </div>
 
@@ -180,7 +180,7 @@ session_start();
                                         <a href="#" class="keyword">carrenage</a>
                                     </div>
                                         <?php    }  ?>
-                                        <?php   # }  ?>
+                                        <?php    }  ?>
 
                                 
                             </div>

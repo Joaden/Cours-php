@@ -321,7 +321,7 @@ function getComments($id)
     $req->closeCursor();
     return $data;
 }
-function getAvatar()
+function getAvatar($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
@@ -331,7 +331,7 @@ function getAvatar()
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
-    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    $data = $req->fetch(PDO::FETCH_OBJ);
     return $data;
     /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
     $req->closeCursor();
@@ -520,7 +520,7 @@ if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
         $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
         if(in_array($extensionUpload, $extensionsValides))
         {
-            $chemin = "$pathToRootFolder/assets/photos/avatars".$_SESSION['id'].".".$extensionUpload;
+            $chemin = "$pathToRootFolder/assets/photos/uploadPersonal/".$_SESSION['id'].".".$extensionUpload;
             $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
             if($resultat)
             {
