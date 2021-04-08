@@ -15,6 +15,12 @@ require_once($pathToRootFolder.'config/functions.php');
 // check if user is connected
 require($pathToRootFolder."views/common/checkSessionUser.php");
 
+if(isset($_POST['formupdateprofil']))
+{
+    //vérification & upload image 
+    $updateAvatar = updateAvatar();  
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -85,22 +91,31 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
                 <div class="col-md-4">
                 </div>
             </div>
+            <p style="color: red;" id="erreur">
+                <?php 
+                    if(isset($erreur))
+                    {
+                    echo $erreur;  
+                    }
+                ?>
+            </p>
+            <br>
 
             <!-- Formulaire pour modifier son profil -->
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
 
                 <h2 class="text-secondary">Visible par vous uniquement</h2>
 
                 <div class="ml-5">
                     <div class="form-group">
                         <label for="emailRegister"><?php if(isset($userInfo)) { echo $userInfo['name']; } ?></label>
-                        <input name="name" type="text" class="form-control" id="nameRegister" aria-describedby="nameRegister" placeholder="Modifier mon nom" value="<?php if(isset($name)) { echo $name; } ?>" required>
+                        <input name="name" type="text" class="form-control" id="nameRegister" aria-describedby="nameRegister" placeholder="Modifier mon nom" value="<?php if(isset($name)) { echo $name; } ?>" >
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="emailRegister"><?php if(isset($userInfo)) { echo $userInfo['email']; } ?></label>
-                                <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="Modifier mon email" value="<?php if(isset($email)) { echo $email; } ?>" required>
+                                <input name="email" type="email" class="form-control" id="emailRegister" aria-describedby="emailRegister" placeholder="Modifier mon email" value="<?php if(isset($email)) { echo $email; } ?>" >
                                 
                             </div>
                         </div>
@@ -113,12 +128,17 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
                                            echo "<div>Votre profil n\'est pas confirmé</div>";
                                         } 
                                         else{
-                                            echo "<div>Profil Vérifié</div>";
+                                            echo "<div>Veuillez confirmer votre email.</div>";
                                         }
                                         
                                     ?>
                                 </label>
                                 
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone"><?php if(isset($userInfo)) { echo 'Statut'; } else { echo "Permission statut :"; }?></label>
                             </div>
                         </div>
 
@@ -134,7 +154,7 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="pseudoRegister"><?php if(isset($userInfo)) { echo $userInfo['pseudo']; } ?></label>
-                                <input name="pseudo" type="text" class="form-control" id="pseudoRegister" aria-describedby="pseudoRegister" placeholder="Modifier mon pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" required>
+                                <input name="pseudo" type="text" class="form-control" id="pseudoRegister" aria-describedby="pseudoRegister" placeholder="Modifier mon pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" >
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -146,7 +166,7 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
                     </div>
                     <div class="form-group">
                         <label for="phraseRegister"><?php if(isset($userInfo)) { echo $userInfo['phrase']; } ?></label>
-                        <input name="phrase" type="text" class="form-control" id="phraseRegister" aria-describedby="phraseRegister" placeholder="Modifier la phrase" value="<?php if(isset($phrase)) { echo $phrase; } ?>" required>
+                        <input name="phrase" type="text" class="form-control" id="phraseRegister" aria-describedby="phraseRegister" placeholder="Modifier la phrase" value="<?php if(isset($phrase)) { echo $phrase; } ?>" >
                     </div>
                 </div>
 

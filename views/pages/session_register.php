@@ -24,7 +24,7 @@ if(isset($_POST['formregister']))
             $password = htmlspecialchars($_POST['mdp']);
             $password2 = htmlspecialchars($_POST['mdp2']);
             $phrase = htmlspecialchars($_POST['phrase']);
-            $avatar = htmlspecialchars($_POST['avatar']);
+            // $avatar = htmlspecialchars($_POST['avatar']);
             $captcha = htmlspecialchars($_POST['captcha']);
             
             // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
@@ -59,15 +59,48 @@ if(isset($_POST['formregister']))
                                 {
                                     if($password == $password2)
                                     {
-                                        // hash de mdp , a voir si il y a plus sûr comme function
-                                        $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
-        
-                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
-                                        // On insère les $*** dans la requête
-                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
-                                        $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
-                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        header('Location: session_login.php');
+                                        if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
+                                        {
+                                            $taillemax = 2097152;
+                                            $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
+                                            if($_FILES['avatar']['size'] <= $taillemax)
+                                            {
+                                                //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                                                $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                                                if(in_array($extensionUpload, $extensionsValides))
+                                                {
+                                                    $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
+                                                    $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                                                    if($resultat)
+                                                    {
+
+                                                        $avatar = $_SESSION['id'].".".$extensionUpload;
+                                                        // hash de mdp , a voir si il y a plus sûr comme function
+                                                        $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
+                                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase, avatar) VALUE(?, ?, ?, ?, ?, ?)");
+                                                        // On insère les $*** dans la requête
+                                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase, $avatar));
+                                                        //vérification & upload image 
+                                                        //$updateAvatar = addAvatar();
+
+                                                        $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
+                                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
+                                                        header('Location: session_login.php');
+
+                                                    } else {
+                                                        $erreur = "Erreur lors de l'importation de photo de profil.";
+                                                    }
+                                                } else {
+                                                    $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
+                                                }
+                                            } else {
+                                                $erreur = "Votre photo ne doit pas dépasser 2Mo.";
+                                            }
+                                        } 
+                                        else {
+                                            $erreur = "Veuillez ajouter une photo.";
+                                        }
+
                                     }
                                     else
                                     {
@@ -112,7 +145,6 @@ if(isset($_POST['formregister']))
     }
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -139,8 +171,18 @@ if(isset($_POST['formregister']))
 
             <br>
             <br>
+            <p style="color: red;" id="erreur">
+                <?php 
+                    if(isset($erreur))
+                    {
+                    echo $erreur;  
+                    }
+                ?>
+            </p>
+            <br>
+            
 
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
 
                 <h2 class="text-secondary">Visible par vous uniquement</h2>
 
@@ -227,6 +269,10 @@ if(isset($_POST['formregister']))
                         <input type="text" class="form-control" id="captcha" name="captcha" placeholder="14 + 6 = ?" autocomplete="off" required="required" data-validation-required-message="Please enter the response.">
                     </div>
                 </div>
+                <div id="antibot" class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label for="antibot"></label>
+                        <input type="text"  name="antibot" placeholder="" value="">
+                    </div>
 
                 <div class="row">
                     <div class="col text-center">

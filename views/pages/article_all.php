@@ -13,8 +13,15 @@ session_start();
     require_once($pathToRootFolder.'config/connect.php');
 
     require_once($pathToRootFolder.'config/functions.php');
+
+    require_once($pathToRootFolder.'config/functions/function_file.php');
+
     // Get all articles
     $articles = getArticles();
+    $images = getImages();
+    $categories = getCategories();
+
+
     //showInConsole($articles); // debug
 
     // retrieves the user's ID if he is logged in
@@ -54,33 +61,42 @@ session_start();
 
                     <div class="container section-content">
                         <div class="row">
-                            <?php # foreach($articles as $article): ?>
-                            <?php for($i=0; $i<6;$i++):?>
+                            <?php foreach($articles as $article): ?>
+                            <?php #for($i=0; $i<6;$i++):?>
                                 <!-- <div class="col-6 show-red"> -->
                                 <!-- </div> -->
 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
                                     <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">
-                                        <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
-                                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
-                                        <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+                                        <?php foreach($images as $image): ?>
+                                            <?php if($article->id == $image->article_id){ ?>
+                                            <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                        <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> 
+                                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article_read.php?id=<?= $article->id ?>"></a>
+                                         <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
                         
                                     </a>
                                     <div class="blogArticle-content">
-                                        <h2 class="blogArticle-title">Lorem ipsum dolor sit amet</h2>
-                                        <p class="blogArticle-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rem eum fuga voluptatibus velit excepturi aliquid quia minima dolor cum? Dolorem repellat, dicta rerum doloremque non omnis?</p>
+                                        <h2 class="blogArticle-title">
+                                            <a href="article_read.php?id=<?= $article->id ?>">
+                                                <?= $article->title; ?>
+                                            </a>
+                                        </h2>
+                                        <p class="blogArticle-text"><?= substr($article->content, 0, 250)."..."; ?></p>
                                         <div class="blogArticle-footer">
                                             <!-- v1 -->
                                             
                                             <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                                 <p class="col-lg-6 align-self-baseline mb-0">
                                                     <span class="abrev">par</span>
-                                                    <span class="pseudo">Pseudo</span>
+                                                    <span class="pseudo"><?php if(isset($article->author)){echo $article->author;}else{echo "Pseudo";} ?></span>
                                                 </p>
                                                 <p class="col-lg-6 align-self-baseline text-lg-right">
                                                     <span class="abrev">date</span>
-                                                    <span class="date">xx/xx/xxxx</span>
-                                                    <span class="hour">..h..</span>
+                                                    <span class="date"><?= $article->date; ?></span>
+                                                    <span class="hour"></span>
                                                 </p>
                                             </div>
 
@@ -93,7 +109,7 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
-                            <?php endfor; ?>
+                            <?php endforeach; ?>
 
                         </div>
                     </div>

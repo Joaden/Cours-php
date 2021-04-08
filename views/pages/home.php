@@ -31,19 +31,14 @@ session_start();
 
     require_once($pathToRootFolder.'config/functions.php');
 
-    // retrieves the user's ID if he is logged in
-    // if(isset($_GET['id']) AND $_GET['id'] > 0)
-    require($pathToRootFolder."views/common/checkSessionUser.php");
-    // if(isset($_SESSION['id']))
-    // {
-    //     $getId = intval($_SESSION['id']);
-    //     $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    //     $reqUser->execute(array($getId));
-    //     $userInfo = $reqUser->fetch();
-    // }
-    
+    require_once($pathToRootFolder.'config/functions/function_file.php');
 
+    require($pathToRootFolder."views/common/checkSessionUser.php");
+    
     $articles = getArticles();
+    $categories = getCategories();
+    $images = getImages();
+
     showInConsole($articles); // debug
 
 ?>
@@ -113,14 +108,21 @@ session_start();
             </div>
 
             <!-- =================== ARTICLES ================== -->
+            <php $nbr = 1; ?>
+            
             <?php foreach($articles as $article): ?>
+                 
                 <div class="section-content">
                     <div class="blogArticle--large row no-gutters">
-                        <a class="blogArticle-imglink col-lg-5" href="#">
+                        <a class="blogArticle-imglink col-lg-5" href="article_read.php?id=<?= $article->id ?>">
                             <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
-                            <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="#"></a>
-
-                            <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+                            <?php foreach($images as $image): ?>
+                                <?php if($article->id == $image->article_id){ ?>
+                                   <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
+                                <?php } ?>
+                                 <!--   <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="#"></a>
+                                <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+                            <?php endforeach; ?>
             
                         </a>
                         <div class="blogArticle-content offset-lg-1 col-lg-6">
@@ -129,7 +131,7 @@ session_start();
                                     <?= $article->title; ?>
                                 </a>
                             </h2>
-                            <p class="blogArticle-text"><?= $article->content; ?></p>
+                            <p class="blogArticle-text"><?= substr($article->content, 0, 250)."..."; ?></p>
                             <div class="blogArticle-footer">
                                 <!-- v1 -->
                                 
@@ -145,12 +147,36 @@ session_start();
                                     </p>
                                 </div>
 
-                                <div class="blogArticle-footer-keywords row no-gutters">
-                                    <a href="#" class="keyword">moto</a>
-                                    <a href="#" class="keyword">vitesse</a>
-                                    <a href="#" class="keyword">design</a>
-                                    <a href="#" class="keyword">carrenage</a>
-                                </div>
+                                <?php #if (isset($categorie)){ ?>
+                                    <div class="blogArticle-footer-keywords row no-gutters">
+                                        <?php if (isset($article->categories_id)){ ?>
+                                            <?php $cat = $article->id; ?>
+                                            <?php $id = $article->id; ?>
+
+                                            <?php $categorie = getCategorie($id); ?>
+                                            
+                                            <?php #if (isset($categorie)){ ?>
+
+                                            <?php #foreach ($categorie as $cat) : ?>
+
+                                            <a href="#" class="keyword"><?= $article->categories_id; ?></a>
+                                        
+                                        <?php #endforeach; ?>
+
+                                    </div>
+
+                                        <?php }else{?>
+
+                                    <div class="blogArticle-footer-keywords row no-gutters">
+                                        <a href="#" class="keyword">moto</a>
+                                        <a href="#" class="keyword">vitesse</a>
+                                        <a href="#" class="keyword">design</a>
+                                        <a href="#" class="keyword">carrenage</a>
+                                    </div>
+                                        <?php    #}  ?>
+                                        <?php    }  ?>
+
+                                
                             </div>
                         </div>
                     </div>

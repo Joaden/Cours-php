@@ -23,4 +23,21 @@
         </div>
     </li>
 </ul>
-<img class="ml-1 avatar-img--small" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+
+<?php 
+    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        $varsessionid = $_SESSION['id'];
+        if(!empty($userInfo['avatar']))
+        {
+        ?>
+            <img class="ml-1 avatar-img--small" src="../../assets/photos/<?php echo "avatars/".$userInfo['avatar']; ?>" alt="avatar">
+        <?php 
+        } else {
+        ?>
+            <img class="ml-1 avatar-img--small" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+        <?php
+        }
+
+    }  
+    ?>
+

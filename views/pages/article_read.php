@@ -8,12 +8,11 @@ session_start();
 
         $id = htmlspecialchars($_GET['id']);
 
-        var_dump($id);
-        //die();
         $id = strip_tags($id);
     
         require_once($pathToRootFolder.'config/connect.php');
         require_once($pathToRootFolder.'config/functions.php');
+        require($pathToRootFolder.'config/functions/function_file.php');
         require($pathToRootFolder."views/common/checkSessionUser.php");
 
         if (isset($_POST['submit_comment'])) {
@@ -22,65 +21,52 @@ session_start();
                 if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                     $varsessionid = $_SESSION['id'];
                     $author = $userInfo['pseudo'] ;
-                    //var_dump($author);
-                    echo $author."ligne 26";
-
-                    die();
+                    $phraseAuthor = $userInfo['phrase'] ;
+                    
                     }
 
-            //extract($_POST);
-            $author = $userInfo['pseudo'] ;  
+                //extract($_POST);
+                $author = htmlspecialchars($userInfo['pseudo']);  
+                $comment = htmlspecialchars($_POST['comment']);
 
-            //var_dump($author);
-            echo $author."ligne 32";
-            die();
+                $errors = array();
+        
+                $author = strip_tags($author);
+                $comment = strip_tags($comment);
+        
+                //if (empty($author))
+                //  array_push($errors, 'Entrez un pseudo !');
+        
+                if (empty($comment))
+                    array_push($errors, 'Entrez un commentaire !');
+        
+                if (count($errors) == 0) {
+                    // get id article read
+                    $articleId = $id;
 
-            $errors = array();
-    
-            $author = strip_tags($author);
-            $comment = strip_tags($comment);
-    
-            //if (empty($author))
-              //  array_push($errors, 'Entrez un pseudo !');
-    
-            if (empty($comment))
-                array_push($errors, 'Entrez un commentaire !');
-    
-            if (count($errors) == 0) {
-                // comment utilise la function addComment
-                $comment = addComment($articleId, $author, $comment);
-    
-                // message retourné pas d'erreur
-                $success = '<div class="alert alert-success">Votre commentaire a bien été envoyé</div>';
-    
-                // Vider le champs du form !
-                unset($author);
-                unset($comment);
-            }
+                    // comment utilise la function addComment
+                    $comment = addComment($articleId, $author, $comment);
+        
+                    // message retourné pas d'erreur
+                    $success = '<div class="alert alert-success">Votre commentaire a bien été envoyé</div>';
+        
+                    // Vider le champs du form !
+                    unset($_POST['comment']);
+                    unset($comment);
+                    header('Location: article_all.php');
+                }
             }
             else{
-                echo $errors;
+                echo '<div class="alert alert-danger">Veuillez écrire un commentaire !</div>';
             }
         }
     
         $article = getArticle($id);
+        $image = getImage($id);
         $comments = getComments($id);
-    }
-    // else {
-    //     $errors = array();
-    //     if (empty($author))
-    //     array_push($errors, 'Entrez un pseudo !');
-
-    //     if (empty($comment))
-    //         array_push($errors, 'Entrez un commentaire !');
-    //     //echo $errors;
-    //     var_dump($author).' vardump author';
-    //     var_dump($errors).'vardump error';
-    //     var_dump($_POST).'vardump post';
-    //     var_dump($_GET).'vardump get';
-    //     die();
-    //     //header('location: home.php');
-    // }
+        $categorie = getCategorie($id);
+        $getAvatar = getAvatar($id);
+     }
 
 ?>
 
@@ -105,8 +91,26 @@ session_start();
                     <div class="blogArticle--large">
                         <div class="blogArticle-content">
                             <div class="row no-gutters align-items-center">
-                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?></h2>
-                                <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?> <?= $article->id; ?></h2>
+                                <?php 
+                                    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+                                        $varsessionid = $_SESSION['id'];
+                                        if(!empty($userInfo['avatar']))
+                                        {
+                                        ?>
+                                            <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+
+                                            <!--<img class="ml-1 avatar-img--small" src="../../assets/photos/<?php # echo "images".$image['name']; ?>" alt="image de l'article">-->
+                                        <?php 
+                                        } else {
+                                        ?>
+                                            <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+                                        <?php
+                                        }
+
+                                    }  
+                                    ?>
+                                <!--<img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">-->
                             </div>
 
 
@@ -118,13 +122,14 @@ session_start();
                                 </p>
                                 <p class="col-lg-6 align-self-baseline text-lg-right">
                                     <span class="abrev">par</span>
-                                    <span class="pseudo"><?php if(isset($author)) echo $author; else echo "Admin"; ?></span>
+                                    <span class="pseudo"><?php if(isset($article->author)) echo $article->author; else echo "Admin"; ?></span>
                                 </p>
                             </div>
 
 
                             <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
+                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here">
+                                <!--<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">-->
                             </a>
 
                             <p class="blogArticle-text">
@@ -133,11 +138,7 @@ session_start();
                                 ?>
                             </p>
 
-                            <p class="blogArticle-text">
-                                <?= 
-                                    $article->content; 
-                                ?>
-                            </p>
+                          
 
                             
                             <p class="blogArticle-text"></p>
@@ -146,7 +147,7 @@ session_start();
                                 <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                     <p class="col-lg-6 align-self-baseline mb-0">
                                         <span class="abrev">par</span>
-                                        <span class="pseudo"><?php if(isset($author)) echo $author; else echo "Admin"; ?></span>
+                                        <span class="pseudo"><?php if(isset($article->author)) echo $article->author; else echo "Admin"; ?></span>
                                     </p>
                                     <p class="col-lg-6 align-self-baseline text-lg-right">
                                         <span class="abrev">date</span>
@@ -154,13 +155,23 @@ session_start();
                                         <span class="hour"></span>
                                     </p>
                                 </div>
+                                <!-- array PERMANENT: -->
+                                <?php if (isset($categorie)){ ?>
+                                    <div class="blogArticle-footer-keywords row no-gutters">
 
-                                <div class="blogArticle-footer-keywords row no-gutters">
-                                    <a href="#" class="keyword">moto</a>
-                                    <a href="#" class="keyword">vitesse</a>
-                                    <a href="#" class="keyword">design</a>
-                                    <a href="#" class="keyword">carrenage</a>
-                                </div>
+                                    <?php foreach ($categorie as $cat) : ?>
+                                        <a href="#" class="keyword"><?= $cat->name; ?></a>
+                                    <?php endforeach; ?>
+                                    </div>
+                                <?php }else{?>
+                                    <div class="blogArticle-footer-keywords row no-gutters">
+                                        <a href="#" class="keyword">moto</a>
+                                        <a href="#" class="keyword">vitesse</a>
+                                        <a href="#" class="keyword">design</a>
+                                        <a href="#" class="keyword">carrenage</a>
+                                    </div>
+                                    <?php    } ?>
+                                
                             </div>
                         </div>
                     </div>
@@ -169,7 +180,7 @@ session_start();
                 
                 <section class="section m-md-5">
                     <!-- COMMENTAIRES -->
-                    <form action="" class="mb-5">
+                    <form method="POST" action="" class="mb-5">
                         <div class="form-group">
                             <label for="writeComment_id">
                                 <h4>Poster un commentaire</h4> 
@@ -198,6 +209,7 @@ session_start();
                                  if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                     $varsessionid = $_SESSION['id'];
                                     $author = $userInfo['pseudo'] ;
+                                    
                                     //article_read.php?id=<?= $article->id
                                  echo "
                                     <form action=\"\" method=\"POST\">
@@ -262,17 +274,17 @@ session_start();
 
             <!-- ############ ASIDE ############## -->
             <aside class="order-0 order-md-1 col-md-3 col-xl-2 bg-secondaireLighter2 articleFilter px-0">
-                <form method="get" action="">
+                <form method="post" action="">
                     <div class="form-group">
                         <label for="filter_categorie_id" class="h3 d-block bg-secondaireDarker2 text-white mt-5 pl-2">Categorie</label>
                         <select name="filter_categorie" id="filter_categorie_id" class="form-control">
                             <!-- <optgroup label=""> -->
 
                                 <!-- array temporaire: -->
-                                <?php $fakeCategories = ['aaaa','bbbb','cccc'];?>
+                                <?php $categories = ['aaaa','bbbb','cccc'];?>
 
-                                <?php for($i=0; $i<count($fakeCategories); $i++): ?>
-                                    <option value="<?=$fakeCategories[$i]?>"><?=$fakeCategories[$i]?></option>
+                                <?php for($i=0; $i<count($categories); $i++): ?>
+                                    <option value="<?=$categories[$i]?>"><?=$categories[$i]?></option>
                                 <?php endfor; ?>
                             <!-- </optgroup> -->
                         </select>
@@ -296,6 +308,10 @@ session_start();
             </aside>
         </div>
     </div>
+    <?php
+    #require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions' . DIRECTORY_SEPARATOR . 'compteur';
+    #ajouter_vue();
+    ?>
 
     <!-- FOOTER -->
     <?php # include($pathToRootFolder."views/common/footer.php");?>

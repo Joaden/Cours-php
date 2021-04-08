@@ -2,9 +2,11 @@
 /formulaireContact.php
 /post_contact_form.php
 /chat.php
+/action_article.php
 /team/*
 /team/portfolioDenis/*
 # /assets/photos/profils/*
+/assets/photos/*
 /assets/uploadPersonal/*
 /pages/article.php
 /NOT_IN_GIT/*
