@@ -69,7 +69,7 @@ if(isset($_POST['formregister']))
                                                 $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
                                                 if(in_array($extensionUpload, $extensionsValides))
                                                 {
-                                                    $chemin = "$pathToRootFolder/assets/photos/uploadPersonal/".$_SESSION['id'].".".$extensionUpload;
+                                                    $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
                                                     $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
                                                     if($resultat)
                                                     {

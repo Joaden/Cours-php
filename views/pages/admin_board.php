@@ -18,6 +18,15 @@ session_start();
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
+
+        
+    $users = getUsers();
+    $comments = getCommentsAdmin();
+
+    $num_rows=0;
+
+    
+
 ?>
 
 <!DOCTYPE html>

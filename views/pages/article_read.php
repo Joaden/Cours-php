@@ -14,6 +14,7 @@ session_start();
     
         require_once($pathToRootFolder.'config/connect.php');
         require_once($pathToRootFolder.'config/functions.php');
+        require($pathToRootFolder.'config/functions/function_file.php');
         require($pathToRootFolder."views/common/checkSessionUser.php");
 
         if (isset($_POST['submit_comment'])) {
@@ -71,7 +72,7 @@ session_start();
         $image = getImage($id);
         $comments = getComments($id);
         $categorie = getCategorie($id);
-        
+        $getAvatar = getAvatar($id);
      }
 
 ?>
@@ -134,7 +135,7 @@ session_start();
 
 
                             <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="../../assets/photos/<?php echo $image->name; ?>" alt="image de l'article here">
+                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here">
                                 <!--<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">-->
                             </a>
 

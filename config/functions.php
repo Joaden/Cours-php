@@ -5,31 +5,7 @@ function createArticle($user_id, $categorie_id, $title, $content, $author, $imag
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    // if(isset($_SESSION['id']))
-    // {
-    //     $getId = intval($_SESSION['id']);
-    //     $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    //     $reqUser->execute(array($getId));
-    //     $userInfo = $reqUser->fetch();
-        
-    // } 
-
-    //$userId = $userInfo['id'];
-    //$name = $userInfo['pseudo'];
-    //$articleId = $article['id'];
-
-    /////////////////// START DEBUG
-    // echo $image . "<br>";
-    // echo $user_id . "<br>";
-    // echo $title . "<br>";
-    // echo $content . "<br>";
-    // echo $author . "<br>ok ";
-    // //var_dump($categorie_id)  . "<br>";
-    // echo $categorie_id . "  before INSERT INTO<br>";
-    //die();
-    /////////////////// END DEBUG
     
-
     // preparation de al requete
     $req = $bdd->prepare('INSERT INTO articles (user_id, categories_id, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
     $req->execute(array($user_id, $categorie_id, $title, $content, $author));
@@ -39,19 +15,9 @@ function createArticle($user_id, $categorie_id, $title, $content, $author, $imag
     if($req1->rowCount() > 0)
     {
         $data = $req1->fetch(PDO::FETCH_OBJ);
-        //echo "id : article créé : ";
-        //var_dump($data);
-        //return $data;
-        // $req->closeCursor();
     
-        
-        // $article_id = $data["id"];
         $article_id = $data->id;
-        //echo $article_id;
-        //vérification & upload image 
-        //$addImageArticle = addImageArticle($article_id, $name, $user_id);
-        // var_dump($data);
-        //die();
+        
         $req1 = $bdd->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
         $req1->execute(array($article_id, $image, $user_id));
 
@@ -59,33 +25,6 @@ function createArticle($user_id, $categorie_id, $title, $content, $author, $imag
     }
 }
 
-////////////////////////////// GET IMAGE ARTICLE
-function getImage($id)
-{
-    $pathToRootFolder = "../../";
-    require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM images WHERE article_id = ? ');
-    $req->execute(array($id));
-    $data = $req->fetch(PDO::FETCH_OBJ);
-    // echo $data;
-    // var_dump($data);
-    // die();
-    $req->closeCursor();
-    return $data;
-}
-function getImages()
-{
-    $pathToRootFolder = "../../";
-    require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM images ORDER BY id ASC');
-    ///* execute() = Exécute la première requête */
-    $req->execute();
-    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
-    $data = $req->fetchAll(PDO::FETCH_OBJ);
-    
-    $req->closeCursor();
-    return $data;
-}
 ////////////////////////////// create article with multi img
 function createArticleMulti($articleId, $author, $userId)
 {
@@ -159,61 +98,6 @@ function createUser()
                                         $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
                                         $_SESSION['comptecree'] = "Votre compte à bien été créé !";
                                         header('Location: session_login.php');
-                                        
-
-                                        // vérification & upload image
-                                        // if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
-                                        // {
-                                        //     //$avatar = htmlspecialchars($_POST['avatar']);
-
-                                        //     $taillemax = 2097152;
-                                        //     $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
-                                        //     if($_FILES['avatar']['size'] <= $taillemax)
-                                        //     {
-                                        //         // file treated lower case and extracted name
-                                        //         $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-                                        //         if(in_array($extensionUpload, $extensionsValides))
-                                        //         {
-                                        //             // path = name of file
-                                        //             $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
-                                        //             $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
-                                        //             if($resultat)
-                                        //             {
-                                        //                 $avatar = $_SESSION['id'].".".$extensionUpload;
-                                        //                 $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase, avatar) VALUE(?, ?, ?, ?, ?, ?)");
-                                        //                 // On insère les $*** dans la requête
-                                        //                 $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase, $avatar));
-
-                                        //                 //$updateAvatar = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
-                                        //                 // $updateAvatar->execute(array(
-                                        //                 //     'avatar' => $_SESSION['id'].".".$extensionUpload,
-                                        //                 //     'id' => $_SESSION['id']
-                                        //                 // ));
-                                        //                 // $_SESSION['comptecree'] = "Votre compte à bien été créé avec avatar!";
-                                        //                 // header('Location: session_login.php');
-                                                        
-                                        //             } else {
-                                        //                 $erreur = "Erreur lors de l'importation de photo de profil.";
-                                        //             }
-                                        //         } else {
-                                        //             $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
-                                        //         }
-                                        //     } else {
-                                        //         $erreur = "Votre photo ne doit pas dépasser 2Mo.";
-                                        //     }
-                                        // } 
-                                             // hash de mdp , a voir si il y a plus sûr comme function
-                                        // $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
-                                        // $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
-                                        // // On insère les $*** dans la requête
-                                        // $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
-                                        // $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
-                                        // $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                        // header('Location: session_login.php');
-                                        
-
-
-                                       //insert in to sans limage
                                         
                                     }
                                     else
@@ -297,6 +181,46 @@ function getArticle($id)
     $req->closeCursor();
 }
 
+//Get image for article in database, table images
+function getImages()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    
+    $error = null;
+    try{
+        // get all images from bdd.
+        $req = $bdd->prepare('SELECT * FROM images ORDER BY id ASC');
+        ///* execute() = Exécute la première requête */
+        $req->execute();
+        /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+        $data = $req->fetchAll(PDO::FETCH_OBJ); // affiche tous les resultats
+        
+        $req->closeCursor();
+        return $data;
+    }
+    catch (PDOException $e){
+        $error = $e->getMessage();
+        printf("Il y a eu un problème"); 
+    }
+    
+}
+
+////////////////////////////// GET IMAGE ARTICLE
+function getImage($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM images WHERE article_id = ? ');
+    $req->execute(array($id));
+    $data = $req->fetch(PDO::FETCH_OBJ);
+    // echo $data;
+    // var_dump($data);
+    // die();
+    $req->closeCursor();
+    return $data;
+}
+
 // fonction ajouter un commentaire à un article
 function addComment($articleId, $author, $comment)
 {
@@ -326,10 +250,10 @@ function getAvatar($id)
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
 
-    $req = $bdd->prepare('SELECT avatar FROM users WHERE id == ');
+    $req = $bdd->prepare('SELECT * FROM users WHERE id = ?');
     
     ///* execute() = Exécute la première requête */
-    $req->execute();
+    $req->execute(array($id));
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
     $data = $req->fetch(PDO::FETCH_OBJ);
     return $data;
@@ -520,7 +444,7 @@ if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
         $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
         if(in_array($extensionUpload, $extensionsValides))
         {
-            $chemin = "$pathToRootFolder/assets/photos/uploadPersonal/".$_SESSION['id'].".".$extensionUpload;
+            $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
             $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
             if($resultat)
             {

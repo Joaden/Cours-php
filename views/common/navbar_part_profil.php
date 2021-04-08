@@ -30,7 +30,7 @@
         if(!empty($userInfo['avatar']))
         {
         ?>
-            <img class="ml-1 avatar-img--small" src="../../assets/photos/<?php echo "avatars".$userInfo['avatar']; ?>" alt="avatar">
+            <img class="ml-1 avatar-img--small" src="../../assets/photos/<?php echo "avatars/".$userInfo['avatar']; ?>" alt="avatar">
         <?php 
         } else {
         ?>

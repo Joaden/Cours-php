@@ -51,7 +51,7 @@ session_start();
                             if(in_array($extensionUpload, $extensionsValides))
                             {
                                 $date = date("Ymdhis");
-                                $chemin = "$pathToRootFolder/assets/photos/uploadPersonal/".$_SESSION['id']."-article-".$date.".".$extensionUpload;
+                                $chemin = "$pathToRootFolder/assets/uploadPersonal/".$_SESSION['id']."-article-".$date.".".$extensionUpload;
                                 $resultat = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
                                 if($resultat)
                                 {

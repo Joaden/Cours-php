@@ -13,8 +13,15 @@ session_start();
     require_once($pathToRootFolder.'config/connect.php');
 
     require_once($pathToRootFolder.'config/functions.php');
+
+    require_once($pathToRootFolder.'config/functions/function_file.php');
+
     // Get all articles
     $articles = getArticles();
+    $images = getImages();
+    $categories = getCategories();
+
+
     //showInConsole($articles); // debug
 
     // retrieves the user's ID if he is logged in
@@ -61,9 +68,14 @@ session_start();
 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
                                     <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">
-                                        <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> -->
-                                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
-                                        <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+                                        <?php foreach($images as $image): ?>
+                                            <?php if($article->id == $image->article_id){ ?>
+                                            <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                        <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here"> 
+                                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article_read.php?id=<?= $article->id ?>"></a>
+                                         <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
                         
                                     </a>
                                     <div class="blogArticle-content">
@@ -72,7 +84,7 @@ session_start();
                                                 <?= $article->title; ?>
                                             </a>
                                         </h2>
-                                        <p class="blogArticle-text"><?= $article->content; ?></p>
+                                        <p class="blogArticle-text"><?= substr($article->content, 0, 250)."..."; ?></p>
                                         <div class="blogArticle-footer">
                                             <!-- v1 -->
                                             
