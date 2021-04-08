@@ -2,9 +2,9 @@
 session_start();
 
     $pathToRootFolder = "../../";
-    $PAGE_TITLE = "Tableau de bord Admin";
+    $PAGE_TITLE = "Tableau de bord Admin Manage Articles";
 
-    $_SESSION["varsessionadmin_board"] = "Session admin_board OK";
+    $_SESSION["varsessionadmin_board"] = "Session admin_board manage articles OK";
 
     include($pathToRootFolder."debug_functions.php");
 
@@ -39,19 +39,23 @@ session_start();
                     <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                     
                     <section class="text-center">
-                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Tableau de bord Admin</h1>
+                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Tableau de bord Admin Manage articles</h1>
 
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
-                            <p class="widgetTextDigit-value">12</p>
+                            <p class="widgetTextDigit-value">240</p>
                         </div>
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de likes reçus</p>
+                            <p class="widgetTextDigit-text">nombre d'articles modifiés</p>
                             <p class="widgetTextDigit-value">134</p>
                         </div>
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de warnings Admin</p>
-                            <p class="widgetTextDigit-value--red">1</p>
+                            <p class="widgetTextDigit-text">nombre d'articles supprimés</p>
+                            <p class="widgetTextDigit-value">34</p>
+                        </div>
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">nombre d'articles en warnings</p>
+                            <p class="widgetTextDigit-value--red">40</p>
                         </div>
                         
                     </section>

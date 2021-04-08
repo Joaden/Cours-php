@@ -8,8 +8,6 @@ session_start();
 
         $id = htmlspecialchars($_GET['id']);
 
-        //var_dump($id);
-        //die();
         $id = strip_tags($id);
     
         require_once($pathToRootFolder.'config/connect.php');
@@ -24,11 +22,7 @@ session_start();
                     $varsessionid = $_SESSION['id'];
                     $author = $userInfo['pseudo'] ;
                     $phraseAuthor = $userInfo['phrase'] ;
-                    // var_dump($author);
-                    // echo $author."ligne 26<br>";
-                    // echo $phraseAuthor."ligne 28<br>";
-
-                    // die();
+                    
                     }
 
                 //extract($_POST);
@@ -48,7 +42,6 @@ session_start();
         
                 if (count($errors) == 0) {
                     // get id article read
-                    //$getId = getArticle($id);
                     $articleId = $id;
 
                     // comment utilise la function addComment

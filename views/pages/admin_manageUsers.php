@@ -2,15 +2,13 @@
 session_start();
 
     $pathToRootFolder = "../../";
-    $PAGE_TITLE = "Tableau de bord Admin";
+    $PAGE_TITLE = "Tableau de bord Admin managge users";
 
     $_SESSION["varsessionadmin_manageUsers"] = "Session admin_manageUsers OK";
 
     include($pathToRootFolder."debug_functions.php");
 
     // Connection
-      //require_once('vendor/autoload.php');
-
       require_once($pathToRootFolder.'config/connect.php');
 
       require_once($pathToRootFolder.'config/functions.php');
@@ -42,16 +40,16 @@ session_start();
                         <h1 class="h1 text-dominante text-center mt-3 mb-5">Manage Users</h1>
 
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
-                            <p class="widgetTextDigit-value">12</p>
+                            <p class="widgetTextDigit-text">nombre d'users inscrit</p>
+                            <p class="widgetTextDigit-value">423</p>
                         </div>
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de likes reçus</p>
+                            <p class="widgetTextDigit-text">demandes des users</p>
                             <p class="widgetTextDigit-value">134</p>
                         </div>
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de warnings Admin</p>
-                            <p class="widgetTextDigit-value--red">1</p>
+                            <p class="widgetTextDigit-text">nombre de warnings users</p>
+                            <p class="widgetTextDigit-value--red">21</p>
                         </div>
                         
                     </section>

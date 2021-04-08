@@ -33,22 +33,11 @@ session_start();
 
     require_once($pathToRootFolder.'config/functions/function_file.php');
 
-    // retrieves the user's ID if he is logged in
-    // if(isset($_GET['id']) AND $_GET['id'] > 0)
     require($pathToRootFolder."views/common/checkSessionUser.php");
-    // if(isset($_SESSION['id']))
-    // {
-    //     $getId = intval($_SESSION['id']);
-    //     $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    //     $reqUser->execute(array($getId));
-    //     $userInfo = $reqUser->fetch();
-    // }
     
-
     $articles = getArticles();
     $categories = getCategories();
     $images = getImages();
-
 
     showInConsole($articles); // debug
 
@@ -166,7 +155,6 @@ session_start();
 
                                             <?php $categorie = getCategorie($id); ?>
                                             
-
                                             <?php #if (isset($categorie)){ ?>
 
                                             <?php #foreach ($categorie as $cat) : ?>

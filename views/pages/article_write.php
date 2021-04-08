@@ -115,22 +115,7 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
-                <!-- <section class="section m-md-5 border-bottom border-dark pb-5">
-                    <div class="blogArticle--large">
-                        <div class="blogArticle-content">
-                            <div class="row no-gutters align-items-center">
-                                <h2 class="blogArticle-title col-md-10 mb-4"></h2>
-                                <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
-                            </div>
-
-                            <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">
-                            </a>
-                            
-                        </div>
-                    </div>
-                    
-                </section> -->
+                
                 <h4><?php 
                         echo $_SESSION["varsessionarticleWritetest"];   
                          echo "<br> ID user N° : ".$userInfo['id'],$userInfo['pseudo'];
