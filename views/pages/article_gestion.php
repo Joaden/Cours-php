@@ -87,7 +87,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                 <!-- </div> -->
 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                                    <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">
+                                    <a class="blogArticle-imglink" href="article_modify.php?id=<?= $article->id ?>">
                                         <?php foreach($images as $image): ?>
                                             <?php if($article->id == $image->article_id){ ?>
                                             <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
@@ -97,7 +97,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                     </a>
                                     <div class="blogArticle-content">
                                         <h2 class="blogArticle-title">
-                                            <a href="article_read.php?id=<?= $article->id ?>">
+                                            <a href="article_modify.php?id=<?= $article->id ?>">
                                                 <?= $article->title; ?>
                                             </a>
                                         </h2>
