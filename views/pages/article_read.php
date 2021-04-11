@@ -65,7 +65,9 @@ session_start();
         $image = getImage($id);
         $comments = getComments($id);
         $categorie = getCategorie($id);
-        $getAvatar = getAvatar($id);
+        $avatar = getAvatar($id);
+        // $avatarByComment = getAvatarByComment($id);
+        
      }
 
 ?>
@@ -98,7 +100,7 @@ session_start();
                                         if(!empty($userInfo['avatar']))
                                         {
                                         ?>
-                                            <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+                                            <img class="avatar-img col-md-2" src="../../assets/photos/avatars/<?php echo $avatar->avatar; ?>" alt="photo de l'auteur">
 
                                             <!--<img class="ml-1 avatar-img--small" src="../../assets/photos/<?php # echo "images".$image['name']; ?>" alt="image de l'article">-->
                                         <?php 
@@ -116,7 +118,7 @@ session_start();
 
                             <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                 <p class="col-lg-6 align-self-baseline mb-0">
-                                    <span class="abrev">date</span>
+                                    <span class="abrev">posté le</span>
                                     <span class="date"><?= $article->date; ?></span>
                                     <span class="hour"></span>
                                 </p>
@@ -128,7 +130,7 @@ session_start();
 
 
                             <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here">
+                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
                                 <!--<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">-->
                             </a>
 
@@ -156,11 +158,18 @@ session_start();
                                     </p>
                                 </div>
                                 <!-- array PERMANENT: -->
-                                <?php if (isset($categorie)){ ?>
+                                <?php
+                                $getHashtags = getHashtags($id);
+                                 if (isset($categorie)){ ?>
                                     <div class="blogArticle-footer-keywords row no-gutters">
 
                                     <?php foreach ($categorie as $cat) : ?>
-                                        <a href="#" class="keyword"><?= $cat->name; ?></a>
+                                        <a href="#" class="text-success"><?= $cat->name; ?></a>
+                                    <?php endforeach; ?>
+                                    <?php foreach ($getHashtags as $hashtags) : ?>
+
+                                        <a href="#" class="keyword"><?=  $hashtags->name; ?></a>
+
                                     <?php endforeach; ?>
                                     </div>
                                 <?php }else{?>
@@ -245,7 +254,16 @@ session_start();
                         <div class="comment row pt-3">
                             <div class="col-md-2">
                                 <div class="d-flex flex-column">
-                                    <img class="avatar-img" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+                                    <?php 
+                                    //foreach ($avatarByComment as $avatarCom)
+                                    if ($com->author == $com->pseudo){
+                                        echo "<img class=\"avatar-img\" src=\"../../assets/photos/avatars/$com->avatar\" alt=\"photo de l'auteur\">"; 
+                                    }else {
+                                        echo "<img class=\"avatar-img col-md-2\" src=\"https://source.unsplash.com/Y7C7F26fzZM/300x300\" alt=\"photo de l'auteur\">";
+
+                                    }
+                                    ?>
+                                    
                                     <p class="">
                                         <span class="abrev">par</span>
                                         <span class="pseudo"><?= $com->author ?></span>

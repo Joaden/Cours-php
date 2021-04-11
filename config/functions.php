@@ -1,7 +1,7 @@
 <?php
 /////////////////////////// CREATE FUNCTION
 //Create article for article_write.php
-function createArticle($user_id, $categorie_id, $title, $content, $author, $image)
+function createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
@@ -153,7 +153,7 @@ function getArticles()
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT * FROM articles ORDER BY id ASC');
+    $req = $bdd->prepare('SELECT * FROM articles ORDER BY id DESC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -163,6 +163,28 @@ function getArticles()
     $req->closeCursor();
     
 }
+
+// Get my articles
+function getMyArticles($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM articles WHERE user_id = ? ORDER BY id ASC');
+    $req->execute(array($id));
+    if($req->rowCount() >= 1)
+    {
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+        $req->closeCursor();
+    }
+    else{
+         header('Location: home.php');
+    $req->closeCursor();
+    }
+   
+    
+}
+
 // Fonction qui récupère un article
 function getArticle($id)
 {
@@ -238,19 +260,37 @@ function getComments($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM comments WHERE articleId = ? ORDER BY id DESC');
+    $req = $bdd->prepare('SELECT * FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ? ORDER BY comments.id DESC');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     
     $req->closeCursor();
     return $data;
 }
+
+function getAvatarByComment($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+
+    $req = $bdd->prepare('SELECT articleId, author, pseudo, avatar FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ?');
+    
+    ///* execute() = Exécute la première requête */
+    $req->execute(array($id));
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $req->closeCursor();
+
+}
+
 function getAvatar($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
 
-    $req = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+    $req = $bdd->prepare('SELECT * FROM articles INNER JOIN users ON articles.user_id = users.id AND articles.id = ?');
     
     ///* execute() = Exécute la première requête */
     $req->execute(array($id));
@@ -261,6 +301,7 @@ function getAvatar($id)
     $req->closeCursor();
 
 }
+
 function getUsers()
 {
     $pathToRootFolder = "../../";
@@ -347,7 +388,20 @@ function getCategorie($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM categories INNER JOIN articles ON categories.id = articles.categories_id WHERE articles.id = ?');
+    $req = $bdd->prepare('SELECT * FROM categories INNER JOIN articles ON categories.id = articles.categories_id AND articles.id = ?');
+    // SELECT name FROM `cours_denis`.`categories` WHERE `id` = ? ');
+    $req->execute(array($id));
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    $req->closeCursor();
+}
+
+// Get HASHTAGS
+function getHashtags($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM tags INNER JOIN tag_items ON tags.id = tag_items.tag_id AND tag_items.article_id = ?');
     // SELECT name FROM `cours_denis`.`categories` WHERE `id` = ? ');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -433,36 +487,36 @@ function updateAvatar()
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-//vérification & upload image
-if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
-{
-    $taillemax = 2097152;
-    $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
-    if($_FILES['avatar']['size'] <= $taillemax)
+    //vérification & upload image
+    if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
     {
-        //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-        $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-        if(in_array($extensionUpload, $extensionsValides))
+        $taillemax = 2097152;
+        $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
+        if($_FILES['avatar']['size'] <= $taillemax)
         {
-            $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
-            $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
-            if($resultat)
+            //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+            $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+            if(in_array($extensionUpload, $extensionsValides))
             {
-                $updateAvatar = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
-                $updateAvatar->execute(array(
-                    'avatar' => $_SESSION['id'].".".$extensionUpload,
-                    'id' => $_SESSION['id']
-                ));
-                
-                header('Location: profil.php');
+                $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
+                $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                if($resultat)
+                {
+                    $updateAvatar = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+                    $updateAvatar->execute(array(
+                        'avatar' => $_SESSION['id'].".".$extensionUpload,
+                        'id' => $_SESSION['id']
+                    ));
+                    
+                    header('Location: profil.php');
+                } else {
+                    $erreur = "Erreur lors de l'importation de photo de profil.";
+                }
             } else {
-                $erreur = "Erreur lors de l'importation de photo de profil.";
+                $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
             }
         } else {
-            $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
+            $erreur = "Votre photo ne doit pas dépasser 2Mo.";
         }
-    } else {
-        $erreur = "Votre photo ne doit pas dépasser 2Mo.";
     }
-}
 }

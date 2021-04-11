@@ -23,7 +23,7 @@ session_start();
 
     ///////////Affichage des articles //////////////
     $req = "SELECT * FROM articles";
-    $res = $conn -> query($req);
+    // $res = $conn -> query($req);
     ////////////////////////////////////////////////
     if($_GET) {
         $id = $_GET['id'];

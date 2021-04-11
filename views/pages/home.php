@@ -38,7 +38,7 @@ session_start();
     $articles = getArticles();
     $categories = getCategories();
     $images = getImages();
-
+    
     showInConsole($articles); // debug
 
 ?>
@@ -153,15 +153,22 @@ session_start();
                                             <?php $cat = $article->id; ?>
                                             <?php $id = $article->id; ?>
 
-                                            <?php $categorie = getCategorie($id); ?>
+   
                                             
-                                            <?php #if (isset($categorie)){ ?>
+                                            <?php  $categorie = getCategorie($id);
+                                            $getHashtags = getHashtags($id);
+                                            #if (isset($categorie)){ ?>
 
-                                            <?php #foreach ($categorie as $cat) : ?>
 
-                                            <a href="#" class="keyword"><?= $article->categories_id; ?></a>
+                                            <?php foreach ($categorie as $cat) : ?>
+                                            <a href="#" class="text-success">Rubrique : <?= $cat->name; ?></a><br>
+                                        <?php endforeach; ?>
+
+                                            <?php foreach ($getHashtags as $hashtags) : ?>
+
+                                            <a href="#" class="keyword"><?=  $hashtags->name; ?></a>
                                         
-                                        <?php #endforeach; ?>
+                                        <?php endforeach; ?>
 
                                     </div>
 

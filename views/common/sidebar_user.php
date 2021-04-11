@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link" href="article_byUser.php" target="_blank" data-type="external" rel="nofollow">
+        <a class="sidebar-link" href="article_gestion.php">
             Gérer mes articles
         </a>
     </li>
