@@ -28,7 +28,7 @@ session_start();
         $varsessionid = $_SESSION['id'];
         //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
         //{   
-        
+        $getUnsubscribes = getUnsubscribes();
         $comments = getCommentsAdmin();
         $myArticles = getMyArticles($id);
         $nbr = 0;
@@ -57,10 +57,10 @@ session_start();
                         <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                         
                         <section class="text-center">
-                            <h1 class="h1 text-dominante text-center mt-3 mb-5">Tableau de bord Admin</h1>
+                            <h1 class="h1 text-dominante text-center mt-3 mb-5">Detail de l'utilisateur ....</h1>
 
                             <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
+                                <p class="widgetTextDigit-text">nombre d'articles rédigés par ...</p>
                                 <p class="widgetTextDigit-value"><?php  
                                 $counterNbr = 0;
                                 foreach($myArticles as $myArticle){
@@ -74,30 +74,29 @@ session_start();
                             </div>
                             
                             <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre membres connectés</p>
-                                <p class="widgetTextDigit-value">134</p>
-                            </div>
-                            <a href="admin_manageUsers.php">
-                            <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">Gérer les membres abonnés</p>
-                                <p class="widgetTextDigit-value">134</p>
-                                
-                            </div>
-                            </a>
-                            <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre de désabonnés</p>
+                                <p class="widgetTextDigit-text">nombre articles commenté</p>
                                 <p class="widgetTextDigit-value">134</p>
                             </div>
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">nombre de commentaires</p>
-                                <p class="widgetTextDigit-value">134</p>
+                                <p class="widgetTextDigit-value"><?php  
+                                $counterUnsubs = 0;
+                                foreach($getUnsubscribes as $getUnsubscribe){
+                                    // if($counterNbr >= 0) {
+                                        $counterUnsubs = $counterUnsubs + 1;
+                                        
+                                    // }
+                                }
+                                echo $counterUnsubs;
+                                ?></p>
+                            </div>
+                            
+                            <div class="widgetTextDigit">
+                                <p class="widgetTextDigit-text">nombre de likes reçu</p>
+                                <p class="widgetTextDigit-value">34</p>
                             </div>
                             <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre de likes</p>
-                                <p class="widgetTextDigit-value">134</p>
-                            </div>
-                            <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre de warnings Admin</p>
+                                <p class="widgetTextDigit-text">nombre de paiements</p>
                                 <p class="widgetTextDigit-value--red">1</p>
                             </div>
                             

@@ -1,20 +1,20 @@
 <?php 
 session_start();
 
-    $pathToRootFolderDetailUser = "../../../";
+    $pathToRootFolder = "../../";
     $PAGE_TITLE = "Tableau de bord Admin detail users";
 
     $_SESSION["varsessionadmin_detailUsers"] = "Session admin_detailUsers OK";
 
-    include($pathToRootFolderDetailUser."debug_functions.php");
+    include($pathToRootFolder."debug_functions.php");
 
     // Connection
-      require_once($pathToRootFolderDetailUser.'config/connect.php');
+      require_once($pathToRootFolder.'config/connect.php');
 
-      require_once($pathToRootFolderDetailUser.'config/functions.php');
+      require_once($pathToRootFolder.'config/functions.php');
       
     // check if user is connected
-    require($pathToRootFolderDetailUser."views/common/checkSessionUser.php");
+    require($pathToRootFolder."views/common/checkSessionUser.php");
 
     // Verification auth
     if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
@@ -24,29 +24,23 @@ session_start();
         $users = getUsers();
         // and $userInfo['roles_id'] == 1
         $varsessionid = $_SESSION['id'];
-        //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
-        //{   
-        $getUnsubscribes = getUnsubscribes();
-        $comments = getCommentsAdmin();
-        $nbr = 0;
-        $num_rows=0;
-        //}
+        
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    <?php include($pathToRootFolderDetailUser."views/common/head.php");?>
+    <?php include($pathToRootFolder."views/common/head.php");?>
     <body>
          <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
 
-        <?php include($pathToRootFolderDetailUser."views/common/header.php"); ?>
+        <?php include($pathToRootFolder."views/common/header.php"); ?>
         
         <div class="container-fluid mt-1 px-0 h-100">
             <div class="row no-gutters">
 
                 <div class="col-md-3">
-                    <?php include($pathToRootFolderDetailUser."views/common/sidebar_user.php"); ?>
+                    <?php include($pathToRootFolder."views/common/sidebar_user.php"); ?>
                 </div>
     
                 <div class="col-md-9">
@@ -60,18 +54,7 @@ session_start();
                             <p class="widgetTextDigit-value">  
                                12</p>
                         </div>
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre d'users désinscrit</p>
-                            <p class="widgetTextDigit-value"></p>
-                        </div>
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">demandes des users</p>
-                            <p class="widgetTextDigit-value">34</p>
-                        </div>
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de warnings users</p>
-                            <p class="widgetTextDigit-value--red">21</p>
-                        </div>
+                        
                         
                     </section>
                         
