@@ -1,37 +1,39 @@
 <?php 
 session_start();
-    // if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-    //     $varsessionid = $_SESSION['id'];
-    //     if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
-    //     {
         
-        $pathToRootFolder = "../../";
-        $PAGE_TITLE = "Tableau de bord Admin";
+    $pathToRootFolder = "../../";
+    $PAGE_TITLE = "Tableau de bord Admin";
 
-        $_SESSION["varsessionadmin_board"] = "Session admin_board OK";
+    $_SESSION["varsessionadmin_board"] = "Session admin_board OK";
 
-        include($pathToRootFolder."debug_functions.php");
+    include($pathToRootFolder."debug_functions.php");
 
-        require_once($pathToRootFolder.'config/connect.php');
+    require_once($pathToRootFolder.'config/connect.php');
 
-        require_once($pathToRootFolder.'config/functions.php');
-        require_once($pathToRootFolder.'config/functions/function_file.php');
+    require_once($pathToRootFolder.'config/functions.php');
+    require_once($pathToRootFolder.'config/functions/function_file.php');
 
 
-        // include($pathToRootFolder."debug_functions.php");
-        
-        // check if user is connected
-        require($pathToRootFolder."views/common/checkSessionUser.php");
+    // include($pathToRootFolder."debug_functions.php");
+    
+    // check if user is connected
+    require($pathToRootFolder."views/common/checkSessionUser.php");
 
-            
+    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
+    {
+        $id = $_SESSION['id'];
+        $id = $userInfo['id'];
         $users = getUsers();
+        // and $userInfo['roles_id'] == 1
+        $varsessionid = $_SESSION['id'];
+        //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
+        //{   
+        
         $comments = getCommentsAdmin();
-
+        $myArticles = getMyArticles($id);
+        $nbr = 0;
         $num_rows=0;
-        if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-            $varsessionid = $_SESSION['id'];
-            if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
-            {
+        //}
 
 ?>
 
@@ -59,10 +61,39 @@ session_start();
 
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
-                                <p class="widgetTextDigit-value">12</p>
+                                <p class="widgetTextDigit-value"><?php  
+                                $counterNbr = 0;
+                                foreach($myArticles as $myArticle){
+                                    // if($counterNbr >= 0) {
+                                        $counterNbr = $counterNbr + 1;
+                                        
+                                    // }
+                                }
+                                echo $counterNbr;
+                                ?></p>
+                            </div>
+                            
+                            <div class="widgetTextDigit">
+                                <p class="widgetTextDigit-text">nombre membres connectés</p>
+                                <p class="widgetTextDigit-value">134</p>
+                            </div>
+                            <a href="admin_manageUsers.php">
+                            <div class="widgetTextDigit">
+                                <p class="widgetTextDigit-text">Gérer les membres abonnés</p>
+                                <p class="widgetTextDigit-value">134</p>
+                                
+                            </div>
+                            </a>
+                            <div class="widgetTextDigit">
+                                <p class="widgetTextDigit-text">nombre de désabonnés</p>
+                                <p class="widgetTextDigit-value">134</p>
                             </div>
                             <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre de likes reçus</p>
+                                <p class="widgetTextDigit-text">nombre de commentaires</p>
+                                <p class="widgetTextDigit-value">134</p>
+                            </div>
+                            <div class="widgetTextDigit">
+                                <p class="widgetTextDigit-text">nombre de likes</p>
                                 <p class="widgetTextDigit-value">134</p>
                             </div>
                             <div class="widgetTextDigit">
@@ -219,8 +250,8 @@ session_start();
 
 <?php 
         } else {
-            header('Location: home.php');
+            header('Location: session_login.php');
         }
-    } 
+    //} 
 
 ?>

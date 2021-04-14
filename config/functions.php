@@ -323,7 +323,16 @@ function getUsers()
             }
             if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
                 $supprime = (int) $_GET['supprime'];
-                
+                // Get Detail User before delete
+                // $reqUser = $bdd->prepare('SELECT id FROM users WHERE id = ?');
+                // $reqUser->execute(array($reqUser));
+
+                // // Update to UNSUBSCRIBE
+                // $comment = "Désinscrit par l'administrateur";
+                // $req = $bdd->prepare('INSERT INTO unsubscribe (user_id, date, comment) VALUE (?, NOW(), ?,) WHERE id = ?');
+                // $req->execute(array($user_id, $comment));
+
+                // DELETE USERS
                 $req = $bdd->prepare('DELETE FROM users WHERE id = ?');
                 $req->execute(array($supprime));
             }
@@ -356,6 +365,19 @@ function getUsers()
     /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
     $req->closeCursor();
 }
+
+// ADMIN Function Get Unsubscribe
+function getUnsubscribes()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM unsubscribe ORDER BY id DESC LIMIT 0,5');
+    $req->execute(array());
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    $req->closeCursor();
+}
+
 // ADMIN fonction récupère le commentaire par ID
 function getCommentsAdmin()
 {

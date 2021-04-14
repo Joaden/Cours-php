@@ -15,6 +15,22 @@ session_start();
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
+
+    // Verification auth
+    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
+    {
+        $id = $_SESSION['id'];
+        $id = $userInfo['id'];
+        $users = getUsers();
+        // and $userInfo['roles_id'] == 1
+        $varsessionid = $_SESSION['id'];
+        //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
+        //{   
+        $getUnsubscribes = getUnsubscribes();
+        $comments = getCommentsAdmin();
+        $nbr = 0;
+        $num_rows=0;
+        //}
 ?>
 
 <!DOCTYPE html>
@@ -41,11 +57,33 @@ session_start();
 
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">nombre d'users inscrit</p>
-                            <p class="widgetTextDigit-value">423</p>
+                            <p class="widgetTextDigit-value"><?php  
+                                $counterNbr = 0;
+                                foreach($users as $user){
+                                    // if($counterNbr >= 0) {
+                                        $counterNbr = $counterNbr + 1;
+                                        
+                                    // }
+                                }
+                                echo $counterNbr;
+                                ?></p>
+                        </div>
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">nombre d'users désinscrit</p>
+                            <p class="widgetTextDigit-value"><?php  
+                                $counterUnsubs = 0;
+                                foreach($getUnsubscribes as $getUnsubscribe){
+                                    // if($counterNbr >= 0) {
+                                        $counterUnsubs = $counterUnsubs + 1;
+                                        
+                                    // }
+                                }
+                                echo $counterUnsubs;
+                                ?></p>
                         </div>
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">demandes des users</p>
-                            <p class="widgetTextDigit-value">134</p>
+                            <p class="widgetTextDigit-value">34</p>
                         </div>
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">nombre de warnings users</p>
@@ -54,6 +92,58 @@ session_start();
                         
                     </section>
                         
+                    <section class="text-center mx-3">
+                        <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Pending Validation Users</h2>
+                        <table class="table border border-secondaire">
+                            <thead>
+                                <tr>
+                                    <td class="bg-secondaire text-white" scope="col">Email</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">ID</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">État</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">Validation</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">date</td>
+                                    <td class="bg-secondaire text-white" scope="col">Commentaires</td>
+                                    <td class="bg-secondaire text-white" scope="col">Voir Détail</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($users as $user): ?>
+                                    <tr>
+                                        <td class="text-left text-dark"><?= $user->email ?></td>
+                                        <td class="text-left text-dark"><?= $user->id ?></td>
+                                        
+                                            <?php if($user->is_verified == 0) { ?>
+                                                <td class="text-danger"><?= $user->is_verified ?></td>
+                                            <?php } ?>
+                                            <?php if($user->is_verified == 1) { ?>  
+                                                <td class="text-secondaire">User verified</td>
+                                            <?php } ?>
+                                            <td>
+                                            <i class="fas fa-edit fa-lg text-dominante"><?php if($user->is_verified == 0) { ?> : 
+                                <a href="admin_manageUsers.php?type=user&confirme=<?= $user->id ?>">
+                                    Confirmer
+                                </a>
+                            <?php } ?> - <a  href="admin_manageUsers.php?type=user&supprime=<?= $user->id ?>"><span class="text-danger">Supprimer</span></a></i>
+                                        </td>
+                                        <td class="text-secondary"><span class=""><?= "date"; ?></span></td>
+                                        <td class="text-secondary"><span class=""><?= $user->is_verified ?></span></td>
+                                        <td class="text-secondary"><span class=""><a  href="admin/admin_manage_detail_users.php?id=<?= $user->id ?>"><span class="text-info">Détails</span></a></span></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td class="text-left text-dark">toto@gmail.fr</td>
+                                    <td class="text-left text-dark">27</td>
+                                    <td class="text-secondaire">validé</td>
+                                    <td>
+                                        <i class="fas fa-edit fa-lg text-dominante"><span class="text-danger">Supprimer</span></i>
+                                    </td>
+                                    <td class="text-secondary"><span class="">26/01/2021 </span></td>
+                                    <td class="text-secondary"><span class="">Inscrit via campagne lead Facebook</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
                     <section class="text-center mx-3">
                         <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Pending Request</h2>
                         <table class="table border border-secondaire">
@@ -197,3 +287,11 @@ session_start();
 
     </body>
 </html>
+
+<?php 
+        } else {
+            header('Location: session_login.php');
+        }
+    //} 
+
+?>

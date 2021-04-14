@@ -17,28 +17,32 @@ session_start();
 
     require($pathToRootFolder."views/common/checkSessionUser.php");
     
-    $articles = getArticles();
-    $categories = getCategories();
-    $images = getImages();
+    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        $id = $_SESSION['id'];
+        $id = $userInfo['id'];
+        $articles = getArticles();
+        $categories = getCategories();
+        $images = getImages();
 
     ///////////Affichage des articles //////////////
-    $req = "SELECT * FROM articles";
+        $req = "SELECT * FROM articles";
     // $res = $conn -> query($req);
     ////////////////////////////////////////////////
     if($_GET) {
-        $id = $_GET['id'];
-        //var_dump($id);
-        // requete pour récuperer la ligne correspondant à l'id transmis ds l'URL
-        $req= "
-        SELECT * FROM articles
-        WHERE id = '$id'
-        LIMIT 1
-        ";
-        // execution de la equete
-        $res = $conn -> query($req);
-        // tableaux des données
-        $data = mysqli_fetch_array($res);
+        // $id = $_GET['id'];
+        // //var_dump($id);
+        // // requete pour récuperer la ligne correspondant à l'id transmis ds l'URL
+        // $req= "
+        // SELECT * FROM articles
+        // WHERE id = '$id'
+        // LIMIT 1
+        // ";
+        // // execution de la requete
+        // $res = $conn -> query($req);
+        // // tableaux des données
+        // $data = mysqli_fetch_array($res);
         // recuperation des donnees
+        $getArticle = getArticle($id);
         $id = $data['id'];
         $titre_article = $data['titre_article'];
         $photo_article = $data['photo_article'];
@@ -158,8 +162,11 @@ session_start();
         <?php endwhile; ?>
     </table>
 
-
-
-
     </body>
     </html>
+    <?php
+} else {
+    header('Location: session_login.php');
+
+}
+?>

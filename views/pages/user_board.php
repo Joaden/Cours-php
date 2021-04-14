@@ -17,6 +17,21 @@ session_start();
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
+    //Get My articles
+    
+    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        $id = $_SESSION['id'];
+        $id = $userInfo['id'];
+        $author = $userInfo['pseudo'] ;
+        // Get my articles
+        $myArticles = getMyArticles($id);
+        $nbr = 0;
+        foreach($myArticles as $post){
+            if($nbr > 0) {
+                $nbr = $nbr + 1;
+            }
+        }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +58,15 @@ session_start();
 
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
-                            <p class="widgetTextDigit-value">12</p>
+                            <p class="widgetTextDigit-value">
+                            <?php  
+                                $counterNbr = 0;
+                                foreach($myArticles as $myArticle){
+                                        $counterNbr = $counterNbr + 1;
+                                }
+                                echo $counterNbr;
+                                ?>
+                            </p>
                         </div>
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">nombre de likes reçus</p>
@@ -69,8 +92,10 @@ session_start();
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php foreach($myArticles as $article): ?>
+
                                 <tr>
-                                    <td class="text-left text-dark">Bien se préparer pour concourir le Bol d'Or.</td>
+                                    <td class="text-left text-dark"><?= $article->title; ?>.</td>
                                     <td>
                                         <i class="fas fa-edit fa-lg text-dominante"></i>
                                     </td>
@@ -78,6 +103,8 @@ session_start();
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
                                     <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
                                 </tr>
+                            <?php endforeach; ?>
+
                                 <tr>
                                     <td class="text-left text-dark">Comment changer un carrénage sur Kawa.</td>
                                     <td>
@@ -200,3 +227,9 @@ session_start();
 
     </body>
 </html>
+<?php
+} else {
+    header('Location: session_login.php');
+
+}
+?>
