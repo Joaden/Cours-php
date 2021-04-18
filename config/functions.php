@@ -37,6 +37,14 @@ function createArticleMulti($articleId, $author, $userId)
     $req->closeCursor(); 
 }
 
+/////////////////////////  update article
+function updateArticle($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    
+}
+
 ////////////////////////////// Create User for page session_register.php
 function createUser()
 {

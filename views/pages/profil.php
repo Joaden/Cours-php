@@ -49,10 +49,7 @@ if(isset($_SESSION['id']))
 
     if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
     {
-        // echo $_POST['newpseudo'];
-        // echo $_POST['mdp'];
-        // echo $_POST['mdp2'];
-        // die();
+        
         $newPseudo = htmlspecialchars($_POST['newpseudo']);
         $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
         $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
