@@ -103,6 +103,15 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                                 <?= $article->title; ?>
                                             </a>
                                         </h2>
+                                        <span>
+                                            <a href="article_modify.php?edit=<?= $article->id ?>">
+                                                Modifier 
+                                            </a>
+                                            |
+                                            <a href="article_modify.php?supprimer=<?= $article->id ?>">
+                                                Supprimer
+                                            </a>
+                                        </span>
                                         
                                     </div>
                                 </div>

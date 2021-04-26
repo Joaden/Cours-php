@@ -24,29 +24,68 @@ session_start();
         $categories = getCategories();
         $images = getImages();
 
-    ///////////////////  SI FORMULAIRE ENVOYE  /////////////////////////////
-    if(isset($_POST['formupdateprofil']))
-    {
-        //vérification & upload image 
-        $updateArticle = updateArticle($id);  
-    }
+    
     ///////////   Affichage article   //////////////    
 
-    if($_GET) {
-        $id = $_GET['id'];
+    if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
+        // secure variable
+        $edit_id = htmlspecialchars($_GET['edit']);
+        // call requete
+        $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
+        $edit_article->execute(array($edit_id));
+        
+        
+        if($edit_article->rowcount() == 1)
+        {
+            $edit_article = $edit_article->fetch();
+            //$edit_titre = $edit_article['titre'];
+
+        } else {
+            die('Erreur : L\article n\existe pas!');
+        }
+
+        ///////////////////  SI FORMULAIRE ENVOYE  /////////////////////////////
+        $mode_edition = 0;
+        if(isset($_POST['submit_modify_article']))
+        {
+            if(isset($_POST['title']) AND $_POST['content']) 
+            {
+                if(!empty($_POST['title']) AND !empty($_POST['content'])) 
+                {
+                    $title = htmlspecialchars($_GET['title']);
+                    $content = htmlspecialchars($_GET['content']);
+
+                    if($mode_edition == 0)
+                    {
+                        $insertArticleModify = $bdd->prepare('UPDATE articles (title, content, edition)) VALUES (?, ?, NOW());
+                        $insertArticleModify->execute(array($title, $content));
+                    } else {
+                        
+                        
+                        ]
+                }
+            }
+            //vérification & upload image 
+            //$updateArticle = updateArticle($id);  
+        }
+
+
+        //$id = $_GET['id'];
         //var_dump($id);
         // requete pour récuperer la ligne correspondant à l'id transmis ds l'URL
-        $req= "
-        SELECT * FROM articles
-        WHERE id = '$id'
-        LIMIT 1
-        ";
+        // $req= "
+        // SELECT * FROM articles
+        // WHERE id = '$id'
+        // LIMIT 1
+        // ";
         // execution de la requete
         //$res = $conn -> query($req);
         // tableaux des données
         //$data = mysqli_fetch_array($res);
         //recuperation des donnees
-        $getArticle = getArticle($id);
+        
+        //$getArticle = getArticle($id);
+        
         //$id = $data['id'];
         //$titre_article = $data['titre_article'];
         //$photo_article = $data['photo_article'];
@@ -82,14 +121,14 @@ session_start();
             }
             //var_dump($nom_photo);
             /////////////// Requete d'insertion///////////////////////
-            $req = "
-            UPDATE articles
-            SET 
-            titre_article = '$titre_article',
-            photo_article = ' $photo_article',
-            contenu_article = '$contenu_article'
-            WHERE  id = '$id'        
-            ";
+            // $req = "
+            // UPDATE articles
+            // SET 
+            // titre_article = '$titre_article',
+            // photo_article = ' $photo_article',
+            // contenu_article = '$contenu_article'
+            // WHERE  id = '$id'        
+            // ";
 
             // A evaluer aussi
             $res = $conn -> query($req);
@@ -142,18 +181,19 @@ session_start();
 
                             <h1>Modifier l'article</h1>
 
-                            <?php if($_GET): ?>
+                            <?php #if($_GET): ?>
 
                                 <form action="" method="POST" enctype="multipart/form-data">
+
                                     <input type="text" name="author" id="author" value="<?php if(isset($userInfo)) { echo $userInfo['pseudo']; } ?>" class="form-control" disabled>
                                 
                                     <div class="form-group">
                                         <label for="title">Title:</label>
-                                        <input type="title" class="form-control" id="title" placeholder="Title de l'article" name="title" require>
+                                        <input type="title" name="title" class="form-control" id="title" placeholder="Title de l'article" value="<?php echo $edit_article['title']; ?>" require>
                                     </div>
                                     <div class="form-group">
                                         <label for="content">Contenu:</label>
-                                        <textarea type="text" class="form-control" id="content" placeholder="Contenu de l'article" name="content" require></textarea>
+                                        <textarea type="text" name="content" class="form-control" id="content" placeholder="Contenu de l'article" value="<?php echo $edit_article['content']; ?>" require></textarea>
                                     </div>
                                     <div class="form-group">
                                         <!-- <div class="form-group"> -->
@@ -168,9 +208,9 @@ session_start();
                                         <label for="inputCat">Catégories</label>
                                         <select id="inputCat" class="form-control" name="categorie">
                                             <option selected>Choisir une catégorie</option>
-                                            <?php foreach ($categories as $cat) : ?>
-                                            <option value="<?php echo $cat->id ?>"><?php echo $cat->name ?></option>
-                                            <?php endforeach; ?>
+                                            <?php #foreach ($categories as $cat) : ?>
+                                            <option value="<?php #echo $cat->id ?>"><?php #echo $cat->name ?></option>
+                                            <?php #endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -179,9 +219,12 @@ session_start();
                                         
                                     </div>
                                 
-                                    <button type="submit" class="btn btn-success" name="submit_article">Poster</button>
+                                    <button type="submit" class="btn btn-success" name="submit_modify_article">Poster</button>
                                 </form>
-                            <?php endif; ?>
+
+                            <?php #endif; ?>
+
+
                             <table>
                                 <?php
                                 

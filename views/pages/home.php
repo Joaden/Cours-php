@@ -60,10 +60,19 @@ session_start();
             <li data-target="#carouselOnHomepage" data-slide-to="0" class="active"></li>
             <li data-target="#carouselOnHomepage" data-slide-to="1"></li>
             <li data-target="#carouselOnHomepage" data-slide-to="2"></li>
+            <li data-target="#carouselOnHomepage" data-slide-to="3"></li>
+            <li data-target="#carouselOnHomepage" data-slide-to="4"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://www.imore.com/sites/imore.com/files/styles/xlarge/public/field/image/2018/12/barley-field-wallpaper-hero.jpg" class="d-block w-100" alt="...">
+               <img src="https://www.imore.com/sites/imore.com/files/styles/xlarge/public/field/image/2018/12/barley-field-wallpaper-hero.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://source.unsplash.com/collection/190727/1600x900">
+            </div>
+            <div class="carousel-item">
+                <img src="https://source.unsplash.com/random" class="d-block w-100" alt="...">
+
             </div>
             <div class="carousel-item">
                 <img src="https://img.fcbayern.com/image/upload/cms/public/images/allianz-arena/wallpaper/wallpaper-7.jpg" class="d-block w-100" alt="...">
