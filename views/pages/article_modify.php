@@ -55,14 +55,12 @@ session_start();
                     $title = htmlspecialchars($_GET['title']);
                     $content = htmlspecialchars($_GET['content']);
 
-                    if($mode_edition == 0)
+                    if($mode_edition == 1)
                     {
-                        $insertArticleModify = $bdd->prepare('UPDATE articles (title, content, edition)) VALUES (?, ?, NOW());
-                        $insertArticleModify->execute(array($title, $content));
-                    } else {
-                        
-                        
-                        ]
+                        $updateArticle = $bdd->prepare('UPDATE articles SET title = ?, content= ?, edition = NOW() WHERE id = ?' );
+                        $updateArticle->execute(array($title, $content));
+                        $message = 'Votre article a bien été modifié';
+                    }
                 }
             }
             //vérification & upload image 
@@ -189,7 +187,9 @@ session_start();
                                 
                                     <div class="form-group">
                                         <label for="title">Title:</label>
-                                        <input type="title" name="title" class="form-control" id="title" placeholder="Title de l'article" value="<?php echo $edit_article['title']; ?>" require>
+                                        <input type="title" name="title" class="form-control" id="title" placeholder="Title de l'article" <?php if($mode_edition == 1) {?>
+                                            value="<?php echo $edit_article['title']; ?>"
+                                        <?php } ?>  require>
                                     </div>
                                     <div class="form-group">
                                         <label for="content">Contenu:</label>
