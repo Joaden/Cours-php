@@ -27,26 +27,31 @@ session_start();
         //if(isset($_GET['id']) AND !empty($_GET['id'])){
             // je securise les données
             $report_id = htmlspecialchars($_GET['id']);
+            $report_id = (int) $report_id;
             //$get_id = htmlspecialchars($_GET['id']);
             // je recup larticle dans la bdd
             $recupComment = $bdd->prepare("SELECT * FROM comments WHERE id = ?");
             $recupComment->execute(array($report_id));
 
             if($recupComment->rowCount() > 0){
+                $addReport = +1;
+                // requete pour signaler un commentaire
+                $reportComment = $bdd->prepare("UPDATE comments SET report = report+1 WHERE id = ?" );
 
-                // requete de suppression sur le commentaire trouvé
-                $deleteComment = $bdd->prepare("UPDATE report FROM comments WHERE id = ?" );
+                // echo $report_id . " est l'id du commentaire qui sera signalé";
+                // die();
 
-                echo $supp_id . " est l'id du commentaire qui sera supprimer";
-                 die();
-
-                $deleteComment->execute(array($report_id));
-                $deleteComment->closeCursor();
-                $message = 'Votre article a bien été supprimé';
-                header('Location: user_board.php');
+                $reportComment->execute(array($report_id));
+                $reportComment->closeCursor();
+                if($reportComment != TRUE) {
+                    var_dump($reportComment);
+                    die();
+                }
+                $message = 'Votre signalement a bien été envoyé';
+                header('Location: article_all.php');
 
             }else{
-                echo "Aucun article n'a été trouvé";
+                echo "Une erreur est survenue";
                 header('Location: home.php');
             }
         }

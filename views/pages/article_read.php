@@ -68,18 +68,13 @@ session_start();
         $getComments = getComments();
         $getUsers = getUsers($id);
         $getUsersId = $getUsers[0];
-        //print_r($comments[0]);
-        //$getUsers['pseudo']
-        //var_dump($idComment);
-        var_dump($comments);
-        echo "<br>stop!!!!!!!!!!!!!!!!!!!!!!!!<br>";
-        //var_dump($getComments);
-        
-           foreach($getComments as $element) {
-               print_r($element->id);
-               print_r($element->comment);
-           } 
-        
+       
+       // test pour debug
+        //    foreach($getComments as $element) {
+        //        print_r($element->id);
+        //        print_r($element->comment);
+        //    } 
+       // fin test debug 
         
         $categorie = getCategorie($id);
         $avatar = getAvatar($id);
@@ -320,7 +315,7 @@ session_start();
                                     }else{
                                         echo 
                                         "<p>
-                                            <a href=\"comment_report.php?id=<?= $idComOk; ?>\">
+                                            <a href=\"comment_report.php?id=$idComOk\">
                                                 <div class=\"text-secondary\">Signaler</div>
                                             </a>
                                         </p>";} 
