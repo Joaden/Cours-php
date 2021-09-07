@@ -171,7 +171,7 @@ session_start();
                     <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                     
                     <section class="text-center">
-                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Modifier Article</h1>
+                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Modifier l'article</h1>
                         <div class="container section-content">
                         <div class="row">
                             <?php if(isset($alerte) && $alerte!= ""): ?>

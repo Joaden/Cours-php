@@ -307,7 +307,7 @@ session_start();
                                             if($com->comment == $element->comment){
                                          
                                                 echo "<a href=\"comment_delete.php?id=$idComOk\">
-                                                    <div class=\"text-danger\">Supprimer mon commentaire</div>
+                                                    <div onclick=\"confirmer() \" class=\"text-danger\">Supprimer mon commentaire</div>
                                                 </a>";
                                             }
                                         }
@@ -378,7 +378,7 @@ session_start();
     #require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions' . DIRECTORY_SEPARATOR . 'compteur';
     #ajouter_vue();
     ?>
-
+    
     <!-- FOOTER -->
     <?php # include($pathToRootFolder."views/common/footer.php");?>
     <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
@@ -387,6 +387,7 @@ session_start();
     <!-- =================================================== -->
 
     <?php include($pathToRootFolder."views/common/load_js_scripts.php");?>
+    
 </body>
 
 </html>

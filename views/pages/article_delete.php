@@ -33,19 +33,27 @@ session_start();
             $recupArticle = $bdd->prepare("SELECT * FROM articles WHERE id = ?");
             $recupArticle->execute(array($supp_id));
 
-            if($recupArticle->rowCount() > 0){
 
-                // requete de suppression sur l'article trouvé
-                $deleteCommentFromArticle = $bdd->prepare("DELETE FROM comments WHERE articleId = ?" );
-                $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
+            if($recupArticle->rowCount() == 1){
 
-                // echo $supp_id;
-                // die();
-
-                $deleteArticle->execute(array($supp_id));
-                $deleteArticle->closeCursor();
+                // requete de suppression sur des commentaires trouvés
+                $recupComment = $bdd->prepare("SELECT * FROM comments WHERE articleId = ?");
+                $result = $recupComment->execute(array($supp_id));
+                if($recupComment->rowCount() == 1){
+                     
+                    // requete de suppression sur l'article trouvé
+                    
+                    $deleteCommentFromArticle = $bdd->prepare("DELETE FROM comments WHERE articleId = $supp_id" );
+                    $deleteCommentFromArticle->execute(array($supp_id));
+                    //$deleteCommentFromArticle->closeCursor();
+                
+                    $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
+                    $deleteArticle->execute($supp_id);
+                    //$deleteArticle->closeCursor();
+                }
+                
                 $message = 'Votre article a bien été supprimé';
-                //header('Location: user_board.php');
+                header('Location: article_gestion.php');
 
             }else{
                 echo "Aucun article n'a été trouvé";

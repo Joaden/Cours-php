@@ -99,9 +99,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                     </a>
                                     <div class="blogArticle-content">
                                         <h2 class="blogArticle-title">
-                                            <a href="article_modify.php?id=<?= $article->id ?>">
-                                                <?= $article->title; ?>
-                                            </a>
+                                            <?= $article->title; ?>
                                         </h2>
                                         <span>
                                             <a href="article_modify.php?edit=<?= $article->id ?>">
