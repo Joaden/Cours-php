@@ -15,9 +15,9 @@ session_start();
 
     
 if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-    $id = $_SESSION['id'];
-    $id = $userInfo['id'];
-    $author = $userInfo['pseudo'] ;
+    $id = htmlspecialchars($_SESSION['id']);
+    $id = htmlspecialchars($userInfo['id']);
+    $author = htmlspecialchars($userInfo['pseudo']);
     // Get my articles
     $myArticles = getMyArticles($id);
     $nbr = 0;
@@ -89,7 +89,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                 <!-- </div> -->
 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                                    <a class="blogArticle-imglink" href="article_modify.php?id=<?= $article->id ?>">
+                                    <a class="blogArticle-imglink" >
                                         <?php foreach($images as $image): ?>
                                             <?php if($article->id == $image->article_id){ ?>
                                             <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
@@ -107,9 +107,8 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                             <a href="article_modify.php?edit=<?= $article->id ?>">
                                                 Modifier 
                                             </a>
-                                            |
-                                            <a href="article_modify.php?supprimer=<?= $article->id ?>">
-                                                Supprimer
+                                            <a href="article_delete.php?id=<?= $article->id ?>">
+                                                    <div class="text-danger">Supprimer</div>
                                             </a>
                                         </span>
                                         

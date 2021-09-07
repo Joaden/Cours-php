@@ -264,11 +264,23 @@ function addComment($articleId, $author, $comment)
     unset($comment);
 }
 // fonction récupère le commentaire par ID
-function getComments($id)
+function getInfoUserByComments($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('SELECT * FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ? ORDER BY comments.id DESC');
+    $req->execute(array($id));
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    
+    $req->closeCursor();
+    return $data;
+}
+// fonction récupère l'ID d'un commentaire
+function getCommentByArticle($id)
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM comments');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     
@@ -392,6 +404,17 @@ function getCommentsAdmin()
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     $req = $bdd->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
+    $req->execute(array());
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    $req->closeCursor();
+}
+//  fonction récupère le commentaire par ID
+function getComments()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM comments');
     $req->execute(array());
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     return $data;

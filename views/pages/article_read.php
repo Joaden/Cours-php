@@ -63,7 +63,24 @@ session_start();
     
         $article = getArticle($id);
         $image = getImage($id);
-        $comments = getComments($id);
+        $comments = getInfoUserByComments($id);
+        $idComment = getCommentByArticle($id);
+        $getComments = getComments();
+        $getUsers = getUsers($id);
+        $getUsersId = $getUsers[0];
+        //print_r($comments[0]);
+        //$getUsers['pseudo']
+        //var_dump($idComment);
+        var_dump($comments);
+        echo "<br>stop!!!!!!!!!!!!!!!!!!!!!!!!<br>";
+        //var_dump($getComments);
+        
+           foreach($getComments as $element) {
+               print_r($element->id);
+               print_r($element->comment);
+           } 
+        
+        
         $categorie = getCategorie($id);
         $avatar = getAvatar($id);
         // $avatarByComment = getAvatarByComment($id);
@@ -274,6 +291,42 @@ session_start();
                             </div>
                             <div class="col-md-10">
                                 <p class="comment-text text-dark"><?= $com->comment ?></p>
+                            </div>
+                            <div>
+                                <!-- Si pseudo du com est = au pseudo session  -->
+                                
+        
+                                <?php 
+                                    foreach($getComments as $element) {
+                                        if($com->comment == $element->comment){
+                                            echo "ID du commentaire : ".$element->id;
+                                            $idComOk = $element->id;
+                                        }
+                                        
+                                    } 
+                                    
+
+
+                                    if($com->author == $userInfo['pseudo']){ 
+                                        foreach($getComments as $element) {
+                                            if($com->comment == $element->comment){
+                                         
+                                                echo "<a href=\"comment_delete.php?id=<?= $idComOk;?>\">
+                                                    <div class=\"text-danger\">Supprimer mon commentaire</div>
+                                                </a>";
+                                            }
+                                        }
+
+                                    }else{
+                                        echo 
+                                        "<p>
+                                            <a href=\"comment_report.php?id=<?= $idComOk; ?>\">
+                                                <div class=\"text-secondary\">Signaler</div>
+                                            </a>
+                                        </p>";} 
+                                ?>
+                            
+                        
                             </div>
                         </div>
 

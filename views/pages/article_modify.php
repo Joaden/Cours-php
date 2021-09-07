@@ -30,6 +30,9 @@ session_start();
     if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
         // secure variable
         $edit_id = htmlspecialchars($_GET['edit']);
+        //$id = htmlspecialchars($_GET['id']);
+        //$id = strip_tags($id);
+
         // call requete
         $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
         $edit_article->execute(array($edit_id));
@@ -168,7 +171,7 @@ session_start();
                     <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                     
                     <section class="text-center">
-                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Modify Article</h1>
+                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Modifier Article</h1>
                         <div class="container section-content">
                         <div class="row">
                             <?php if(isset($alerte) && $alerte!= ""): ?>
@@ -177,13 +180,13 @@ session_start();
                                 </p>
                             <?php endif; ?>
 
-                            <h1>Modifier l'article</h1>
+                            <h1> Article </h1>
 
                             <?php #if($_GET): ?>
 
                                 <form action="" method="POST" enctype="multipart/form-data">
 
-                                    <input type="text" name="author" id="author" value="<?php if(isset($userInfo)) { echo $userInfo['pseudo']; } ?>" class="form-control" disabled>
+                                    <!-- <input type="text" name="author" id="author" value="<?php #if(isset($userInfo)) { echo $userInfo['pseudo']; } ?>" class="form-control" disabled> -->
                                 
                                     <div class="form-group">
                                         <label for="title">Title:</label>
@@ -208,9 +211,9 @@ session_start();
                                         <label for="inputCat">Catégories</label>
                                         <select id="inputCat" class="form-control" name="categorie">
                                             <option selected>Choisir une catégorie</option>
-                                            <?php #foreach ($categories as $cat) : ?>
-                                            <option value="<?php #echo $cat->id ?>"><?php #echo $cat->name ?></option>
-                                            <?php #endforeach; ?>
+                                            <?php foreach ($categories as $cat) : ?>
+                                            <option value="<?php echo $cat->id ?>"><?php echo $cat->name ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -219,45 +222,13 @@ session_start();
                                         
                                     </div>
                                 
-                                    <button type="submit" class="btn btn-success" name="submit_modify_article">Poster</button>
+                                    <button type="submit" class="btn btn-success" name="submit_modify_article">Valider la modification</button>
                                 </form>
 
                             <?php #endif; ?>
 
 
-                            <table>
-                                <?php
-                                
-                                while($data = mysqli_fetch_array($res)): ?>
-                                    <tr>
-                                    <td><?php echo $data['id']; ?></td>
-                                    <td><?php echo $data['titre_article']; ?></td>
-                                    <td><a href="modifier.php?id=<?php echo $data['id']; ?>">Modifier</a></td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </table>
-                            <?php foreach($myArticles as $article): ?>
-                            <?php #for($i=0; $i<6;$i++):?>
-                                <!-- <div class="col-6 show-red"> -->
-                                <!-- </div> -->
-                                <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                                    <a class="blogArticle-imglink" href="article_modify.php?id=<?= $article->id ?>">
-                                        <?php foreach($images as $image): ?>
-                                            <?php if($article->id == $image->article_id){ ?>
-                                            <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
-                                            <?php } ?>
-                                        <?php endforeach; ?>
-                                    </a>
-                                    <div class="blogArticle-content">
-                                        <h2 class="blogArticle-title">
-                                            <a href="article_modify.php?id=<?= $article->id ?>">
-                                                <?= $article->title; ?>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
+                    </div>
                     </div>
                     </section>
                 </div>
