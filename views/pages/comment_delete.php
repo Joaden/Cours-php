@@ -33,18 +33,20 @@ session_start();
             $recupComment = $bdd->prepare("SELECT * FROM comments WHERE id = ?");
             $recupComment->execute(array($supp_id));
 
+            
             if($recupComment->rowCount() > 0){
 
                 // requete de suppression sur le commentaire trouvé
                 $deleteComment = $bdd->prepare("DELETE FROM comments WHERE id = ?" );
 
-                echo $supp_id . " est l'id du commentaire qui sera supprimer";
+                // echo $supp_id . " est l'id du commentaire qui sera supprimer";
+                // var_dump($supp_id);
                 // die();
 
                 $deleteComment->execute(array($supp_id));
                 $deleteComment->closeCursor();
-                $message = 'Votre article a bien été supprimé';
-                header('Location: user_board.php');
+                $message = 'Votre commentaire a bien été supprimé';
+                header('Location: article_all.php');
 
             }else{
                 echo "Aucun article n'a été trouvé";

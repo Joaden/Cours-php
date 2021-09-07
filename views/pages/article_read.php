@@ -311,7 +311,7 @@ session_start();
                                         foreach($getComments as $element) {
                                             if($com->comment == $element->comment){
                                          
-                                                echo "<a href=\"comment_delete.php?id=<?= $idComOk;?>\">
+                                                echo "<a href=\"comment_delete.php?id=$idComOk\">
                                                     <div class=\"text-danger\">Supprimer mon commentaire</div>
                                                 </a>";
                                             }
