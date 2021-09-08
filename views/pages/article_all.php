@@ -53,7 +53,17 @@ session_start();
 
 
                     <div class="section-head mt-5">
-                        <h2 class="section-head-title">Articles populaires</h2>
+                        <h2 class="section-head-title"><?php  
+                                $counterNbr = 0;
+                                foreach($articles as $article){
+                                    // if($counterNbr >= 0) {
+                                        $counterNbr = $counterNbr + 1;
+                                        
+                                    // }
+                                }
+                                echo $counterNbr;
+                                ?>
+                                Articles populaires</h2>
                         <h3>
                         <?php echo $_SESSION["varsessionAllArticlestest"]; ?>
                     </h3>

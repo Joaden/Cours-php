@@ -19,3 +19,16 @@
 ### branch newdesign Denis(commit 26janv2021 10h30 )
 
 - in article_all.php -> created aside
+
+
+## DENIS - branch newarticle (commit 23h50 08/09/21 )
+
+- in `article_gestion.php` and `article_mofidy` -> it's operational / we can modify our articles (only title and content for now).
+- created `views/pages/article_gestion.php`
+- created `views/pages/article_modify.php` -> modification article
+- created `views/pages/article_delete.php` -> delete article
+- created `views/pages/comment_delete.php` -> delete comment
+- created `views/pages/comment_report.php` -> to report an unpleasant comment 
+- modified `views/pages/article_read.php`
+- modified `views/pages/article_write.php`
+- in `views/pages/article_gestion.php` -> created 2 sets to modify or delete article.

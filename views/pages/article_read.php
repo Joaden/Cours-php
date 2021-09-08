@@ -6,8 +6,8 @@ session_start();
     if (isset($_GET['id']) AND !empty($_GET['id'])){
         extract($_GET);
 
+        // secure data
         $id = htmlspecialchars($_GET['id']);
-
         $id = strip_tags($id);
     
         require_once($pathToRootFolder.'config/connect.php');
@@ -18,6 +18,7 @@ session_start();
         if (isset($_POST['submit_comment'])) {
             if(isset($_POST['comment']) AND !empty($_POST['comment'])) {
 
+                // secure session user
                 if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                     $varsessionid = $_SESSION['id'];
                     $author = $userInfo['pseudo'] ;
@@ -67,18 +68,10 @@ session_start();
         $idComment = getCommentByArticle($id);
         $getComments = getComments();
         $getUsers = getUsers($id);
-        $getUsersId = $getUsers[0];
-       
-       // test pour debug
-        //    foreach($getComments as $element) {
-        //        print_r($element->id);
-        //        print_r($element->comment);
-        //    } 
-       // fin test debug 
+        $getUsersId = $getUsers[0];     
         
         $categorie = getCategorie($id);
         $avatar = getAvatar($id);
-        // $avatarByComment = getAvatarByComment($id);
         
      }
 
@@ -113,20 +106,15 @@ session_start();
                                         {
                                         ?>
                                             <img class="avatar-img col-md-2" src="../../assets/photos/avatars/<?php echo $avatar->avatar; ?>" alt="photo de l'auteur">
-
-                                            <!--<img class="ml-1 avatar-img--small" src="../../assets/photos/<?php # echo "images".$image['name']; ?>" alt="image de l'article">-->
                                         <?php 
                                         } else {
                                         ?>
                                             <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
                                         <?php
                                         }
-
                                     }  
                                     ?>
-                                <!--<img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">-->
                             </div>
-
 
                             <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                 <p class="col-lg-6 align-self-baseline mb-0">
@@ -143,7 +131,6 @@ session_start();
 
                             <a class="blogArticle-imglink" href="#">
                                 <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
-                                <!--<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">-->
                             </a>
 
                             <p class="blogArticle-text">
@@ -151,9 +138,6 @@ session_start();
                                     $article->content; 
                                 ?>
                             </p>
-
-                          
-
                             
                             <p class="blogArticle-text"></p>
                             
@@ -231,7 +215,6 @@ session_start();
                                     $varsessionid = $_SESSION['id'];
                                     $author = $userInfo['pseudo'] ;
                                     
-                                    //article_read.php?id=<?= $article->id
                                  echo "
                                     <form action=\"\" method=\"POST\">
                                         <p>
@@ -254,7 +237,6 @@ session_start();
                                         </p>";
                                 }
                             ?>
-                            
                             
                         </div>
                     </form>
@@ -289,19 +271,16 @@ session_start();
                             </div>
                             <div>
                                 <!-- Si pseudo du com est = au pseudo session  -->
+                                <!-- report or delete comment  -->
                                 
-        
                                 <?php 
                                     foreach($getComments as $element) {
                                         if($com->comment == $element->comment){
-                                            echo "ID du commentaire : ".$element->id;
                                             $idComOk = $element->id;
                                         }
                                         
                                     } 
                                     
-
-
                                     if($com->author == $userInfo['pseudo']){ 
                                         foreach($getComments as $element) {
                                             if($com->comment == $element->comment){
@@ -321,7 +300,6 @@ session_start();
                                         </p>";} 
                                 ?>
                             
-                        
                             </div>
                         </div>
 
