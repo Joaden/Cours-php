@@ -2,36 +2,29 @@
 session_start();
 
     $pathToRootFolder = "../../";
-    $PAGE_TITLE = "Tableau de bord";
+    $PAGE_TITLE = "Tableau de bord Admin detail users";
 
-    $_SESSION["varsessionuserboard"] = "Session user_board OK";
+    $_SESSION["varsessionadmin_detailUsers"] = "Session admin_detailUsers OK";
 
     include($pathToRootFolder."debug_functions.php");
 
     // Connection
-      //require_once('vendor/autoload.php');
-
       require_once($pathToRootFolder.'config/connect.php');
 
       require_once($pathToRootFolder.'config/functions.php');
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
-    //Get My articles
-    
-    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+
+    // Verification auth
+    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
+    {
         $id = $_SESSION['id'];
         $id = $userInfo['id'];
-        $author = $userInfo['pseudo'] ;
-        // Get my articles
-        $myArticles = getMyArticles($id);
-        $nbr = 0;
-        foreach($myArticles as $post){
-            if($nbr > 0) {
-                $nbr = $nbr + 1;
-            }
-        }
-
+        $users = getUsers();
+        // and $userInfo['roles_id'] == 1
+        $varsessionid = $_SESSION['id'];
+        
 ?>
 
 <!DOCTYPE html>
@@ -54,33 +47,71 @@ session_start();
                     <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                     
                     <section class="text-center">
-                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Tableau de bord</h1>
+                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Détails Users</h1>
 
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
-                            <p class="widgetTextDigit-value">
-                            <?php  
-                                $counterNbr = 0;
-                                foreach($myArticles as $myArticle){
-                                        $counterNbr = $counterNbr + 1;
-                                }
-                                echo $counterNbr;
-                                ?>
-                            </p>
+                            <p class="widgetTextDigit-text">ID User</p>
+                            <p class="widgetTextDigit-value">  
+                               12</p>
                         </div>
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de likes reçus</p>
-                            <p class="widgetTextDigit-value">134</p>
-                        </div>
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de warnings Admin</p>
-                            <p class="widgetTextDigit-value--red">1</p>
-                        </div>
+                        
                         
                     </section>
                         
                     <section class="text-center mx-3">
-                        <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Mes Articles</h2>
+                        <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Table Users</h2>
+                        <table class="table border border-secondaire">
+                            <thead>
+                                <tr>
+                                    <td class="bg-secondaire text-white" scope="col">Email</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">ID</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">État</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">Validation</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">date</td>
+                                    <td class="bg-secondaire text-white" scope="col">Commentaires</td>
+                                    <td class="bg-secondaire text-white" scope="col">Voir Détail</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($users as $user): ?>
+                                    <tr>
+                                        <td class="text-left text-dark"><?= $user->email ?></td>
+                                        <td class="text-left text-dark"><?= $user->id ?></td>
+                                        
+                                            <?php if($user->is_verified == 0) { ?>
+                                                <td class="text-danger"><?= $user->is_verified ?></td>
+                                            <?php } ?>
+                                            <?php if($user->is_verified == 1) { ?>  
+                                                <td class="text-secondaire">User verified</td>
+                                            <?php } ?>
+                                            <td>
+                                            <i class="fas fa-edit fa-lg text-dominante"><?php if($user->is_verified == 0) { ?> : 
+                                <a href="admin_manageUsers.php?type=user&confirme=<?= $user->id ?>">
+                                    Confirmer
+                                </a>
+                            <?php } ?> - <a  href="admin_manageUsers.php?type=user&supprime=<?= $user->id ?>"><span class="text-danger">Supprimer</span></a></i>
+                                        </td>
+                                        <td class="text-secondary"><span class=""><?= "date"; ?></span></td>
+                                        <td class="text-secondary"><span class=""><?= $user->is_verified ?></span></td>
+                                        <td class="text-secondary"><span class=""><a  href="admin_manage_detail_users.php?id=<?= $user->id ?>"><span class="text-info">Détails</span></a></span></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td class="text-left text-dark">toto@gmail.fr</td>
+                                    <td class="text-left text-dark">27</td>
+                                    <td class="text-secondaire">validé</td>
+                                    <td>
+                                        <i class="fas fa-edit fa-lg text-dominante"><span class="text-danger">Supprimer</span></i>
+                                    </td>
+                                    <td class="text-secondary"><span class="">26/01/2021 </span></td>
+                                    <td class="text-secondary"><span class="">Inscrit via campagne lead Facebook</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="text-center mx-3">
+                        <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Table User_Info</h2>
                         <table class="table border border-secondaire">
                             <thead>
                                 <tr>
@@ -92,10 +123,8 @@ session_start();
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($myArticles as $article): ?>
-
                                 <tr>
-                                    <td class="text-left text-dark"><?= $article->title; ?>.</td>
+                                    <td class="text-left text-dark">Bien se préparer pour concourir le Bol d'Or.</td>
                                     <td>
                                         <i class="fas fa-edit fa-lg text-dominante"></i>
                                     </td>
@@ -103,8 +132,6 @@ session_start();
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
                                     <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
                                 </tr>
-                            <?php endforeach; ?>
-
                                 <tr>
                                     <td class="text-left text-dark">Comment changer un carrénage sur Kawa.</td>
                                     <td>
@@ -201,7 +228,6 @@ session_start();
                     </section>
                     
                     
-                    <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Mes Notes</h2>
                 </div>
             </div>   
         </div>
@@ -227,9 +253,11 @@ session_start();
 
     </body>
 </html>
-<?php
-} else {
-    header('Location: session_login.php');
 
-}
+<?php 
+        } else {
+            header('Location: session_login.php');
+        }
+    //} 
+
 ?>

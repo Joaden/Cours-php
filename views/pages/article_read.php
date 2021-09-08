@@ -6,8 +6,8 @@ session_start();
     if (isset($_GET['id']) AND !empty($_GET['id'])){
         extract($_GET);
 
+        // secure data
         $id = htmlspecialchars($_GET['id']);
-
         $id = strip_tags($id);
     
         require_once($pathToRootFolder.'config/connect.php');
@@ -18,6 +18,7 @@ session_start();
         if (isset($_POST['submit_comment'])) {
             if(isset($_POST['comment']) AND !empty($_POST['comment'])) {
 
+                // secure session user
                 if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                     $varsessionid = $_SESSION['id'];
                     $author = $userInfo['pseudo'] ;
@@ -63,9 +64,15 @@ session_start();
     
         $article = getArticle($id);
         $image = getImage($id);
-        $comments = getComments($id);
+        $comments = getInfoUserByComments($id);
+        $idComment = getCommentByArticle($id);
+        $getComments = getComments();
+        $getUsers = getUsers($id);
+        $getUsersId = $getUsers[0];     
+        
         $categorie = getCategorie($id);
-        $getAvatar = getAvatar($id);
+        $avatar = getAvatar($id);
+        
      }
 
 ?>
@@ -98,25 +105,20 @@ session_start();
                                         if(!empty($userInfo['avatar']))
                                         {
                                         ?>
-                                            <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
-
-                                            <!--<img class="ml-1 avatar-img--small" src="../../assets/photos/<?php # echo "images".$image['name']; ?>" alt="image de l'article">-->
+                                            <img class="avatar-img col-md-2" src="../../assets/photos/avatars/<?php echo $avatar->avatar; ?>" alt="photo de l'auteur">
                                         <?php 
                                         } else {
                                         ?>
                                             <img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
                                         <?php
                                         }
-
                                     }  
                                     ?>
-                                <!--<img class="avatar-img col-md-2" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">-->
                             </div>
-
 
                             <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
                                 <p class="col-lg-6 align-self-baseline mb-0">
-                                    <span class="abrev">date</span>
+                                    <span class="abrev">posté le</span>
                                     <span class="date"><?= $article->date; ?></span>
                                     <span class="hour"></span>
                                 </p>
@@ -128,8 +130,7 @@ session_start();
 
 
                             <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here">
-                                <!--<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here">-->
+                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
                             </a>
 
                             <p class="blogArticle-text">
@@ -137,9 +138,6 @@ session_start();
                                     $article->content; 
                                 ?>
                             </p>
-
-                          
-
                             
                             <p class="blogArticle-text"></p>
                             
@@ -156,11 +154,18 @@ session_start();
                                     </p>
                                 </div>
                                 <!-- array PERMANENT: -->
-                                <?php if (isset($categorie)){ ?>
+                                <?php
+                                $getHashtags = getHashtags($id);
+                                 if (isset($categorie)){ ?>
                                     <div class="blogArticle-footer-keywords row no-gutters">
 
                                     <?php foreach ($categorie as $cat) : ?>
-                                        <a href="#" class="keyword"><?= $cat->name; ?></a>
+                                        <a href="#" class="text-success"><?= $cat->name; ?></a>
+                                    <?php endforeach; ?>
+                                    <?php foreach ($getHashtags as $hashtags) : ?>
+
+                                        <a href="#" class="keyword"><?=  $hashtags->name; ?></a>
+
                                     <?php endforeach; ?>
                                     </div>
                                 <?php }else{?>
@@ -210,7 +215,6 @@ session_start();
                                     $varsessionid = $_SESSION['id'];
                                     $author = $userInfo['pseudo'] ;
                                     
-                                    //article_read.php?id=<?= $article->id
                                  echo "
                                     <form action=\"\" method=\"POST\">
                                         <p>
@@ -234,7 +238,6 @@ session_start();
                                 }
                             ?>
                             
-                            
                         </div>
                     </form>
 
@@ -245,7 +248,16 @@ session_start();
                         <div class="comment row pt-3">
                             <div class="col-md-2">
                                 <div class="d-flex flex-column">
-                                    <img class="avatar-img" src="https://source.unsplash.com/Y7C7F26fzZM/300x300" alt="photo de l'auteur">
+                                    <?php 
+                                    //foreach ($avatarByComment as $avatarCom)
+                                    if ($com->author == $com->pseudo){
+                                        echo "<img class=\"avatar-img\" src=\"../../assets/photos/avatars/$com->avatar\" alt=\"photo de l'auteur\">"; 
+                                    }else {
+                                        echo "<img class=\"avatar-img col-md-2\" src=\"https://source.unsplash.com/Y7C7F26fzZM/300x300\" alt=\"photo de l'auteur\">";
+
+                                    }
+                                    ?>
+                                    
                                     <p class="">
                                         <span class="abrev">par</span>
                                         <span class="pseudo"><?= $com->author ?></span>
@@ -256,6 +268,38 @@ session_start();
                             </div>
                             <div class="col-md-10">
                                 <p class="comment-text text-dark"><?= $com->comment ?></p>
+                            </div>
+                            <div>
+                                <!-- Si pseudo du com est = au pseudo session  -->
+                                <!-- report or delete comment  -->
+                                
+                                <?php 
+                                    foreach($getComments as $element) {
+                                        if($com->comment == $element->comment){
+                                            $idComOk = $element->id;
+                                        }
+                                        
+                                    } 
+                                    
+                                    if($com->author == $userInfo['pseudo']){ 
+                                        foreach($getComments as $element) {
+                                            if($com->comment == $element->comment){
+                                         
+                                                echo "<a href=\"comment_delete.php?id=$idComOk\">
+                                                    <div onclick=\"confirmer() \" class=\"text-danger\">Supprimer mon commentaire</div>
+                                                </a>";
+                                            }
+                                        }
+
+                                    }else{
+                                        echo 
+                                        "<p>
+                                            <a href=\"comment_report.php?id=$idComOk\">
+                                                <div class=\"text-secondary\">Signaler</div>
+                                            </a>
+                                        </p>";} 
+                                ?>
+                            
                             </div>
                         </div>
 
@@ -312,7 +356,7 @@ session_start();
     #require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions' . DIRECTORY_SEPARATOR . 'compteur';
     #ajouter_vue();
     ?>
-
+    
     <!-- FOOTER -->
     <?php # include($pathToRootFolder."views/common/footer.php");?>
     <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
@@ -321,6 +365,7 @@ session_start();
     <!-- =================================================== -->
 
     <?php include($pathToRootFolder."views/common/load_js_scripts.php");?>
+    
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-$_SESSION["varsessionprofiltest"]= "Session profil test OK";
+$_SESSION["varsessionparameters"]= "Session parameters test OK";
 $pathToRootFolder = "../../";
-$PAGE_TITLE = "Mon profil";
+$PAGE_TITLE = "Parameters";
 
 //require_once($pathToRootFolder.'vendor/autoload.php');
 
@@ -15,23 +15,12 @@ require_once($pathToRootFolder.'config/functions.php');
 // check if user is connected
 require($pathToRootFolder."views/common/checkSessionUser.php");
 
-if(isset($_POST['formupdateprofil']))
+if(isset($_POST['formupdateparameters']))
 {
-    //vérification & upload image 
-    $updateAvatar = updateAvatar();  
+    //vérification & update 
+      
 }
 
-// $articles = getMyArticles($id);
-// if($articles >= 1)
-// {
-//     $nrb = 0;
-//     foreach($articles as $article)
-//     {
-//         $nbr++;
-//     }
-//     var_dump($nrb);
-//     echo $nrb;
-// }
 
 if(isset($_SESSION['id']))
 {
@@ -42,29 +31,17 @@ if(isset($_SESSION['id']))
     $reqUser->execute(array($_SESSION['id']));
     $user = $reqUser->fetch();
 
-    // on get tous ses articles
-    $reqarticleByUser = $bdd->prepare("SELECT * FROM articles WHERE user_id = ? ");
-    $reqarticleByUser->execute(array($_SESSION['id']));
-    $articleByUser = $reqarticleByUser->fetch();
-
-    if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
+    if(isset($_POST['']) AND !empty($_POST['']) AND $_POST[''] != $user[''] AND !empty($_POST['']) AND !empty($_POST['']) AND $_POST[''] == $_POST[''])
     {
         
-        $newPseudo = htmlspecialchars($_POST['newpseudo']);
+        $newPseudo = htmlspecialchars($_POST['']);
         $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
         $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
         header('Location: profil.php?id='.$_SESSION['id']);
 
     }
 
-    if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
-    {
-        $newemail = htmlspecialchars($_POST['newemail']);
-        $insertemail = $bdd->prepare("UPDATE users SET email = ? WHERE id = ?");
-        $insertemail->execute(array($newemail, $_SESSION['id']));
-        header('Location: profil.php?id='.$_SESSION['id']);
-
-    }
+    
 
 
 
@@ -120,7 +97,7 @@ if(isset($_SESSION['id']))
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
                     <h5>
-                        <?php echo $_SESSION["varsessionprofiltest"]; ?>
+                        <?php #echo $_SESSION["varsessionprofiltest"]; ?>
                         
                     </h5>
                     
@@ -147,15 +124,31 @@ if(isset($_SESSION['id']))
             </p>
             <br>
 
-            <!-- Formulaire pour modifier son profil -->
+            <!-- Formulaire pour modifier  les parametres -->
             <form method="POST" action="" enctype="multipart/form-data">
 
-                <h2 class="text-secondary">Visible par vous uniquement</h2>
+                <h2 class="text-secondary">Notifications</h2>
 
                 <div class="ml-5">
                     <div class="form-group">
-                        <label for="emailRegister"><?php if(isset($userInfo)) { echo $userInfo['name']; } ?></label>
-                        <input name="name" type="text" class="form-control" id="nameRegister" aria-describedby="nameRegister" placeholder="Modifier mon nom" value="<?php if(isset($name)) { echo $name; } ?>" >
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Default radio
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Second default radio
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+                            <label class="form-check-label" for="exampleRadios3">
+                                Disabled radio
+                            </label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -184,7 +177,7 @@ if(isset($_SESSION['id']))
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="phone"><?php if(isset($userInfo)) { echo 'Statut : '.$userInfo['roles_id']; } else { echo "Permission statut :"; }?></label>
+                                <label for="status"><?php if(isset($userInfo)) { echo 'Statut : '.$userInfo->roles_id; } else { echo "Permission statut :"; }?></label>
                             </div>
                         </div>
 
@@ -258,43 +251,6 @@ if(isset($_SESSION['id']))
                 ?>
             </p>
             <br>
-
-            <form>
-                <div class="form-group">
-                    <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-                <div class="form-group">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
             <br>
             <hr>
             <?php
@@ -320,6 +276,7 @@ if(isset($_SESSION['id']))
     <br>
 
     <!-- FOOTER -->
+    <?php include($pathToRootFolder."views/common/footer.php");?>
     <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->

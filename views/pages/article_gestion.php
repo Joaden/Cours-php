@@ -2,14 +2,9 @@
 session_start();
 
     $pathToRootFolder = "../../";
-    $PAGE_TITLE = "Tableau de bord";
+    $PAGE_TITLE = "Dashboard My Posts";
 
-    $_SESSION["varsessionuserboard"] = "Session user_board OK";
-
-    include($pathToRootFolder."debug_functions.php");
-
-    // Connection
-      //require_once('vendor/autoload.php');
+    $_SESSION["varsessionboardarticle"] = "Session board_my_article OK";
 
       require_once($pathToRootFolder.'config/connect.php');
 
@@ -17,21 +12,28 @@ session_start();
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
-    //Get My articles
-    
-    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $id = $_SESSION['id'];
-        $id = $userInfo['id'];
-        $author = $userInfo['pseudo'] ;
-        // Get my articles
-        $myArticles = getMyArticles($id);
-        $nbr = 0;
-        foreach($myArticles as $post){
-            if($nbr > 0) {
-                $nbr = $nbr + 1;
-            }
-        }
 
+    
+if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+    $id = htmlspecialchars($_SESSION['id']);
+    $id = htmlspecialchars($userInfo['id']);
+    $author = htmlspecialchars($userInfo['pseudo']);
+    // Get my articles
+    $myArticles = getMyArticles($id);
+    $nbr = 0;
+    foreach($myArticles as $post){
+        if($nbr > 0) {
+            $nbr = $nbr + 1;
+        }
+    }
+    // $reqnbr = $bdd->prepare('SELECT COUNT(*) FROM comments WHERE author = ?');
+    // $reqnbr->execute(array($id));
+    // $reqnbr->closeCursor();
+  
+    
+    $images = getImages();
+    $categories = getCategories();
+    
 ?>
 
 <!DOCTYPE html>
@@ -54,15 +56,18 @@ session_start();
                     <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                     
                     <section class="text-center">
-                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Tableau de bord</h1>
+                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Mes articles</h1>
 
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
                             <p class="widgetTextDigit-value">
-                            <?php  
+                                <?php  
                                 $counterNbr = 0;
                                 foreach($myArticles as $myArticle){
+                                    // if($counterNbr >= 0) {
                                         $counterNbr = $counterNbr + 1;
+                                        
+                                    // }
                                 }
                                 echo $counterNbr;
                                 ?>
@@ -73,10 +78,45 @@ session_start();
                             <p class="widgetTextDigit-value">134</p>
                         </div>
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de warnings Admin</p>
+                            <p class="widgetTextDigit-text">nombre de commentaires</p>
                             <p class="widgetTextDigit-value--red">1</p>
                         </div>
-                        
+                        <div class="container section-content">
+                        <div class="row">
+                            <?php foreach($myArticles as $article): ?>
+                            <?php #for($i=0; $i<6;$i++):?>
+                                <!-- <div class="col-6 show-red"> -->
+                                <!-- </div> -->
+
+                                <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
+                                    <a class="blogArticle-imglink" >
+                                        <?php foreach($images as $image): ?>
+                                            <?php if($article->id == $image->article_id){ ?>
+                                            <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                        
+                                    </a>
+                                    <div class="blogArticle-content">
+                                        <h2 class="blogArticle-title">
+                                            <?= $article->title; ?>
+                                        </h2>
+                                        <span>
+                                            <a href="article_modify.php?edit=<?= $article->id ?>">
+                                                Modifier 
+                                            </a>
+                                            <a href="article_delete.php?id=<?= $article->id ?>">
+                                                    <div class="text-danger">Supprimer</div>
+                                            </a>
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+
+                        </div>
+                    </div>
+
                     </section>
                         
                     <section class="text-center mx-3">
@@ -97,7 +137,9 @@ session_start();
                                 <tr>
                                     <td class="text-left text-dark"><?= $article->title; ?>.</td>
                                     <td>
-                                        <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        <a href="article_modify.php?edit=<?= $article->id ?>">
+                                            <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        </a>
                                     </td>
                                     <td class="text-secondaire">validé</td>
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
@@ -132,6 +174,7 @@ session_start();
                                     <td class="text-secondary"><span class="">0 </span><i class="fas fa-thumbs-up"></i></td>
                                     <td class="text-secondary"><span class="">0 </span><i class="fas fa-comments"></i></td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </section>

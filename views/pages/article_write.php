@@ -30,6 +30,7 @@ session_start();
                 $title = htmlspecialchars($_POST['title']);
                 $content = htmlspecialchars($_POST['content']);
                 $categorie_id = htmlspecialchars($_POST['categorie']);
+                $hastag = htmlspecialchars($_POST['hastag']);
                 $user_id = $userInfo['id'];      
                     
                 if(isset($_POST['title'], $_POST['content'], $_FILES['image'], $_POST['categorie'])) {
@@ -38,6 +39,7 @@ session_start();
                         $title = htmlspecialchars($_POST['title']);
                         $content = htmlspecialchars($_POST['content']);
                         $categorie_id = htmlspecialchars($_POST['categorie']);
+                        $hastag = htmlspecialchars($_POST['hastag']);
                         
 
 
@@ -60,7 +62,7 @@ session_start();
 
                                     $author = $userInfo['pseudo'];
 
-                                    $ins = createArticle($user_id, $categorie_id, $title, $content, $author, $image);
+                                    $ins = createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag);
 
                                     $message = 'Votre article a bien été posté';
                                     header('Location: user_board.php');
@@ -176,6 +178,11 @@ session_start();
                                             <option value="<?php echo $cat->id ?>"><?php echo $cat->name ?></option>
                                             <?php endforeach; ?>
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTag">Hastags</label>
+                                        <input type="hastag" class="form-control" id="hastag" placeholder="Ecrivez vos tags" name="hastag">
+                                        
                                     </div>
                                 
                                     <button type="submit" class="btn btn-success" name="submit_article">Poster</button>
