@@ -137,7 +137,9 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                 <tr>
                                     <td class="text-left text-dark"><?= $article->title; ?>.</td>
                                     <td>
-                                        <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        <a href="article_modify.php?edit=<?= $article->id ?>">
+                                            <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        </a>
                                     </td>
                                     <td class="text-secondaire">validé</td>
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>

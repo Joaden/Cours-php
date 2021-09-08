@@ -5,9 +5,6 @@ session_start();
     $PAGE_TITLE = "BlogPHP - modify Articles";
 
     //Appel de function avec la connexion à la bdd
-    // require_once($pathToRootFolder.'config/functions.php');
-    // $articles = getArticles();
-
 
     require_once($pathToRootFolder.'config/connect.php');
 
@@ -23,8 +20,7 @@ session_start();
         $articles = getArticles();
         $categories = getCategories();
         $images = getImages();
-
-    
+        
     ///////////   Affichage article   //////////////    
 
     if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
@@ -32,6 +28,8 @@ session_start();
         $edit_id = htmlspecialchars($_GET['edit']);
         //$id = htmlspecialchars($_GET['id']);
         //$id = strip_tags($id);
+        $image = getImage($edit_id);
+        $categorie = getCategorie($edit_id);
 
         // call requete
         $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
@@ -41,57 +39,39 @@ session_start();
         if($edit_article->rowcount() == 1)
         {
             $edit_article = $edit_article->fetch();
-            //$edit_titre = $edit_article['titre'];
 
         } else {
             die('Erreur : L\article n\existe pas!');
-        }
 
+        }
+        
         ///////////////////  SI FORMULAIRE ENVOYE  /////////////////////////////
-        $mode_edition = 0;
+        $mode_edition = 1;
         if(isset($_POST['submit_modify_article']))
         {
             if(isset($_POST['title']) AND $_POST['content']) 
             {
                 if(!empty($_POST['title']) AND !empty($_POST['content'])) 
                 {
-                    $title = htmlspecialchars($_GET['title']);
-                    $content = htmlspecialchars($_GET['content']);
+                    $title = htmlspecialchars($_POST['title']);
+                    $content = htmlspecialchars($_POST['content']);
 
                     if($mode_edition == 1)
                     {
                         $updateArticle = $bdd->prepare('UPDATE articles SET title = ?, content= ?, edition = NOW() WHERE id = ?' );
-                        $updateArticle->execute(array($title, $content));
+                        $updateArticle->execute(array($title, $content, $edit_id));
                         $message = 'Votre article a bien été modifié';
+                        header('Location: article_gestion.php');
+                    }else{
+                        echo "Une erreur s'est produite, la modification à échouée !";
                     }
                 }
             }
-            //vérification & upload image 
-            //$updateArticle = updateArticle($id);  
+             
         }
 
-
-        //$id = $_GET['id'];
-        //var_dump($id);
-        // requete pour récuperer la ligne correspondant à l'id transmis ds l'URL
-        // $req= "
-        // SELECT * FROM articles
-        // WHERE id = '$id'
-        // LIMIT 1
-        // ";
-        // execution de la requete
-        //$res = $conn -> query($req);
-        // tableaux des données
-        //$data = mysqli_fetch_array($res);
-        //recuperation des donnees
-        
-        //$getArticle = getArticle($id);
-        
-        //$id = $data['id'];
-        //$titre_article = $data['titre_article'];
-        //$photo_article = $data['photo_article'];
-        //echo $photo_article;
-        //$contenu_article = nl2br($data['contenu_article']);
+    }else{
+        echo 'Aucun identifiant trouvé';
     }
 
     ///////////Modification ////////////////
@@ -107,49 +87,17 @@ session_start();
             }
         } // fin foreach
 
-        // Attention pas terminé
-        // A finir
-        if($_FILES) {
-            $alerte .= uploadFile(DIR_UPLOAD, TAILLE_MAX_UPLOAD, LARGEUR_MAX_PHOTO);
-        } else {
-
-        }
-
         if(empty($alerte)) { 
             $alerte = "Article enregistré";
             if(isset($GLOBALS['nom_photo'])) {
                 $photo_article = $GLOBALS['nom_photo'];
             }
-            //var_dump($nom_photo);
-            /////////////// Requete d'insertion///////////////////////
-            // $req = "
-            // UPDATE articles
-            // SET 
-            // titre_article = '$titre_article',
-            // photo_article = ' $photo_article',
-            // contenu_article = '$contenu_article'
-            // WHERE  id = '$id'        
-            // ";
-
-            // A evaluer aussi
-            $res = $conn -> query($req);
-            if($res){
-                $alerte = "Article modifié";
-            } else {
-                $alerte = "Problème";
-            }
-
-
-
+           
             //////////////////////////////////////////////////////////
         } // fin empty alerte
     } // fin POST
 
-
-
     ?>
-
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -168,8 +116,6 @@ session_start();
                 </div>
     
                 <div class="col-md-9">
-                    <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
-                    
                     <section class="text-center">
                         <h1 class="h1 text-dominante text-center mt-3 mb-5">Modifier l'article</h1>
                         <div class="container section-content">
@@ -180,48 +126,66 @@ session_start();
                                 </p>
                             <?php endif; ?>
 
-                            <h1> Article </h1>
+                            <h1>  </h1>
 
                             <?php #if($_GET): ?>
 
-                                <form action="" method="POST" enctype="multipart/form-data">
-
-                                    <!-- <input type="text" name="author" id="author" value="<?php #if(isset($userInfo)) { echo $userInfo['pseudo']; } ?>" class="form-control" disabled> -->
+                                <form action="" method="POST">
                                 
                                     <div class="form-group">
-                                        <label for="title">Title:</label>
+                                        <label for="title">Titre de mon article </label>
                                         <input type="title" name="title" class="form-control" id="title" placeholder="Title de l'article" <?php if($mode_edition == 1) {?>
                                             value="<?php echo $edit_article['title']; ?>"
                                         <?php } ?>  require>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="content">Contenu:</label>
-                                        <textarea type="text" name="content" class="form-control" id="content" placeholder="Contenu de l'article" value="<?php echo $edit_article['content']; ?>" require></textarea>
+                                        <label for="content">Contenu</label>
+                                        <input type="text" name="content" class="form-control" id="content" <?php if($mode_edition == 1) { ?> value="<?php echo $edit_article['content']; ?>" 
+                                        <?php } ?> require>
+                                        </input>
                                     </div>
+
                                     <div class="form-group">
-                                        <!-- <div class="form-group"> -->
-                                            <label for="image">Photo de votre article</label>
-                                            <?php if($mode_edition == 1) { ?>
-                                            <input name="image" type="file" class="form-control">
-                                            <?php } ?>
-                                        <!-- </div> -->
+                                        
+                                            <label for="image">Photo de l'article</label>
+                                            
+                                            <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
+                                            
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="inputCat">Catégories</label>
+                                        <label for="inputCat">
+
+                                            Catégorie choisie :
+                                            <?php
+                                                if($mode_edition == 1){
+                                                    if (isset($categorie)){ ?>
+                                                    <div class="blogArticle-footer-keywords row no-gutters">
+
+                                                    <?php foreach ($categorie as $cat) : ?>
+                                                        <em class="text-success"><?= $cat->name; ?></em>
+                                                    <?php endforeach; 
+                                                }
+                                            
+                                            }?>
+
+                                        </label>
                                         <select id="inputCat" class="form-control" name="categorie">
-                                            <option selected>Choisir une catégorie</option>
+                                            <option selected>Changer de catégorie</option>
                                             <?php foreach ($categories as $cat) : ?>
-                                            <option value="<?php echo $cat->id ?>"><?php echo $cat->name ?></option>
+                                            <option  value="<?php echo $cat->id ?>"><?php echo $cat->name ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="inputTag">Hastags</label>
                                         <input type="hastag" class="form-control" id="hastag" placeholder="Ecrivez vos tags" name="hastag">
                                         
-                                    </div>
+                                    </div> -->
                                 
+                                    <div class="form-group"></div>
+                                    
                                     <button type="submit" class="btn btn-success" name="submit_modify_article">Valider la modification</button>
                                 </form>
 
