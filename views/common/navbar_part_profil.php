@@ -5,7 +5,7 @@
                 <p class="h4 mb-0">
                     <?php 
                         if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-                        $varsessionid = $_SESSION['id'];
+                        $varsessionid = htmlspecialchars($_SESSION['id']);
                         echo $userInfo['pseudo'];
                         }  
                     ?>

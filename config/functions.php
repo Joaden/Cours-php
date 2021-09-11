@@ -45,7 +45,7 @@ function updateArticle($id)
     
 }
 
-////////////////////////////// Create User for page session_register.php
+////////////////////////////// Create User for page session_register.php //  done by chrisptophe
 function createUser()
 {
     $pathToRootFolder = "../../";
@@ -186,7 +186,8 @@ function getMyArticles($id)
         $req->closeCursor();
     }
     else{
-         header('Location: home.php');
+        echo "Vous n'avez pas rédigé d'articles";
+         //header('Location: home.php');
     $req->closeCursor();
     }
    

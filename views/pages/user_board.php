@@ -20,9 +20,19 @@ session_start();
     //Get My articles
     
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $id = $_SESSION['id'];
-        $id = $userInfo['id'];
-        $author = $userInfo['pseudo'] ;
+        $id1 = htmlspecialchars($_SESSION['id']);
+        $id2 = htmlspecialchars($userInfo['id']);
+        $author = htmlspecialchars($userInfo['pseudo']);
+
+        // var_dump($id1);
+        // var_dump($id2);
+        // var_dump($author);
+        // echo $_SESSION["varsessionuserboard"];
+        // // die();
+
+       // echo "oups";
+        //die();
+
         // Get my articles
         $myArticles = getMyArticles($id);
         $nbr = 0;
@@ -31,7 +41,14 @@ session_start();
                 $nbr = $nbr + 1;
             }
         }
+        var_dump($id1);
+        var_dump($id2);
+        var_dump($author);
+        echo $_SESSION["varsessionuserboard"];
+        // die();
 
+        echo "</br>Fin script PHP Page user_board.php</br>";
+        //die();
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +114,10 @@ session_start();
                                 <tr>
                                     <td class="text-left text-dark"><?= $article->title; ?>.</td>
                                     <td>
-                                        <i class="fas fa-edit fa-lg text-dominante"></i>
+                                     
+                                    <a href="article_modify.php?edit=<?= $article->id ?>">
+                                            <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        </a>
                                     </td>
                                     <td class="text-secondaire">validé</td>
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
@@ -229,6 +249,7 @@ session_start();
 </html>
 <?php
 } else {
+
     header('Location: session_login.php');
 
 }

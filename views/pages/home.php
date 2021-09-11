@@ -11,6 +11,7 @@ session_start();
     $_SESSION["varsessiontest"] = "Session home active OK";
     if (isset($_SESSION['id'])){
         $varsessionid = $_SESSION['id'];
+        echo $varsessionid;
     };
 
     

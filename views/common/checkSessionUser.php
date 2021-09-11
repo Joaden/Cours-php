@@ -7,7 +7,7 @@ if(isset($_SESSION['id']))
     $userInfo = $reqUser->fetch();
  } 
 else {
-    echo "error user in checSessionUSer";
+    
     header("Location: session_login.php");
     
 }

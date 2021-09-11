@@ -13,7 +13,20 @@ session_start();
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
 
-    
+
+    /// start test debug
+$id1 = htmlspecialchars($_SESSION['id']);
+$id2 = htmlspecialchars($userInfo['id']);
+var_dump($id1);
+var_dump($id2);
+var_dump($userInfo);
+var_dump($_SESSION);
+
+// die();
+/// end test debug
+
+
+
 if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
     $id = htmlspecialchars($_SESSION['id']);
     $id = htmlspecialchars($userInfo['id']);
@@ -272,6 +285,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
 </html>
 <?php
 } else {
+    
     header('Location: session_login.php');
 
 }
