@@ -151,20 +151,24 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($myArticles as $article): ?>
+                            <?php if($article->id == $image->article_id){ ?>
+                                <?php foreach($myArticles as $article): ?>
 
-                                <tr>
-                                    <td class="text-left text-dark"><?= $article->title; ?>.</td>
-                                    <td>
-                                        <a href="article_modify.php?edit=<?= $article->id ?>">
-                                            <i class="fas fa-edit fa-lg text-dominante"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-secondaire">validé</td>
-                                    <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
-                                    <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
-                                </tr>
-                            <?php endforeach; ?>
+                                    <tr>
+                                        <td class="text-left text-dark"><?= $article->title; ?>.</td>
+                                        <td>
+                                            <a href="article_modify.php?edit=<?= $article->id ?>">
+                                                <i class="fas fa-edit fa-lg text-dominante"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-secondaire">validé</td>
+                                        <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
+                                        <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php }else{
+                                echo "Vous n'avez pas rédigé d'articles.</br> <a class=\"dropdown-item\" href:\"article_write.php\">Publier un article </a>\"";
+                            } ?>
 
                                 <tr>
                                     <td class="text-left text-dark">Comment changer un carrénage sur Kawa.</td>
