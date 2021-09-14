@@ -31,13 +31,27 @@ if(isset($_POST['formconnexion']))
             // request for verify id and check this
             $reqUser = $bdd->prepare("SELECT * FROM users WHERE email = :email ");
             $reqUser->execute(array('email' => $_POST['email']));
-            $result = $reqUser->fetch();
-            if ($result && password_verify($_POST['mdp'], $result['password']))
+            $connectedUserFromDB = $reqUser->fetch();
+            if ($connectedUserFromDB && password_verify($_POST['mdp'], $connectedUserFromDB['password']))
             {
                 // If the checks are successful we can use these session variables to get the information of the connected user.
-                $_SESSION['id'] = $result['id'];
-                $_SESSION['pseudo'] = $result['pseudo'];
-                $_SESSION['email'] = $result['email'];
+                $sessionIdActual = session_id();
+                if(empty($sessionIdActual)) session_start();
+                echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
+                echo $sessionIdActual;
+               //////////// START REGISTER IP & SESSION ID to DB //////////
+
+
+
+               //////////// END REGISTER IP & SESSION ID to DB ////////////
+                $cookieActual = $_COOKIE["PHPSESSID"];
+                //$_SESSION['cookie'] = $cookieActual;
+                $_SESSION['id'] = $connectedUserFromDB['id'];
+                $_SESSION['userid'] = $connectedUserFromDB['id'];
+                $_SESSION['sessionuserid'] = $connectedUserFromDB['id'];
+                //$_SESSION['id'] = $sessionIdActual;
+                $_SESSION['pseudo'] = $connectedUserFromDB['pseudo'];
+                $_SESSION['email'] = $connectedUserFromDB['email'];
                 $_SESSION['autoriser']="oui";
                 // header("Location: session.php?id=".$_SESSION['id']);
                 header("Location: session.php");

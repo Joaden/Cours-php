@@ -21,8 +21,8 @@ session_start();
 
     if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
     {
-        $id = htmlspecialchars($_SESSION['id']);
-        $id = htmlspecialchars($userInfo['id']);
+        $id1 = htmlspecialchars($_SESSION['id']);
+        $id2 = htmlspecialchars($userInfo['id']);
         //$author = htmlspecialchars($userInfo['pseudo']);
         $users = getUsers();
         // and $userInfo['roles_id'] == 1
@@ -31,10 +31,21 @@ session_start();
         //{   
         $getUnsubscribes = getUnsubscribes();
         $comments = getCommentsAdmin();
-        $myArticles = getMyArticles($id);
+        $myArticles = getMyArticles($id2);
+        $AllUserSubscribes = getAllUserSubscribes();
+        $AllComments = getAllComments();
         $nbr = 0;
         $num_rows=0;
         //}
+        $a = session_id();
+        if(empty($a)) session_start();
+        echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
+        echo $a;
+        echo $id1;
+        echo $id2;
+        echo "</br> var_dump(SESSION); : </br>";
+        var_dump($_SESSION);
+        // die();
 
 ?>
 
@@ -62,26 +73,46 @@ session_start();
 
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
-                                <p class="widgetTextDigit-value"><?php  
-                                $counterNbr = 0;
-                                foreach($myArticles as $myArticle){
-                                    // if($counterNbr >= 0) {
-                                        $counterNbr = $counterNbr + 1;
-                                        
-                                    // }
-                                }
-                                echo $counterNbr;
-                                ?></p>
+                                <p class="widgetTextDigit-value"> 
+                                <?php  
+                                    $counterNbr = 0;
+                                    if(isset($myArticles) AND !empty($myArticles)){
+                                        foreach($myArticles as $myArticle){
+                                                $counterNbr = $counterNbr + 1;
+                                            }
+                                            echo $counterNbr; 
+                                        }else{
+                                            echo "0";
+                                    }
+                                    
+                                
+                                ?>
+                                </p>
                             </div>
                             
                             <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">nombre membres connectés</p>
-                                <p class="widgetTextDigit-value">134</p>
+                                <p class="widgetTextDigit-text">nombre membres inscrits</p>
+                                <p class="widgetTextDigit-value">
+                                <?php  
+                                    $counterNbr = 0;
+                                    if(isset($AllUserSubscribes) AND !empty($AllUserSubscribes)){
+                                        foreach($AllUserSubscribes as $AllUserSubscribe){
+                                                $counterNbr = $counterNbr + 1;
+                                            }
+                                            echo $counterNbr; 
+                                        }else{
+                                            echo "0";
+                                    }
+                                    
+                                
+                                ?>
+
+                                </p>
                             </div>
                             <a href="admin_manageUsers.php">
                             <div class="widgetTextDigit">
-                                <p class="widgetTextDigit-text">Gérer les membres abonnés</p>
-                                <p class="widgetTextDigit-value">134</p>
+                                <p class="widgetTextDigit-text">Membres connectés</p>
+                                <p class="widgetTextDigit-value">10</p>
                                 
                             </div>
                             </a>
@@ -100,7 +131,22 @@ session_start();
                             </div>
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">nombre de commentaires</p>
-                                <p class="widgetTextDigit-value">134</p>
+                                <p class="widgetTextDigit-value">
+                                <?php  
+                                    $counterNbr = 0;
+                                    if(isset($AllComments) AND !empty($AllComments)){
+                                        foreach($AllComments as $AllComment){
+                                                $counterNbr = $counterNbr + 1;
+                                            }
+                                            echo $counterNbr; 
+                                        }else{
+                                            echo "0";
+                                    }
+                                    
+                                
+                                ?>
+
+                                </p>
                             </div>
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">nombre de likes</p>

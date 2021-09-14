@@ -11,41 +11,32 @@ session_start();
     // Connection
       //require_once('vendor/autoload.php');
 
-      require_once($pathToRootFolder.'config/connect.php');
+    require_once($pathToRootFolder.'config/connect.php');
 
-      require_once($pathToRootFolder.'config/functions.php');
+    require_once($pathToRootFolder.'config/functions.php');
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
     //Get My articles
     
+    // verification si la session & user
+    // 1) si il y a bien un id de session = id de userinfo en bdd
+    // 2) si la session est active & autorisée
+    // 3) si l'adresse ip = id de userinfo en bdd
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $id = htmlspecialchars($_SESSION['id']);
-        $id = htmlspecialchars($userInfo['id']);
+        $idsession = htmlspecialchars($_SESSION['id']);
+        $iduserinfo = htmlspecialchars($userInfo['id']);
         $author = htmlspecialchars($userInfo['pseudo']);
 
-        // var_dump($id1);
-        // var_dump($id2);
-        // var_dump($author);
-        // echo $_SESSION["varsessionuserboard"];
-        // // die();
-
-       // echo "oups";
-        //die();
-
-        // Get my articles
-        $myArticles = getMyArticles($id);
+        // Get my articles, this methode is in function.php
+        $myArticles = getMyArticles($iduserinfo);
         $nbr = 0;
-        // foreach($myArticles as $myArticle){
-        //     if($nbr > 0) {
-        //         $nbr = $nbr + 1;
-        //         echo $nbr;
-
-        //     }
-        // }
-        var_dump($id);
-        var_dump($id);
-        var_dump($author);
+         
+        showinhtml($author);
+        //var_dump($_SESSION);
+        // var_dump($idsession);
+        // var_dump($iduserinfo);
+        // var_dump($author);
         echo $_SESSION["varsessionuserboard"];
         // die();
 

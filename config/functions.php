@@ -152,6 +152,23 @@ function createUser()
     $req->closeCursor(); 
 
 }
+////////////// START function USER AllUserSubscribes
+function getAllUserSubscribes()
+{
+$pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    ///* prepare() = Création d'un objet PDOStatement */
+    $req = $bdd->prepare('SELECT * FROM users ORDER BY id DESC');
+    ///* execute() = Exécute la première requête */
+    $req->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $req->closeCursor();
+}
+
+////////////// END function USER AllUserSubscribes
 
 /////////////////////////// GET & ADD FUNCTION
 
@@ -251,6 +268,21 @@ function getImage($id)
     $req->closeCursor();
     return $data;
 }
+// START functions COMMENT => getAllComments
+function getAllComments()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    $req = $bdd->prepare('SELECT * FROM comments ORDER BY id DESC');
+    ///* execute() = Exécute la première requête */
+    $req->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $req->closeCursor();
+}
+// END functions COMMENT => getAllComments
 
 // fonction ajouter un commentaire à un article
 function addComment($articleId, $author, $comment)

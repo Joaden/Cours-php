@@ -2,7 +2,7 @@
 session_start();
 
     $pathToRootFolder = "../../";
-    $PAGE_TITLE = "BlogPHP - home";
+    $PAGE_TITLE = "Blog DCCG - home";
     
     include($pathToRootFolder."debug_functions.php");
 
@@ -11,7 +11,9 @@ session_start();
     $_SESSION["varsessiontest"] = "Session home active OK";
     if (isset($_SESSION['id'])){
         $varsessionid = $_SESSION['id'];
-        echo $varsessionid;
+        $cookieActual = $_COOKIE["PHPSESSID"];
+        echo "</br> Session id :".$varsessionid;
+        echo "</br> Cookie Session id :".$cookieActual;
     };
 
     

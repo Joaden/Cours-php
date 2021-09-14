@@ -2,7 +2,7 @@
     session_start();
     
     // Détruit toutes les variables de session
-    $_SESSION = array();
+    // $_SESSION = array();
 
     // Si vous voulez détruire complètement la session, effacez également
     // le cookie de session.
@@ -15,10 +15,12 @@
         );
     }
 
-    // Finalement, on détruit la session.
-    session_destroy();
+    
     // destruction de tab session
     unset($_SESSION);
+
+    // Finalement, on détruit la session.
+    session_destroy();
 
     header("Location: msg_logout.php");
     //header("Location: home.php");
