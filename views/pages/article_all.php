@@ -23,6 +23,17 @@ session_start();
 
 
     //showInConsole($articles); // debug
+    // do search by author
+    if(isset($_GET['filter_author']) AND !empty($_GET['filter_author'])) {
+        $search = htmlspecialchars($_GET['filter_author']);
+        $articlesS = $bdd->query('SELECT * FROM articles WHERE author LIKE "%'.$search.'%" ORDER BY id DESC');
+        //$articlesS->execute();
+        //$dataSearch = $articlesS->fetchAll(PDO::FETCH_OBJ);
+        //$articlesSearch = $articlesS->fetch();
+        //$allUsers->closeCursor();
+
+    }
+
 
     // retrieves the user's ID if he is logged in
     // if(isset($_GET['id']) AND $_GET['id'] > 0)
@@ -32,9 +43,7 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="fr">
-
     <?php include($pathToRootFolder."views/common/head.php");?>
-
 <body>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
@@ -71,11 +80,71 @@ session_start();
 
                     <div class="container section-content">
                         <div class="row">
+
+                            <?php 
+                            if(isset($articlesS)){
+                                if($articlesS->rowCount() > 0){
+                                    //echo "Author : ".$articlesS->author."</br>";
+                                    echo "affichage de la search bar";
+                                    //echo $articlesS['author']."</br>";
+
+                                    // 1er exmeple affichage
+                                    while($articlesSearch = $articlesS->fetch()){ ?>
+                                    <!-- // 2eme ex -->
+                                    <!-- <?php #foreach($articlesSearchs as $articlesSearch): ?> -->
+                                        
+                                            <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
+                                                
+                                                <div class="blogArticle-content">
+                                                    <h2 class="blogArticle-title">
+                                                        <a href="article_read.php?id=<?= $articlesSearch['id'] ?>">
+                                                            <?= $articlesSearch['title']; ?>
+                                                        </a>
+                                                    </h2>
+                                                    
+                                                    <div class="blogArticle-footer">
+                                                        <!-- v1 -->
+                                                        
+                                                        <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
+                                                            
+                                                            <p class="col-lg-6 align-self-baseline text-lg-right">
+                                                                <span class="abrev">date</span>
+                                                                <span class="date"><?= $articlesSearch['date']; ?></span>
+                                                                <span class="hour"></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php #endforeach; ?>
+                                        <p>
+                                            <?= $articlesSearch['author']; ?>
+                                        </p>
+                                        <?php
+                                       // var_dump($articlesS);
+                                        //die();
+
+                                        //echo $articlesS->title."</br>";
+                                        //echo "Author : ".$articlesS->author;
+                                        //die();
+                                    }
+
+                                }else{
+                                    echo "Aucun author trouvé";
+                                    
+                                }
+                            }else{
+                                echo "Vous pouvez rentrer un nom d'auteur dans la barre de recherche";
+                                } 
+                                
+                            ?>
+
+
                             <?php foreach($articles as $article): ?>
                             <?php #for($i=0; $i<6;$i++):?>
                                 <!-- <div class="col-6 show-red"> -->
                                 <!-- </div> -->
-
+                                
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
                                     <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">
                                         <?php foreach($images as $image): ?>
@@ -120,7 +189,7 @@ session_start();
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-
+                        
                         </div>
                     </div>
 
@@ -147,16 +216,11 @@ session_start();
                                 <?php endfor; ?>
                             <!-- </optgroup> -->
                         </select>
-
                         <label for="filter_author_id" class="h3 d-block bg-secondaireDarker2 text-white mt-3 mb-1 pl-2">Auteur</label>
                         <input type="text" id="filter_author_id" name="filter_author" class="form-control rounded-pill">
 
-
                         <label for="filter_topic_id" class="h3 d-block bg-secondaireDarker2 text-white mt-3 mb-1 pl-2">Sujet ou Hashtag</label>
                         <input type="text" id="filter_topic_id" name="filter_topic" class="form-control rounded-pill">
-
-
-
 
                         <!-- <input type="submit" value="Filter" name="" id=""> -->
                         <div class="d-flex justify-content-center">

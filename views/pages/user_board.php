@@ -11,27 +11,37 @@ session_start();
     // Connection
       //require_once('vendor/autoload.php');
 
-      require_once($pathToRootFolder.'config/connect.php');
+    require_once($pathToRootFolder.'config/connect.php');
 
-      require_once($pathToRootFolder.'config/functions.php');
+    require_once($pathToRootFolder.'config/functions.php');
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
     //Get My articles
     
+    // verification si la session & user
+    // 1) si il y a bien un id de session = id de userinfo en bdd
+    // 2) si la session est active & autorisée
+    // 3) si l'adresse ip = id de userinfo en bdd
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $id = $_SESSION['id'];
-        $id = $userInfo['id'];
-        $author = $userInfo['pseudo'] ;
-        // Get my articles
-        $myArticles = getMyArticles($id);
-        $nbr = 0;
-        foreach($myArticles as $post){
-            if($nbr > 0) {
-                $nbr = $nbr + 1;
-            }
-        }
+        $idsession = htmlspecialchars($_SESSION['id']);
+        $iduserinfo = htmlspecialchars($userInfo['id']);
+        $author = htmlspecialchars($userInfo['pseudo']);
 
+        // Get my articles, this methode is in function.php
+        $myArticles = getMyArticles($iduserinfo);
+        $nbr = 0;
+         
+        showinhtml($author);
+        //var_dump($_SESSION);
+        // var_dump($idsession);
+        // var_dump($iduserinfo);
+        // var_dump($author);
+        echo $_SESSION["varsessionuserboard"];
+        // die();
+
+        echo "</br>Fin script PHP Page user_board.php</br>";
+        //die();
 ?>
 
 <!DOCTYPE html>
@@ -61,10 +71,15 @@ session_start();
                             <p class="widgetTextDigit-value">
                             <?php  
                                 $counterNbr = 0;
-                                foreach($myArticles as $myArticle){
+                                if(isset($myArticles) AND !empty($myArticles)){
+                                   foreach($myArticles as $myArticle){
                                         $counterNbr = $counterNbr + 1;
+                                    }
+                                    echo $counterNbr; 
+                                }else{
+                                    echo "0";
                                 }
-                                echo $counterNbr;
+                                
                                 ?>
                             </p>
                         </div>
@@ -97,12 +112,22 @@ session_start();
                                 <tr>
                                     <td class="text-left text-dark"><?= $article->title; ?>.</td>
                                     <td>
-                                        <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        <a href="article_modify.php?edit=<?= $article->id ?>">
+                                            <i class="fas fa-edit fa-lg text-dominante"></i>
+                                        </a>
                                     </td>
-                                    <td class="text-secondaire">validé</td>
+
+                                    <td class="text-secondaire"><?php if($article->online == false) {
+                                         echo "Validé";
+                                        }else {
+                                            echo "En attente de validation";
+                                         } ?>
+                                    </td>
+
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
                                     <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
                                 </tr>
+
                             <?php endforeach; ?>
 
                                 <tr>
@@ -216,7 +241,7 @@ session_start();
         <!-- FOOTER -->
         <?php 
             #include($pathToRootFolder."views/common/footer.php");
-            include($pathToRootFolder."views/common/footer_dev_mode.php");
+            #include($pathToRootFolder."views/common/footer_dev_mode.php");
             
         ?>
         
@@ -229,6 +254,7 @@ session_start();
 </html>
 <?php
 } else {
+
     header('Location: session_login.php');
 
 }

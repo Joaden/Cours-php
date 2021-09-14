@@ -38,7 +38,7 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
           
     
     
-            <h1>Page confidentielle de Connexion</h1>
+            <h1>Page de Connexion</h1>
             <h2>Félicitations, vous êtes bien connecté !</h2>
             <h3>Vous allez être rediriger vers la page d'accueil.</h3>
             <h4><a href="session_logout.php">Se déconnecter</a></h4>
