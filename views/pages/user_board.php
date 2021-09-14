@@ -20,8 +20,8 @@ session_start();
     //Get My articles
     
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $id1 = htmlspecialchars($_SESSION['id']);
-        $id2 = htmlspecialchars($userInfo['id']);
+        $id = htmlspecialchars($_SESSION['id']);
+        $id = htmlspecialchars($userInfo['id']);
         $author = htmlspecialchars($userInfo['pseudo']);
 
         // var_dump($id1);
@@ -36,13 +36,15 @@ session_start();
         // Get my articles
         $myArticles = getMyArticles($id);
         $nbr = 0;
-        foreach($myArticles as $post){
-            if($nbr > 0) {
-                $nbr = $nbr + 1;
-            }
-        }
-        var_dump($id1);
-        var_dump($id2);
+        // foreach($myArticles as $myArticle){
+        //     if($nbr > 0) {
+        //         $nbr = $nbr + 1;
+        //         echo $nbr;
+
+        //     }
+        // }
+        var_dump($id);
+        var_dump($id);
         var_dump($author);
         echo $_SESSION["varsessionuserboard"];
         // die();
@@ -78,10 +80,15 @@ session_start();
                             <p class="widgetTextDigit-value">
                             <?php  
                                 $counterNbr = 0;
-                                foreach($myArticles as $myArticle){
+                                if(isset($myArticles) AND !empty($myArticles)){
+                                   foreach($myArticles as $myArticle){
                                         $counterNbr = $counterNbr + 1;
+                                    }
+                                    echo $counterNbr; 
+                                }else{
+                                    echo "0";
                                 }
-                                echo $counterNbr;
+                                
                                 ?>
                             </p>
                         </div>
@@ -114,15 +121,22 @@ session_start();
                                 <tr>
                                     <td class="text-left text-dark"><?= $article->title; ?>.</td>
                                     <td>
-                                     
-                                    <a href="article_modify.php?edit=<?= $article->id ?>">
+                                        <a href="article_modify.php?edit=<?= $article->id ?>">
                                             <i class="fas fa-edit fa-lg text-dominante"></i>
                                         </a>
                                     </td>
-                                    <td class="text-secondaire">validé</td>
+
+                                    <td class="text-secondaire"><?php if($article->online == false) {
+                                         echo "Validé";
+                                        }else {
+                                            echo "En attente de validation";
+                                         } ?>
+                                    </td>
+
                                     <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
                                     <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
                                 </tr>
+
                             <?php endforeach; ?>
 
                                 <tr>
@@ -236,7 +250,7 @@ session_start();
         <!-- FOOTER -->
         <?php 
             #include($pathToRootFolder."views/common/footer.php");
-            include($pathToRootFolder."views/common/footer_dev_mode.php");
+            #include($pathToRootFolder."views/common/footer_dev_mode.php");
             
         ?>
         

@@ -75,14 +75,16 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                             <p class="widgetTextDigit-text">nombre d'articles rédigés</p>
                             <p class="widgetTextDigit-value">
                                 <?php  
-                                $counterNbr = 0;
-                                foreach($myArticles as $myArticle){
-                                    // if($counterNbr >= 0) {
-                                        $counterNbr = $counterNbr + 1;
-                                        
-                                    // }
-                                }
-                                echo $counterNbr;
+                                    $counterNbr = 0;
+                                    if(isset($myArticles) AND !empty($myArticles)){
+                                        foreach($myArticles as $myArticle){
+                                                $counterNbr = $counterNbr + 1;
+                                            }
+                                            echo $counterNbr; 
+                                        }else{
+                                            echo "0";
+                                    }   
+                                
                                 ?>
                             </p>
                         </div>
@@ -96,36 +98,40 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                         </div>
                         <div class="container section-content">
                         <div class="row">
-                            <?php foreach($myArticles as $article): ?>
-                            <?php #for($i=0; $i<6;$i++):?>
-                                <!-- <div class="col-6 show-red"> -->
-                                <!-- </div> -->
+                    <?php   if(isset($myArticles) AND !empty($myArticles)){
+                                    foreach($myArticles as $article): ?>
+                                        <?php #for($i=0; $i<6;$i++):?>
+                                        <!-- <div class="col-6 show-red"> -->
+                                        <!-- </div> -->
 
-                                <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                                    <a class="blogArticle-imglink" >
-                                        <?php foreach($images as $image): ?>
-                                            <?php if($article->id == $image->article_id){ ?>
-                                            <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
-                                            <?php } ?>
-                                        <?php endforeach; ?>
-                                        
-                                    </a>
-                                    <div class="blogArticle-content">
-                                        <h2 class="blogArticle-title">
-                                            <?= $article->title; ?>
-                                        </h2>
-                                        <span>
-                                            <a href="article_modify.php?edit=<?= $article->id ?>">
-                                                Modifier 
+                                        <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
+                                            <a class="blogArticle-imglink" >
+                                                <?php foreach($images as $image): ?>
+                                                    <?php if($article->id == $image->article_id){ ?>
+                                                    <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article">
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
+                                                
                                             </a>
-                                            <a href="article_delete.php?id=<?= $article->id ?>">
-                                                    <div class="text-danger">Supprimer</div>
-                                            </a>
-                                        </span>
-                                        
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
+                                            <div class="blogArticle-content">
+                                                <h2 class="blogArticle-title">
+                                                    <?= $article->title; ?>
+                                                </h2>
+                                                <span>
+                                                    <a href="article_modify.php?edit=<?= $article->id ?>">
+                                                        Modifier 
+                                                    </a>
+                                                    <a href="article_delete.php?id=<?= $article->id ?>">
+                                                            <div class="text-danger">Supprimer</div>
+                                                    </a>
+                                                </span>
+                                                
+                                            </div>
+                                        </div>
+                                <?php endforeach; ?>
+                            <?php }else{
+                                echo "Vous n'avez pas rédigé d'articles.</br> <a class=\"dropdown-item\" href:\"article_write.php\">Publier un article </a>\"";
+                            } ?>
 
                         </div>
                     </div>

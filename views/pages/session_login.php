@@ -130,7 +130,7 @@ if(isset($_POST['formconnexion']))
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="mdp"></label>
-                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Mot de passe" required>
+                            <input name="mdp" type="password" class="form-control" id="mdp" placeholder="Mot de passe" autocomplete="off" required>
                             <small id="emailRegister" class="form-text text-muted">
                                 <a href="recover_password.php">
                                     Mot de passe oublié ?
