@@ -6,19 +6,47 @@ session_start();
     
     include($pathToRootFolder."debug_functions.php");
 
+     
+    
     
 
     $_SESSION["varsessiontest"] = "Session home active OK";
     if (isset($_SESSION['id'])){
         $varsessionid = $_SESSION['id'];
         $cookieActual = $_COOKIE["PHPSESSID"];
+        $ipUser = $_SERVER['REMOTE_ADDR'];
+        // $ipUser1 = $_SERVER['HTTP_CLIENT_IP'];
+        // $ipUser2 = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        echo "</br> Address IP :".$ipUser;
+        // echo $_SERVER['HTTP_CLIENT_IP'];
+        // echo $_SERVER['HTTP_X_FORWARDED_FOR'];
+
         echo "</br> Session id :".$varsessionid;
         echo "</br> Cookie Session id :".$cookieActual;
-    };
+        $connectedUserFromDB['pseudo'] = $_SESSION['pseudo'];
+        setcookie('pseudo1', $connectedUserFromDB['pseudo'], time() +3600, null, null, false, true);
+        setcookie('pseudo2', "Denis", time() +3600, null, null, false, true);
+        if(isset($_COOKIE["pseudo1"])){
+            echo "</br>cookie['pseudo1']".$_COOKIE["pseudo1"]."</br>";
+            echo "</br>session['pseudo'] :".$_SESSION['pseudo']."</br>";
+        }elseif(isset($_COOKIE["pseudo2"])){
+            echo "</br>".$_COOKIE["pseudo2"]."</br>";
 
+        }else{
+            echo "</br>Cookie pseudo inexistant";
+
+        }
+    }
+
+    // COOKIES 
+    // if(isset($_COOKIE['pseudo'])){
+    //     echo $_COOKIE['pseudo1'];
+    //     }else{
+    //         echo " chez nous!";
+    //     } 
     
     //Cookie de test pour le theme
-    // @$theme=$_GET["theme"];
+    @$theme=$_GET["theme"];
     // if($theme=="clair" || $theme=="sombre"){
     //     setcookie("theme",$theme,time()+3600);
     //     header("location: home.php");
@@ -102,7 +130,14 @@ session_start();
         ?>
         <section class="section">
             <div class="section-head">
-                <h2 class="section-head-title">Bienvenue</h2>
+                <h2 class="section-head-title">Bienvenue 
+                    <?php if(isset($_COOKIE['pseudo1'])){
+                        echo $_COOKIE['pseudo1'];
+                        }else{
+                            echo " chez nous!";
+                        } 
+                    ?>
+                </h2>
                 <h4><?php echo $_SESSION["varsessiontest"]; ?></h4>
 
             </div>

@@ -39,12 +39,23 @@ if(isset($_POST['formconnexion']))
                 if(empty($sessionIdActual)) session_start();
                 echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
                 echo $sessionIdActual;
+
                //////////// START REGISTER IP & SESSION ID to DB //////////
+               $userId = $connectedUserFromDB['id'];
+               //$ipUser = $_SERVER['HTTP_CLIENT_IP'];
+               $ipUser = $_SERVER['REMOTE_ADDR'];
+               $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
+                $reqUser = $bdd->prepare("INSERT INTO sessions (user_id, session_id, ip, user_agent, date) VALUES (?, ?, ?, ?,NOW())");
 
+                $reqUser->execute(array($userId, $sessionIdActual, $ipUser, $userAgent));
+                //$connectedUserFromDB = $reqUser->fetch();
 
                //////////// END REGISTER IP & SESSION ID to DB ////////////
+
                 $cookieActual = $_COOKIE["PHPSESSID"];
+                setcookie('infoUser', 'infos divers', time() + 365*24*3600, null, null, false, true); 
+                setcookie('pseudo1', $connectedUserFromDB['pseudo'], time() + 365*24*3600, null, null, false, true); 
                 //$_SESSION['cookie'] = $cookieActual;
                 $_SESSION['id'] = $connectedUserFromDB['id'];
                 $_SESSION['userid'] = $connectedUserFromDB['id'];

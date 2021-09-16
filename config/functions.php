@@ -220,13 +220,26 @@ function getArticle($id)
     $req->execute(array($id));
     if($req->rowCount() == 1)
     {
+        /////////////////////////////////////////////////// START ADD NBR VIEW ARTICLE
+        $nbrView = +1;
+        $insNbrView = $bdd->prepare('UPDATE articles SET nbr_view = nbr_view+1 WHERE id = ? ');
+        $insNbrView->execute(array($id));
+        $insNbrView->closeCursor();
+        if($insNbrView != TRUE) {
+            var_dump($insNbrView);
+            die();
+        }
+        /////////////////////////////////////////////////// END ADD NBR VIEW ARTICLE
+
+        ///// get data de $req
         $data = $req->fetch(PDO::FETCH_OBJ);
         return $data;
         // $req->closeCursor();
     }
-    else
-    header('Location: index.php');
-    $req->closeCursor();
+    else{
+        header('Location: index.php');
+        $req->closeCursor();
+    }
 }
 
 //Get image for article in database, table images
