@@ -57,6 +57,7 @@ if(isset($_POST['formconnexion']))
                 setcookie('infoUser', 'infos divers', time() + 365*24*3600, null, null, false, true); 
                 setcookie('pseudo1', $connectedUserFromDB['pseudo'], time() + 365*24*3600, null, null, false, true); 
                 //$_SESSION['cookie'] = $cookieActual;
+                $_SESSION['sessionid'] = $sessionIdActual;
                 $_SESSION['id'] = $connectedUserFromDB['id'];
                 $_SESSION['userid'] = $connectedUserFromDB['id'];
                 $_SESSION['sessionuserid'] = $connectedUserFromDB['id'];

@@ -78,13 +78,18 @@ session_start();
                     <div class="section-head mt-5">
                         <h2 class="section-head-title"><?php  
                                 $counterNbr = 0;
-                                foreach($articles as $article){
+                                if(isset($articles)){
+                                    foreach($articles as $article){
                                     // if($counterNbr >= 0) {
                                         $counterNbr = $counterNbr + 1;
                                         
                                     // }
                                 }
                                 echo $counterNbr;
+                                }else {
+                                    echo "Aucun article trouvé";
+                                }
+                                
                                 ?>
                                 Articles populaires</h2>
                         <h3>
@@ -148,7 +153,7 @@ session_start();
                                     
                                 }
                             }else{
-                                echo "Vous pouvez rentrer un nom d'auteur dans la barre de recherche";
+                                // echo "Vous pouvez rentrer un nom d'auteur dans la barre de recherche";
                                 } 
                                 
                             ?>

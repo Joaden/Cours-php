@@ -11,8 +11,8 @@ session_start();
     
 
     $_SESSION["varsessiontest"] = "Session home active OK";
-    if (isset($_SESSION['id'])){
-        $varsessionid = $_SESSION['id'];
+    if (isset($_SESSION['sessionid'])){
+        $varsessionid = $_SESSION['sessionid'];
         $cookieActual = $_COOKIE["PHPSESSID"];
         $ipUser = $_SERVER['REMOTE_ADDR'];
         // $ipUser1 = $_SERVER['HTTP_CLIENT_IP'];
@@ -20,7 +20,23 @@ session_start();
         echo "</br> Address IP :".$ipUser;
         // echo $_SERVER['HTTP_CLIENT_IP'];
         // echo $_SERVER['HTTP_X_FORWARDED_FOR'];
-
+        function getIPAddress() {  
+            //whether ip is from the share internet  
+             if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                        $ip = $_SERVER['HTTP_CLIENT_IP'];  
+                }  
+            //whether ip is from the proxy  
+            elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+             }  
+        //whether ip is from the remote address  
+            else{  
+                     $ip = $_SERVER['REMOTE_ADDR'];  
+             }  
+             return $ip;  
+        }  
+        $ip = getIPAddress();  
+        echo 'User Real IP Address - '.$ip;
         echo "</br> Session id :".$varsessionid;
         echo "</br> Cookie Session id :".$cookieActual;
         $connectedUserFromDB['pseudo'] = $_SESSION['pseudo'];

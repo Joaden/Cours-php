@@ -24,6 +24,10 @@ session_start();
     // 2) si la session est active & autorisée
     // 3) si l'adresse ip = id de userinfo en bdd
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+            echo "</br>if isset session_id == à s_session['sessionid</br>";
+            var_dump($_SESSION);
+            //die();
         $idsession = htmlspecialchars($_SESSION['id']);
         $iduserinfo = htmlspecialchars($userInfo['id']);
         $author = htmlspecialchars($userInfo['pseudo']);
@@ -107,28 +111,31 @@ session_start();
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($myArticles as $article): ?>
+                            <?php 
+                                if(isset($myArticles) AND !empty($myArticles)){
+                                foreach($myArticles as $article): ?>
 
-                                <tr>
-                                    <td class="text-left text-dark"><?= $article->title; ?>.</td>
-                                    <td>
-                                        <a href="article_modify.php?edit=<?= $article->id ?>">
-                                            <i class="fas fa-edit fa-lg text-dominante"></i>
-                                        </a>
-                                    </td>
+                                    <tr>
+                                        <td class="text-left text-dark"><?= $article->title; ?>.</td>
+                                        <td>
+                                            <a href="article_modify.php?edit=<?= $article->id ?>">
+                                                <i class="fas fa-edit fa-lg text-dominante"></i>
+                                            </a>
+                                        </td>
 
-                                    <td class="text-secondaire"><?php if($article->online == false) {
-                                         echo "Validé";
-                                        }else {
-                                            echo "En attente de validation";
-                                         } ?>
-                                    </td>
+                                        <td class="text-secondaire"><?php if($article->online == false) {
+                                            echo "Validé";
+                                            }else {
+                                                echo "En attente de validation";
+                                            } ?>
+                                        </td>
 
-                                    <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
-                                    <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
-                                </tr>
+                                        <td class="text-secondary"><span class="">12 </span><i class="fas fa-thumbs-up"></i></td>
+                                        <td class="text-secondary"><span class="">22 </span><i class="fas fa-comments"></i></td>
+                                    </tr>
 
-                            <?php endforeach; ?>
+                                <?php endforeach; }?>
+
 
                                 <tr>
                                     <td class="text-left text-dark">Comment changer un carrénage sur Kawa.</td>
@@ -253,6 +260,8 @@ session_start();
     </body>
 </html>
 <?php
+}
+
 } else {
 
     header('Location: session_login.php');
