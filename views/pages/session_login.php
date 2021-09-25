@@ -3,6 +3,8 @@ session_start();
 
 $pathToRootFolder = "../../";
 $PAGE_TITLE = "Connexion";
+$_SESSION['autoriser']="non";
+
 
 $_SESSION["varsessionlogintest"] = "Session login active OK";
 
@@ -32,6 +34,8 @@ if(isset($_POST['formconnexion']))
             $reqUser = $bdd->prepare("SELECT * FROM users WHERE email = :email ");
             $reqUser->execute(array('email' => $_POST['email']));
             $connectedUserFromDB = $reqUser->fetch();
+            $reqUser->closeCursor(); 
+
             if ($connectedUserFromDB && password_verify($_POST['mdp'], $connectedUserFromDB['password']))
             {
                 // If the checks are successful we can use these session variables to get the information of the connected user.
@@ -39,20 +43,70 @@ if(isset($_POST['formconnexion']))
                 if(empty($sessionIdActual)) session_start();
                 echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
                 echo $sessionIdActual;
+
                //////////// START REGISTER IP & SESSION ID to DB //////////
+               $userId = $connectedUserFromDB['id'];
+               //$ipUser = $_SERVER['HTTP_CLIENT_IP'];
+               $ipUser = $_SERVER['REMOTE_ADDR'];
+               $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+               // je vérifie si il y a une entrée correspondant à l'ID du user
+                // $reqVerifIfIdExistToDBSession = $bdd->prepare("SELECT user_id FROM sessions WHERE user_id = ? ");
+                // $reqVerifIfIdExistToDBSession->execute(array($userId));
+                // $userIdFromDBSessions = $reqVerifIfIdExistToDBSession->fetch();
+                // echo "</br>after SELECT USER_ID FROM SESSIONS</br>";
+
+                // // Si il y a déjà une entrée avec son ID de user(user_id) je dois l'UPDATE
+                // if(isset($userIdFromDBSessions['user_id']) && $userIdFromDBSessions['user_id'] == $userId ){
+                //     echo "</br>Il y a déjà une entrée dans la Table Sessions ! Before UPDATE sessions SET session_id....</br>";
+                // //die();
+                //     $reqUpdateSessionId = $bdd->prepare("UPDATE sessions SET session_id = :session_id, ip = :ip, user_agent = :user_agent, date = NOW() WHERE id = :id");
+                //     echo "</br>Il y a déjà une entrée dans la Table Sessions ! Before Execute!! UPDATE sessions SET session_id....</br>";
+                //     $reqUpdateSessionId->execute(array(
+                //         'session_id' => $sessionIdActual,
+                //         'ip' => $ipUser,
+                //         'user_agent' => $userAgent,
+                //         'id' => $userId
+                //         ));
+                // $reqUpdateSessionId->closeCursor(); 
 
 
+                // echo "</br>Il y a déjà une entrée dans la Table Sessions ! After UPDATE sessions SET session_id....</br>";
+                // die();
 
+                // }else{
+
+                   $reqInsertToDBSessions = $bdd->prepare("INSERT INTO sessions (user_id, session_id, ip, user_agent, date) VALUES (?, ?, ?, ?,NOW())");
+
+                    $reqInsertToDBSessions->execute(array($userId, $sessionIdActual, $ipUser, $userAgent));
+                    //$connectedUserFromDB = $reqUser->fetch();
+                    $reqInsertToDBSessions->closeCursor(); 
+
+ 
+                    echo "</br>Nouvelle Entrée dans la Table Sessions ! after INSERT INTO sessions SET session_id</br>";
+                // die();
+                // }
+                
                //////////// END REGISTER IP & SESSION ID to DB ////////////
+
                 $cookieActual = $_COOKIE["PHPSESSID"];
+                setcookie('infoUser', 'infos divers', time() + 365*24*3600, null, null, false, true); 
+                setcookie('pseudo1', $connectedUserFromDB['pseudo'], time() + 365*24*3600, null, null, false, true); 
                 //$_SESSION['cookie'] = $cookieActual;
+                $_SESSION['sessionid'] = $sessionIdActual;
                 $_SESSION['id'] = $connectedUserFromDB['id'];
                 $_SESSION['userid'] = $connectedUserFromDB['id'];
                 $_SESSION['sessionuserid'] = $connectedUserFromDB['id'];
+                $_SESSION['role'] = $connectedUserFromDB['roles_id'];
                 //$_SESSION['id'] = $sessionIdActual;
                 $_SESSION['pseudo'] = $connectedUserFromDB['pseudo'];
                 $_SESSION['email'] = $connectedUserFromDB['email'];
                 $_SESSION['autoriser']="oui";
+                // CREATE TOKEN AFTER LOGIN
+                $_SESSION['token'] = md5(time()*rand(175,658));
+
+               
+
                 // header("Location: session.php?id=".$_SESSION['id']);
                 header("Location: session.php");
             }

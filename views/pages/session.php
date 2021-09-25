@@ -12,7 +12,7 @@ require_once($pathToRootFolder.'config/connect.php');
 
 require_once($pathToRootFolder.'config/functions.php');
 
-require($pathToRootFolder."views/common/checkSessionUser.php");
+// require($pathToRootFolder."views/common/checkSessionUser.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,10 +38,9 @@ require($pathToRootFolder."views/common/checkSessionUser.php");
           
     
     
-            <h1>Page de Connexion</h1>
-            <h2>Félicitations, vous êtes bien connecté !</h2>
-            <h3>Vous allez être rediriger vers la page d'accueil.</h3>
-            <h4><a href="session_logout.php">Se déconnecter</a></h4>
+            <h1>Vous êtes bien connecté !</h1>
+            <h2>Vous allez être rediriger vers la page d'accueil.</h2>
+            <h3><a href="session_logout.php">Se déconnecter</a></h3>
             
             <?php header("refresh:4;url=home.php");?> 
             <br>

@@ -15,32 +15,36 @@ session_start();
 
 
     /// start test debug
-$id1 = htmlspecialchars($_SESSION['id']);
-$id2 = htmlspecialchars($userInfo['id']);
-var_dump($id1);
-var_dump($id2);
-var_dump($userInfo);
-var_dump($_SESSION);
+    $id1 = htmlspecialchars($_SESSION['id']);
+    $id2 = htmlspecialchars($userInfo['id']);
+    var_dump($id1);
+    var_dump($id2);
+    var_dump($userInfo);
+    var_dump($_SESSION);
 
-// die();
-/// end test debug
+    // die();
+    /// end test debug
 
 
 
-if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-    $id = htmlspecialchars($_SESSION['id']);
-    $id = htmlspecialchars($userInfo['id']);
-    $author = htmlspecialchars($userInfo['pseudo']);
-    // Get my articles
-    $myArticles = getMyArticles($id);
-    $nbr = 0;
-    if(isset($myArticles) AND !empty($myArticles)){
-        foreach($myArticles as $post){
-            if($nbr > 0) {
-                $nbr = $nbr + 1;
+    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+            echo "</br>if isset session_id == à la session en base de donnée créé lors du login</br>";
+            var_dump($_SESSION);
+            //die();
+        $id = htmlspecialchars($_SESSION['id']);
+        $id = htmlspecialchars($userInfo['id']);
+        $author = htmlspecialchars($userInfo['pseudo']);
+        // Get my articles
+        $myArticles = getMyArticles($id);
+        $nbr = 0;
+        if(isset($myArticles) AND !empty($myArticles)){
+            foreach($myArticles as $post){
+                if($nbr > 0) {
+                    $nbr = $nbr + 1;
+                }
             }
         }
-    }
     // $reqnbr = $bdd->prepare('SELECT COUNT(*) FROM comments WHERE author = ?');
     // $reqnbr->execute(array($id));
     // $reqnbr->closeCursor();
@@ -132,7 +136,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                         </div>
                                 <?php endforeach; ?>
                             <?php }else{
-                                echo "Vous n'avez pas rédigé d'articles.</br> <a class=\"dropdown-item\" href:\"article_write.php\">Publier un article </a>\"";
+                                echo "Vous n'avez pas rédigé d'articles.";
                             } ?>
 
                         </div>
@@ -300,6 +304,7 @@ if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
     </body>
 </html>
 <?php
+        }
 } else {
     
     header('Location: session_login.php');

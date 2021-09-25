@@ -4,13 +4,34 @@
             <div class="d-flex flex-column text-white">
                 <p class="h4 mb-0">
                     <?php 
-                        if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-                        $varsessionid = htmlspecialchars($_SESSION['id']);
+                        if (isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
+                        $varsessionid = htmlspecialchars($_SESSION['userid']);
                         echo $userInfo['pseudo'];
                         }  
                     ?>
                 </p>
-                <small>[statut: Writer]</small>
+                <small>
+                   <?php 
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+                           echo "[statut: Super Admin]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
+                            echo "[statut: Admin]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
+                            echo "[statut: Modérateur]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 4) {
+                            echo "[statut: Writer]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 5) {
+                            echo "[statut: Désabonné]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 6) {
+                            echo "[statut: Supprimé]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 7) {
+                            echo "[statut: Premium]";
+                        } else {
+                            echo "[statut: Writer]";
+
+                        }
+                    ?>
+                </small>
             </div>
         </a>
         <div class="dropdown-menu dropdownProfil" aria-labelledby="navbar_profil_Dropdown">
@@ -25,8 +46,8 @@
 </ul>
 
 <?php 
-    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $varsessionid = $_SESSION['id'];
+    if (isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
+        $varsessionid = $_SESSION['userid'];
         if(!empty($userInfo['avatar']))
         {
         ?>

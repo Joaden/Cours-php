@@ -21,6 +21,20 @@ session_start();
     $images = getImages();
     $categories = getCategories();
 
+    ////////// START afficher le nombre de vue
+
+    //$monfichier = fopen('compteur.txt', 'a+');
+    $monfichier = fopen('compteur_view_article_all.txt', 'r+');
+ 
+    $pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+    $pages_vues += 1; // On augmente de 1 ce nombre de pages vues
+    fseek($monfichier, 0); // On remet le curseur au début du fichier
+    fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
+    
+    fclose($monfichier);
+    
+    echo '<p>Cette page a été vue ' . $pages_vues . ' fois !</p>';
+    ////////// END
 
     //showInConsole($articles); // debug
     // do search by author
@@ -64,13 +78,18 @@ session_start();
                     <div class="section-head mt-5">
                         <h2 class="section-head-title"><?php  
                                 $counterNbr = 0;
-                                foreach($articles as $article){
+                                if(isset($articles)){
+                                    foreach($articles as $article){
                                     // if($counterNbr >= 0) {
                                         $counterNbr = $counterNbr + 1;
                                         
                                     // }
                                 }
                                 echo $counterNbr;
+                                }else {
+                                    echo "Aucun article trouvé";
+                                }
+                                
                                 ?>
                                 Articles populaires</h2>
                         <h3>
@@ -134,7 +153,7 @@ session_start();
                                     
                                 }
                             }else{
-                                echo "Vous pouvez rentrer un nom d'auteur dans la barre de recherche";
+                                // echo "Vous pouvez rentrer un nom d'auteur dans la barre de recherche";
                                 } 
                                 
                             ?>

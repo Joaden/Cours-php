@@ -141,9 +141,12 @@ session_start();
 
                                     <div class="form-group">
                                         <label for="content">Contenu</label>
-                                        <input type="text" name="content" class="form-control" id="content" <?php if($mode_edition == 1) { ?> value="<?php echo $edit_article['content']; ?>" 
-                                        <?php } ?> require>
-                                        </input>
+                                        
+                                        <textarea type="text" name="content" class="form-control" cols="30" rows="12" id="content" 
+                                        placeholder="<?php if($mode_edition == 1){echo $edit_article['content'];}?>" 
+                                        require><?php if($mode_edition == 1){echo $edit_article['content'];}?>
+                                        </textarea>
+                                        
                                     </div>
 
                                     <div class="form-group">

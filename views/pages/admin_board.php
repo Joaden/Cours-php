@@ -21,6 +21,8 @@ session_start();
 
     if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
     {
+        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+
         $id1 = htmlspecialchars($_SESSION['id']);
         $id2 = htmlspecialchars($userInfo['id']);
         //$author = htmlspecialchars($userInfo['pseudo']);
@@ -29,6 +31,7 @@ session_start();
         $varsessionid = $_SESSION['id'];
         //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
         //{   
+        $getUsersConnected = getUsersConnected();
         $getUnsubscribes = getUnsubscribes();
         $comments = getCommentsAdmin();
         $myArticles = getMyArticles($id2);
@@ -36,6 +39,7 @@ session_start();
         $AllComments = getAllComments();
         $nbr = 0;
         $num_rows=0;
+        $setuser ="oui";
         //}
         $a = session_id();
         if(empty($a)) session_start();
@@ -112,7 +116,21 @@ session_start();
                             <a href="admin_manageUsers.php">
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">Membres connectés</p>
-                                <p class="widgetTextDigit-value">10</p>
+                                <p class="widgetTextDigit-value">
+                                <?php  
+                                    $counterNbr = 0;
+                                    if(isset($getUsersConnected) AND !empty($getUsersConnected)){
+                                        foreach($getUsersConnected as $getUsersConnected){
+                                                $counterNbr = $counterNbr + 1;
+                                            }
+                                            echo $counterNbr; 
+                                        }else{
+                                            echo "0";
+                                    }
+                                    
+                                
+                                ?>
+                                </p>
                                 
                             </div>
                             </a>
@@ -155,6 +173,9 @@ session_start();
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text">nombre de warnings Admin</p>
                                 <p class="widgetTextDigit-value--red">1</p>
+                            </div>
+                            <div class="widgetTextDigit">
+                                <p class="widgetTextDigit-text"> <a href="admin_manageUsers.php?token=<?php echo $_SESSION['token']; ?>&setuser=<?php echo $setuser; ?>">MANAGE USERS</a></p>
                             </div>
                             
                         </section>
@@ -309,6 +330,7 @@ session_start();
     </html>
 
 <?php 
+        }
         } else {
             header('Location: session_login.php');
         }

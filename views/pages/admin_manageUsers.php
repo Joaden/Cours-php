@@ -17,20 +17,36 @@ session_start();
     require($pathToRootFolder."views/common/checkSessionUser.php");
 
     // Verification auth
+    if (isset($_GET['setuser']) && isset($_GET['token'])){
+        if(($_GET['setuser'] == "oui") and ($_GET['token'] == $_SESSION['token'])) {
+            echo "Controle setuser == oui && get token == sessiontoken ";
+            // die();
+
+
+
+
+
+
     if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
     {
-        $id = $_SESSION['id'];
-        $id = $userInfo['id'];
-        $users = getUsers();
-        // and $userInfo['roles_id'] == 1
-        $varsessionid = $_SESSION['id'];
-        //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
-        //{   
-        $getUnsubscribes = getUnsubscribes();
-        $comments = getCommentsAdmin();
-        $nbr = 0;
-        $num_rows=0;
-        //}
+        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+
+            $id1 = htmlspecialchars($_SESSION['id']);
+            $id2 = htmlspecialchars($userInfo['id']);
+            $users = getUsers();
+            // and $userInfo['roles_id'] == 1
+            $varsessionid = $_SESSION['id'];
+            //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
+            //{   
+            $getUsersConnected = getUsersConnected();
+            $getUnsubscribes = getUnsubscribes();
+            $comments = getCommentsAdmin();
+            $myArticles = getMyArticles($id2);
+            $AllUserSubscribes = getAllUserSubscribes();
+            $AllComments = getAllComments();
+            $nbr = 0;
+            $num_rows=0;
+            //}
 ?>
 
 <!DOCTYPE html>
@@ -53,34 +69,8 @@ session_start();
                     <!-- <h1 class="h1 text-dominante text-center my-5 border-top border-dominante"><?php # echo $PAGE_TITLE ?></h1> -->
                     
                     <section class="text-center">
-                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Manage Users</h1>
-
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre d'users inscrit</p>
-                            <p class="widgetTextDigit-value"><?php  
-                                $counterNbr = 0;
-                                foreach($users as $user){
-                                    // if($counterNbr >= 0) {
-                                        $counterNbr = $counterNbr + 1;
-                                        
-                                    // }
-                                }
-                                echo $counterNbr;
-                                ?></p>
-                        </div>
-                        <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre d'users désinscrit</p>
-                            <p class="widgetTextDigit-value"><?php  
-                                $counterUnsubs = 0;
-                                foreach($getUnsubscribes as $getUnsubscribe){
-                                    // if($counterNbr >= 0) {
-                                        $counterUnsubs = $counterUnsubs + 1;
-                                        
-                                    // }
-                                }
-                                echo $counterUnsubs;
-                                ?></p>
-                        </div>
+                        <h1 class="h1 text-dominante text-center mt-3 mb-5">Admin Manage Users</h1>
+                        
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">demandes des users</p>
                             <p class="widgetTextDigit-value">34</p>
@@ -289,9 +279,18 @@ session_start();
 </html>
 
 <?php 
-        } else {
-            header('Location: session_login.php');
+            }
         }
+        else {
+        die('echec controle token et setuser ERROR');
+        }
+    }else{
+    die('echec controle token et setuser VIDE');
+
+    }
+    } else {
+        header('Location: session_login.php');
+    }
     //} 
 
 ?>
