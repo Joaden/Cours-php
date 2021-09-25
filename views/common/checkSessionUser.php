@@ -3,6 +3,8 @@ if(isset($_SESSION['userid'])){
     if( isset($_GET['token']) && $_GET['token'] != $_SESSION['token']){
         echo('Echec checksessionuser.php => Jeton de sécurité périmé');
         die();
+        header("Location: session_logout.php");
+
     }else{
         ////////////// 1) Controle des infos user
         // intval force le type 

@@ -7,6 +7,7 @@ session_start();
     $_SESSION["varsessionuserboard"] = "Session user_board OK";
 
     include($pathToRootFolder."debug_functions.php");
+    $setuser ="non";
 
     // Connection
       //require_once('vendor/autoload.php');
@@ -25,10 +26,8 @@ session_start();
     // 3) si l'adresse ip = id de userinfo en bdd
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
-            echo "</br>if isset session_id == à s_session['sessionid</br>";
-            //var_dump($_SESSION).'</br>';
-            var_dump($_SESSION['sessionid']);
-            // die();
+            echo "</br>if isset session_id == à s_session['sessionid :: ".$_SESSION['sessionid']."</br>";
+            
             $idsession = htmlspecialchars($_SESSION['id']);
             $iduserinfo = htmlspecialchars($userInfo['id']);
             $author = htmlspecialchars($userInfo['pseudo']);
@@ -36,6 +35,7 @@ session_start();
             // Get my articles, this methode is in function.php
             $myArticles = getMyArticles($iduserinfo);
             $nbr = 0;
+            $setuser ="non";
             
             showinhtml($author);
             

@@ -16,25 +16,26 @@
     }
 
     /////////////////////////// START foreach log out , the session id should be delete in database
-    if(isset($userInfo['id']) && $userInfo['id'] === $_SESSION['userid']){
+   // if(isset($userInfo['id']) && $userInfo['id'] === $_SESSION['userid']){
+    if (isset($_SESSION['userid']) && isset($_SESSION['sessionid'])) {
             
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
 
-        $sessionIdUserToDelete = $_SESSION['sessionid'];
-        $userIdInSessionToDelete = $_SESSION['userid'];
+        $sessionIdUserToDelete = htmlspecialchars($_SESSION['sessionid']);
+        $userIdInSessionToDelete = htmlspecialchars($_SESSION['userid']);
         // Je verifie la correspondance de l'enregistrement de l'id dans la BDD
         $reqVerifIfSessionIdExistToDelete = $bdd->prepare('SELECT * FROM sessions WHERE user_id = ?');
         $reqVerifIfSessionIdExistToDelete->execute(array($userIdInSessionToDelete));
         
         var_dump($userIdInSessionToDelete);
-        die('Check Id In SESSION TABLE to DELETE');
+        //die('Check Id In SESSION TABLE to DELETE');
         if($reqVerifIfSessionIdExistToDelete->rowcount() > 0)
         {
             $data = $reqVerifIfSessionIdExistToDelete->fetchAll(PDO::FETCH_OBJ);
             // Si je trouve une correspondance je delete les données en BDD
-            $reqVerifIfSessionIdExistToDelete = $bdd->prepare('DELETE * FROM sessions WHERE user_id = ? AND session_id = ?');
-            $reqVerifIfSessionIdExistToDelete->execute(array($userIdInSessionToDelete, $sessionIdUserToDelete));
+            $reqVerifIfSessionIdExistToDelete = $bdd->prepare('DELETE FROM sessions WHERE user_id = ?');
+            $reqVerifIfSessionIdExistToDelete->execute(array($userIdInSessionToDelete));
         
         }
         
@@ -44,7 +45,7 @@
 
     /////////////////////////// END foreach log out , the session id should be delete in database
     }
-    die('DELETE SESSION ECHEC');
+    //die('DELETE SESSION ECHEC');
     // delete token 
     unset($_SESSION['token']);
     // destruction de tab session

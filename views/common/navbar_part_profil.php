@@ -10,7 +10,28 @@
                         }  
                     ?>
                 </p>
-                <small>[statut: Writer]</small>
+                <small>
+                   <?php 
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+                           echo "[statut: Super Admin]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
+                            echo "[statut: Admin]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
+                            echo "[statut: Modérateur]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 4) {
+                            echo "[statut: Writer]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 5) {
+                            echo "[statut: Désabonné]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 6) {
+                            echo "[statut: Supprimé]";
+                        } elseif (isset($_SESSION['role']) && $_SESSION['role'] == 7) {
+                            echo "[statut: Premium]";
+                        } else {
+                            echo "[statut: Writer]";
+
+                        }
+                    ?>
+                </small>
             </div>
         </a>
         <div class="dropdown-menu dropdownProfil" aria-labelledby="navbar_profil_Dropdown">

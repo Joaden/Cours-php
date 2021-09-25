@@ -484,6 +484,7 @@ function getCategories()
     $req->closeCursor();
     
 }
+//GET Categories by ID
 function getCategorie($id)
 {
     $pathToRootFolder = "../../";
@@ -619,4 +620,21 @@ function updateAvatar()
             $erreur = "Votre photo ne doit pas dépasser 2Mo.";
         }
     }
+}
+
+// function qui récupère tout les users connectés
+function getUsersConnected()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    ///* prepare() = Création d'un objet PDOStatement */
+    $reqGetUserConnected = $bdd->prepare('SELECT user_id FROM sessions');
+    ///* execute() = Exécute la première requête */
+    $reqGetUserConnected->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $reqGetUserConnected->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $reqGetUserConnected->closeCursor();
+    
 }

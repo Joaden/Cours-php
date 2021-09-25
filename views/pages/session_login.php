@@ -97,6 +97,7 @@ if(isset($_POST['formconnexion']))
                 $_SESSION['id'] = $connectedUserFromDB['id'];
                 $_SESSION['userid'] = $connectedUserFromDB['id'];
                 $_SESSION['sessionuserid'] = $connectedUserFromDB['id'];
+                $_SESSION['role'] = $connectedUserFromDB['roles_id'];
                 //$_SESSION['id'] = $sessionIdActual;
                 $_SESSION['pseudo'] = $connectedUserFromDB['pseudo'];
                 $_SESSION['email'] = $connectedUserFromDB['email'];
