@@ -11,14 +11,22 @@ $pathToRootFolder = "../../";
 require($pathToRootFolder."personal_variables/db_credentials.php");
 
 //connection à la bdd
+// try
+// {
 // $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
-$bdd = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password);
+
+$bdd = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// le array pdo attr erromode et execption afficherons plus clairement les erreurs
 
 //affiche le msg d'erreur
 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-
-////PDO vs mysqli:
-
+// }
+// catch (Exception $e)
+// {
+// 2eme solution pour afficher le msg d'erreur 
+//         die('Erreur : ' . $e->getMessage());
+// }
+// 
 // PDO avantages :
 // API limitée (moins de méthodes, demande moins d'instructions pour exécuter une requête et en exploiter le résultat)
 // PDO::quote ajoute les quotes (= ton code est un peu plus lisible)

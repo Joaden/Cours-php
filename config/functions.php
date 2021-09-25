@@ -180,6 +180,7 @@ function getArticles()
     ///* prepare() = Création d'un objet PDOStatement */
     $req = $bdd->prepare('SELECT * FROM articles ORDER BY id DESC');
     ///* execute() = Exécute la première requête */
+    //
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
     $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -194,7 +195,7 @@ function getMyArticles($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM articles WHERE user_id = ? ORDER BY id ASC');
+    $req = $bdd->prepare('SELECT * FROM articles WHERE user_id = ? ORDER BY id DESC');
     $req->execute(array($id));
     if($req->rowCount() >= 1)
     {

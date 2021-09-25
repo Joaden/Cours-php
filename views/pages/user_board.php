@@ -26,26 +26,24 @@ session_start();
     if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
         if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
             echo "</br>if isset session_id == à s_session['sessionid</br>";
-            var_dump($_SESSION);
-            //die();
-        $idsession = htmlspecialchars($_SESSION['id']);
-        $iduserinfo = htmlspecialchars($userInfo['id']);
-        $author = htmlspecialchars($userInfo['pseudo']);
+            //var_dump($_SESSION).'</br>';
+            var_dump($_SESSION['sessionid']);
+            // die();
+            $idsession = htmlspecialchars($_SESSION['id']);
+            $iduserinfo = htmlspecialchars($userInfo['id']);
+            $author = htmlspecialchars($userInfo['pseudo']);
 
-        // Get my articles, this methode is in function.php
-        $myArticles = getMyArticles($iduserinfo);
-        $nbr = 0;
-         
-        showinhtml($author);
-        //var_dump($_SESSION);
-        // var_dump($idsession);
-        // var_dump($iduserinfo);
-        // var_dump($author);
-        echo $_SESSION["varsessionuserboard"];
-        // die();
-
-        echo "</br>Fin script PHP Page user_board.php</br>";
-        //die();
+            // Get my articles, this methode is in function.php
+            $myArticles = getMyArticles($iduserinfo);
+            $nbr = 0;
+            
+            showinhtml($author);
+            
+            echo $_SESSION["varsessionuserboard"];
+            
+            echo ($_SESSION['token']).'var dump de session token </br>';
+            echo "</br>Fin script PHP Page user_board.php</br>";
+        
 ?>
 
 <!DOCTYPE html>

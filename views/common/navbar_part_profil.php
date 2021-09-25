@@ -4,8 +4,8 @@
             <div class="d-flex flex-column text-white">
                 <p class="h4 mb-0">
                     <?php 
-                        if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-                        $varsessionid = htmlspecialchars($_SESSION['id']);
+                        if (isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
+                        $varsessionid = htmlspecialchars($_SESSION['userid']);
                         echo $userInfo['pseudo'];
                         }  
                     ?>
@@ -25,8 +25,8 @@
 </ul>
 
 <?php 
-    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $varsessionid = $_SESSION['id'];
+    if (isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
+        $varsessionid = $_SESSION['userid'];
         if(!empty($userInfo['avatar']))
         {
         ?>
