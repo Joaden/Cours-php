@@ -24,7 +24,7 @@ session_start();
     // 1) si il y a bien un id de session = id de userinfo en bdd
     // 2) si la session est active & autorisée
     // 3) si l'adresse ip = id de userinfo en bdd
-    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
+    if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
         if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
             echo "</br>if isset session_id == à s_session['sessionid :: ".$_SESSION['sessionid']."</br>";
             

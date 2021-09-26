@@ -9,51 +9,44 @@ session_start();
     include($pathToRootFolder."debug_functions.php");
 
     // Connection
-      require_once($pathToRootFolder.'config/connect.php');
-
-      require_once($pathToRootFolder.'config/functions.php');
+    require_once($pathToRootFolder.'config/connect.php');
+    // acces all functions
+    require_once($pathToRootFolder.'config/functions.php');
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
 
-    // Verification auth
+    // Verification auth 
     if (isset($_GET['setuser']) && isset($_GET['token'])){
         if(($_GET['setuser'] == "oui") and ($_GET['token'] == $_SESSION['token'])) {
             echo "Controle setuser == oui && get token == sessiontoken ";
-            // die();
+            
+            // $_SESSION est créé lors du login et a une durée de vie jusqu'à la deconnexion
+            if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
+            {
+                // comparaison entre la sessionid créé lors du login et la session actuel visite dans le navigateur
+                if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
 
-
-
-
-
-
-    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
-    {
-        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
-
-            $id1 = htmlspecialchars($_SESSION['id']);
-            $id2 = htmlspecialchars($userInfo['id']);
-            $users = getUsers();
-            // and $userInfo['roles_id'] == 1
-            $varsessionid = $_SESSION['id'];
-            //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
-            //{   
-            $getUsersConnected = getUsersConnected();
-            $getUnsubscribes = getUnsubscribes();
-            $comments = getCommentsAdmin();
-            $myArticles = getMyArticles($id2);
-            $AllUserSubscribes = getAllUserSubscribes();
-            $AllComments = getAllComments();
-            $nbr = 0;
-            $num_rows=0;
-            //}
+                    $id1 = htmlspecialchars($_SESSION['id']);
+                    $id2 = htmlspecialchars($userInfo['id']);
+                    $users = getUsers();
+                    $varsessionid = $_SESSION['id'];
+                    $getUsersConnected = getUsersConnected();
+                    $getUnsubscribes = getUnsubscribes();
+                    $comments = getCommentsAdmin();
+                    $myArticles = getMyArticles($id2);
+                    $AllUserSubscribes = getAllUserSubscribes();
+                    $AllComments = getAllComments();
+                    $nbr = 0;
+                    $num_rows=0;
+                    
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
     <?php include($pathToRootFolder."views/common/head.php");?>
     <body>
-         <!-- =================================================== -->
+        <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
 
         <?php include($pathToRootFolder."views/common/header.php"); ?>
@@ -72,11 +65,15 @@ session_start();
                         <h1 class="h1 text-dominante text-center mt-3 mb-5">Admin Manage Users</h1>
                         
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">demandes des users</p>
+                            <p class="widgetTextDigit-text">Demandes users</p>
                             <p class="widgetTextDigit-value">34</p>
                         </div>
                         <div class="widgetTextDigit">
-                            <p class="widgetTextDigit-text">nombre de warnings users</p>
+                            <p class="widgetTextDigit-text">Warnings users</p>
+                            <p class="widgetTextDigit-value--red">21</p>
+                        </div>
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">Projets</p>
                             <p class="widgetTextDigit-value--red">21</p>
                         </div>
                         
@@ -266,7 +263,7 @@ session_start();
         <!-- FOOTER -->
         <?php 
             #include($pathToRootFolder."views/common/footer.php");
-            include($pathToRootFolder."views/common/footer_dev_mode.php");
+            #include($pathToRootFolder."views/common/footer_dev_mode.php");
             
         ?>
         
@@ -279,18 +276,14 @@ session_start();
 </html>
 
 <?php 
+                }
+            }else{
+                die('echec controle token et setuser ERROR');
             }
-        }
-        else {
-        die('echec controle token et setuser ERROR');
+        }else{
+            die('echec controle token et setuser VIDE');
         }
     }else{
-    die('echec controle token et setuser VIDE');
-
-    }
-    } else {
         header('Location: session_login.php');
-    }
-    //} 
-
+    } 
 ?>

@@ -69,9 +69,11 @@ session_start();
         $getComments = getComments();
         $getUsers = getUsers($id);
         $getUsersId = $getUsers[0];     
-        
         $categorie = getCategorie($id);
         $avatar = getAvatar($id);
+
+        $idPostReportOk = $id;
+        echo "</br>Voici l'id du post choisi  => ".$idPostReportOk;
         
      }
 
@@ -152,6 +154,7 @@ session_start();
                                         <span class="date"><?= $article->date; ?></span>
                                         <span class="hour"></span>
                                     </p>
+                                    
                                 </div>
                                 <!-- array PERMANENT: -->
                                 <?php
@@ -168,6 +171,7 @@ session_start();
 
                                     <?php endforeach; ?>
                                     </div>
+                                
                                 <?php }else{?>
                                     <div class="blogArticle-footer-keywords row no-gutters">
                                         <a href="#" class="keyword">moto</a>
@@ -175,7 +179,14 @@ session_start();
                                         <a href="#" class="keyword">design</a>
                                         <a href="#" class="keyword">carrenage</a>
                                     </div>
-                                    <?php    } ?>
+                                <?php  } ?>
+
+                                <p class="col-lg-2 align-self-baseline mb-0">
+                                    <a href="article_report.php?id=<?= $idPostReportOk; ?>">
+                                        <div class="text-danger">Signaler</div>
+                                    </a>
+                                </p>
+                                
                                 
                             </div>
                         </div>

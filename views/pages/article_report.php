@@ -2,7 +2,7 @@
 session_start();
 
     $pathToRootFolder = "../../";
-    $PAGE_TITLE = "BlogPHP - report Comment";
+    $PAGE_TITLE = "BlogPHP - report Article";
 
     //Appel de function avec la connexion à la bdd
 
@@ -29,32 +29,31 @@ session_start();
 
                 if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
         
-                    //if(isset($_GET['id']) AND !empty($_GET['id'])){
                     // je securise les données
-                    $report_id = htmlspecialchars($_GET['id']);
-                    $report_id = (int) $report_id;
-                    //$get_id = htmlspecialchars($_GET['id']);
+                    $reportA_id = htmlspecialchars($_GET['id']);
+                    $reportA_id = (int) $reportA_id;
+                    
                     // je recup larticle dans la bdd
-                    $recupComment = $bdd->prepare("SELECT * FROM comments WHERE id = ?");
-                    $recupComment->execute(array($report_id));
+                    $recupArticle = $bdd->prepare("SELECT * FROM articles WHERE id = ?");
+                    $recupArticle->execute(array($reportA_id));
 
-                    if($recupComment->rowCount() > 0){
-                        $addReport = +1;
+                    if($recupArticle->rowCount() > 0){
+                        $addReportA = +1;
                         // requete pour signaler un commentaire
-                        $reportComment = $bdd->prepare("UPDATE comments SET report = report+1 WHERE id = ?" );
+                        $reportArticle = $bdd->prepare("UPDATE articles SET report = report+1 WHERE id = ?" );
 
-
-                        $reportComment->execute(array($report_id));
-                        $reportComment->closeCursor();
-                        if($reportComment != TRUE) {
-                            var_dump($reportComment);
+                        $reportArticle->execute(array($reportA_id));
+                        $reportArticle->closeCursor();
+                        if($reportArticle != TRUE) {
+                            var_dump($reportArticle);
                             die();
                         }
                         $message = 'Votre signalement a bien été envoyé';
                         header('Location: article_all.php');
 
                     }else{
-                        echo "Une erreur est survenue";
+                        echo $reportA_id." Une erreur est survenue";
+                        die('Echec du signalement de l\'article');
                         header('Location: home.php');
                     }
                 }else{
@@ -66,7 +65,7 @@ session_start();
                 header('Location: home.php');
             }
         }else{
-            die('error id commentaire');
+            die('error id article');
             header('Location: home.php');
         }
         
