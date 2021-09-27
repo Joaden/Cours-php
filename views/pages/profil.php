@@ -15,56 +15,66 @@ require_once($pathToRootFolder.'config/functions.php');
 // check if user is connected
 require($pathToRootFolder."views/common/checkSessionUser.php");
 
-if(isset($_POST['formupdateprofil']))
-{
-    //vérification & upload image 
-    $updateAvatar = updateAvatar();  
-}
-
-// $articles = getMyArticles($id);
-// if($articles >= 1)
-// {
-//     $nrb = 0;
-//     foreach($articles as $article)
-//     {
-//         $nbr++;
-//     }
-//     var_dump($nrb);
-//     echo $nrb;
-// }
-
-if(isset($_SESSION['id']))
-{
-    $num_rows=0;
-
-    //Si le user est connecté
-    $reqUser = $bdd->prepare("SELECT * FROM users WHERE id = ? ");
-    $reqUser->execute(array($_SESSION['id']));
-    $user = $reqUser->fetch();
-
-    // on get tous ses articles
-    $reqarticleByUser = $bdd->prepare("SELECT * FROM articles WHERE user_id = ? ");
-    $reqarticleByUser->execute(array($_SESSION['id']));
-    $articleByUser = $reqarticleByUser->fetch();
-
-    if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
-    {
+if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
+    if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+        //echo "</br>if isset session_id == à s_session['sessionid :: ".$_SESSION['sessionid']."</br>";
         
-        $newPseudo = htmlspecialchars($_POST['newpseudo']);
-        $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
-        $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
-        header('Location: profil.php?id='.$_SESSION['id']);
+        $idsession = htmlspecialchars($_SESSION['userid']);
+        $iduserinfo = htmlspecialchars($userInfo['id']);
+        $author = htmlspecialchars($userInfo['pseudo']);
 
-    }
 
-    if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
-    {
-        $newemail = htmlspecialchars($_POST['newemail']);
-        $insertemail = $bdd->prepare("UPDATE users SET email = ? WHERE id = ?");
-        $insertemail->execute(array($newemail, $_SESSION['id']));
-        header('Location: profil.php?id='.$_SESSION['id']);
 
-    }
+        if(isset($_POST['formupdateprofil']))
+        {
+            //vérification & upload image 
+            $updateAvatar = updateAvatar();  
+        }
+
+        // $articles = getMyArticles($id);
+        // if($articles >= 1)
+        // {
+        //     $nrb = 0;
+        //     foreach($articles as $article)
+        //     {
+        //         $nbr++;
+        //     }
+        //     var_dump($nrb);
+        //     echo $nrb;
+        // }
+
+        if(isset($_SESSION['id']))
+        {
+            $num_rows=0;
+
+            //Si le user est connecté
+            $reqUser = $bdd->prepare("SELECT * FROM users WHERE id = ? ");
+            $reqUser->execute(array($_SESSION['id']));
+            $user = $reqUser->fetch();
+
+            // on get tous ses articles
+            $reqarticleByUser = $bdd->prepare("SELECT * FROM articles WHERE user_id = ? ");
+            $reqarticleByUser->execute(array($_SESSION['id']));
+            $articleByUser = $reqarticleByUser->fetch();
+
+            if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
+            {
+                
+                $newPseudo = htmlspecialchars($_POST['newpseudo']);
+                $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
+                $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
+                header('Location: profil.php?id='.$_SESSION['id']);
+
+            }
+
+            if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
+            {
+                $newemail = htmlspecialchars($_POST['newemail']);
+                $insertemail = $bdd->prepare("UPDATE users SET email = ? WHERE id = ?");
+                $insertemail->execute(array($newemail, $_SESSION['id']));
+                header('Location: profil.php?id='.$_SESSION['id']);
+
+            }
 
 
 
@@ -120,12 +130,12 @@ if(isset($_SESSION['id']))
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
                     <h5>
-                        <?php echo $_SESSION["varsessionprofiltest"]; ?>
+                        <?php #echo $_SESSION["varsessionprofiltest"]; ?>
                         
                     </h5>
                     
                     <?php
-                        if(isset($_SESSION['id']) AND $userInfo['id'] == $_SESSION['id'])
+                        if(isset($_SESSION['userid']) AND $userInfo['id'] == $_SESSION['userid'])
                         {
                             //echo $userInfo['pseudo'];
                         }
@@ -331,5 +341,7 @@ if(isset($_SESSION['id']))
 
 </html>
 <?php
+        }
+    }
 }
 ?>

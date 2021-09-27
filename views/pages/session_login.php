@@ -41,8 +41,8 @@ if(isset($_POST['formconnexion']))
                 // If the checks are successful we can use these session variables to get the information of the connected user.
                 $sessionIdActual = session_id();
                 if(empty($sessionIdActual)) session_start();
-                echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
-                echo $sessionIdActual;
+                // echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
+                // echo $sessionIdActual;
 
                //////////// START REGISTER IP & SESSION ID to DB //////////
                $userId = $connectedUserFromDB['id'];
@@ -50,42 +50,14 @@ if(isset($_POST['formconnexion']))
                $ipUser = $_SERVER['REMOTE_ADDR'];
                $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
-               // je vérifie si il y a une entrée correspondant à l'ID du user
-                // $reqVerifIfIdExistToDBSession = $bdd->prepare("SELECT user_id FROM sessions WHERE user_id = ? ");
-                // $reqVerifIfIdExistToDBSession->execute(array($userId));
-                // $userIdFromDBSessions = $reqVerifIfIdExistToDBSession->fetch();
-                // echo "</br>after SELECT USER_ID FROM SESSIONS</br>";
-
-                // // Si il y a déjà une entrée avec son ID de user(user_id) je dois l'UPDATE
-                // if(isset($userIdFromDBSessions['user_id']) && $userIdFromDBSessions['user_id'] == $userId ){
-                //     echo "</br>Il y a déjà une entrée dans la Table Sessions ! Before UPDATE sessions SET session_id....</br>";
-                // //die();
-                //     $reqUpdateSessionId = $bdd->prepare("UPDATE sessions SET session_id = :session_id, ip = :ip, user_agent = :user_agent, date = NOW() WHERE id = :id");
-                //     echo "</br>Il y a déjà une entrée dans la Table Sessions ! Before Execute!! UPDATE sessions SET session_id....</br>";
-                //     $reqUpdateSessionId->execute(array(
-                //         'session_id' => $sessionIdActual,
-                //         'ip' => $ipUser,
-                //         'user_agent' => $userAgent,
-                //         'id' => $userId
-                //         ));
-                // $reqUpdateSessionId->closeCursor(); 
-
-
-                // echo "</br>Il y a déjà une entrée dans la Table Sessions ! After UPDATE sessions SET session_id....</br>";
-                // die();
-
-                // }else{
-
                    $reqInsertToDBSessions = $bdd->prepare("INSERT INTO sessions (user_id, session_id, ip, user_agent, date) VALUES (?, ?, ?, ?,NOW())");
 
                     $reqInsertToDBSessions->execute(array($userId, $sessionIdActual, $ipUser, $userAgent));
                     //$connectedUserFromDB = $reqUser->fetch();
                     $reqInsertToDBSessions->closeCursor(); 
 
- 
-                    echo "</br>Nouvelle Entrée dans la Table Sessions ! after INSERT INTO sessions SET session_id</br>";
-                // die();
-                // }
+                    //echo "</br>Nouvelle Entrée dans la Table Sessions ! after INSERT INTO sessions SET session_id</br>";
+                
                 
                //////////// END REGISTER IP & SESSION ID to DB ////////////
 
@@ -145,7 +117,7 @@ if(isset($_POST['formconnexion']))
          <!-- =================================================== -->
         <!-- ================ DEBUT HTML  ================ -->
         <h1 class="brand-logo--big">
-        <a class="brand-logo_link" href="home.php">BLOG</a>
+        <a class="brand-logo_link" href="home.php">BLOG DCCG</a>
         </h1>
 
         <!-- ======== NAVBAR ========= -->
@@ -164,9 +136,7 @@ if(isset($_POST['formconnexion']))
                 <div class="col-md-4">
                     <h1><?php echo $PAGE_TITLE ?></h1>
                     <!-- H3 affiche une var de session pour tester si la session fonctionne bien -->
-                    <h3>
-                        <?php echo $_SESSION["varsessionlogintest"]; ?>
-                    </h3>
+                    
                 </div>
                 <div class="col-md-4">
 
@@ -270,8 +240,7 @@ if(isset($_POST['formconnexion']))
         </div>
           <!-- FOOTER -->
         <?php 
-            #include($pathToRootFolder."views/common/footer.php");
-            include($pathToRootFolder."views/common/footer_dev_mode.php");
+            // include($pathToRootFolder."views/common/footer_dev_mode.php");
         
         ?>
         

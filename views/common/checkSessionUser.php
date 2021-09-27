@@ -26,11 +26,11 @@ if(isset($_SESSION['userid'])){
         $reqSession->execute();
         // $sessionInfo stock les données du fetch 
         $sessionInfo = $reqSession->fetch();
-        echo 'CheckSessionUser.php => Affichage de $sessionInfo[\'session_id\']';
-        var_dump($sessionInfo['session_id']);
+        //echo 'CheckSessionUser.php => Affichage de $sessionInfo[\'session_id\']';
+        //var_dump($sessionInfo['session_id']);
 
         // $sessionInfo = $reqSession->fetchAll(PDO::FETCH_OBJ);
-        // $reqSession->closeCursor();
+        $reqSession->closeCursor();
         //die('die vardump sessionInfo du checksessionuser');
         }
         

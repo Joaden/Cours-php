@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a class="nav-link text-center" href="#" target="_blank" data-type="external" rel="nofollow">
+                <a class="nav-link text-center" href="team.php" target="_blank" data-type="external" rel="nofollow">
                     <!-- <i class="fas fa-user"></i> -->
                     L'équipe
                 </a>
@@ -27,6 +27,12 @@
                 <a class="nav-link text-center" href="contact_writeMessage.php">
                     <!-- <i class="fas fa-envelope"></i> -->
                     Contact
+                </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+                <a class="nav-link text-center" href="service.php">
+                    <!-- <i class="fas fa-envelope"></i> -->
+                    Service
                 </a>
             </li>
 <!--

@@ -32,7 +32,9 @@
     </li>
     <li class="sidebar-item">
         <a class="sidebar-link" href="#">
-            <?php echo $_SESSION["varsessionuserboard"]; ?>
+            <!-- <?php #echo $_SESSION["varsessionuserboard"]; ?> -->
+             
+
         </a>
     </li>
 </ul>

@@ -73,7 +73,7 @@ session_start();
         $avatar = getAvatar($id);
 
         $idPostReportOk = $id;
-        echo "</br>Voici l'id du post choisi  => ".$idPostReportOk;
+        //echo "</br>Voici l'id du post choisi  => ".$idPostReportOk;
         
      }
 
@@ -100,7 +100,7 @@ session_start();
                     <div class="blogArticle--large">
                         <div class="blogArticle-content">
                             <div class="row no-gutters align-items-center">
-                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?> <?= $article->id; ?></h2>
+                                <h2 class="blogArticle-title col-md-10 mb-4"><?= $article->title; ?></h2>
                                 <?php 
                                     if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
                                         $varsessionid = $_SESSION['id'];
@@ -132,7 +132,8 @@ session_start();
 
 
                             <a class="blogArticle-imglink" href="#">
-                                <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
+                                <!-- <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto"> -->
+                                <img class="blogArticle-imglink col-lg-6" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
                             </a>
 
                             <p class="blogArticle-text">

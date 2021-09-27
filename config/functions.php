@@ -190,6 +190,23 @@ function getArticles()
     
 }
 
+// function qui récupère les 5 derniers articles
+function getLastArticles()
+{
+    $pathToRootFolder = "../../";
+    require($pathToRootFolder.'config/connect.php');
+    ///* prepare() = Création d'un objet PDOStatement */
+    $req = $bdd->prepare('SELECT * FROM articles ORDER BY id DESC lIMIT 5');
+    ///* execute() = Exécute la première requête */
+    //
+    $req->execute();
+    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+    $data = $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+    $req->closeCursor();
+    
+}
 // Get my articles
 function getMyArticles($id)
 {

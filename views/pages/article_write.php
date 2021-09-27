@@ -119,8 +119,8 @@ session_start();
             <main class="order-1 order-md-0 col-md-9 col-xl-10">
                 
                 <h4><?php 
-                        echo $_SESSION["varsessionarticleWritetest"];   
-                         echo "<br> ID user N° : ".$userInfo['id'],$userInfo['pseudo'];
+                        //echo $_SESSION["varsessionarticleWritetest"];   
+                        //echo "<br> ID user N° : ".$userInfo['id'],$userInfo['pseudo'];
                         
                     ?></h4>
    
@@ -223,8 +223,8 @@ session_start();
     </div>
 
     <!-- FOOTER -->
-    <?php # include($pathToRootFolder."views/common/footer.php");?>
-    <?php include($pathToRootFolder."views/common/footer_dev_mode.php");?>
+    <?php  include($pathToRootFolder."views/common/footer.php");?>
+    <?php #include($pathToRootFolder."views/common/footer_dev_mode.php");?>
     
     <!-- ================ FIN HTML  ================ -->
     <!-- =================================================== -->

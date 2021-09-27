@@ -26,9 +26,9 @@ session_start();
     // 3) si l'adresse ip = id de userinfo en bdd
     if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
         if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
-            echo "</br>if isset session_id == à s_session['sessionid :: ".$_SESSION['sessionid']."</br>";
+            //echo "</br>if isset session_id == à s_session['sessionid :: ".$_SESSION['sessionid']."</br>";
             
-            $idsession = htmlspecialchars($_SESSION['id']);
+            $idsession = htmlspecialchars($_SESSION['userid']);
             $iduserinfo = htmlspecialchars($userInfo['id']);
             $author = htmlspecialchars($userInfo['pseudo']);
 
@@ -37,12 +37,12 @@ session_start();
             $nbr = 0;
             $setuser ="non";
             
-            showinhtml($author);
+            //showinhtml($author);
             
-            echo $_SESSION["varsessionuserboard"];
+            //echo $_SESSION["varsessionuserboard"];
             
-            echo ($_SESSION['token']).'var dump de session token </br>';
-            echo "</br>Fin script PHP Page user_board.php</br>";
+            //echo ($_SESSION['token']).'var dump de session token </br>';
+            //echo "</br>Fin script PHP Page user_board.php</br>";
         
 ?>
 

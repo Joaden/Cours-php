@@ -33,7 +33,7 @@ session_start();
     
     fclose($monfichier);
     
-    echo '<p>Cette page a été vue ' . $pages_vues . ' fois !</p>';
+    // echo '<p>Cette page a été vue ' . $pages_vues . ' fois !</p>';
     ////////// END
 
     //showInConsole($articles); // debug
@@ -95,6 +95,9 @@ session_start();
                         <h3>
                         <?php echo $_SESSION["varsessionAllArticlestest"]; ?>
                     </h3>
+                    <span>
+                        <?php echo'<p>Cette page a été vue ' . $pages_vues . ' fois !</p>'; ?>
+                    </span>
                     </div>
 
                     <div class="container section-content">
@@ -183,6 +186,18 @@ session_start();
                                             </a>
                                         </h2>
                                         <p class="blogArticle-text"><?= substr($article->content, 0, 250)."..."; ?></p>
+                                        <?php if (isset($article->categories_id)){ 
+                                                    $id = $article->id;
+                                                    $categorie = getCategorie($id);
+                                                ?>
+                                                    <p class="col-lg-3 align-self-baseline text-lg-right">
+                                                        <span class="abrev">
+                                                            <?php foreach ($categorie as $cat) : ?>
+                                                                <?= $cat->name; ?>
+                                                            <?php endforeach; ?>
+                                                        </span>
+                                                    </p>
+                                                <?php    }  ?>
                                         <div class="blogArticle-footer">
                                             <!-- v1 -->
                                             
@@ -196,6 +211,7 @@ session_start();
                                                     <span class="date"><?= $article->date; ?></span>
                                                     <span class="hour"></span>
                                                 </p>
+                                                
                                             </div>
 
                                             <div class="blogArticle-footer-keywords row no-gutters">

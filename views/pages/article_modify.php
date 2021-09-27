@@ -14,65 +14,109 @@ session_start();
 
     require($pathToRootFolder."views/common/checkSessionUser.php");
     
-    if(isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
-        $id = $_SESSION['id'];
-        $id = $userInfo['id'];
-        $articles = getArticles();
-        $categories = getCategories();
-        $images = getImages();
-        
-    ///////////   Affichage article   //////////////    
+    if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
+        echo "</br>if isset user id = ".$_SESSION['userid'];
 
-    if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
-        // secure variable
-        $edit_id = htmlspecialchars($_GET['edit']);
-        //$id = htmlspecialchars($_GET['id']);
-        //$id = strip_tags($id);
-        $image = getImage($edit_id);
-        $categorie = getCategorie($edit_id);
-
-        // call requete
-        $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
-        $edit_article->execute(array($edit_id));
+        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
         
-        
-        if($edit_article->rowcount() == 1)
-        {
-            $edit_article = $edit_article->fetch();
+            $id = htmlspecialchars($_SESSION['userid']);
+            $id = htmlspecialchars($userInfo['id']);
+            $articles = getArticles();
+            $categories = getCategories();
+            $images = getImages();
+            echo "</br>if isset session id = ".$_SESSION['sessionid'];
+            
+            ///////////   Affichage article   //////////////    
 
-        } else {
-            die('Erreur : L\article n\existe pas!');
+            if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
+                // secure variable
+                $edit_id = htmlspecialchars($_GET['edit']);
+                //$id = htmlspecialchars($_GET['id']);
+                //$id = strip_tags($id);
+                $image = getImage($edit_id);
+                $categorie = getCategorie($edit_id);
 
-        }
-        
-        ///////////////////  SI FORMULAIRE ENVOYE  /////////////////////////////
-        $mode_edition = 1;
-        if(isset($_POST['submit_modify_article']))
-        {
-            if(isset($_POST['title']) AND $_POST['content']) 
-            {
-                if(!empty($_POST['title']) AND !empty($_POST['content'])) 
+                echo "</br>if isset get edit iD = ".$edit_id."</br>";
+                // die('Before select');
+                // call requete
+                $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
+                $edit_article->execute(array($edit_id));
+                
+                
+                if($edit_article->rowcount() == 1)
                 {
-                    $title = htmlspecialchars($_POST['title']);
-                    $content = htmlspecialchars($_POST['content']);
+                    $edit_article = $edit_article->fetch();
+
+                } else {
+                    die('Erreur : L\article n\existe pas!');
+
+                }
+            
+                ///////////////////  SI FORMULAIRE ENVOYE  /////////////////////////////
+                $mode_edition = 1;
+                if(isset($_POST['submit_modify_article']))
+                {
+                    $mode_edition = 1;
+                    echo "</br>Before if isset POST title iD = ".$edit_id."</br>";
 
                     if($mode_edition == 1)
                     {
-                        $updateArticle = $bdd->prepare('UPDATE articles SET title = ?, content= ?, edition = NOW() WHERE id = ?' );
-                        $updateArticle->execute(array($title, $content, $edit_id));
-                        $message = 'Votre article a bien été modifié';
-                        header('Location: article_gestion.php');
+                        if(isset($_POST['title']) AND !empty($_POST['title'])) 
+                        {
+                            $title = htmlspecialchars($_POST['title']);
+
+                            $updateArticleTitle = $bdd->prepare('UPDATE articles SET title = ?, edition = NOW() WHERE id = ?' );
+                            $updateArticleTitle->execute(array($title, $edit_id));
+
+                            echo "</br>After UPDATE POST title </br>";
+
+                            if(isset($_POST['content']) AND !empty($_POST['content'])) 
+                            {
+                                $content = htmlspecialchars($_POST['content']);
+                                echo "</br>Before UPDATE POST content </br>";
+                                // if($mode_edition == 1)
+                                // {
+                                    $updateArticleContent = $bdd->prepare('UPDATE articles SET content= ?, edition = NOW() WHERE id = ?' );
+                                    $updateArticleContent->execute(array($content, $edit_id));
+                                    $message = 'Votre article a bien été modifié';
+                                    echo "</br>After UPDATE POST content </br>";
+                                    //die();
+                                    //header('Location: article_gestion.php');
+                                // }else{
+                                //     echo "Une erreur s'est produite, la modification à échouée !";
+                                // }
+                            }
+                            echo "</br>After UPDATE POST Content </br>";
+
+                            if(isset($_POST['categorie']) AND !empty($_POST['categorie'])) 
+                            {
+                                $categorieId = htmlspecialchars($_POST['categorie']);
+                                echo "</br>Before UPDATE POST Categorie </br>".$categorieId;
+                                //die();
+                                // if($mode_edition == 1)
+                                // {
+                                    $updateArticleContent = $bdd->prepare('UPDATE articles SET categories_id= ?, edition = NOW() WHERE id = ?' );
+                                    $updateArticleContent->execute(array($categorieId, $edit_id));
+                                    $message = 'Votre article a bien été modifié';
+                                    echo "</br>After UPDATE POST categorie </br>";
+
+                                    //die();
+                                    header('Location: article_gestion.php');
+                                // }else{
+                                //     echo "Une erreur s'est produite, la modification à échouée !";
+                                // }
+                            }
+                            echo "</br>After UPDATE POST Categorie </br>";
+
+                        }
                     }else{
                         echo "Une erreur s'est produite, la modification à échouée !";
                     }
                 }
-            }
-             
-        }
 
-    }else{
-        echo 'Aucun identifiant trouvé';
-    }
+            }else{
+                echo 'Aucun identifiant trouvé';
+            }
 
     ///////////Modification ////////////////
     $alerte= '';
@@ -210,7 +254,7 @@ session_start();
         <!-- FOOTER -->
         <?php 
             #include($pathToRootFolder."views/common/footer.php");
-            include($pathToRootFolder."views/common/footer_dev_mode.php");
+            #include($pathToRootFolder."views/common/footer_dev_mode.php");
         ?>
         <!-- ================ FIN HTML  ================ -->
         <!-- =================================================== -->
@@ -218,7 +262,9 @@ session_start();
     </body>
 </html>
 <?php
-} else {
+        }
+
+    } else {
     header('Location: session_login.php');
 }
 ?>

@@ -43,12 +43,12 @@ session_start();
         //}
         $a = session_id();
         if(empty($a)) session_start();
-        echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
-        echo $a;
-        echo $id1;
-        echo $id2;
-        echo "</br> var_dump(SESSION); : </br>";
-        var_dump($_SESSION);
+        // echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
+        // echo $a;
+        // echo $id1;
+        // echo $id2;
+        // echo "</br> var_dump(SESSION); : </br>";
+        // var_dump($_SESSION);
         // die();
 
 ?>
