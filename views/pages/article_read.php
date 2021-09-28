@@ -133,7 +133,7 @@ session_start();
 
                             <a class="blogArticle-imglink" href="#">
                                 <!-- <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto"> -->
-                                <img class="blogArticle-imglink col-lg-6" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
+                                <img class="blogArticle-imglink col-lg-8" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image de l'article here" style="width:100%; height:auto">
                             </a>
 
                             <p class="blogArticle-text">

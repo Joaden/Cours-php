@@ -64,6 +64,26 @@ session_start();
 
                                     $ins = createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag);
 
+                                    ///////////////////// START LOGGER 
+                                    include ($pathToRootFolder.'views/common/logs.php');
+                                    $successArticleCreate = TRUE;
+                                    if($_SERVER['REQUEST_METHOD'] === "POST") {
+
+                                        if($successArticleCreate === TRUE){
+
+                                            $user_idLogs = $user_id;
+                                            $titleLogs = $title;
+                                            $authorLogs = $author;
+
+                                            $log = "Article créé par :".$authorLogs." ID :".$user_idLogs." Titre : ".$titleLogs;
+                                            logger($log);
+                                            echo "Success create article";
+
+                                        }
+                                        
+                                    }
+                                    ///////////////////// END LOGGER 
+
                                     $message = 'Votre article a bien été posté';
                                     header('Location: user_board.php');
 

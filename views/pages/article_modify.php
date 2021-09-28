@@ -21,7 +21,7 @@ session_start();
         
             $id = htmlspecialchars($_SESSION['userid']);
             $id = htmlspecialchars($userInfo['id']);
-            $articles = getArticles();
+            //$articles = getArticles();
             $categories = getCategories();
             $images = getImages();
             echo "</br>if isset session id = ".$_SESSION['sessionid'];
@@ -30,7 +30,10 @@ session_start();
 
             if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
                 // secure variable
-                $edit_id = htmlspecialchars($_GET['edit']);
+                $edit_id = strip_tags($_GET['edit']);
+                $edit_id = htmlspecialchars($edit_id);
+                echo "</br>if isset get edit iD = ".$edit_id."</br>";
+                die('Die Strip tags');
                 //$id = htmlspecialchars($_GET['id']);
                 //$id = strip_tags($id);
                 $image = getImage($edit_id);
@@ -41,7 +44,9 @@ session_start();
                 // call requete
                 $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
                 $edit_article->execute(array($edit_id));
-                
+                /////////////////////////////////////////
+                //// VERIFIER SI LARTICLE RECUPERER DANS LE GET APPARTIENT BIEN AU USER ET QUELA PAGE EST BIEN CELLE DE MON SITE
+
                 
                 if($edit_article->rowcount() == 1)
                 {
