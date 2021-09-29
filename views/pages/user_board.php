@@ -28,7 +28,8 @@ session_start();
         if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
             //echo "</br>if isset session_id == à s_session['sessionid :: ".$_SESSION['sessionid']."</br>";
             
-            $idsession = htmlspecialchars($_SESSION['userid']);
+            $idsession = htmlspecialchars($_SESSION['sessionid']);
+            $iduserid = htmlspecialchars($_SESSION['userid']);
             $iduserinfo = htmlspecialchars($userInfo['id']);
             $author = htmlspecialchars($userInfo['pseudo']);
 
@@ -43,6 +44,16 @@ session_start();
             
             //echo ($_SESSION['token']).'var dump de session token </br>';
             //echo "</br>Fin script PHP Page user_board.php</br>";
+            
+            // $p = $_SERVER['PHP_SELF'];
+            // $page = basename ($p);
+
+            // if($page == "user_board.php")
+            // {
+            //   //echo 'TON TEXTE';
+            //   //OU
+            //   echo '<script>alert("Bienvenue sur votre tableau de bord");</script>';
+            // }
         
 ?>
 
@@ -95,7 +106,7 @@ session_start();
                         </div>
                         
                     </section>
-                        
+                    
                     <section class="text-center mx-3">
                         <h2 class="h1 text-dominante text-center my-5 border-top border-dominante">Mes Articles</h2>
                         <table class="table border border-secondaire">

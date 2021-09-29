@@ -88,7 +88,7 @@ session_start();
                                     <td class="bg-secondaire text-white border-left border-white" scope="col">ID</td>
                                     <td class="bg-secondaire text-white border-left border-white" scope="col">État</td>
                                     <td class="bg-secondaire text-white border-left border-white" scope="col">Validation</td>
-                                    <td class="bg-secondaire text-white border-left border-white" scope="col">date</td>
+                                    <td class="bg-secondaire text-white border-left border-white" scope="col">inscrit le</td>
                                     <td class="bg-secondaire text-white" scope="col">Commentaires</td>
                                     <td class="bg-secondaire text-white" scope="col">Voir Détail</td>
                                 </tr>
@@ -100,17 +100,19 @@ session_start();
                                         <td class="text-left text-dark"><?= $user->id ?></td>
                                         
                                             <?php if($user->is_verified == 0) { ?>
-                                                <td class="text-danger"><?= $user->is_verified ?></td>
+                                                <td class="text-danger">User no verified</td>
                                             <?php } ?>
                                             <?php if($user->is_verified == 1) { ?>  
                                                 <td class="text-secondaire">User verified</td>
                                             <?php } ?>
                                             <td>
-                                            <i class="fas fa-edit fa-lg text-dominante"><?php if($user->is_verified == 0) { ?> : 
-                                <a href="admin_manageUsers.php?type=user&confirme=<?= $user->id ?>">
-                                    Confirmer
-                                </a>
-                            <?php } ?> - <a  href="admin_manageUsers.php?type=user&supprime=<?= $user->id ?>"><span class="text-danger">Supprimer</span></a></i>
+                                            <?php if($user->is_verified == 0) { ?> 
+                                            <a href="admin_manageUsers.php?type=user&confirme=<?= $user->id ?>">
+                                            <button onclick="return(confirm('Etes-vous sûr de vouloir confirmer?'));" class="text-success">Confirmer</button>
+                                            </a>
+                                            <?php } ?>
+                                         <a  href="admin_manageUsers.php?type=user&supprime=<?= $user->id ?>"><button onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));" class="text-danger">Supprimer</button>
+                                        </a>
                                         </td>
                                         <td class="text-secondary"><span class=""><?= "date"; ?></span></td>
                                         <td class="text-secondary"><span class=""><?= $user->is_verified ?></span></td>

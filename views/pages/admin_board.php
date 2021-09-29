@@ -19,37 +19,52 @@ session_start();
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
 
-    if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
-    {
-        if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+    if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
 
-        $id1 = htmlspecialchars($_SESSION['id']);
-        $id2 = htmlspecialchars($userInfo['id']);
-        //$author = htmlspecialchars($userInfo['pseudo']);
-        $users = getUsers();
-        // and $userInfo['roles_id'] == 1
-        $varsessionid = $_SESSION['id'];
-        //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
-        //{   
-        $getUsersConnected = getUsersConnected();
-        $getUnsubscribes = getUnsubscribes();
-        $comments = getCommentsAdmin();
-        $myArticles = getMyArticles($id2);
-        $AllUserSubscribes = getAllUserSubscribes();
-        $AllComments = getAllComments();
-        $nbr = 0;
-        $num_rows=0;
-        $setuser ="oui";
-        //}
-        $a = session_id();
-        if(empty($a)) session_start();
-        // echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
-        // echo $a;
-        // echo $id1;
-        // echo $id2;
-        // echo "</br> var_dump(SESSION); : </br>";
-        // var_dump($_SESSION);
-        // die();
+        if ($_SESSION["role"] == 1){ 
+            $bienvenu = "Bonjour Boss";
+            // echo $bienvenu;
+            // die();
+        }else{
+            $nonAutorised = "Vous n'êtes pas autorisé";
+            echo $nonAutorised;
+            // die();
+            header("location: /home.php?msg=ok&err=Vous n'êtes pas autorisé");
+            exit;
+        }
+        if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id'])
+        {
+            if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
+
+            $id1 = htmlspecialchars($_SESSION['id']);
+            $id2 = htmlspecialchars($userInfo['id']);
+            //$author = htmlspecialchars($userInfo['pseudo']);
+            $users = getUsers();
+            // and $userInfo['roles_id'] == 1
+            $varsessionid = $_SESSION['id'];
+            //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
+            //{   
+            $getUsersConnected = getUsersConnected();
+            $getUnsubscribes = getUnsubscribes();
+            $comments = getCommentsAdmin();
+            $myArticles = getMyArticles($id2);
+            $AllUserSubscribes = getAllUserSubscribes();
+            $AllComments = getAllComments();
+            $articles = getArticles();
+
+            $nbr = 0;
+            $num_rows=0;
+            $setuser ="oui";
+            //}
+            $a = session_id();
+            if(empty($a)) session_start();
+            // echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];
+            // echo $a;
+            // echo $id1;
+            // echo $id2;
+            // echo "</br> var_dump(SESSION); : </br>";
+            // var_dump($_SESSION);
+            // die();
 
 ?>
 
@@ -80,8 +95,8 @@ session_start();
                                 <p class="widgetTextDigit-value"> 
                                 <?php  
                                     $counterNbr = 0;
-                                    if(isset($myArticles) AND !empty($myArticles)){
-                                        foreach($myArticles as $myArticle){
+                                    if(isset($articles) AND !empty($articles)){
+                                        foreach($articles as $articles){
                                                 $counterNbr = $counterNbr + 1;
                                             }
                                             echo $counterNbr; 
@@ -334,6 +349,6 @@ session_start();
         } else {
             header('Location: session_login.php');
         }
-    //} 
+    } 
 
 ?>

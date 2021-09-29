@@ -93,7 +93,7 @@ session_start();
                                 ?>
                                 Articles populaires</h2>
                         <h3>
-                        <?php echo $_SESSION["varsessionAllArticlestest"]; ?>
+                        <?php #echo $_SESSION["varsessionAllArticlestest"]; ?>
                     </h3>
                     <span>
                         <?php echo'<p>Cette page a été vue ' . $pages_vues . ' fois !</p>'; ?>

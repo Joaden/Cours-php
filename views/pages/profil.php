@@ -110,6 +110,9 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
     </style>
 
 <body>
+    <?php 
+        include($pathToRootFolder."views/common/head.php"); 
+    ?>
     <!-- =================================================== -->
     <!-- ================ DEBUT HTML  ================ -->
 
@@ -270,39 +273,46 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             <br>
 
             <form>
+                <div class="form-group  col-md-3">
+                    <label for="inputPhone">Phone</label>
+                    <input type="text" class="form-control" id="inputPhone" placeholder="0606060606">
+                </div>
+                <div class="form-group  col-md-3">
+                    <label for="inputBirth">Date de naissance</label>
+                    <input type="date" class="form-control" id="inputBirth">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            <br>
+            <hr>
+            <form>
                 <div class="form-group">
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="3 route du puit">
                 </div>
                 <div class="form-group">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    <label for="inputAddress2">Complément</label>
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Appartement, 4C 1er étage">
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Zip</label>
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
                     <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity">
                     </div>
                     <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
+                        <label for="inputState">Country</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                    </div>
-                </div>
+                
                 <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
             <br>
@@ -310,8 +320,8 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             <?php
             #if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
             ?>
-                <a href="editProfilNew.php?id=<?php $_SESSION['id']; ?>">Editer mon profil</a><br>
-                <a href="session_logout.php">Se déconnecter</a>
+                <a href="editProfilNew.php?id=<?php echo $_SESSION['id']; ?>&auth=<?php echo $_SESSION['token']; ?>">Editer mon adresse</a><br>
+                <!-- <a href="session_logout.php">Se déconnecter</a> -->
             <?php
             #}
             ?>

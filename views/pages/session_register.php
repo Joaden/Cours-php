@@ -27,6 +27,35 @@ if(isset($_POST['formregister']))
             // $avatar = htmlspecialchars($_POST['avatar']);
             $captcha = htmlspecialchars($_POST['captcha']);
             
+            $name = trim($name);
+            $email = trim($email);
+            
+
+            // /////// START REGEX EXPRESSIONS REGULIERES
+            // // /^[a-zA-Z0-9]{20,}$/ Correspond à un mot d’au moins une lettre ou un chiffre
+            // if ( preg_match ( " /^[a-zA-Z0-9_]{5,}$/ " , $pseudo ) )
+            // {
+            // echo $pseudo."Pseudo est valide";
+            // // die();
+
+            // }else{
+            // echo $pseudo."NON VALIDE";
+            // // die();
+            // }
+            // /////// END REGEX EXPRESSIONS REGULIERES
+
+
+            // strip_tags enleve les caractere speciaux
+            // $name = strip_tags($name);
+            // $email = strip_tags($email);
+            // $email = strip_tags($email);
+            // $pseudo = strip_tags($pseudo);
+            // $password = strip_tags($password);
+            // $password2 = strip_tags($password2);
+            // $phrase = strip_tags($phrase);
+
+
+
             // sha1, md5, sha256 et sha512 ne sont plus sûres aujourdhui donc à ne plus utiliser !!!!
             // j'utilise password_hash() MAIS, faudra faire une petite recherche pour être sûr que ce soit sécurisé
             // $br = '<br>';
@@ -41,86 +70,175 @@ if(isset($_POST['formregister']))
                 $pseudolength = strlen($pseudo);
                 if($pseudolength <= 30)
                 {
+                    
                     $reqpseudo = $bdd->prepare("SELECT * FROM users WHERE pseudo = ?");
                     $reqpseudo->execute(array($pseudo));
                     $pseudoexist = $reqpseudo->rowCount();
                     if($pseudoexist == 0)
                     {
-                        if($email == $email2)
+                        /////// START REGEX EXPRESSIONS REGULIERES
+                        // /^[a-zA-Z0-9]{20,}$/ Correspond à un mot d’au moins une lettre ou un chiffre
+                        if ( preg_match ( " /^[a-zA-Z0-9_]{5,}$/ " , $pseudo ) )
                         {
-                            // function avec filtre qui permet de vérifier si c'est bien une adresse mail
-                            if(filter_var($email, FILTER_VALIDATE_EMAIL))
+                        //echo $pseudo."Pseudo est valide";
+                        
+                        /////// END REGEX EXPRESSIONS REGULIERES
+                            if($email == $email2)
                             {
-                                $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ?");
-                                $reqmail->execute(array($email));
-                                $mailexist = $reqmail->rowCount();
-                                // Si il n'y a pas cet email en base
-                                if($mailexist == 0)
+                                // function avec filtre qui permet de vérifier si c'est bien une adresse mail
+                                if(filter_var($email, FILTER_VALIDATE_EMAIL))
                                 {
-                                    if($password == $password2)
+                                    $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ?");
+                                    $reqmail->execute(array($email));
+                                    $mailexist = $reqmail->rowCount();
+                                    // Si il n'y a pas cet email en base
+                                    if($mailexist == 0)
                                     {
-                                        if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
+                                        if($password == $password2)
                                         {
-                                            $taillemax = 2097152;
-                                            $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
-                                            if($_FILES['avatar']['size'] <= $taillemax)
+                                            if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
                                             {
-                                                //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-                                                $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-                                                if(in_array($extensionUpload, $extensionsValides))
+                                                $taillemax = 2097152;
+                                                $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
+                                                if($_FILES['avatar']['size'] <= $taillemax)
                                                 {
-                                                    $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
-                                                    $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
-                                                    if($resultat)
+                                                    //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                                                    $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                                                    if(in_array($extensionUpload, $extensionsValides))
                                                     {
+                                                        $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
+                                                        $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                                                        if($resultat)
+                                                        {
 
-                                                        $avatar = $_SESSION['id'].".".$extensionUpload;
-                                                        // hash de mdp , a voir si il y a plus sûr comme function
-                                                        $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
-                                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase, avatar) VALUE(?, ?, ?, ?, ?, ?)");
-                                                        // On insère les $*** dans la requête
-                                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase, $avatar));
-                                                        //vérification & upload image 
-                                                        //$updateAvatar = addAvatar();
+                                                            $avatar = $_SESSION['id'].".".$extensionUpload;
+                                                            // hash de mdp , a voir si il y a plus sûr comme function
+                                                            $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
+                                                            $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase, avatar) VALUE(?, ?, ?, ?, ?, ?)");
+                                                            // On insère les $*** dans la requête
+                                                            $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase, $avatar));
+                                                            ///////////////////////////////////////////////////////////
+                                                            // get id of last register
+                                                            $selectIdLastUser = $bdd->prepare("SELECT id FROM users ORDER BY ID DESC LIMIT 1");
+                                                            $selectIdLastUser->execute();
+                                                            /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+                                                            $users_id = $selectIdLastUser->fetch();
+                                                            
+                                                            $selectIdLastUser->closeCursor();
+                                                            
+                                                            // Creation de user_info 
+                                                            $users_id = $users_id['id'];
+                                                            $is_valid = 0;
+                                                            // $birth = date();
+                                                            $phone = "0606060606";
+                                                            $ip = "127.0.0.1";
+                                                            $newsletter = 0;
+                                                            
+                                                            $insertUserInfos = $bdd->prepare("INSERT INTO users_infos(users_id, is_valid, birth, date_inscription, phone, ip, newsletter) VALUE(?, ?, NOW(), NOW(), ?, ?, ?)");
+                                                            $insertUserInfos->execute(array($users_id, $is_valid, $phone, $ip, $newsletter));
+                                                            $insertUserInfos->closeCursor();
+                                                            // get id of last register
+                                                            $selectIdLastUserInfo = $bdd->prepare("SELECT id FROM users_infos ORDER BY ID DESC LIMIT 1");
+                                                            $selectIdLastUserInfo->execute();
+                                                            $usersInfos_id = $selectIdLastUserInfo->fetch();
 
-                                                        $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
-                                                        $_SESSION['comptecree'] = "Votre compte à bien été créé !";
-                                                        header('Location: session_login.php');
+                                                            echo "</br>ID userinfo[id] ".$usersInfos_id;
+                                                            echo "</br>ID userid ".$users_id;
+                                                            die();
 
+                                                            $selectIdLastUserInfo->closeCursor();
+                                                            // Update de user
+                                                            $updatetUser = $bdd->prepare("UPDATE users SET users_infos_id = :users_infos_id WHERE id = :id ");
+                                                            $updatetUser->execute(array(
+                                                                'users_infos_id' => $usersInfos_id['id'],
+                                                                'id' => $users_id['id']
+                                                            ));
+                                                            $updatetUser->closeCursor();
+                                                            //////////////////////////////////////////////////////////
+
+                                                            $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";
+                                                            
+                                                            $p = $_SERVER['PHP_SELF'];
+                                                            $pageActuel = basename ($p);
+
+                                                            if($pageActuel == "session_register.php")
+                                                            {
+                                                                $compteCreate = True;
+                                                                                    
+                                                                ///////////////////// START LOGGER 
+                                                                include ($pathToRootFolder.'views/common/logs_users.php');
+                                                                $successUserCreate = TRUE;
+                                                                if($compteCreate == TRUE) {
+
+                                                                    if($successUserCreate === TRUE){
+
+                                                                        $nameLogs = $name;
+                                                                        $user_idLogs = $user_id;
+                                                                        $emailLogs = $email;
+                                                                        $pseudoLogs = $pseudo;
+                                                                        $phraseLog = $phrase;
+
+                                                                        $log = "User créé - Name :".$nameLogs." ID :".$user_idLogs." Email : ".$emailLogs." Pseudo : ".$pseudoLogs." Phrase : ".$phraseLog;
+                                                                        logger($log);
+                                                                        echo "Success create user";
+
+                                                                    }
+                                                                    
+                                                                }
+                                                            }else{
+                                                                $erreur = "URL non valide.";
+
+                                                                // delete session 
+                                                                // destruction de tab session
+                                                                unset($_SESSION);
+
+                                                                // Finalement, on détruit la session.
+                                                                session_destroy();
+
+                                                                header("Location: home.php");
+                                                            }
+                                                            ///////////////////// END LOGGER 
+
+                                                            header('Location: session_login.php');
+
+                                                        } else {
+                                                            $erreur = "Erreur lors de l'importation de photo de profil.";
+                                                        }
                                                     } else {
-                                                        $erreur = "Erreur lors de l'importation de photo de profil.";
+                                                        $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
                                                     }
                                                 } else {
-                                                    $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
+                                                    $erreur = "Votre photo ne doit pas dépasser 2Mo.";
                                                 }
-                                            } else {
-                                                $erreur = "Votre photo ne doit pas dépasser 2Mo.";
+                                            } 
+                                            else {
+                                                $erreur = "Veuillez ajouter une photo.";
                                             }
-                                        } 
-                                        else {
-                                            $erreur = "Veuillez ajouter une photo.";
-                                        }
 
+                                        }
+                                        else
+                                        {
+                                            $erreur = "Vos mots de passes ne correspondent pas.";
+                                        }
                                     }
                                     else
                                     {
-                                        $erreur = "Vos mots de passes ne correspondent pas.";
+                                        $erreur = "Votre adresse mail est déjà utilisé.";
                                     }
                                 }
                                 else
                                 {
-                                    $erreur = "Votre adresse mail est déjà utilisé.";
+                                    $erreur = "Votre adresses mail n'est pas valide.";
                                 }
                             }
                             else
                             {
-                                $erreur = "Votre adresses mail n'est pas valide.";
+                                // erreur email
+                                $erreur = "Vos adresses mails ne correspondent pas.";
                             }
-                        }
-                        else
+                        }else
                         {
-                            // erreur email
-                            $erreur = "Vos adresses mails ne correspondent pas.";
+                            $erreur = $pseudo."NON VALIDE";
                         }
                     }
                     else

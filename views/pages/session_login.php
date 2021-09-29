@@ -76,7 +76,7 @@ if(isset($_POST['formconnexion']))
                 $_SESSION['autoriser']="oui";
                 // CREATE TOKEN AFTER LOGIN
                 $_SESSION['token'] = md5(time()*rand(175,658));
-
+                $_SESSION["loggedin"] = TRUE;
                
 
                 // header("Location: session.php?id=".$_SESSION['id']);

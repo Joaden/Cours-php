@@ -24,40 +24,66 @@ session_start();
         ///////////////////  SI SUPPRESSION ENVOYEE  /////////////////////////////
         $mode_delete = 0;
         if(isset($_GET['id']) AND !empty($_GET['id'])){
+            if(isset($_GET['user']) AND !empty($_GET['user'])){
 
-        
-            // je securise les données
-            $supp_id = htmlspecialchars($_GET['id']);
-            
-            // je recup larticle dans la bdd
-            $recupArticle = $bdd->prepare("SELECT * FROM articles WHERE id = ?");
-            $recupArticle->execute(array($supp_id));
+                $deleteAuthorized = 0;
+                
 
-            if($recupArticle->rowCount() == 1){
+                // je securise les données
+                $supp_id = htmlspecialchars($_GET['id']);
+                $user_id = htmlspecialchars($_GET['user']);
+                
+                // je recup larticle dans la bdd
+                $recupArticle = $bdd->prepare("SELECT * FROM articles WHERE id = ?");
+                $recupArticle->execute(array($supp_id));
 
-                //echo "</br>Article trouvé ID : ".$supp_id;
-               
-                $mode_delete = 1;
-            
-                if($mode_delete == 1){
+                if($recupArticle->rowCount() == 1){
+                ///////////// START VERIFIER SI LARTICLE RECUPERER DANS LE GET APPARTIENT BIEN AU USER ET QUELA PAGE EST BIEN CELLE DE MON SITE
+ 
+                    // if()
 
-                    //echo "</br>Mode delete activé </br>";
+                ///////////// END Controle ID USER AND ARTICLE
 
-                    $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
-                    $deleteArticle->execute(array($supp_id));
-                    $deleteArticle->closeCursor();
-                    $message = 'Votre article a bien été supprimé';
-                    header('Location: article_gestion.php');
+                    //echo "</br>Article trouvé ID : ".$supp_id;
+                
+                    $mode_delete = 1;
+                
+                    if($mode_delete == 1){
+                        $deleteAuthorized = 1;
+                        //echo "</br>Mode delete activé </br>";
+                        if($deleteAuthorized == 1) {
 
+                            $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
+                            $deleteArticle->execute(array($supp_id));
+                            $deleteArticle->closeCursor();
+                            $message = 'Votre article a bien été supprimé';
+                            ///////////////////// START LOGGER 
+                            include ($pathToRootFolder.'views/common/logs_articles.php');
+                            $successArticleDelete = TRUE;
+                        
+
+                            if($successArticleDelete === TRUE){
+
+                                $log = "Article id :".$supp_id." Delete par author ID :".$user_id;
+                                logger($log);
+                                echo "Success Delete article";
+
+                            }
+                            
+                        }
+                        ///////////////////// END LOGGER 
+                        header('Location: article_gestion.php');
+
+                    }else{
+                        echo "La suppression a échoué!!!";
+                        die();
+                    }
+                    
+                    
                 }else{
-                    echo "La suppression a échoué!!!";
-                    die();
+                    echo "Aucun article n'a été trouvé";
+                    header('Location: home.php');
                 }
-                
-                
-            }else{
-                echo "Aucun article n'a été trouvé";
-                header('Location: home.php');
             }
         }
         

@@ -31,7 +31,7 @@ session_start();
             //var_dump($_SESSION);
             //die();
         $id = htmlspecialchars($_SESSION['id']);
-        $id = htmlspecialchars($userInfo['id']);
+        $iduser = htmlspecialchars($userInfo['id']);
         $author = htmlspecialchars($userInfo['pseudo']);
         // Get my articles
         $myArticles = getMyArticles($id);
@@ -122,11 +122,11 @@ session_start();
                                                     <?= $article->title; ?>
                                                 </h2>
                                                 <span>
-                                                    <a href="article_modify.php?edit=<?= $article->id ?>">
+                                                    <a href="article_modify.php?edit=<?= $article->id ?>&user=<?= $iduser ?>">
                                                         Modifier 
                                                     </a>
-                                                    <a href="article_delete.php?id=<?= $article->id ?>">
-                                                            <div class="text-danger">Supprimer</div>
+                                                    <a href="article_delete.php?id=<?= $article->id ?>&user=<?= $iduser ?>">
+                                                            <div onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));" class="text-danger">Supprimer</div>
                                                     </a>
                                                 </span>
                                                 

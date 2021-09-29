@@ -65,7 +65,7 @@ session_start();
                                     $ins = createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag);
 
                                     ///////////////////// START LOGGER 
-                                    include ($pathToRootFolder.'views/common/logs.php');
+                                    include ($pathToRootFolder.'views/common/logs_articles.php');
                                     $successArticleCreate = TRUE;
                                     if($_SERVER['REQUEST_METHOD'] === "POST") {
 

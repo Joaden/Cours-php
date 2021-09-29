@@ -45,7 +45,7 @@ function updateArticle($id)
     
 }
 
-////////////////////////////// Create User for page session_register.php //  done by chrisptophe
+////////////////////////////// Create User & userinfo for page session_register.php //  done by chrisptophe
 function createUser()
 {
     $pathToRootFolder = "../../";
@@ -96,9 +96,40 @@ function createUser()
                                     {
                                         // hash de mdp , a voir si il y a plus sûr comme function
                                         $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
-                                        $insertmdr = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
-                                        // On insère les $*** dans la requête
-                                        $insertmdr->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
+
+                                        // Creation de user
+                                        $insertUser = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
+                                        $insertUser->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
+                                        $insertUser->closeCursor();
+
+                                        // get id of last register
+                                        $selectIdLastUser = $bdd->prepare("SELECT id FROM users ORDER BY ID DESC LIMIT 1");
+                                        $selectIdLastUser->execute();
+                                        /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+                                        $users_id = $selectIdLastUser->fetch();
+                                        var_dump($users_id);
+                                        die();
+                                        $selectIdLastUser->closeCursor();
+                                        
+                                        // Creation de user_info 
+                                        $insertUserInfos = $bdd->prepare("INSERT INTO users_infos(users_id, date_inscription) VALUE(?, NOW())");
+                                        $insertUserInfos->execute(array($users_id));
+                                        $insertUserInfos->closeCursor();
+                                        // get id of last register
+                                        $selectIdLastUserInfo = $bdd->prepare("SELECT id FROM users_infos ORDER BY ID DESC LIMIT 1");
+                                        $selectIdLastUserInfo->execute();
+                                        $usersInfos_id = $selectIdLastUserInfo->fetch();
+                                        $selectIdLastUserInfo->closeCursor();
+                                        // Update de user
+                                        $updatetUser = $bdd->prepare("UPDATE users SET users_infos_id = :userInfo WHERE id = :iduser ");
+                                        $updatetUser->execute(array(
+                                            'userInfo' => $usersInfos_id,
+                                            'iduser' => $users_id
+                                        ));
+                                        $updatetUser->closeCursor();
+                                        // $insNbrView = $bdd->prepare('UPDATE articles SET nbr_view = nbr_view+1 WHERE id = ? ');
+                                        // $insNbrView->execute(array($id));
+                                        // $insNbrView->closeCursor();
 
                                         //vérification & upload image 
                                         $updateAvatar = updateAvatar();

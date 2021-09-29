@@ -28,7 +28,7 @@
         $reqVerifIfSessionIdExistToDelete = $bdd->prepare('SELECT * FROM sessions WHERE user_id = ?');
         $reqVerifIfSessionIdExistToDelete->execute(array($userIdInSessionToDelete));
         
-        var_dump($userIdInSessionToDelete);
+        //var_dump($userIdInSessionToDelete);
         //die('Check Id In SESSION TABLE to DELETE');
         if($reqVerifIfSessionIdExistToDelete->rowcount() > 0)
         {
