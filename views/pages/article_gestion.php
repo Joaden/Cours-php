@@ -122,10 +122,10 @@ session_start();
                                                     <?= $article->title; ?>
                                                 </h2>
                                                 <span>
-                                                    <a href="article_modify.php?edit=<?= $article->id ?>&user=<?= $iduser ?>">
+                                                    <a href="article_modify.php?edit=<?= $article->id ?>&user=<?= $iduser ?>&salt=<?= $_SESSION['token'] ?>">
                                                         Modifier 
                                                     </a>
-                                                    <a href="article_delete.php?id=<?= $article->id ?>&user=<?= $iduser ?>">
+                                                    <a href="article_delete.php?id=<?= $article->id ?>&user=<?= $iduser ?>&salt=<?= $_SESSION['token'] ?>">
                                                             <div onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));" class="text-danger">Supprimer</div>
                                                     </a>
                                                 </span>

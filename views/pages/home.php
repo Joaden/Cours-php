@@ -44,6 +44,7 @@ session_start();
         // }
     }
 
+   
     
     //Cookie de test pour le theme
     @$theme=$_GET["theme"];
@@ -138,7 +139,11 @@ session_start();
                         } 
                     ?>
                 </h2>
-                <h4><?php #echo $_SESSION["varsessiontest"]; ?></h4>
+                <!-- <h4><?php #echo $_SESSION["varsessiontest"]; ?></h4> -->
+                <h4><?php if(isset($errorMessage)){
+                    echo $errorMessage;
+                }
+                 ?></h4>
                 <!-- START Affiche l'heure  -->
                 <?php echo date('d/m/Y'); ?>
                 

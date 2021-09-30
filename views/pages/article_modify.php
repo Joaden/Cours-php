@@ -14,56 +14,89 @@ session_start();
 
     require($pathToRootFolder."views/common/checkSessionUser.php");
     
-    if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
-        echo "</br>if isset user id = ".$_SESSION['userid'];
+    // Vous pouvez decommenter les ECHO pour afficher les aides 
+    if(isset($_SESSION['userid']) && $userInfo['id'] == $_SESSION['userid']) {
+        //echo "</br>if isset user id = ".$_SESSION['userid'];
 
         if(isset($_SESSION['sessionid']) and $_SESSION['sessionid'] == session_id()){
         
-            $id = htmlspecialchars($_SESSION['userid']);
-            $id = htmlspecialchars($userInfo['id']);
-            //$articles = getArticles();
-            $categories = getCategories();
-            $images = getImages();
-            echo "</br>if isset session id = ".$_SESSION['sessionid'];
+            $userid = htmlspecialchars($_SESSION['userid']);
+            $iduserInfo = htmlspecialchars($userInfo['id']);
+            
+            //echo "</br>if isset session id = ".$_SESSION['sessionid'];
             
             ///////////   Affichage article   //////////////    
             ///////////// START VERIFIER SI LARTICLE RECUPERER DANS LE GET APPARTIENT BIEN AU USER ET QUELA PAGE EST BIEN CELLE DE MON SITE
-            if(isset($_GET['edit']) AND !empty($_GET['edit'])) {
-                if(isset($_GET['user']) AND !empty($_GET['user'])){
+            if(isset($_GET['edit']) && !empty($_GET['edit']) && isset($_GET['user']) && !empty($_GET['user']) && isset($_SESSION['token']) && !empty($_SESSION['token'])) {
+                // if(isset($_GET['user']) AND !empty($_GET['user'])){
 
                     $modificationAuthorized = 0;
                     // secure variable
                     $edit_id = strip_tags($_GET['edit']);
-                    $user_id = strip_tags($_GET['user']);
+                    $getUser_id = strip_tags($_GET['user']);
+                    $getToken = strip_tags($_SESSION['token']);
+                    
                     $author = strip_tags($userInfo['pseudo']);
                     $edit_id = htmlspecialchars($edit_id);
-                    echo "</br>if isset get edit iD = ".$edit_id."</br>";
-                    // die('Die Strip tags');
-                    //$id = htmlspecialchars($_GET['id']);
-                    //$id = strip_tags($id);
+                    // echo "</br>if isset get edit iD = ".$edit_id."</br>";
+                    // echo "</br>if isset getUser_id  = ".$getUser_id."</br>";
+                    // echo "</br>if isset getToken  = ".$getToken."</br>";
+                    
+                    $categories = getCategories();
+                    $images = getImages();
                     $image = getImage($edit_id);
                     $categorie = getCategorie($edit_id);
 
-                    echo "</br>if isset get edit iD = ".$edit_id."</br>";
-                    // die('Before select');
-                    // call requete
-                    $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = ? ');
-                    $edit_article->execute(array($edit_id));
-                    /////////////////////////////////////////
+                    //echo "</br>if isset get edit iD = ".$edit_id."</br>";
                     
+                    // call requete
+                    $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = :id ');
 
+                    $edit_article->bindValue(':id', $edit_id, PDO::PARAM_INT);
+
+                    $edit_article->execute();
+                    
+                    // $edit_article->execute(array($edit_id));
+                    /////////////////////////////////////////
+                    // Si user_id de l'article = id $_SESSION['userid']) && $userInfo['id'] et qu'il y a un get token
+                    // je peux afficher l'article pour le modifier
+                     
+                    $edit_article = $edit_article->fetch();
+                    //echo "</br></br>ID de l'Auteur de l'article = ".$edit_article['user_id'];
+                    //echo "</br></br>ID du user actuel = ".$getUser_id;
+                    // if(!isset($edit_article) && empty($edit_article)){
+                    //     $errorMessage = "Erreur : L\'article n\'existe pas!";
+                    //     die();
+                    //     header('Location: home.php');
+                    // }
+                    if(isset($edit_article) && !empty($edit_article))
+                    // if($edit_article->rowcount() == 1)
+                    {    
+                        //echo "</br>Fetch => Article exist";
+
+                        if(isset($edit_article['user_id']) && $edit_article['user_id'] == $getUser_id ){
+                            //echo "</br>Vous êtes bien l'auteur de cet article, vous pouvez le modifier";
+                            // die();
+                       
+                        }else{
+                            $errorMessage = "</br>Vous n'êtes pas l'auteur de cet article, vous ne pouvez pas le modifier";
+                            echo $errorMessage;
+                            // die($errorMessage);
+                            header('Location: session_logout.php');
+                        
+                        }
+                    }else {
+                        $errorMessage = "Erreur : L\article n\'existe pas! ";
+                        echo $errorMessage;
+                        // die($errorMessage);
+                        header('Location: article_gestion.php?errorMessage=oui');
+                    }
 
                     ///////////// END Controle ID USER AND ARTICLE
-
-                    if($edit_article->rowcount() == 1)
-                    {
-                        $edit_article = $edit_article->fetch();
-
-                    } else {
-                        die('Erreur : L\article n\existe pas!');
-
+                    if(isset($_GET['errorMessage']) && !empty($_GET['errorMessage']) && $_GET['errorMessage'] == "oui"){
+                        $errorMessage = strip_tags($_GET['errorMessage']);
+                        
                     }
-                
                     ///////////////////  SI FORMULAIRE ENVOYE  /////////////////////////////
                     $mode_edition = 1;
                     if(isset($_POST['submit_modify_article']))
@@ -144,10 +177,12 @@ session_start();
                             echo "Une erreur s'est produite, la modification à échouée !";
                         }
                     }
-                }
+                // }
 
             }else{
-                echo 'Aucun identifiant trouvé';
+                $alerte = 'Aucun identifiant trouvé';
+                header('Location: article_gestion.php');
+
             }
 
     ///////////Modification ////////////////
@@ -204,7 +239,9 @@ session_start();
 
                             <h1>  </h1>
 
-                            <?php #if($_GET): ?>
+                            <?php if(isset($_GET['errorMessage']) && !empty($_GET['errorMessage'])){
+                                echo $errorMessage;
+                            } ?>
 
                                 <form action="" method="POST">
                                 
