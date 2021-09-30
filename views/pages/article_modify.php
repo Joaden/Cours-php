@@ -81,6 +81,25 @@ session_start();
                         }else{
                             $errorMessage = "</br>Vous n'êtes pas l'auteur de cet article, vous ne pouvez pas le modifier";
                             echo $errorMessage;
+                            ///////////////////// START LOGGER 
+                            include ($pathToRootFolder.'views/common/logs_users.php');
+                            $errorModifyArticle = TRUE;
+
+                                if($errorModifyArticle === TRUE){
+
+                                    $nameLogs = $edit_article['user_id'];
+                                    $user_idLogs = $getUser_id;
+                                    $author = $author;
+                                    // $pseudoLogs = $pseudo;
+                                    // $phraseLog = $phrase;
+
+                                    $log = "Warning ID User & ID Article :".$nameLogs." ID :".$user_idLogs." Last author : ".$author." Error Tentative de modification non autorisée !!! ";
+                                    logger($log);
+                                    echo "Error Tentative de modification non autorisée !!!";
+
+                                }
+                                
+                            
                             // die($errorMessage);
                             header('Location: session_logout.php');
                         
@@ -88,6 +107,24 @@ session_start();
                     }else {
                         $errorMessage = "Erreur : L\article n\'existe pas! ";
                         echo $errorMessage;
+                        ///////////////////// START LOGGER 
+                        include ($pathToRootFolder.'views/common/logs_users.php');
+                        $errorModifyArticle = TRUE;
+
+                            if($errorModifyArticle === TRUE){
+
+                                $nameLogs = $edit_article['user_id'];
+                                $user_idLogs = $getUser_id;
+                                $author = $author;
+                                // $pseudoLogs = $pseudo;
+                                // $phraseLog = $phrase;
+
+                                $log = "Warning ID User & ID Article :".$nameLogs." ID :".$user_idLogs." Last author : ".$author." Message : ".$errorMessage." modification non autorisée !!! ";
+                                logger($log);
+                                echo "Error Tentative de modification non autorisée !!!";
+
+                            }
+                            
                         // die($errorMessage);
                         header('Location: article_gestion.php?errorMessage=oui');
                     }
