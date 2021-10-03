@@ -192,6 +192,14 @@ session_start();
                             <div class="widgetTextDigit">
                                 <p class="widgetTextDigit-text"> <a href="admin_manageUsers.php?token=<?php echo $_SESSION['token']; ?>&setuser=<?php echo $setuser; ?>">MANAGE USERS</a></p>
                             </div>
+                            <!-- START PAGE AFFICHAGE TEST JWT TOKEN -->
+                            <div class="widgetTextDigit">
+                                <!-- <div type="button" class="widgetTextDigit-text">  -->
+                                    <a href="admin_manageToken.php?token=<?php echo $_SESSION['token']; ?>&setuser=<?php echo $setuser; ?>">SHOW TEST TOKEN API</a>
+                                <!-- </div> -->
+                            </div>
+                            <!-- END PAGE AFFICHAGE TEST JWT TOKEN -->
+
                             
                         </section>
                             
