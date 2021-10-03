@@ -261,6 +261,8 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             </form>
 
             <hr>
+            <hr>
+            <hr>
             
             <p style="color: red;" id="erreur">
                 <?php 
@@ -272,7 +274,7 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             </p>
             <br>
 
-            <form>
+            <form method="POST" action="" >
                 <div class="form-group  col-md-3">
                     <label for="inputPhone">Phone</label>
                     <input type="text" class="form-control" id="inputPhone" placeholder="0606060606">
@@ -282,11 +284,15 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
                     <input type="date" class="form-control" id="inputBirth">
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-info">
+                <a href="editProfilNumBirth.php?id=<?php echo $_SESSION['id']; ?>&auth=<?php echo $_SESSION['token']; ?>">Mettre à jour</a>
+                </button>
                 </form>
             <br>
             <hr>
-            <form>
+            <hr>
+            <hr>
+            <form method="POST" action="" >
                 <div class="form-group">
                     <label for="inputAddress">Address</label>
                     <input type="text" class="form-control" id="inputAddress" placeholder="3 route du puit">
@@ -308,19 +314,21 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
                         <label for="inputState">Country</label>
                         <select id="inputState" class="form-control">
                             <option selected>Choose...</option>
-                            <option>...</option>
+                            <option>France</option>
+                            <option>USA</option>
+                            <option>Laos</option>
                         </select>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
                 </form>
             <br>
             <hr>
             <?php
             #if (isset($_SESSION['id']) and $userInfo['id'] == $_SESSION['id']) {
             ?>
-                <a href="editProfilNew.php?id=<?php echo $_SESSION['id']; ?>&auth=<?php echo $_SESSION['token']; ?>">Editer mon adresse</a><br>
+                <a href="editProfilAddress.php?id=<?php echo $_SESSION['id']; ?>&auth=<?php echo $_SESSION['token']; ?>">Editer mon adresse</a><br>
                 <!-- <a href="session_logout.php">Se déconnecter</a> -->
             <?php
             #}
