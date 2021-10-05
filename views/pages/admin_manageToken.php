@@ -22,6 +22,8 @@ session_start();
     require_once ($pathToRootFolder.'next_src_wip_denis/classes/JWT.php');
     require($pathToRootFolder."views/common/jwtToken.php");
     require($pathToRootFolder."views/common/decodeJWT.php");
+    require($pathToRootFolder."views/common/authAPI.php");
+
  
 ?>
 

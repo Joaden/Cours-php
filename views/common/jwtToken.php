@@ -25,7 +25,7 @@ $payload = [
 // On instancie un token
 $jwt = new JWT();
 
-$token = $jwt->generate($header, $payload, SECRET, 3600);
+$token = $jwt->generate($header, $payload, SECRET);
 
 echo $token;
 
