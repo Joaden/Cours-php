@@ -15,6 +15,15 @@ session_start();
         require($pathToRootFolder.'config/functions/function_file.php');
         require($pathToRootFolder."views/common/checkSessionUser.php");
 
+        // ADD likes
+        $likes = $bdd->prepare('SELECT id FROM post_like WHERE article_id = ?');
+        $likes->execute(array($id));
+        $likes= $likes->rowCount();
+        // ADD dislikes
+        $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE article_id = ?');
+        $dislikes->execute(array($id));
+        $dislikes= $dislikes->rowCount();
+
         if (isset($_POST['submit_comment'])) {
             if(isset($_POST['comment']) AND !empty($_POST['comment'])) {
 
@@ -156,6 +165,7 @@ session_start();
                                         <span class="hour"></span>
                                     </p>
                                     
+                                    
                                 </div>
                                 <!-- array PERMANENT: -->
                                 <?php
@@ -164,11 +174,11 @@ session_start();
                                     <div class="blogArticle-footer-keywords row no-gutters">
 
                                     <?php foreach ($categorie as $cat) : ?>
-                                        <a href="#" class="text-success"><?= $cat->name; ?></a>
+                                        Catégorie : <a href="#" class="text-success"><?= $cat->name; ?></a>
                                     <?php endforeach; ?>
                                     <?php foreach ($getHashtags as $hashtags) : ?>
 
-                                        <a href="#" class="keyword"><?=  $hashtags->name; ?></a>
+                                        <a href="#" class="keyword"> <?=  $hashtags->name; ?></a>
 
                                     <?php endforeach; ?>
                                     </div>
@@ -182,6 +192,12 @@ session_start();
                                     </div>
                                 <?php  } ?>
 
+                                <p>
+                                    <span class="abrev">
+                                        <a href="../common/actionLike.php?t=1&id=<?= $id ?>">J'aime  </a> (<?= $likes ?>)
+                                        <a href="../common/actionLike.php?t=2&id=<?= $id ?>">/ Je n'aime pas</a> (<?= $dislikes ?>)
+                                    </span>
+                                </p>
                                 <p class="col-lg-2 align-self-baseline mb-0">
                                     <a href="article_report.php?id=<?= $idPostReportOk; ?>">
                                         <div class="text-danger">Signaler</div>
