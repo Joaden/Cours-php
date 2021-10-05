@@ -18,8 +18,11 @@ session_start();
       
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
+    
+    require_once ($pathToRootFolder.'next_src_wip_denis/classes/JWT.php');
     require($pathToRootFolder."views/common/jwtToken.php");
-
+    require($pathToRootFolder."views/common/decodeJWT.php");
+ 
 ?>
 
 <!DOCTYPE html>
@@ -45,8 +48,33 @@ session_start();
 
                         <div class="widgetTextDigit">
                             <p class="widgetTextDigit-text">TEST</p>
-                            <p class="widgetTextDigit-value">240</p>
-                        </div>                       
+                        </div>      
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">base64Header</p>
+                            
+                        </div>      
+                        <p class="widgetTextDigit-value"></p>
+
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">base64Payload</p>
+                        </div>  
+
+                        <p class="widgetTextDigit-value"></p>
+
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">jwt</p>
+                        </div>     
+                        <p class="widgetTextDigit-value"></p>
+
+                        <div class="widgetTextDigit">
+                            <p class="widgetTextDigit-text">jwt</p>
+                        </div>     
+                        <p class="widgetTextDigit-value"></p>
+                        
+                        
+
+
+
                     </section>                        
                 </div>
             </div>   
