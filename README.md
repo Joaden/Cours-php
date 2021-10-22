@@ -1,12 +1,11 @@
 # Project Cours-PHP
 
 ## Project description
-    Entrainement en php natif
-    Cours-php
+    Blog en php natif
 
-    is it a blog ? 
-    is it something else ?
-    it contain articles of what ?
+    it's a blog 
+    portfolio presentation
+    contains articles on science, technology and climate
 
 ## Installation
     Please see the /DOCS/INSTALL.md file.
