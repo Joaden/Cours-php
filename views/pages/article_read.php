@@ -83,7 +83,7 @@ session_start();
         $modelArticle = new Article();
         $modelCom = new Comments();
         $modelUser = new User();
-        $model = new Article();
+        // $modelCat = new Categories();
 
         $article = $modelArticle->getArticle($id);
         $image = getImage($id);
@@ -327,8 +327,8 @@ session_start();
                                         foreach($getComments as $element) {
                                             if($com->comment == $element->comment){
                                          
-                                                echo "<a href=\"comment_delete.php?id=$idComOk\">
-                                                    <div onclick=\"confirmer() \" class=\"text-danger\">Supprimer mon commentaire</div>
+                                                echo "<a href=\"comment_delete.php?id=$idComOk&post=$id\">
+                                                    <div onclick=\"confirm('Supprimer le commentaire ?'); \" class=\"text-danger\">Supprimer mon commentaire</div>
                                                 </a>";
                                             }
                                         }

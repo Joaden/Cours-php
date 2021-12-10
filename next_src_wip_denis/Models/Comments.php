@@ -67,6 +67,18 @@ class Comments {
         $req->closeCursor();
     }
 
+    
+    //  fonction supprime le commentaire par ID
+    public function deleteComments($supp_id)
+    {
+        $pathToRootFolder = "../../";
+        require($pathToRootFolder.'config/connect.php');
+        
+        $deleteComment = $bdd->prepare("DELETE FROM comments WHERE id = ?" );
+
+        $deleteComment->execute(array($supp_id));
+        $deleteComment->closeCursor();
+    }
 
 
 }
