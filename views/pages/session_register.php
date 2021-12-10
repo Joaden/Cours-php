@@ -127,33 +127,33 @@ if(isset($_POST['formregister']))
                                                             $selectIdLastUser->closeCursor();
                                                             
                                                             // Creation de user_info 
-                                                            $users_id = $users_id['id'];
-                                                            $is_valid = 0;
-                                                            // $birth = date();
-                                                            $phone = "0606060606";
-                                                            $ip = "127.0.0.1";
-                                                            $newsletter = 0;
+                                                            // $users_id = $users_id['id'];
+                                                            // $is_valid = 0;
+                                                            // // $birth = date();
+                                                            // $phone = "0606060606";
+                                                            // $ip = "127.0.0.1";
+                                                            // $newsletter = 0;
                                                             
-                                                            $insertUserInfos = $bdd->prepare("INSERT INTO users_infos(users_id, is_valid, birth, date_inscription, phone, ip, newsletter) VALUE(?, ?, NOW(), NOW(), ?, ?, ?)");
-                                                            $insertUserInfos->execute(array($users_id, $is_valid, $phone, $ip, $newsletter));
-                                                            $insertUserInfos->closeCursor();
-                                                            // get id of last register
-                                                            $selectIdLastUserInfo = $bdd->prepare("SELECT id FROM users_infos ORDER BY ID DESC LIMIT 1");
-                                                            $selectIdLastUserInfo->execute();
-                                                            $usersInfos_id = $selectIdLastUserInfo->fetch();
+                                                            // $insertUserInfos = $bdd->prepare("INSERT INTO users_infos(users_id, is_valid, birth, date_inscription, phone, ip, newsletter) VALUE(?, ?, NOW(), NOW(), ?, ?, ?)");
+                                                            // $insertUserInfos->execute(array($users_id, $is_valid, $phone, $ip, $newsletter));
+                                                            // $insertUserInfos->closeCursor();
+                                                            // // get id of last register
+                                                            // $selectIdLastUserInfo = $bdd->prepare("SELECT id FROM users_infos ORDER BY ID DESC LIMIT 1");
+                                                            // $selectIdLastUserInfo->execute();
+                                                            // $usersInfos_id = $selectIdLastUserInfo->fetch();
 
-                                                            echo "</br>ID userinfo[id] ".$usersInfos_id;
-                                                            echo "</br>ID userid ".$users_id;
-                                                            die();
+                                                            // echo "</br>ID userinfo[id] ".$usersInfos_id;
+                                                            // echo "</br>ID userid ".$users_id;
+                                                            // //die();
 
-                                                            $selectIdLastUserInfo->closeCursor();
-                                                            // Update de user
-                                                            $updatetUser = $bdd->prepare("UPDATE users SET users_infos_id = :users_infos_id WHERE id = :id ");
-                                                            $updatetUser->execute(array(
-                                                                'users_infos_id' => $usersInfos_id['id'],
-                                                                'id' => $users_id['id']
-                                                            ));
-                                                            $updatetUser->closeCursor();
+                                                            // $selectIdLastUserInfo->closeCursor();
+                                                            // // Update de user
+                                                            // $updatetUser = $bdd->prepare("UPDATE users SET users_infos_id = :users_infos_id WHERE id = :id ");
+                                                            // $updatetUser->execute(array(
+                                                            //     'users_infos_id' => $usersInfos_id['id'],
+                                                            //     'id' => $users_id['id']
+                                                            // ));
+                                                            // $updatetUser->closeCursor();
                                                             //////////////////////////////////////////////////////////
 
                                                             $erreur = "Votre compte à bien été créé ! <a href=\"session_login.php\">Me Connecter</a>";

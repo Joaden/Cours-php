@@ -13,11 +13,16 @@ session_start();
     require_once($pathToRootFolder.'config/connect.php');
 
     require_once($pathToRootFolder.'config/functions.php');
+    
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+
 
     require_once($pathToRootFolder.'config/functions/function_file.php');
 
+    $model = new Article();
+
     // Get all articles
-    $articles = getArticles();
+    $articles = $model->getArticles();
     $images = getImages();
     $categories = getCategories();
 
@@ -163,9 +168,6 @@ session_start();
 
 
                             <?php foreach($articles as $article): ?>
-                            <?php #for($i=0; $i<6;$i++):?>
-                                <!-- <div class="col-6 show-red"> -->
-                                <!-- </div> -->
                                 
                                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
                                     <a class="blogArticle-imglink" href="article_read.php?id=<?= $article->id ?>">

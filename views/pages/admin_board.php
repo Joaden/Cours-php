@@ -10,6 +10,8 @@ session_start();
 
     require_once($pathToRootFolder.'config/connect.php');
 
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+
     require_once($pathToRootFolder.'config/functions.php');
     require_once($pathToRootFolder.'config/functions/function_file.php');
 

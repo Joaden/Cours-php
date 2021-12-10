@@ -15,6 +15,8 @@ session_start();
 
         require_once($pathToRootFolder.'config/functions.php');
 
+        require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+
         require($pathToRootFolder."views/common/checkSessionUser.php");
         // retrieves the user's ID if he is logged in
         // if(isset($_GET['id']) AND $_GET['id'] > 0)

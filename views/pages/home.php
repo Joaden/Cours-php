@@ -5,6 +5,14 @@ session_start();
     $PAGE_TITLE = "Blog DCCG - home";
     
     include($pathToRootFolder."debug_functions.php");
+    //////////////////// START WIP DENIS POO->ROUTER
+    //require_once($pathToRootFolder.'next_src_wip_denis/Controllers/Router.php');
+
+    // $router = new router();
+    // $router->routerReq();
+    
+    //////////////////// END WIP DENIS POO->ROUTER
+
 
     $_SESSION["varsessiontest"] = "Session home active OK";
     if (isset($_SESSION['sessionid'])){
@@ -63,11 +71,15 @@ session_start();
 
     require_once($pathToRootFolder.'config/functions.php');
 
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+
     require_once($pathToRootFolder.'config/functions/function_file.php');
 
     require($pathToRootFolder."views/common/checkSessionUser.php");
     
-    $articles = getLastArticles();
+    $model = new Article();
+
+    $articles = $model->getLastArticles();
     $categories = getCategories();
     $images = getImages();
     
@@ -255,19 +267,139 @@ session_start();
         <section class="section">
             <div class="section-head d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
                 <h2 class="section-head-title font-weight-bolder">Services</h2>
-                <div class="blogArticle--large row no-gutters">
-                    <a href="service.php" class="abrev">Découvrir</a>
-                </div>
+                
+                
             </div>
         </section>
+        <div class="blogArticle--large row no-gutters">
+                    <a class="blogArticle-imglink col-lg-5" href="">
+                        <!-- <img class="blogArticle-imglink-img" src="../../assets/uploadPersonal/<?php echo $image->name; ?>" alt="image article"> -->
+                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="#"></a>
+                        <!-- <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+                    </a>
+                </div>
         <section class="section">
             <div class="section-head d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
                 <h2 class="section-head-title font-weight-bolder">Nos Vidéos Youtube</h2>
+                
+        </section>
+
+<!-- ======== CARROUSEL ========= -->
+<div id="carouselOnHomepage" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselOnHomepage" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselOnHomepage" data-slide-to="1"></li>
+                        <li data-target="#carouselOnHomepage" data-slide-to="2"></li>
+                        <li data-target="#carouselOnHomepage" data-slide-to="3"></li>
+                        <li data-target="#carouselOnHomepage" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container mt-3">
+                                <h2>Card Image</h2>
+                                <p>Image at the top (card-img-top):</p>
+                                <div class="card" style="width:400px">
+                                    <img class="card-img-top" src="https://img-4.linternaute.com/UcR-LNbBvF-FMfqevLX9pV0no8o=/1240x/smart/56b88043c63e497c99930c4b296eaa5c/ccmcms-linternaute/10501254.jpg" alt="Card image" style="width:100%">
+                                    <div class="card-body">
+                                    <h4 class="card-title">John Doe</h4>
+                                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                                    <a href="#" class="btn btn-primary">See Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container mt-3">
+                                <h2>Card Image</h2>
+                                <p>Image at the top (card-img-top):</p>
+                                <div class="card" style="width:400px">
+                                    <img class="card-img-top" src="https://img-4.linternaute.com/UcR-LNbBvF-FMfqevLX9pV0no8o=/1240x/smart/56b88043c63e497c99930c4b296eaa5c/ccmcms-linternaute/10501254.jpg" alt="Card image" style="width:100%">
+                                    <div class="card-body">
+                                    <h4 class="card-title">John Doe</h4>
+                                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                                    <a href="#" class="btn btn-primary">See Profile</a>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container mt-3">
+                                <h2>Card Image</h2>
+                                <p>Image at the top (card-img-top):</p>
+                                <div class="card" style="width:400px">
+                                    <img class="card-img-top" src="https://img-4.linternaute.com/UcR-LNbBvF-FMfqevLX9pV0no8o=/1240x/smart/56b88043c63e497c99930c4b296eaa5c/ccmcms-linternaute/10501254.jpg" alt="Card image" style="width:100%">
+                                    <div class="card-body">
+                                    <h4 class="card-title">John Doe</h4>
+                                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                                    <a href="#" class="btn btn-primary">See Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container mt-3">
+                                <h2>Card Image</h2>
+                                <p>Image at the top (card-img-top):</p>
+                                <div class="card" style="width:400px">
+                                    <img class="card-img-top" src="https://img-4.linternaute.com/UcR-LNbBvF-FMfqevLX9pV0no8o=/1240x/smart/56b88043c63e497c99930c4b296eaa5c/ccmcms-linternaute/10501254.jpg" alt="Card image" style="width:100%">
+                                    <div class="card-body">
+                                    <h4 class="card-title">John Doe</h4>
+                                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                                    <a href="#" class="btn btn-primary">See Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselOnHomepage" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselOnHomepage" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
                 <div class="blogArticle--large row no-gutters">
                     <a href="#" class="abrev">Voir toutes les vidéos</a>
                 </div>
             </div>
-        </section>
+            <div class="container mt-3">
+                <h2>Card Image</h2>
+                <p>Image at the top (card-img-top):</p>
+                <div class="card" style="width:400px">
+                    <img class="card-img-top" src="https://img-4.linternaute.com/UcR-LNbBvF-FMfqevLX9pV0no8o=/1240x/smart/56b88043c63e497c99930c4b296eaa5c/ccmcms-linternaute/10501254.jpg" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                    <h4 class="card-title">John Doe</h4>
+                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-3">
+                <h2>Card Image</h2>
+                <p>Image at the top (card-img-top):</p>
+                <div class="card" style="width:400px">
+                  
+                    <img class="card-img-top" src="https://img-4.linternaute.com/UcR-LNbBvF-FMfqevLX9pV0no8o=/1240x/smart/56b88043c63e497c99930c4b296eaa5c/ccmcms-linternaute/10501254.jpg" alt="Card image" style="width:100%">
+
+                    <div class="card-body">
+                    <h4 class="card-title">John Doe</h4>
+                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-3">
+                <img src="https://youtu.be/dhsNcKeOZNA" class="rounded" alt="Cinque Terre" width="304" height="236"> 
+
+                <img src="cinqueterre.jpg" class="circle" alt="Cinque Terre" width="304" height="236"> 
+                <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre" width="304" height="236"> 
+            </div>
+            <iframe width="320" height="240" controls src="https://youtu.be/dhsNcKeOZNA" type="video/mp4">
+            </iframe>
+
         <section class="section">
             <div class="section-head d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
                 <h2 class="section-head-title font-weight-bolder">Meet-up</h2>

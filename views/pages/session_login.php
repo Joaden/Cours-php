@@ -11,9 +11,11 @@ $_SESSION["varsessionlogintest"] = "Session login active OK";
 require_once($pathToRootFolder.'vendor/autoload.php');
 
 // Call functions with the connections
+require_once($pathToRootFolder.'config/connect.php'); 
+
 require($pathToRootFolder.'config/functions.php');
 
-require_once($pathToRootFolder.'config/connect.php'); 
+require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
 
 // back processing of the form if the form is submitted
 if(isset($_POST['formconnexion']))

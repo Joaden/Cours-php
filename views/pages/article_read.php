@@ -12,6 +12,12 @@ session_start();
     
         require_once($pathToRootFolder.'config/connect.php');
         require_once($pathToRootFolder.'config/functions.php');
+        
+        require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+        require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+        require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
+        require_once($pathToRootFolder.'config/functions/utils.php');
+
         require($pathToRootFolder.'config/functions/function_file.php');
         require($pathToRootFolder."views/common/checkSessionUser.php");
 
@@ -54,8 +60,9 @@ session_start();
                     // get id article read
                     $articleId = $id;
 
+                    $modelAddCom = new Comments();
                     // comment utilise la function addComment
-                    $comment = addComment($articleId, $author, $comment);
+                    $comment = $modelAddCom->addComment($articleId, $author, $comment);
         
                     // message retourné pas d'erreur
                     $success = '<div class="alert alert-success">Votre commentaire a bien été envoyé</div>';
@@ -63,7 +70,9 @@ session_start();
                     // Vider le champs du form !
                     unset($_POST['comment']);
                     unset($comment);
-                    header('Location: article_all.php');
+                    // header('Location: article_all.php');
+                        redirect("article_read.php?id=" . $id);
+                    
                 }
             }
             else{
@@ -71,12 +80,17 @@ session_start();
             }
         }
     
-        $article = getArticle($id);
+        $modelArticle = new Article();
+        $modelCom = new Comments();
+        $modelUser = new User();
+        $model = new Article();
+
+        $article = $modelArticle->getArticle($id);
         $image = getImage($id);
         $comments = getInfoUserByComments($id);
-        $idComment = getCommentByArticle($id);
-        $getComments = getComments();
-        $getUsers = getUsers($id);
+        $idComment = $modelCom->getCommentByArticle($id);
+        $getComments = $modelCom->getComments();
+        $getUsers = $modelUser->getUsers($id);
         $getUsersId = $getUsers[0];     
         $categorie = getCategorie($id);
         $avatar = getAvatar($id);
@@ -100,7 +114,7 @@ session_start();
     <!-- ================ DEBUT HTML  ================ -->
 
     <?php include($pathToRootFolder."views/common/header.php"); ?>
-
+ 
     
     <div class="container-fluid">
         <div class="row">
@@ -273,7 +287,7 @@ session_start();
                     <?php if (isset($comments)){ ?>
                     <?php foreach ($comments as $com) : ?>
 
-                        <div class="comment row pt-3">
+                        <div id="article_comment_section_div" class="comment row pt-3">
                             <div class="col-md-2">
                                 <div class="d-flex flex-column">
                                     <?php 

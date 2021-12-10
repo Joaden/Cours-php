@@ -25,4 +25,7 @@
                     // expire in 300sec = 5 min
     ?>
 
+    <style>
+        /* #article_comment_section_div() */
+    </style>
 </head>

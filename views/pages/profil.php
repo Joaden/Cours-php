@@ -12,6 +12,8 @@ require_once($pathToRootFolder.'config/connect.php');
 
 require_once($pathToRootFolder.'config/functions.php');
 
+require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+
 // check if user is connected
 require($pathToRootFolder."views/common/checkSessionUser.php");
 

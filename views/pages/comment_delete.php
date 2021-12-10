@@ -10,7 +10,12 @@ session_start();
 
     require_once($pathToRootFolder.'config/functions.php');
 
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+
     require_once($pathToRootFolder.'config/functions/function_file.php');
+    require_once($pathToRootFolder.'config/functions/utils.php');
 
     require($pathToRootFolder."views/common/checkSessionUser.php");
 
@@ -46,7 +51,8 @@ session_start();
                 $deleteComment->execute(array($supp_id));
                 $deleteComment->closeCursor();
                 $message = 'Votre commentaire a bien été supprimé';
-                header('Location: article_all.php');
+                // header('Location: article_all.php');
+                redirect("article_read.php?id=" . $article_id);
 
             }else{
                 echo "Aucun article n'a été trouvé";
