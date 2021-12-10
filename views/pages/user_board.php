@@ -15,7 +15,12 @@ session_start();
     require_once($pathToRootFolder.'config/connect.php');
 
     require_once($pathToRootFolder.'config/functions.php');
-      
+    
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
+    require_once($pathToRootFolder.'config/functions/utils.php');
+
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
     //Get My articles
@@ -34,7 +39,9 @@ session_start();
             $author = htmlspecialchars($userInfo['pseudo']);
 
             // Get my articles, this methode is in function.php
-            $myArticles = getMyArticles($iduserinfo);
+            $modelArticle = new Article();
+            
+            $myArticles = $modelArticle->getMyArticles($iduserinfo);
             $nbr = 0;
             $setuser ="non";
             

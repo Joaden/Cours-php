@@ -161,7 +161,7 @@ session_start();
 
                             <p class="blogArticle-text">
                                 <?= 
-                                    $article->content; 
+                                     nl2br($article->content); 
                                 ?>
                             </p>
                             

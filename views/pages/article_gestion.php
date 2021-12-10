@@ -6,12 +6,15 @@ session_start();
 
     $_SESSION["varsessionboardarticle"] = "Session board_my_article OK";
 
-      require_once($pathToRootFolder.'config/connect.php');
+    require_once($pathToRootFolder.'config/connect.php');
 
-      require_once($pathToRootFolder.'config/functions.php');
-      
+    require_once($pathToRootFolder.'config/functions.php');
+    
     require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
-
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+    require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
+    require_once($pathToRootFolder.'config/functions/utils.php');
+  
     // check if user is connected
     require($pathToRootFolder."views/common/checkSessionUser.php");
 
@@ -36,7 +39,10 @@ session_start();
         $iduser = htmlspecialchars($userInfo['id']);
         $author = htmlspecialchars($userInfo['pseudo']);
         // Get my articles
-        $myArticles = getMyArticles($id);
+        $modelArticle = new Article();
+            
+        $myArticles = $modelArticle->getMyArticles($id);
+        
         $nbr = 0;
         if(isset($myArticles) AND !empty($myArticles)){
             foreach($myArticles as $post){

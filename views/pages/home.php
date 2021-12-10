@@ -198,7 +198,7 @@ session_start();
                                     <?= $article->title; ?>
                                 </a>
                             </h2>
-                            <p class="blogArticle-text"><?= substr($article->content, 0, 250)."..."; ?></p>
+                            <p class="blogArticle-text"><?= nl2br(substr($article->content, 0, 250))."..."; ?></p>
                             <div class="blogArticle-footer">
                                 <!-- v1 -->
                                 
@@ -283,8 +283,7 @@ session_start();
                 <h2 class="section-head-title font-weight-bolder">Nos Vidéos Youtube</h2>
                 
         </section>
-
-<!-- ======== CARROUSEL ========= -->
+<!-- 
 <div id="carouselOnHomepage" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselOnHomepage" data-slide-to="0" class="active"></li>
@@ -392,13 +391,13 @@ session_start();
                 </div>
             </div>
             <div class="container mt-3">
-                <img src="https://youtu.be/dhsNcKeOZNA" class="rounded" alt="Cinque Terre" width="304" height="236"> 
+                <img src="https://youtu.be/dhsNcKeOZNA" class="rounded" alt="Cinque Terre1" width="304" height="236"> 
 
-                <img src="cinqueterre.jpg" class="circle" alt="Cinque Terre" width="304" height="236"> 
-                <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre" width="304" height="236"> 
-            </div>
+                <img src="cinqueterre.jpg" class="circle" alt="Cinque Terre2" width="304" height="236"> 
+                <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre3" width="304" height="236"> 
+            </div>-->
             <iframe width="320" height="240" controls src="https://youtu.be/dhsNcKeOZNA" type="video/mp4">
-            </iframe>
+            </iframe> 
 
         <section class="section">
             <div class="section-head d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">

@@ -16,7 +16,10 @@ session_start();
         require_once($pathToRootFolder.'config/functions.php');
 
         require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
-
+        require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+        require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
+        require_once($pathToRootFolder.'config/functions/utils.php');
+    
         require($pathToRootFolder."views/common/checkSessionUser.php");
         // retrieves the user's ID if he is logged in
         // if(isset($_GET['id']) AND $_GET['id'] > 0)
@@ -44,6 +47,11 @@ session_start();
                         $hastag = htmlspecialchars($_POST['hastag']);
                         
 
+                        // STR_REPLACE <br> pour permettre d'aaficher les retour a la ligne
+                        $content = str_replace("<br>", "nl2br()", $content);
+
+                        var_dump($title);
+                        var_dump($content);
 
                         // traitement image de l'article
                         $taillemax = 2097152;
@@ -64,7 +72,9 @@ session_start();
 
                                     $author = $userInfo['pseudo'];
 
-                                    $ins = createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag);
+                                    $modelCreateArticle = new Article();
+
+                                    $ins = $modelCreateArticle->createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag);
 
                                     ///////////////////// START LOGGER 
                                     include ($pathToRootFolder.'views/common/logs_articles.php');
