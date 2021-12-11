@@ -70,7 +70,7 @@ class User {
                     $pseudolength = strlen($pseudo);
                     if($pseudolength <= 30)
                     {
-                        $reqpseudo = $bdd->prepare("SELECT * FROM users WHERE pseudo = ?");
+                        $reqpseudo = $pdo->prepare("SELECT * FROM users WHERE pseudo = ?");
                         $reqpseudo->execute(array($pseudo));
                         $pseudoexist = $reqpseudo->rowCount();
                         if($pseudoexist == 0)
@@ -80,7 +80,7 @@ class User {
                                 // function avec filtre qui permet de vérifier si c'est bien une adresse mail
                                 if(filter_var($email, FILTER_VALIDATE_EMAIL))
                                 {
-                                    $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ?");
+                                    $reqmail = $pdo->prepare("SELECT * FROM users WHERE email = ?");
                                     $reqmail->execute(array($email));
                                     $mailexist = $reqmail->rowCount();
                                     // Si il n'y a pas cet email en base
@@ -92,12 +92,12 @@ class User {
                                             $hashedmdp = password_hash($password, PASSWORD_DEFAULT);
 
                                             // Creation de user
-                                            $insertUser = $bdd->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
+                                            $insertUser = $pdo->prepare("INSERT INTO users(name, email, pseudo, password, phrase) VALUE(?, ?, ?, ?, ?)");
                                             $insertUser->execute(array($name, $email, $pseudo, $hashedmdp, $phrase));
                                             $insertUser->closeCursor();
 
                                             // get id of last register
-                                            $selectIdLastUser = $bdd->prepare("SELECT id FROM users ORDER BY ID DESC LIMIT 1");
+                                            $selectIdLastUser = $pdo->prepare("SELECT id FROM users ORDER BY ID DESC LIMIT 1");
                                             $selectIdLastUser->execute();
                                             /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
                                             $users_id = $selectIdLastUser->fetch();
@@ -106,22 +106,22 @@ class User {
                                             $selectIdLastUser->closeCursor();
                                             
                                             // Creation de user_info 
-                                            $insertUserInfos = $bdd->prepare("INSERT INTO users_infos(users_id, date_inscription) VALUE(?, NOW())");
+                                            $insertUserInfos = $pdo->prepare("INSERT INTO users_infos(users_id, date_inscription) VALUE(?, NOW())");
                                             $insertUserInfos->execute(array($users_id));
                                             $insertUserInfos->closeCursor();
                                             // get id of last register
-                                            $selectIdLastUserInfo = $bdd->prepare("SELECT id FROM users_infos ORDER BY ID DESC LIMIT 1");
+                                            $selectIdLastUserInfo = $pdo->prepare("SELECT id FROM users_infos ORDER BY ID DESC LIMIT 1");
                                             $selectIdLastUserInfo->execute();
                                             $usersInfos_id = $selectIdLastUserInfo->fetch();
                                             $selectIdLastUserInfo->closeCursor();
                                             // Update de user
-                                            $updatetUser = $bdd->prepare("UPDATE users SET users_infos_id = :userInfo WHERE id = :iduser ");
+                                            $updatetUser = $pdo->prepare("UPDATE users SET users_infos_id = :userInfo WHERE id = :iduser ");
                                             $updatetUser->execute(array(
                                                 'userInfo' => $usersInfos_id,
                                                 'iduser' => $users_id
                                             ));
                                             $updatetUser->closeCursor();
-                                            // $insNbrView = $bdd->prepare('UPDATE articles SET nbr_view = nbr_view+1 WHERE id = ? ');
+                                            // $insNbrView = $pdo->prepare('UPDATE articles SET nbr_view = nbr_view+1 WHERE id = ? ');
                                             // $insNbrView->execute(array($id));
                                             // $insNbrView->closeCursor();
 
@@ -195,7 +195,7 @@ class User {
                 if(isset($_GET['confirme']) AND !empty($_GET['confirme'])) {
                     $confirme = (int) $_GET['confirme'];
     
-                    $req = $bdd->prepare('UPDATE users SET is_verified = 1 WHERE id = ?');
+                    $req = $pdo->prepare('UPDATE users SET is_verified = 1 WHERE id = ?');
                     $req->execute(array($confirme));
                 }
                 if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
@@ -210,27 +210,27 @@ class User {
                     // $req->execute(array($user_id, $comment));
     
                     // DELETE USERS
-                    $req = $bdd->prepare('DELETE FROM users WHERE id = ?');
+                    $req = $pdo->prepare('DELETE FROM users WHERE id = ?');
                     $req->execute(array($supprime));
                 }
             } elseif(isset($_GET['type']) AND $_GET['type'] == 'commentaire') {
                 if(isset($_GET['approved']) AND !empty($_GET['approved'])) {
                     $approved = (int) $_GET['approved'];
     
-                    $req = $bdd->prepare('UPDATE users SET approved = 1 WHERE id = ?');
+                    $req = $pdo->prepare('UPDATE users SET approved = 1 WHERE id = ?');
                     $req->execute(array($approved));
                 }
                 if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
                     $supprime = (int) $_GET['supprime'];
     
-                    $req = $bdd->prepare('DELETE FROM comments WHERE id = ?');
+                    $req = $pdo->prepare('DELETE FROM comments WHERE id = ?');
                     $req->execute(array($supprime));
                 } 
             }
     
                 
     
-        $req = $bdd->prepare('SELECT * FROM users ORDER BY id DESC');
+        $req = $pdo->prepare('SELECT * FROM users ORDER BY id DESC');
         // $req = $bdd->prepare('SELECT * FROM users WHERE is_verified = 0 ORDER BY id DESC');
     
         
@@ -250,7 +250,7 @@ class User {
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
         ///* prepare() = Création d'un objet PDOStatement */
-        $reqGetUserConnected = $bdd->prepare('SELECT user_id FROM sessions');
+        $reqGetUserConnected = $pdo->prepare('SELECT user_id FROM sessions');
         ///* execute() = Exécute la première requête */
         $reqGetUserConnected->execute();
         /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/

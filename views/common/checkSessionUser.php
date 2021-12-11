@@ -9,8 +9,10 @@ if(isset($_SESSION['userid'])){
         ////////////// 1) Controle des infos user
         // intval force le type 
         $getId = intval($_SESSION['id']);
+        require_once($pathToRootFolder.'config/connect.php');
+
         // je prepare la requete 'SELECT' recherche par id 
-        $reqUser = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+        $reqUser = $pdo->prepare('SELECT * FROM users WHERE id = ?');
         // execution de la requete $reqUser avec l'id($getId)
         $reqUser->execute(array($getId));
         // $userInfo stock les données du fetch 
@@ -19,7 +21,7 @@ if(isset($_SESSION['userid'])){
 
         /////////////// 2) Controle de la session 
         if(isset($userInfo['id']) && $userInfo['id'] === $_SESSION['userid']){
-        $reqSession = $bdd->prepare(
+        $reqSession = $pdo->prepare(
             'SELECT * FROM sessions ORDER BY id DESC LIMIT 1'
         );
         // execution de la requete $reqUser avec l'id($getId)

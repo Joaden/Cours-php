@@ -2,24 +2,33 @@
 
 
 $pathToRootFolder = "../../";
-require_once($pathToRootFolder.'config/functions.php');
 
-require($pathToRootFolder.'config/connect.php');
+//  require($pathToRootFolder.'config/connect.php');
+require_once($pathToRootFolder.'next_src_wip_denis/Models/Model.php');
 
 
-class Article {
+class Article
+{
 
+    protected $table = "articles";
+    private $pdo;
+    
+    public function __construct()
+    {
+        // $this->pdo = DbConnect();
+        
+    }
 
       //Create article for article_write.php
       public function createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag)
       {
-          $pathToRootFolder = "../../";
-          require($pathToRootFolder.'config/connect.php');
-          
+        $pathToRootFolder = "../../";
+
+        require($pathToRootFolder.'config/connect.php');
           // preparation de al requete
-          $req = $bdd->prepare('INSERT INTO articles (user_id, categories_id, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
+          $req = $pdo->prepare('INSERT INTO articles (user_id, categories_id, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
           $req->execute(array($user_id, $categorie_id, $title, $content, $author));
-          $req1 = $bdd->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
+          $req1 = $this->pdo->prepare('SELECT id FROM articles ORDER BY id DESC LIMIT 0,1');
           $postId = $req1->execute();
           
           if($req1->rowCount() > 0)
@@ -28,7 +37,7 @@ class Article {
           
               $article_id = $data->id;
               
-              $req1 = $bdd->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
+              $req1 = $this->pdo->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
               $req1->execute(array($article_id, $image, $user_id));
   
               $req1->closeCursor(); 
@@ -44,11 +53,11 @@ class Article {
      */
     public function getArticles(): array
     {
-
         $pathToRootFolder = "../../";
+
         require($pathToRootFolder.'config/connect.php');
         ///* prepare() = Création d'un objet PDOStatement */
-        $req = $bdd->prepare('SELECT * FROM articles ORDER BY id DESC');
+        $req = $pdo->prepare('SELECT * FROM articles ORDER BY id DESC');
         ///* execute() = Exécute la première requête */
         //
         $req->execute();
@@ -59,20 +68,35 @@ class Article {
         $req->closeCursor();
         
     }
-
+    
+    /**
+     * Supprime un article par son id
+     * 
+     * @param integer $id
+     * @return void
+     */
+    public function delete(int $id): void
+    {
+        
+        $deleteArticle = $this->pdo->prepare('DELETE FROM articles WHERE id = :id');
+        $deleteArticle->execute(['id' => $id]);
+        $deleteArticle->closeCursor();
+        
+    }
+    
 
     /**
      * Retourne la liste des 5 derniers articles créés
      * 
-     * @return array
      */
     // function qui récupère les 5 derniers articles
-    public function getLastArticles(): array
+    public function getLastArticles()
     {
         $pathToRootFolder = "../../";
+
         require($pathToRootFolder.'config/connect.php');
         ///* prepare() = Création d'un objet PDOStatement */
-        $req = $bdd->prepare('SELECT * FROM articles ORDER BY id DESC lIMIT 5');
+        $req = $pdo->prepare('SELECT * FROM articles ORDER BY id DESC lIMIT 5');
         ///* execute() = Exécute la première requête */
         //
         $req->execute();
@@ -89,8 +113,10 @@ class Article {
     public function getMyArticles($id)
     {
         $pathToRootFolder = "../../";
+
         require($pathToRootFolder.'config/connect.php');
-        $req = $bdd->prepare('SELECT * FROM articles WHERE user_id = ? ORDER BY id DESC');
+
+        $req = $pdo->prepare('SELECT * FROM articles WHERE user_id = ? ORDER BY id DESC');
         $req->execute(array($id));
         if($req->rowCount() >= 1)
         {
@@ -112,14 +138,16 @@ class Article {
     public function getArticle($id)
     {
         $pathToRootFolder = "../../";
+
         require($pathToRootFolder.'config/connect.php');
-        $req = $bdd->prepare('SELECT * FROM articles WHERE id = ?');
+
+        $req = $pdo->prepare('SELECT * FROM articles WHERE id = ?');
         $req->execute(array($id));
         if($req->rowCount() == 1)
         {
             /////////////////////////////////////////////////// START ADD NBR VIEW ARTICLE
             $nbrView = +1;
-            $insNbrView = $bdd->prepare('UPDATE articles SET nbr_view = nbr_view+1 WHERE id = ? ');
+            $insNbrView = $pdo->prepare('UPDATE articles SET nbr_view = nbr_view+1 WHERE id = ? ');
             $insNbrView->execute(array($id));
             $insNbrView->closeCursor();
             if($insNbrView != TRUE) {
@@ -142,13 +170,14 @@ class Article {
 
 
     ////////////////////////////// create article with multi img
-    public function createArticleMulti($articleId, $author, $userId)
+    public function createArticleMulti($postId, $author, $userId)
     {
         $pathToRootFolder = "../../";
+
         require($pathToRootFolder.'config/connect.php');
         // preparation de la requete
-        $req = $bdd->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
-        $req->execute(array($postId, $name, $userId));
+        $req = $this->pdo->prepare('INSERT INTO images (article_id, name, user_id) VALUES (?, ?, ?)');
+        $req->execute(array($postId, $author, $userId));
 
         $req->closeCursor(); 
     }

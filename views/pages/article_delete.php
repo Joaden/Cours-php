@@ -6,7 +6,7 @@ session_start();
 
     //Appel de function avec la connexion à la bdd
 
-    require_once($pathToRootFolder.'config/connect.php');
+    // require_once($pathToRootFolder.'config/connect.php');
 
     require_once($pathToRootFolder.'config/functions.php');
 
@@ -55,9 +55,10 @@ session_start();
                         //echo "</br>Mode delete activé </br>";
                         if($deleteAuthorized == 1) {
 
-                            $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
-                            $deleteArticle->execute(array($supp_id));
-                            $deleteArticle->closeCursor();
+                            $deleteArticle = delete($id);
+                            // $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
+                            // $deleteArticle->execute(array($supp_id));
+                            // $deleteArticle->closeCursor();
                             $message = 'Votre article a bien été supprimé';
                             ///////////////////// START LOGGER 
                             include ($pathToRootFolder.'views/common/logs_articles.php');

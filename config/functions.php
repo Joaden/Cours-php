@@ -17,7 +17,7 @@ function getAllUserSubscribes()
 $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT * FROM users ORDER BY id DESC');
+    $req = $pdo->prepare('SELECT * FROM users ORDER BY id DESC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -41,7 +41,7 @@ function getImages()
     $error = null;
     try{
         // get all images from bdd.
-        $req = $bdd->prepare('SELECT * FROM images ORDER BY id ASC');
+        $req = $pdo->prepare('SELECT * FROM images ORDER BY id ASC');
         ///* execute() = Exécute la première requête */
         $req->execute();
         /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -62,7 +62,7 @@ function getImage($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM images WHERE article_id = ? ');
+    $req = $pdo->prepare('SELECT * FROM images WHERE article_id = ? ');
     $req->execute(array($id));
     $data = $req->fetch(PDO::FETCH_OBJ);
     // echo $data;
@@ -77,7 +77,7 @@ function getInfoUserByComments($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ? ORDER BY comments.id DESC');
+    $req = $pdo->prepare('SELECT * FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ? ORDER BY comments.id DESC');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     
@@ -91,7 +91,7 @@ function getAvatarByComment($id)
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
 
-    $req = $bdd->prepare('SELECT articleId, author, pseudo, avatar FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ?');
+    $req = $pdo->prepare('SELECT articleId, author, pseudo, avatar FROM comments INNER JOIN users ON comments.author = users.pseudo AND articleId = ?');
     
     ///* execute() = Exécute la première requête */
     $req->execute(array($id));
@@ -108,7 +108,7 @@ function getAvatar($id)
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
 
-    $req = $bdd->prepare('SELECT * FROM articles INNER JOIN users ON articles.user_id = users.id AND articles.id = ?');
+    $req = $pdo->prepare('SELECT * FROM articles INNER JOIN users ON articles.user_id = users.id AND articles.id = ?');
     
     ///* execute() = Exécute la première requête */
     $req->execute(array($id));
@@ -125,7 +125,7 @@ function getUnsubscribes()
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM unsubscribe ORDER BY id DESC LIMIT 0,5');
+    $req = $pdo->prepare('SELECT * FROM unsubscribe ORDER BY id DESC LIMIT 0,5');
     $req->execute(array());
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     return $data;
@@ -137,7 +137,7 @@ function getCommentsAdmin()
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
+    $req = $pdo->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
     $req->execute(array());
     $data = $req->fetchAll(PDO::FETCH_OBJ);
     return $data;
@@ -151,7 +151,7 @@ function getCategories()
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
     ///* prepare() = Création d'un objet PDOStatement */
-    $req = $bdd->prepare('SELECT id, parent_id, name, slug, is_valid FROM categories ORDER BY id ASC');
+    $req = $pdo->prepare('SELECT id, parent_id, name, slug, is_valid FROM categories ORDER BY id ASC');
     ///* execute() = Exécute la première requête */
     $req->execute();
     /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -166,7 +166,7 @@ function getCategorie($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM categories INNER JOIN articles ON categories.id = articles.categories_id AND articles.id = ?');
+    $req = $pdo->prepare('SELECT * FROM categories INNER JOIN articles ON categories.id = articles.categories_id AND articles.id = ?');
     // SELECT name FROM `cours_denis`.`categories` WHERE `id` = ? ');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -179,7 +179,7 @@ function getHashtags($id)
 {
     $pathToRootFolder = "../../";
     require($pathToRootFolder.'config/connect.php');
-    $req = $bdd->prepare('SELECT * FROM tags INNER JOIN tag_items ON tags.id = tag_items.tag_id AND tag_items.article_id = ?');
+    $req = $pdo->prepare('SELECT * FROM tags INNER JOIN tag_items ON tags.id = tag_items.tag_id AND tag_items.article_id = ?');
     // SELECT name FROM `cours_denis`.`categories` WHERE `id` = ? ');
     $req->execute(array($id));
     $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -205,7 +205,7 @@ function addavatar()
             $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
             if($resultat)
             {
-                $updateAvatar = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+                $updateAvatar = $pdo->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
                 $updateAvatar->execute(array(
                     'avatar' => $_SESSION['id'].".".$extensionUpload,
                     'id' => $_SESSION['id']

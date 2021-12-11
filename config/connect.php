@@ -8,18 +8,51 @@ $pathToRootFolder = "../../";
             $db_password = "..."
 
 */
-require($pathToRootFolder."personal_variables/db_credentials.php");
+    require($pathToRootFolder."personal_variables/db_credentials.php");
 
-//connection à la bdd
-// try
-// {
-// $bdd = new PDO('mysql:host=localhost;dbname=cours_denis;charset=utf8', $db_login, $db_password);
+    // //connection à la bdd
+    try{
+        $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        // le array pdo attr erromode et execption afficherons plus clairement les erreurs
 
-$bdd = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-// le array pdo attr erromode et execption afficherons plus clairement les erreurs
+        //affiche le msg d'erreur
+        //  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
-//affiche le msg d'erreur
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        return $pdo;
+    }
+    catch(Exception $e)
+    {
+        die('Erreur : '.$e->getMessage());
+    }
+
+    
+    if (!function_exists('DbConnect')) { 
+        
+        /**
+         * retourne une connexion a la bdd
+         * @return PDO
+         */
+        function DbConnect(): PDO
+        {
+
+            try{
+                // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                // le array pdo attr erromode et execption afficherons plus clairement les erreurs
+
+                //affiche le msg d'erreur
+                //  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+
+                return $pdo;
+            }
+            catch(Exception $e)
+            {
+                die('Erreur : '.$e->getMessage());
+            }
+        }
+        
+    }
 // }
 // catch (Exception $e)
 // {

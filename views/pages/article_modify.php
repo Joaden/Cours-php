@@ -52,7 +52,7 @@ session_start();
                     //echo "</br>if isset get edit iD = ".$edit_id."</br>";
                     
                     // call requete
-                    $edit_article = $bdd->prepare('SELECT * FROM articles WHERE id = :id ');
+                    $edit_article = $pdo->prepare('SELECT * FROM articles WHERE id = :id ');
 
                     $edit_article->bindValue(':id', $edit_id, PDO::PARAM_INT);
 
@@ -148,7 +148,7 @@ session_start();
                             if(isset($_POST['title']) AND !empty($_POST['title'])) 
                             {
                                 $title = htmlspecialchars($_POST['title']);
-                                $updateArticleTitle = $bdd->prepare('UPDATE articles SET title = ?, edition = NOW() WHERE id = ?' );
+                                $updateArticleTitle = $pdo->prepare('UPDATE articles SET title = ?, edition = NOW() WHERE id = ?' );
                                 $updateArticleTitle->execute(array($title, $edit_id));
 
                                 echo "</br>After UPDATE POST title </br>";
@@ -159,7 +159,7 @@ session_start();
                                     echo "</br>Before UPDATE POST content </br>";
                                     // if($mode_edition == 1)
                                     // {
-                                        $updateArticleContent = $bdd->prepare('UPDATE articles SET content= ?, edition = NOW() WHERE id = ?' );
+                                        $updateArticleContent = $pdo->prepare('UPDATE articles SET content= ?, edition = NOW() WHERE id = ?' );
                                         $updateArticleContent->execute(array($content, $edit_id));
                                         $message = 'Votre article a bien été modifié';
                                         echo "</br>After UPDATE POST content </br>";
@@ -178,7 +178,7 @@ session_start();
                                     //die();
                                     // if($mode_edition == 1)
                                     // {
-                                        $updateArticleContent = $bdd->prepare('UPDATE articles SET categories_id= ?, edition = NOW() WHERE id = ?' );
+                                        $updateArticleContent = $pdo->prepare('UPDATE articles SET categories_id= ?, edition = NOW() WHERE id = ?' );
                                         $updateArticleContent->execute(array($categorieId, $edit_id));
                                         $message = 'Votre article a bien été modifié';
                                         echo "</br>After UPDATE POST categorie </br>";

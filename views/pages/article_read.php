@@ -22,11 +22,11 @@ session_start();
         require($pathToRootFolder."views/common/checkSessionUser.php");
 
         // ADD likes
-        $likes = $bdd->prepare('SELECT id FROM post_like WHERE article_id = ?');
+        $likes = $pdo->prepare('SELECT id FROM post_like WHERE article_id = ?');
         $likes->execute(array($id));
         $likes= $likes->rowCount();
         // ADD dislikes
-        $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE article_id = ?');
+        $dislikes = $pdo->prepare('SELECT id FROM dislikes WHERE article_id = ?');
         $dislikes->execute(array($id));
         $dislikes= $dislikes->rowCount();
 

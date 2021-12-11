@@ -18,7 +18,7 @@ class Comments {
     {
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
-        $req = $bdd->prepare('SELECT * FROM comments ORDER BY id DESC');
+        $req = $pdo->prepare('SELECT * FROM comments ORDER BY id DESC');
         ///* execute() = Exécute la première requête */
         $req->execute();
         /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
@@ -34,7 +34,7 @@ class Comments {
     {
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
-        $req = $bdd->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
+        $req = $pdo->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
         $req->execute(array($articleId, $author, $comment));
         $req->closeCursor();
         // // Vider le champs du form !
@@ -47,7 +47,7 @@ class Comments {
     {
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
-        $req = $bdd->prepare('SELECT * FROM comments');
+        $req = $pdo->prepare('SELECT * FROM comments');
         $req->execute(array($id));
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         
@@ -60,7 +60,7 @@ class Comments {
     {
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
-        $req = $bdd->prepare('SELECT * FROM comments');
+        $req = $pdo->prepare('SELECT * FROM comments');
         $req->execute(array());
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         return $data;
@@ -74,7 +74,7 @@ class Comments {
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
         
-        $deleteComment = $bdd->prepare("DELETE FROM comments WHERE id = ?" );
+        $deleteComment = $pdo->prepare("DELETE FROM comments WHERE id = ?" );
 
         $deleteComment->execute(array($supp_id));
         $deleteComment->closeCursor();
