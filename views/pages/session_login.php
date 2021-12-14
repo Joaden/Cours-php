@@ -12,10 +12,11 @@ require_once($pathToRootFolder.'vendor/autoload.php');
 
 // Call functions with the connections
 require_once($pathToRootFolder.'config/connect.php'); 
+require_once($pathToRootFolder.'src_denis/Models/Manager.php');
 
 require($pathToRootFolder.'config/functions.php');
 
-require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+require_once($pathToRootFolder.'src_denis/Models/User.php');
 
 // back processing of the form if the form is submitted
 if(isset($_POST['formconnexion']))
@@ -33,7 +34,7 @@ if(isset($_POST['formconnexion']))
         if($_POST['captcha']=="10")
         {
             // request for verify id and check this
-            $reqUser = $bdd->prepare("SELECT * FROM users WHERE email = :email ");
+            $reqUser = $pdo->prepare("SELECT * FROM users WHERE email = :email ");
             $reqUser->execute(array('email' => $_POST['email']));
             $connectedUserFromDB = $reqUser->fetch();
             $reqUser->closeCursor(); 
@@ -52,7 +53,7 @@ if(isset($_POST['formconnexion']))
                $ipUser = $_SERVER['REMOTE_ADDR'];
                $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
-                   $reqInsertToDBSessions = $bdd->prepare("INSERT INTO sessions (user_id, session_id, ip, user_agent, date) VALUES (?, ?, ?, ?,NOW())");
+                   $reqInsertToDBSessions = $pdo->prepare("INSERT INTO sessions (user_id, session_id, ip, user_agent, date) VALUES (?, ?, ?, ?,NOW())");
 
                     $reqInsertToDBSessions->execute(array($userId, $sessionIdActual, $ipUser, $userAgent));
                     //$connectedUserFromDB = $reqUser->fetch();

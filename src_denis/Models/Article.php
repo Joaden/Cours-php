@@ -1,30 +1,35 @@
 <?php
 
+// namespace next_src_wip_denis/Models;
+
+use src_denis\Models\Manager;
+use src_denis\Models\Comments;
+use src_denis\Models\User;
 
 $pathToRootFolder = "../../";
 
-//  require($pathToRootFolder.'config/connect.php');
-require_once($pathToRootFolder.'next_src_wip_denis/Models/Model.php');
+ require($pathToRootFolder.'config/connect.php');
+// require_once($pathToRootFolder.'next_src_wip_denis/Models/Model.php');
+require_once($pathToRootFolder.'src_denis/Models/Manager.php');
+require_once($pathToRootFolder.'config/functions.php');
 
 
-class Article
+class Article extends Manager
 {
 
     protected $table = "articles";
-    private $pdo;
+   // private $pdo;
     
     public function __construct()
     {
-        // $this->pdo = DbConnect();
+        $pdo = $this->dbConnect();
         
     }
 
       //Create article for article_write.php
       public function createArticle($user_id, $categorie_id, $title, $content, $author, $image, $hastag)
       {
-        $pathToRootFolder = "../../";
-
-        require($pathToRootFolder.'config/connect.php');
+        $pdo = $this->dbConnect1();
           // preparation de al requete
           $req = $pdo->prepare('INSERT INTO articles (user_id, categories_id, title, content, author, date) VALUES (?, ?, ?, ?, ?, NOW())');
           $req->execute(array($user_id, $categorie_id, $title, $content, $author));
@@ -53,10 +58,9 @@ class Article
      */
     public function getArticles(): array
     {
-        $pathToRootFolder = "../../";
+    
+        $pdo = $this->dbConnect();
 
-        require($pathToRootFolder.'config/connect.php');
-        ///* prepare() = Création d'un objet PDOStatement */
         $req = $pdo->prepare('SELECT * FROM articles ORDER BY id DESC');
         ///* execute() = Exécute la première requête */
         //
@@ -84,7 +88,6 @@ class Article
         
     }
     
-
     /**
      * Retourne la liste des 5 derniers articles créés
      * 
@@ -182,7 +185,20 @@ class Article
         $req->closeCursor(); 
     }
 
+    public function dbConnect1()
+    {
+        // //connection à la bdd
+        try{
+            // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
+            return $pdo;
+        }
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
 
 
 

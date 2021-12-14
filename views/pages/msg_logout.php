@@ -33,7 +33,7 @@
     </div>
 
     <?php header("refresh:5;url=home.php");
-        echo 'Sinon cliquez içi <a href="home.php">Here</a>.';
+        // echo 'Sinon cliquez içi <a href="home.php">Here</a>.';
     ?>
     <?php //sleep(5);?>
 

@@ -21,6 +21,7 @@
             
         $pathToRootFolder = "../../";
         require($pathToRootFolder.'config/connect.php');
+        require_once($pathToRootFolder.'src_denis/Models/Manager.php');
 
         $sessionIdUserToDelete = htmlspecialchars($_SESSION['sessionid']);
         $userIdInSessionToDelete = htmlspecialchars($_SESSION['userid']);
@@ -34,7 +35,7 @@
         {
             $data = $reqVerifIfSessionIdExistToDelete->fetchAll(PDO::FETCH_OBJ);
             // Si je trouve une correspondance je delete les données en BDD
-            $reqVerifIfSessionIdExistToDelete = $bdd->prepare('DELETE FROM sessions WHERE user_id = ?');
+            $reqVerifIfSessionIdExistToDelete = $pdo->prepare('DELETE FROM sessions WHERE user_id = ?');
             $reqVerifIfSessionIdExistToDelete->execute(array($userIdInSessionToDelete));
         
         }

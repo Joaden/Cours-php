@@ -1,6 +1,12 @@
 <?php 
 session_start();
         
+
+    // use src_denis\Models\Manager;
+    // use src_denis\Models\Article;
+    // use src_denis\Models\Comments;
+    // use src_denis\Models\User;
+
     $pathToRootFolder = "../../";
     $PAGE_TITLE = "Tableau de bord Admin";
 
@@ -9,8 +15,10 @@ session_start();
     include($pathToRootFolder."debug_functions.php");
 
     require_once($pathToRootFolder.'config/connect.php');
-
-    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+    require_once($pathToRootFolder.'src_denis/Models/Manager.php');
+    require_once($pathToRootFolder.'src_denis/Models/Article.php');
+    require_once($pathToRootFolder.'src_denis/Models/User.php');
+    require_once($pathToRootFolder.'src_denis/Models/Comments.php');
 
     require_once($pathToRootFolder.'config/functions.php');
     require_once($pathToRootFolder.'config/functions/function_file.php');
@@ -41,18 +49,22 @@ session_start();
             $id1 = htmlspecialchars($_SESSION['id']);
             $id2 = htmlspecialchars($userInfo['id']);
             //$author = htmlspecialchars($userInfo['pseudo']);
-            $users = getUsers();
+            $modelUser = new User();
+            $modelPost = new Article();
+            $modelCom = new Comments();
+            
+            $users = $modelUser->getUsers();
             // and $userInfo['roles_id'] == 1
             $varsessionid = $_SESSION['id'];
             //if(!empty($userInfo['roles_id']) and $userInfo['roles_id'] == 1)
             //{   
-            $getUsersConnected = getUsersConnected();
-            $getUnsubscribes = getUnsubscribes();
-            $comments = getCommentsAdmin();
-            $myArticles = getMyArticles($id2);
-            $AllUserSubscribes = getAllUserSubscribes();
-            $AllComments = getAllComments();
-            $articles = getArticles();
+            $getUsersConnected = $modelUser->getUsersConnected();
+            $getUnsubscribes = $modelUser->getUnsubscribes();
+            $comments = $modelCom->getCommentsAdmin();
+            $myArticles = $modelPost->getMyArticles($id2);
+            $AllUserSubscribes = $modelUser->getAllUserSubscribes();
+            $AllComments = $modelCom->getAllComments();
+            $articles = $modelPost->getArticles();
 
             $nbr = 0;
             $num_rows=0;

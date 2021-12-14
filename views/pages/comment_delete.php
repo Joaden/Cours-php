@@ -7,6 +7,7 @@ session_start();
     //Appel de function avec la connexion à la bdd
 
     require_once($pathToRootFolder.'config/connect.php');
+    require_once($pathToRootFolder.'src_denis/Models/Manager.php');
     
     require($pathToRootFolder."views/common/checkSessionUser.php");
     
@@ -14,9 +15,9 @@ session_start();
     require_once($pathToRootFolder.'config/functions/utils.php');
     require_once($pathToRootFolder.'config/functions/function_file.php');
 
-    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
-    require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
-    require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+    require_once($pathToRootFolder.'src_denis/Models/Article.php');
+    require_once($pathToRootFolder.'src_denis/Models/Comments.php');
+    require_once($pathToRootFolder.'src_denis/Models/User.php');
 
 
     
@@ -42,7 +43,7 @@ session_start();
             // die();
             //$get_id = htmlspecialchars($_GET['id']);
             // je recup larticle dans la bdd
-            $recupComment = $bdd->prepare("SELECT * FROM comments WHERE id = ?");
+            $recupComment = $pdo->prepare("SELECT * FROM comments WHERE id = ?");
             $recupComment->execute(array($supp_id));
 
             

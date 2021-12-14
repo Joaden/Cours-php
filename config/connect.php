@@ -1,18 +1,19 @@
 <?php
+//namespace config;
+
 $pathToRootFolder = "../../";
 
-/* Please create on the project folder : 
-     folder "personal_variables"    containing
-        db_credentials.php    containing
-            $db_login = "..." 
-            $db_password = "..."
-
-*/
+    /* Please create on the project folder : 
+        folder "personal_variables"    containing
+            db_credentials.php    containing
+                $db_login = "..." 
+                $db_password = "..."
+    */
     require($pathToRootFolder."personal_variables/db_credentials.php");
 
     // //connection à la bdd
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $pdo = new \PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         // le array pdo attr erromode et execption afficherons plus clairement les erreurs
 
@@ -21,24 +22,24 @@ $pathToRootFolder = "../../";
 
         return $pdo;
     }
-    catch(Exception $e)
+    catch(\Exception $e)
     {
         die('Erreur : '.$e->getMessage());
     }
 
-    
+
     if (!function_exists('DbConnect')) { 
         
         /**
          * retourne une connexion a la bdd
          * @return PDO
          */
-        function DbConnect(): PDO
+        function DbConnect(): \PDO
         {
 
             try{
                 // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                $pdo = new \PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                 // le array pdo attr erromode et execption afficherons plus clairement les erreurs
 
                 //affiche le msg d'erreur
@@ -46,7 +47,7 @@ $pathToRootFolder = "../../";
 
                 return $pdo;
             }
-            catch(Exception $e)
+            catch(\Exception $e)
             {
                 die('Erreur : '.$e->getMessage());
             }

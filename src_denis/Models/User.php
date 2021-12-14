@@ -1,9 +1,13 @@
 <?php
 
+use src_denis\Models\Manager;
+
+
 $pathToRootFolder = "../../";
 require_once($pathToRootFolder.'config/functions.php');
 
-require($pathToRootFolder.'config/connect.php');
+// require($pathToRootFolder.'config/connect.php');
+require_once($pathToRootFolder.'src_denis/Models/Manager.php');
 
 
 /**
@@ -13,7 +17,8 @@ require($pathToRootFolder.'config/connect.php');
  * Time: 12:32
  */
 /** Creation de class **/
-class User {
+class User extends Manager
+{
 
 //    public $prenom;
 //    public $nom;
@@ -262,7 +267,35 @@ class User {
     }
 
 
+    // ADMIN Function Get Unsubscribe
+    function getUnsubscribes()
+    {
+        $pathToRootFolder = "../../";
+        require($pathToRootFolder.'config/connect.php');
+        $req = $pdo->prepare('SELECT * FROM unsubscribe ORDER BY id DESC LIMIT 0,5');
+        $req->execute(array());
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+        $req->closeCursor();
+    }
 
+
+
+    ////////////// START function USER AllUserSubscribes
+    function getAllUserSubscribes()
+    {
+    $pathToRootFolder = "../../";
+        require($pathToRootFolder.'config/connect.php');
+        ///* prepare() = Création d'un objet PDOStatement */
+        $req = $pdo->prepare('SELECT * FROM users ORDER BY id DESC');
+        ///* execute() = Exécute la première requête */
+        $req->execute();
+        /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+        /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
+        $req->closeCursor();
+    }
 
 
 

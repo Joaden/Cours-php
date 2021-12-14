@@ -1,13 +1,28 @@
 <?php
 
+// namespace next_src_wip_denis/Models;
+
+use src_denis\Models\Manager;
+use src_denis\Models\Article;
+use src_denis\Models\User;
 
 $pathToRootFolder = "../../";
 require_once($pathToRootFolder.'config/functions.php');
 
 require($pathToRootFolder.'config/connect.php');
+require_once($pathToRootFolder.'src_denis/Models/Manager.php');
 
 
-class Comments {
+
+
+class Comments extends Manager
+{
+
+    public function __construct()
+    {
+        $pdo = $this->dbConnect1();
+        
+    }
 
     /**
      * Retourne la liste des commentaires d'un article
@@ -16,8 +31,10 @@ class Comments {
      */
     public function getAllComments(): array
     {
-        $pathToRootFolder = "../../";
-        require($pathToRootFolder.'config/connect.php');
+        $pdo = $this->dbConnect1();
+
+        // $pathToRootFolder = "../../";
+        // require($pathToRootFolder.'config/connect.php');
         $req = $pdo->prepare('SELECT * FROM comments ORDER BY id DESC');
         ///* execute() = Exécute la première requête */
         $req->execute();
@@ -32,8 +49,8 @@ class Comments {
     // fonction ajouter un commentaire à un article
     public function addComment($articleId, $author, $comment)
     {
-        $pathToRootFolder = "../../";
-        require($pathToRootFolder.'config/connect.php');
+        // $pathToRootFolder = "../../";
+        // require($pathToRootFolder.'config/connect.php');
         $req = $pdo->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
         $req->execute(array($articleId, $author, $comment));
         $req->closeCursor();
@@ -45,8 +62,10 @@ class Comments {
     // fonction récupère l'ID d'un commentaire
     public function getCommentByArticle($id)
     {
-        $pathToRootFolder = "../../";
-        require($pathToRootFolder.'config/connect.php');
+        // $pathToRootFolder = "../../";
+        // require($pathToRootFolder.'config/connect.php');
+        $pdo = $this->dbConnect1();
+        
         $req = $pdo->prepare('SELECT * FROM comments');
         $req->execute(array($id));
         $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -79,6 +98,35 @@ class Comments {
         $deleteComment->execute(array($supp_id));
         $deleteComment->closeCursor();
     }
+
+        
+    // ADMIN fonction récupère le commentaire par ID
+    function getCommentsAdmin()
+    {
+        $pathToRootFolder = "../../";
+        require($pathToRootFolder.'config/connect.php');
+        $req = $pdo->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
+        $req->execute(array());
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+        $req->closeCursor();
+    }
+
+    public function dbConnect1()
+    {
+        // //connection à la bdd
+        try{
+            // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+            return $pdo;
+        }
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
 
 
 }

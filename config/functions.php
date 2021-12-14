@@ -1,5 +1,20 @@
 <?php
-
+//////////// Get IP
+function getIPAddress() {  
+    //whether ip is from the share internet  
+     if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                $ip = $_SERVER['HTTP_CLIENT_IP'];  
+        }  
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+     }  
+    //whether ip is from the remote address  
+    else{  
+             $ip = $_SERVER['REMOTE_ADDR'];  
+     }  
+     return $ip;  
+}  
 
 
 /////////////////////////  update article
@@ -10,22 +25,6 @@ function updateArticle($id)
     
 }
 
-
-////////////// START function USER AllUserSubscribes
-function getAllUserSubscribes()
-{
-$pathToRootFolder = "../../";
-    require($pathToRootFolder.'config/connect.php');
-    ///* prepare() = Création d'un objet PDOStatement */
-    $req = $pdo->prepare('SELECT * FROM users ORDER BY id DESC');
-    ///* execute() = Exécute la première requête */
-    $req->execute();
-    /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
-    $data = $req->fetchAll(PDO::FETCH_OBJ);
-    return $data;
-    /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
-    $req->closeCursor();
-}
 
 ////////////// END function USER AllUserSubscribes
 
@@ -118,30 +117,6 @@ function getAvatar($id)
     /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
     $req->closeCursor();
 
-}
-
-// ADMIN Function Get Unsubscribe
-function getUnsubscribes()
-{
-    $pathToRootFolder = "../../";
-    require($pathToRootFolder.'config/connect.php');
-    $req = $pdo->prepare('SELECT * FROM unsubscribe ORDER BY id DESC LIMIT 0,5');
-    $req->execute(array());
-    $data = $req->fetchAll(PDO::FETCH_OBJ);
-    return $data;
-    $req->closeCursor();
-}
-
-// ADMIN fonction récupère le commentaire par ID
-function getCommentsAdmin()
-{
-    $pathToRootFolder = "../../";
-    require($pathToRootFolder.'config/connect.php');
-    $req = $pdo->prepare('SELECT * FROM comments ORDER BY id DESC LIMIT 0,5');
-    $req->execute(array());
-    $data = $req->fetchAll(PDO::FETCH_OBJ);
-    return $data;
-    $req->closeCursor();
 }
 
 

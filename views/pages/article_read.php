@@ -12,10 +12,11 @@ session_start();
     
         require_once($pathToRootFolder.'config/connect.php');
         require_once($pathToRootFolder.'config/functions.php');
+        require_once($pathToRootFolder.'src_denis/Models/Manager.php');
         
-        require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
-        require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
-        require_once($pathToRootFolder.'next_src_wip_denis/Models/Comments.php');
+        require_once($pathToRootFolder.'src_denis/Models/Article.php');
+        require_once($pathToRootFolder.'src_denis/Models/User.php');
+        require_once($pathToRootFolder.'src_denis/Models/Comments.php');
         require_once($pathToRootFolder.'config/functions/utils.php');
 
         require($pathToRootFolder.'config/functions/function_file.php');

@@ -4,3 +4,8 @@
 
 <!-- ======== NAVBAR ========= -->
 <?php include($pathToRootFolder."views/common/navbar.php"); ?>
+<!-- ======== END NAVBAR ========= -->
+
+<!-- ======== START CARROUSEL ========= -->
+<?php include($pathToRootFolder."views/common/caroussel.php"); ?>
+<!-- ======== END CARROUSEL ========= -->

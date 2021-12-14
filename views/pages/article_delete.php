@@ -10,7 +10,7 @@ session_start();
 
     require_once($pathToRootFolder.'config/functions.php');
 
-    require_once($pathToRootFolder.'next_src_wip_denis/Models/Article.php');
+    require_once($pathToRootFolder.'src_denis/Models/Article.php');
 
     require_once($pathToRootFolder.'config/functions/function_file.php');
 
@@ -55,11 +55,20 @@ session_start();
                         //echo "</br>Mode delete activé </br>";
                         if($deleteAuthorized == 1) {
 
-                            $deleteArticle = delete($id);
-                            // $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
-                            // $deleteArticle->execute(array($supp_id));
-                            // $deleteArticle->closeCursor();
-                            $message = 'Votre article a bien été supprimé';
+                            try{
+                                $modelDelPost = new Article();
+                                $deleteArticle = $modelDelPost->delete($id);
+                                // $deleteArticle = $bdd->prepare("DELETE FROM articles WHERE id = ?" );
+                                // $deleteArticle->execute(array($supp_id));
+                                // $deleteArticle->closeCursor();
+                                $message = 'Votre article a bien été supprimé';
+                             
+                            }
+                            catch(\Exception $e)
+                            {
+                                die('Erreur : '.$e->getMessage());
+                            }
+                            
                             ///////////////////// START LOGGER 
                             include ($pathToRootFolder.'views/common/logs_articles.php');
                             $successArticleDelete = TRUE;

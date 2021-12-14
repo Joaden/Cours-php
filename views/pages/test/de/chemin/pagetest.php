@@ -2,6 +2,26 @@
 $pathToRootFolder = "../../../../../";
 
 
+//  <div class="container-menu">
+// <div class="btn-menu">
+//     <div class="ligne"></div>
+// </div>
+//      div.blob.blob$*4>img.icone 
+//     <div class="blob blob1">
+//         <img src="../../assets/upload/desert.jpg" alt="icone" class="icone">
+//     </div>
+//     <div class="blob blob2">
+//         <img src="../../assets/upload/etretat.jpg" alt="icone" class="icone">
+//     </div>
+//     <div class="blob blob3">
+//         <img src="../../assets/upload/koala.jpg" alt="icone" class="icone">
+//     </div>
+//     <div class="blob blob4">
+//         <img src="../../assets/upload/penguins.jpg" alt="icone" class="icone">
+//     </div>
+
+// </div> 
+
 
 function calculatePathToRootFolder($pathToParentFolderOfTheFile) {
     // __DIR__                    renvoi  C:\laragon\www\Cours-php\views\pages
