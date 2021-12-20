@@ -6,7 +6,7 @@ use src_denis\Models\Manager;
 use src_denis\Models\Article;
 use src_denis\Models\User;
 
-$pathToRootFolder = "../../";
+$pathToRootFolder = "";
 require_once($pathToRootFolder.'config/functions.php');
 
 require($pathToRootFolder.'config/connect.php');
@@ -49,8 +49,8 @@ class Comments extends Manager
     // fonction ajouter un commentaire à un article
     public function addComment($articleId, $author, $comment)
     {
-        // $pathToRootFolder = "../../";
-        // require($pathToRootFolder.'config/connect.php');
+        $pathToRootFolder = "";
+        require($pathToRootFolder.'config/connect.php');
         $req = $pdo->prepare('INSERT INTO comments (articleId, author, comment, date) VALUES (?, ?, ?, NOW())');
         $req->execute(array($articleId, $author, $comment));
         $req->closeCursor();

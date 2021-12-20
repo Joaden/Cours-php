@@ -1,8 +1,8 @@
 <?php
-    // header('Location: views/pages/home.php');
-    require('controller/frontend/AccueilController.php');
+    header('Location: views/pages/home.php');
+    // require('src_denis/Controllers/frontend/AccueilController.php');
 
-    require('views/pages/home.php');
+    // require('views/pages/home.php');
 
     
 try {

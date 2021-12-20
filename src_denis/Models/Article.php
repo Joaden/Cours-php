@@ -1,6 +1,6 @@
 <?php
 
-// namespace next_src_wip_denis/Models;
+//namespace src_denis\Models;
 
 use src_denis\Models\Manager;
 use src_denis\Models\Comments;
@@ -8,7 +8,7 @@ use src_denis\Models\User;
 
 $pathToRootFolder = "../../";
 
- require($pathToRootFolder.'config/connect.php');
+require_once($pathToRootFolder.'config/connect.php');
 // require_once($pathToRootFolder.'next_src_wip_denis/Models/Model.php');
 require_once($pathToRootFolder.'src_denis/Models/Manager.php');
 require_once($pathToRootFolder.'config/functions.php');
@@ -38,7 +38,7 @@ class Article extends Manager
           
           if($req1->rowCount() > 0)
           {
-              $data = $req1->fetch(PDO::FETCH_OBJ);
+              $data = $req1->fetch(\PDO::FETCH_OBJ);
           
               $article_id = $data->id;
               
@@ -66,7 +66,7 @@ class Article extends Manager
         //
         $req->execute();
         /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
-        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        $data = $req->fetchAll(\PDO::FETCH_OBJ);
         return $data;
         /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
         $req->closeCursor();
@@ -104,7 +104,7 @@ class Article extends Manager
         //
         $req->execute();
         /* fetch() = Récupération de la première ligne uniquement depuis le résultat et fetchAll recup tous*/
-        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        $data = $req->fetchAll(\PDO::FETCH_OBJ);
         return $data;
         /* L'appel suivant à closeCursor() peut être requis par quelques drivers */
         $req->closeCursor();
@@ -123,7 +123,7 @@ class Article extends Manager
         $req->execute(array($id));
         if($req->rowCount() >= 1)
         {
-            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            $data = $req->fetchAll(\PDO::FETCH_OBJ);
             return $data;
             $req->closeCursor();
         }
@@ -160,7 +160,7 @@ class Article extends Manager
             /////////////////////////////////////////////////// END ADD NBR VIEW ARTICLE
 
             ///// get data de $req
-            $data = $req->fetch(PDO::FETCH_OBJ);
+            $data = $req->fetch(\PDO::FETCH_OBJ);
             return $data;
             // $req->closeCursor();
         }
@@ -190,11 +190,11 @@ class Article extends Manager
         // //connection à la bdd
         try{
             // $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', $db_login, $db_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            $pdo = new PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $pdo = new \PDO('mysql:host=localhost;dbname=blog_dccg_test;charset=utf8', "root", "", array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
 
             return $pdo;
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             die('Erreur : '.$e->getMessage());
         }

@@ -298,6 +298,45 @@ class User extends Manager
     }
 
 
+    // update  avatar profil.php
+    function updateAvatar()
+    {
+        $pathToRootFolder = "../../";
+        require($pathToRootFolder.'config/connect.php');
+        //vérification & upload image
+        if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name']))
+        {
+            $taillemax = 2097152;
+            $extensionsValides = array('jpg', 'jpeg', 'png', 'gif');
+            if($_FILES['avatar']['size'] <= $taillemax)
+            {
+                //$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                if(in_array($extensionUpload, $extensionsValides))
+                {
+                    $chemin = "$pathToRootFolder/assets/photos/avatars/".$_SESSION['id'].".".$extensionUpload;
+                    $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                    if($resultat)
+                    {
+                        $updateAvatar = $bdd->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+                        $updateAvatar->execute(array(
+                            'avatar' => $_SESSION['id'].".".$extensionUpload,
+                            'id' => $_SESSION['id']
+                        ));
+                        
+                        header('Location: profil.php');
+                    } else {
+                        $erreur = "Erreur lors de l'importation de photo de profil.";
+                    }
+                } else {
+                    $erreur = "Votre photo doit être au format jpg, jpeg, gif ou png.";
+                }
+            } else {
+                $erreur = "Votre photo ne doit pas dépasser 2Mo.";
+            }
+        }
+    }
+
 
 
 }

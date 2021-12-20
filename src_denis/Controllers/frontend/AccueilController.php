@@ -3,6 +3,8 @@
 require('src_denis/Models/Article.php');
 require('src_denis/Models/Comments.php');
 require('src_denis/Models/User.php');
+use src_denis\Models\Manager;
+use src_denis\Models\Article;
 
 
 function listPosts()

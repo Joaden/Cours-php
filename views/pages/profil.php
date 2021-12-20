@@ -12,7 +12,7 @@ require_once($pathToRootFolder.'config/connect.php');
 
 require_once($pathToRootFolder.'config/functions.php');
 
-require_once($pathToRootFolder.'next_src_wip_denis/Models/User.php');
+require_once($pathToRootFolder.'src_denis/Models/User.php');
 
 // check if user is connected
 require($pathToRootFolder."views/common/checkSessionUser.php");
@@ -30,7 +30,9 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
         if(isset($_POST['formupdateprofil']))
         {
             //vérification & upload image 
-            $updateAvatar = updateAvatar();  
+            $modelUpdateAvatar = new User();
+
+            $updateAvatar = $modelUpdateAvatar->updateAvatar();  
         }
 
         // $articles = getMyArticles($id);
@@ -50,12 +52,12 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             $num_rows=0;
 
             //Si le user est connecté
-            $reqUser = $bdd->prepare("SELECT * FROM users WHERE id = ? ");
+            $reqUser = $pdo->prepare("SELECT * FROM users WHERE id = ? ");
             $reqUser->execute(array($_SESSION['id']));
             $user = $reqUser->fetch();
 
             // on get tous ses articles
-            $reqarticleByUser = $bdd->prepare("SELECT * FROM articles WHERE user_id = ? ");
+            $reqarticleByUser = $pdo->prepare("SELECT * FROM articles WHERE user_id = ? ");
             $reqarticleByUser->execute(array($_SESSION['id']));
             $articleByUser = $reqarticleByUser->fetch();
 
@@ -63,7 +65,7 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             {
                 
                 $newPseudo = htmlspecialchars($_POST['newpseudo']);
-                $insertPseudo = $bdd->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
+                $insertPseudo = $pdo->prepare("UPDATE users SET pseudo = ? WHERE id = ?");
                 $insertPseudo->execute(array($newPseudo, $_SESSION['id']));
                 header('Location: profil.php?id='.$_SESSION['id']);
 
@@ -72,7 +74,7 @@ if(isset($_SESSION['userid']) and $userInfo['id'] == $_SESSION['userid']) {
             if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email'] AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']) AND $_POST['mdp'] == $_POST['mdp2'])
             {
                 $newemail = htmlspecialchars($_POST['newemail']);
-                $insertemail = $bdd->prepare("UPDATE users SET email = ? WHERE id = ?");
+                $insertemail = $pdo->prepare("UPDATE users SET email = ? WHERE id = ?");
                 $insertemail->execute(array($newemail, $_SESSION['id']));
                 header('Location: profil.php?id='.$_SESSION['id']);
 
